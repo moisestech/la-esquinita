@@ -1,7 +1,7 @@
 "use client"
 
 import { Canvas, useFrame, RootState } from "@react-three/fiber"
-import { OrbitControls, useTexture, Environment, Html, PerspectiveCamera } from "@react-three/drei"
+import { OrbitControls, useTexture, Environment, Html } from "@react-three/drei"
 import { Suspense, useState, useEffect, useRef } from "react"
 import * as THREE from 'three'
 import SugarCubesV2 from "./sugar-cubes"

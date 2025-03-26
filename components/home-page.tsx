@@ -124,7 +124,7 @@ export default function HomePage() {
         </Link>
       </div>
       
-      <div className="z-0 absolute top-0 left-0 w-full h-full">
+      <div className="z-0">
         <Simple3D />
       </div>
 
