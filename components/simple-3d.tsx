@@ -4,19 +4,15 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls, useTexture, Environment, Html, PerspectiveCamera } from "@react-three/drei"
 import { Suspense, useState, useEffect, useRef } from "react"
 import * as THREE from 'three'
-
+import SugarCubesV2 from "./sugar-cubes"
 // Glass text component with frosted glass effect
 function SimpleCssGlassText({ 
   text, 
   position, 
-  color = "#80ccff", // Ice blue color for frost effect
-  highlightColor = "rgba(220, 240, 255, 0.9)", // Frosty highlight
   size = 1
 }: { 
   text: string, 
   position: [number, number, number], 
-  color?: string,
-  highlightColor?: string,
   size?: number
 }) {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -84,130 +80,67 @@ function SimpleCssGlassText({
       occlude={false}
     >
       <div style={{ 
-        width: '1200px', 
-        height: '600px',
+        width: '2400px',
+        height: '1200px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         pointerEvents: 'none',
       }}>
-        {/* Enhanced SVG filters for frosted glass effect */}
-        <svg style={{ position: 'absolute', top: '-999em' }}>
-          {/* Frosted glass light effect */}
-          <filter id="frost-light" style={{ colorInterpolation: 'sRGB' as any }}>
-            <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="B" />
-            <feSpecularLighting in="B" specularExponent="80" lightingColor="#ffffff" result="S">
-              <fePointLight x="120" y="60" z="80" />
-            </feSpecularLighting>
-            <feComposite in="S" in2="SourceAlpha" operator="in" result="L" />
-            <feComposite in="SourceGraphic" in2="L" operator="arithmetic" k2="1" k3="1" />
-          </filter>
-          
-          {/* Ice crystal texture */}
-          <filter id="frost-texture" style={{ colorInterpolation: 'sRGB' as any }}>
-            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="1" />
-            <feDisplacementMap in="SourceGraphic" scale="5" />
-          </filter>
-          
-          {/* Glass blur and highlight */}
-          <filter id="frost-glass" style={{ colorInterpolation: 'sRGB' as any }}>
-            <feGaussianBlur stdDeviation="3" />
-            <feColorMatrix type="matrix"
-              values="1 0 0 0 0
-                      0 1 0 0 0
-                      0 0 1 0 0
-                      0 0 0 18 -7" />
-            <feComposite in2="SourceGraphic" operator="in" />
-          </filter>
-        </svg>
-
-        {/* Frosted glass text element with skeleton-blood font */}
         <div 
-          className={isAnimating ? 'animate-frost-text' : 'frost-text-container'}
-          style={{
-            position: 'relative',
-            padding: '0 20px',
-          }}
+          className={isAnimating ? 'animate-glass-text' : 'glass-text-container'}
         >
-          <p 
-            data-text={text}
-            style={{
-              position: 'relative',
-              fontFamily: fontLoaded ? "'SkeletonBlood', fantasy" : "fantasy",
-              fontWeight: 'bold',
-              fontSize: '14rem',
-              textAlign: 'center',
-              margin: 0,
-              padding: '20px 40px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              borderRadius: '15px',
-              backdropFilter: 'blur(5px)',
-              WebkitBackdropFilter: 'blur(5px)',
-              boxShadow: `
-                0 4px 30px rgba(0, 0, 0, 0.1),
-                inset 0 0 20px rgba(255, 255, 255, 0.25)
-              `,
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-            }}
-          >
-            {text}
-          </p>
+          <h1 className="glass-text">{text}</h1>
           
           <style jsx>{`
-            .frost-text-container {
+            .glass-text-container,
+            .animate-glass-text {
+              position: relative;
               transform-style: preserve-3d;
-              transition: transform 0.5s ease-out;
             }
-            
-            .animate-frost-text {
-              animation: frost-pulse 2s ease-in-out;
+
+            .glass-text {
+              font-family: ${fontLoaded ? "'SkeletonBlood', fantasy" : "fantasy"};
+              font-size: 12rem;
+              font-weight: bold;
+              margin: 0;
+              padding: 20px 40px;
+              background: linear-gradient(
+                -45deg,
+                #ff69b4 0%,
+                #ff1493 25%,
+                #00bfff 50%,
+                #1e90ff 75%,
+                #ff69b4 100%
+              );
+              background-size: 200% 200%;
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent;
+              animation: gradient-animation 4s ease infinite;
+              text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.2),
+                0 0 40px rgba(255, 255, 255, 0.1);
             }
-            
-            @keyframes frost-pulse {
+
+            @keyframes gradient-animation {
+              0% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+              100% { background-position: 0% 50%; }
+            }
+
+            .animate-glass-text .glass-text {
+              animation: 
+                gradient-animation 4s ease infinite,
+                glass-pulse 2s ease-in-out;
+            }
+
+            @keyframes glass-pulse {
               0% { transform: scale3d(1, 1, 1) rotate3d(0, 1, 0, 0deg); }
               25% { transform: scale3d(1.03, 1.03, 1.03) rotate3d(0, 1, 0, 2deg); }
               50% { transform: scale3d(1.05, 1.05, 1.05) rotate3d(0, 1, 0, 0deg); }
               75% { transform: scale3d(1.03, 1.03, 1.03) rotate3d(0, 1, 0, -2deg); }
               100% { transform: scale3d(1, 1, 1) rotate3d(0, 1, 0, 0deg); }
-            }
-            
-            p {
-              color: transparent;
-              background-clip: text;
-              -webkit-background-clip: text;
-              background-image: linear-gradient(135deg, ${color} 20%, ${highlightColor} 50%, ${color} 80%);
-              filter: url(#frost-light);
-            }
-            
-            p:before,
-            p:after {
-              content: attr(data-text);
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              z-index: -1;
-            }
-            
-            /* Outer glow */
-            p:before {
-              color: rgba(255, 255, 255, 0.4);
-              text-shadow: 
-                0 0 10px rgba(255, 255, 255, 0.8),
-                0 0 20px rgba(255, 255, 255, 0.4),
-                0 0 30px rgba(255, 255, 255, 0.2);
-              filter: url(#frost-texture);
-              transform: translateZ(-10px);
-            }
-            
-            /* Inner detail */
-            p:after {
-              color: rgba(255, 255, 255, 0.9);
-              text-shadow: 
-                -1px -1px 1px rgba(255, 255, 255, 0.7), 
-                1px 1px 1px rgba(0, 0, 0, 0.2);
-              filter: url(#frost-glass);
             }
           `}</style>
         </div>
@@ -342,14 +275,16 @@ function MinimalScene() {
       
       {/* Additional light for frosted effect */}
       <pointLight position={[0, 0, 2]} intensity={0.5} color="#ffffff" />
+
+      <Suspense fallback={null}>
+          <SugarCubesV2 count={200} />
+        </Suspense>
       
       {/* Glass text with frosted effect */}
       <SimpleCssGlassText
         text="La Esquinita" 
         position={[0, 0, 0]}
-        color="#80ccff" // Ice blue for frost effect
-        highlightColor="rgba(220, 240, 255, 0.9)" // Frosty highlight
-        size={2.8} // Slightly smaller to fit with background
+        size={5.6}
       />
 
       {/* Interactive floating objects */}

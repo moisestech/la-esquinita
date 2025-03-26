@@ -1,12 +1,19 @@
 "use client"
 
+// REACT 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
+import Link from "next/link"
+
+// COMPONENTS
 import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/toaster"
-import { useToast } from "@/hooks/use-toast"
 import BackgroundPattern from '@/components/background-pattern'
+
+// HOOKS
+import { useToast } from "@/hooks/use-toast"
+
 
 // Dynamically import the simple 3D component with error handling
 const Simple3D = dynamic(
@@ -36,8 +43,39 @@ const Simple3D = dynamic(
 )
 
 export default function HomePage() {
-  const [email, setEmail] = useState("")
+  const [fontLoaded, setFontLoaded] = useState(false);
   const { toast } = useToast()
+  const [email, setEmail] = useState("")
+
+  // Add font loading effect
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @font-face {
+        font-family: 'SkeletonBlood';
+        src: url('/fonts/skeleton-blood.woff2') format('woff2'),
+             url('/fonts/skeleton-blood.woff') format('woff'),
+             url('/fonts/skeleton-blood.ttf') format('truetype'),
+             url('/fonts/skeleton-blood.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    if ('fonts' in document) {
+      document.fonts.ready.then(() => {
+        setFontLoaded(true);
+      });
+    } else {
+      setFontLoaded(true);
+    }
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -71,9 +109,26 @@ export default function HomePage() {
         className="opacity-90"
       />
       
-      <Simple3D />
+      <div className="absolute top-4 right-4 z-50">
+        <Link href="/about" className="block">
+          <Button
+            className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-miami-pink/50 px-8 py-6 text-2xl transition-all duration-300 hover:scale-105"
+            style={{
+              fontFamily: fontLoaded ? "'SkeletonBlood', fantasy" : "fantasy",
+              cursor: 'pointer',
+              pointerEvents: 'auto',
+            }}
+          >
+            About
+          </Button>
+        </Link>
+      </div>
+      
+      <div className="z-0 absolute top-0 left-0 w-full h-full">
+        <Simple3D />
+      </div>
 
-      <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-md px-4">
+      <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 z-40 w-full max-w-md px-4">
         <form
           onSubmit={handleSubmit}
           className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-miami-cyan/30"
@@ -101,7 +156,7 @@ export default function HomePage() {
         </form>
       </div>
 
-      <div className="absolute bottom-4 right-4 z-10">
+      <div className="absolute bottom-4 right-4 z-50">
         <Button
           className="bg-gradient-to-r from-miami-pink to-miami-cyan hover:from-miami-pink/90 hover:to-miami-cyan/90 text-white"
           onClick={() => window.location.reload()}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useMemo, useState, useEffect } from "react"
+import { useRef, useMemo, useEffect } from "react"
 import { useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
@@ -9,76 +9,134 @@ const randBetween = (min: number, max: number) => {
   return Math.random() * (max - min) + min
 }
 
-// Single sugar cube component
-function SugarCube() {
-  const meshRef = useRef<THREE.Mesh>(null)
-  const [textureLoaded, setTextureLoaded] = useState(false)
-  const [texture, setTexture] = useState<THREE.Texture | null>(null)
+// Main component that renders multiple sugar cubes
+export default function SugarCubesV2({ count = 200 }) {
+  // Create a group to hold all cubes
+  const groupRef = useRef<THREE.Group>(null)
 
-  // Create geometry
-  const geometry = useMemo(() => {
-    const length = randBetween(1, 6)
-    const width = randBetween(1, 8)
+  // Create all cube meshes
+  const cubes = useMemo(() => {
+    const meshes = []
 
-    const shape = new THREE.Shape()
-    shape.moveTo(randBetween(0, 1.5), randBetween(0, 1.5))
-    shape.lineTo(randBetween(0, 1.5), width)
-    shape.lineTo(length, width)
-    shape.lineTo(length, randBetween(0, 1.5))
-    shape.lineTo(randBetween(0, 1.5), randBetween(0, 1.5))
+    for (let i = 0; i < count; i++) {
+      // Create geometry
+      const length = randBetween(0.5, 2) // Smaller cubes
+      const width = randBetween(0.5, 2.5) // Smaller cubes
 
-    const extrudeSettings = {
-      steps: 2,
-      depth: randBetween(3, 6),
-      bevelEnabled: true,
-      bevelThickness: 1,
-      bevelSize: randBetween(1, 3),
-      bevelSegments: 1,
+      const shape = new THREE.Shape()
+      shape.moveTo(randBetween(0, 0.5), randBetween(0, 0.5))
+      shape.lineTo(randBetween(0, 0.5), width)
+      shape.lineTo(length, width)
+      shape.lineTo(length, randBetween(0, 0.5))
+      shape.lineTo(randBetween(0, 0.5), randBetween(0, 0.5))
+
+      const extrudeSettings = {
+        steps: 2,
+        depth: randBetween(0.5, 2),
+        bevelEnabled: true,
+        bevelThickness: 0.2,
+        bevelSize: randBetween(0.2, 0.5),
+        bevelSegments: 1,
+      }
+
+      const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings)
+      geometry.center() // Center the geometry
+
+      // Create material - add some color tint to make cubes visible against white
+      const material = new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color("#f0f0f0"),
+        transparent: true,
+        opacity: 0.49,
+        metalness: 0.4,
+        roughness: 0.1,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+        side: THREE.DoubleSide,
+        // Add subtle color variations to make cubes visible against white
+        emissive: new THREE.Color(i % 3 === 0 ? "#ffddee" : i % 3 === 1 ? "#ddffff" : "#eeeeee"),
+        emissiveIntensity: 0.1,
+      })
+
+      const mesh = new THREE.Mesh(geometry, material)
+
+      // Set position - ensure no cubes are in front of the text
+      // Define text boundaries (approximate)
+      const textWidth = 4 // Approximate width of "La Esquinita" text
+      const textHeight = 1 // Approximate height of text
+
+      // Generate x and y positions
+      const x = randBetween(-20, 20)
+      const y = randBetween(-20, 20)
+
+      // Generate z position - either behind the text or far in front
+      // Text is at z=0, so we'll place cubes either at z < -1 (behind) or z > 5 (far in front)
+      let z
+
+      // Check if the cube would be in the text area in x,y plane
+      const inTextAreaXY = Math.abs(x) < textWidth / 2 && Math.abs(y) < textHeight / 2
+
+      if (inTextAreaXY) {
+        // If in text area, place behind the text
+        z = randBetween(-20, -1.5)
+      } else {
+        // If not in text area, can be anywhere
+        z =
+          Math.random() > 0.5
+            ? randBetween(-20, -1.5) // behind text
+            : randBetween(5, 20) // far in front of text
+      }
+
+      mesh.position.set(x, y, z)
+
+      // Make them appropriately sized
+      const scale = randBetween(0.5, 1.2)
+      mesh.scale.set(scale, scale, scale)
+
+      // Store rotation speed
+      mesh.userData.rotateSpeed = randBetween(0.01, 0.04)
+
+      meshes.push(mesh)
     }
 
-    return new THREE.ExtrudeGeometry(shape, extrudeSettings)
-  }, [])
+    return meshes
+  }, [count])
 
-  // Load texture
+  // Add meshes to the scene
   useEffect(() => {
-    const textureLoader = new THREE.TextureLoader()
-    textureLoader.crossOrigin = "anonymous"
-    textureLoader.load("/sugar-texture.png", (loadedTexture) => {
-      loadedTexture.wrapS = loadedTexture.wrapT = THREE.MirroredRepeatWrapping
-      loadedTexture.repeat.set(0.1, 0.1)
-      setTexture(loadedTexture)
-      setTextureLoaded(true)
-    })
-  }, [])
+    if (groupRef.current) {
+      cubes.forEach((cube) => {
+        groupRef.current!.add(cube)
+      })
+    }
 
-  // Random position and rotation speed
-  const position = useMemo(() => [randBetween(-120, 120), randBetween(-120, 120), randBetween(-120, 120)], [])
+    // Cleanup
+    return () => {
+      if (groupRef.current) {
+        cubes.forEach((cube) => {
+          groupRef.current!.remove(cube)
+        })
+      }
+    }
+  }, [cubes])
 
-  const rotateSpeed = useMemo(() => randBetween(0.01, 0.04), [])
-
-  // Animation
+  // Animate cubes
   useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += rotateSpeed
-      meshRef.current.rotation.y += rotateSpeed
+    if (groupRef.current) {
+      groupRef.current.children.forEach((child) => {
+        const speed = child.userData.rotateSpeed
+        child.rotation.x += speed
+        child.rotation.y += speed
+      })
     }
   })
 
-  if (!textureLoaded) return null
-
   return (
-    <mesh ref={meshRef} geometry={geometry} position={[position[0], position[1], position[2]]}>
-      <meshBasicMaterial map={texture!} transparent={true} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
-    </mesh>
+    <group ref={groupRef}>
+      {/* Add lights with colors to help cubes stand out against white */}
+      <pointLight position={[10, 10, 10]} intensity={0.8} color="#ffddee" />
+      <pointLight position={[-10, -10, 10]} intensity={0.8} color="#ddffff" />
+      <pointLight position={[0, 0, 10]} intensity={0.5} color="#FF1493" />
+    </group>
   )
-}
-
-// Main component that renders multiple sugar cubes
-export default function SugarCubes({ count = 100 }) {
-  const cubes = useMemo(() => {
-    return Array.from({ length: count }, (_, i) => <SugarCube key={i} />)
-  }, [count])
-
-  return <>{cubes}</>
 }
 

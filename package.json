@@ -49,7 +49,7 @@
     "expo-asset": "latest",
     "expo-file-system": "latest",
     "expo-gl": "latest",
-    "framer-motion": "^12.6.0",
+    "framer-motion": "^12.6.1",
     "input-otp": "1.4.1",
     "jotai": "^2.12.2",
     "lucide-react": "^0.454.0",

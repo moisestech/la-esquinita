@@ -46,7 +46,7 @@ export default function SugarCubesV2({ count = 200 }) {
       const material = new THREE.MeshPhysicalMaterial({
         color: new THREE.Color("#f0f0f0"),
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.49,
         metalness: 0.4,
         roughness: 0.1,
         clearcoat: 1.0,

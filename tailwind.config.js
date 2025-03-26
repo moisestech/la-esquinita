@@ -52,8 +52,8 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
         // Miami Heat colors
-        "miami-pink": "#FF1493",
-        "miami-cyan": "#00E4FF",
+        "miami-pink": "#ff1493",
+        "miami-cyan": "#00bfff",
       },
       borderRadius: {
         lg: "var(--radius)",
