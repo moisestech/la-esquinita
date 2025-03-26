@@ -1,10 +1,11 @@
 "use client"
 
-import { Canvas, useFrame } from "@react-three/fiber"
+import { Canvas, useFrame, RootState } from "@react-three/fiber"
 import { OrbitControls, useTexture, Environment, Html, PerspectiveCamera } from "@react-three/drei"
 import { Suspense, useState, useEffect, useRef } from "react"
 import * as THREE from 'three'
 import SugarCubesV2 from "./sugar-cubes"
+import { ThreeEvent } from '@react-three/fiber'
 // Glass text component with frosted glass effect
 function SimpleCssGlassText({ 
   text, 
@@ -167,14 +168,14 @@ function FloatingObject({ url, position, scale = 2.5 }: FloatingObjectProps) {
   const spriteRef = useRef<THREE.Sprite>(null)
   
   // Normal animation
-  useFrame((state) => {
+  useFrame((state: RootState) => {
     if (!spriteRef.current) return
     
     // Base rotation animation
     const baseRotation = [
-      Math.sin(state.clock.elapsedTime * 0.5) * 0.1,
-      state.clock.elapsedTime * 0.3,
-      Math.cos(state.clock.elapsedTime * 0.4) * 0.1
+      Math.sin(state.clock.getElapsedTime() * 0.5) * 0.1,
+      state.clock.getElapsedTime() * 0.3,
+      Math.cos(state.clock.getElapsedTime() * 0.4) * 0.1
     ] as [number, number, number]
     
     // If hovered, add more intense rotation and pulsing scale
@@ -185,7 +186,7 @@ function FloatingObject({ url, position, scale = 2.5 }: FloatingObjectProps) {
       baseRotation[2] *= 2
       
       // Pulse scale when hovered
-      const pulseScale = 1 + 0.1 * Math.sin(state.clock.elapsedTime * 5)
+      const pulseScale = 1 + 0.1 * Math.sin(state.clock.getElapsedTime() * 5)
       spriteRef.current.scale.set(
         scale * pulseScale,
         scale * pulseScale,
@@ -213,16 +214,16 @@ function FloatingObject({ url, position, scale = 2.5 }: FloatingObjectProps) {
       position={position}
       scale={[scale, scale, scale]}
       rotation={rotation}
-      onClick={(e) => {
+      onClick={(e: ThreeEvent<MouseEvent>) => {
         e.stopPropagation()
         console.log('Clicked on object:', url.split('/').pop())
       }}
-      onPointerOver={(e) => {
+      onPointerOver={(e: ThreeEvent<PointerEvent>) => {
         e.stopPropagation()
         if (clickable) setHovered(true)
         document.body.style.cursor = 'pointer'
       }}
-      onPointerOut={(e) => {
+      onPointerOut={(e: ThreeEvent<PointerEvent>) => {
         e.stopPropagation()
         setHovered(false)
         document.body.style.cursor = 'auto'
