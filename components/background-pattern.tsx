@@ -29,7 +29,7 @@ export default function BackgroundPattern({ imageUrl, className = '' }: Backgrou
   return (
     <>
       <div 
-        className={`fixed inset-0 w-full h-full -z-10 ${className}`}
+        className={`absolute inset-0 w-full h-full -z-10 ${className}`}
         style={{
           backgroundImage: `url(${imageUrl})`,
           backgroundRepeat: 'repeat',
@@ -39,7 +39,7 @@ export default function BackgroundPattern({ imageUrl, className = '' }: Backgrou
           backgroundColor: '#f5f5f5',
         }}
       />
-      <div className="fixed inset-0 -z-20">
+      <div className="absolute inset-0 -z-10">
         <Image
           src={imageUrl}
           alt="Background pattern"

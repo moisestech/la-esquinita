@@ -6,6 +6,7 @@ import { Suspense, useState, useEffect, useRef } from "react"
 import * as THREE from 'three'
 import SugarCubesV2 from "./sugar-cubes"
 import { ThreeEvent } from '@react-three/fiber'
+
 // Glass text component with frosted glass effect
 function SimpleCssGlassText({ 
   text, 
@@ -155,10 +156,11 @@ interface FloatingObjectProps {
   url: string
   position: [number, number, number]
   scale?: number
+  onClick?: () => void
 }
 
 // FloatingObject component with hover animation
-function FloatingObject({ url, position, scale = 2.5 }: FloatingObjectProps) {
+function FloatingObject({ url, position, scale = 2.5, onClick }: FloatingObjectProps) {
   const texture = useTexture(url)
   const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0])
   const [hovered, setHovered] = useState(false)
@@ -216,7 +218,7 @@ function FloatingObject({ url, position, scale = 2.5 }: FloatingObjectProps) {
       rotation={rotation}
       onClick={(e: ThreeEvent<MouseEvent>) => {
         e.stopPropagation()
-        console.log('Clicked on object:', url.split('/').pop())
+        if (onClick) onClick()
       }}
       onPointerOver={(e: ThreeEvent<PointerEvent>) => {
         e.stopPropagation()
@@ -278,8 +280,8 @@ function MinimalScene() {
       <pointLight position={[0, 0, 2]} intensity={0.5} color="#ffffff" />
 
       <Suspense fallback={null}>
-          <SugarCubesV2 count={200} />
-        </Suspense>
+        <SugarCubesV2 count={200} />
+      </Suspense>
       
       {/* Glass text with frosted effect */}
       <SimpleCssGlassText
@@ -307,14 +309,24 @@ function MinimalScene() {
       })}
       
       <Environment preset="sunset" background={false} />
-      <OrbitControls enablePan={false} enableZoom={true} />
+      <OrbitControls 
+        enablePan={false} 
+        enableZoom={true} 
+        enableRotate={true}
+        makeDefault
+        minDistance={2}
+        maxDistance={10}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 2}
+        target={[0, 0, 0]}
+      />
     </>
   )
 }
 
 export default function Simple3D() {
   return (
-    <div className="w-full h-full">
+    <div className="absolute inset-0 w-full h-full">
       <Canvas
         camera={{
           position: [0, 0, 3],
@@ -324,6 +336,22 @@ export default function Simple3D() {
           antialias: true,
           alpha: true,
         }}
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          pointerEvents: 'auto',
+        }}
+        dpr={[1, 2]}
+        resize={{
+          offsetSize: true,
+          scroll: false,
+        }}
+        className="w-full h-full"
       >
         <Suspense fallback={null}>
           <MinimalScene />

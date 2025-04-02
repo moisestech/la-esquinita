@@ -2,13 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer components {
+  .about-button {
+    @apply relative z-[100] mr-8 mt-8;
+  }
+
+  .about-button-content {
+    @apply relative
+           bg-gradient-to-r from-miami-pink/80 to-miami-cyan/80
+           hover:from-miami-pink hover:to-miami-cyan
+           text-white
+           border-2 border-white/20
+           px-8 py-6
+           text-2xl
+           rounded-full
+           shadow-lg
+           transition-all
+           duration-300
+           hover:scale-105
+           hover:shadow-xl
+           active:scale-95
+           overflow-hidden;
+  }
+
+  .about-button-shine {
+    @apply absolute inset-0
+           bg-gradient-to-r from-white/0 via-white/20 to-white/0
+           transform -skew-x-12
+           transition-transform duration-1000;
+  }
+
+  /* About page styles */
+  .about-page {
+    @apply min-h-screen bg-gradient-to-br from-miami-pink/10 to-miami-cyan/10;
+  }
+
+  .about-nav {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-sm border-b border-white/20;
+  }
+
+  .about-content {
+    @apply max-w-3xl mx-auto space-y-6 text-white/90;
+  }
+
+  .about-card {
+    @apply bg-white/5 backdrop-blur-sm rounded-lg p-6 mt-8;
+  }
+
+  .about-footer {
+    @apply fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm border-t border-white/20 py-4;
   }
 }
 
@@ -89,6 +145,6 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }

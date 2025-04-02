@@ -19,7 +19,7 @@ export default function MiamiText3D() {
         far: 1000,
       }}
     >
-      <color attach="background" args={["white"]} />
+      <color attach="background" args={[1, 1, 1]} />
       <PresentationControls
         global
         rotation={[0, 0, 0]}
