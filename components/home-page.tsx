@@ -10,11 +10,12 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/toaster"
 import BackgroundPattern from '@/components/background-pattern'
-import NewsletterForm from "@/components/newsletter-form"
+import NewsletterModal from "@/components/newsletter-modal"
 import AboutButton from "@/components/about-button"
 
 // HOOKS
 import { useToast } from "@/hooks/use-toast"
+import { db, DatabaseError } from "@/lib/supabase"
 
 
 // Dynamically import the simple 3D component with error handling
@@ -32,8 +33,8 @@ const Simple3D = dynamic(
 
 export default function HomePage() {
   const [fontLoaded, setFontLoaded] = useState(false);
+  const [showNewsletter, setShowNewsletter] = useState(false);
   const { toast } = useToast()
-  const [email, setEmail] = useState("")
 
   // Add font loading effect
   useEffect(() => {
@@ -65,33 +66,34 @@ export default function HomePage() {
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
+  const handleNewsletterSubmit = async (email: string) => {
+    try {
+      await db.newsletter.subscribe(email)
       toast({
-        title: "Invalid Email",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
+        title: "Success!",
+        description: "Your email has been captured. Thanks for subscribing!",
+        variant: "default",
       })
-      return
+      setShowNewsletter(false)
+    } catch (error) {
+      if (error instanceof DatabaseError) {
+        toast({
+          title: "Already Subscribed",
+          description: error.message,
+          variant: "default",
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: "Something went wrong. Please try again later.",
+          variant: "destructive",
+        })
+      }
     }
-
-    // Success notification
-    toast({
-      title: "Success!",
-      description: "Your email has been captured. Thanks for subscribing!",
-      variant: "default",
-    })
-
-    // Reset form
-    setEmail("")
   }
 
   return (
-    <main className="relative w-full h-full overflow-hidden bg-green-500">
+    <main className="relative w-full h-full overflow-hidden">
       {/* Background pattern layer - lowest z-index */}
       <div className="absolute inset-0 -z-10">
         <BackgroundPattern 
@@ -102,7 +104,7 @@ export default function HomePage() {
 
       {/* 3D Canvas layer */}
       <div className="absolute inset-0 z-10">
-        <Simple3D />
+        <Simple3D onTitleClick={() => setShowNewsletter(true)} />
       </div>
 
       {/* UI Controls layer - highest z-index */}
@@ -122,6 +124,13 @@ export default function HomePage() {
           </button>
         </div>
       </div>
+
+      {/* Newsletter Modal */}
+      <NewsletterModal
+        isOpen={showNewsletter}
+        onClose={() => setShowNewsletter(false)}
+        onSubmit={handleNewsletterSubmit}
+      />
 
       <Toaster />
     </main>

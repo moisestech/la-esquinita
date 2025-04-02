@@ -27,9 +27,9 @@ export const db = {
 
       if (error) {
         if (error.code === '23505') { // Unique violation
-          throw new Error('This email is already subscribed to our newsletter.')
+          throw new DatabaseError('This email is already subscribed to our newsletter.', error.code)
         }
-        throw error
+        throw new DatabaseError(error.message || 'An unexpected error occurred', error.code)
       }
 
       return data

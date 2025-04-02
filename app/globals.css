@@ -1,75 +1,21 @@
+@font-face {
+  font-family: 'SkeletonBlood';
+  src: url('/fonts/skeleton-blood.woff2') format('woff2'),
+       url('/fonts/skeleton-blood.woff') format('woff'),
+       url('/fonts/skeleton-blood.ttf') format('truetype'),
+       url('/fonts/skeleton-blood.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-@layer components {
-  .about-button {
-    @apply relative z-[100] mr-8 mt-8;
-  }
-
-  .about-button-content {
-    @apply relative
-           bg-gradient-to-r from-miami-pink/80 to-miami-cyan/80
-           hover:from-miami-pink hover:to-miami-cyan
-           text-white
-           border-2 border-white/20
-           px-8 py-6
-           text-2xl
-           rounded-full
-           shadow-lg
-           transition-all
-           duration-300
-           hover:scale-105
-           hover:shadow-xl
-           active:scale-95
-           overflow-hidden;
-  }
-
-  .about-button-shine {
-    @apply absolute inset-0
-           bg-gradient-to-r from-white/0 via-white/20 to-white/0
-           transform -skew-x-12
-           transition-transform duration-1000;
-  }
-
-  /* About page styles */
-  .about-page {
-    @apply min-h-screen bg-gradient-to-br from-miami-pink/10 to-miami-cyan/10;
-  }
-
-  .about-nav {
-    @apply fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-sm border-b border-white/20;
-  }
-
-  .about-content {
-    @apply max-w-3xl mx-auto space-y-6 text-white/90;
-  }
-
-  .about-card {
-    @apply bg-white/5 backdrop-blur-sm rounded-lg p-6 mt-8;
-  }
-
-  .about-footer {
-    @apply fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm border-t border-white/20 py-4;
-  }
-}
-
-@layer base {
   :root {
+    --font-skeleton: 'SkeletonBlood', fantasy;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -137,6 +83,121 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Custom cursor styles */
+  .cursor-pointer {
+    cursor: pointer !important;
+  }
+
+  .cursor-pointer::before {
+    content: '';
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s ease;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-pointer:hover::before {
+    transform: translate(-50%, -50%) scale(1.5);
+    background: rgba(255, 255, 255, 0.8);
+    border-color: #ff69b4;
+  }
+
+  .about-button {
+    @apply relative z-[100] mr-8 mt-8;
+  }
+
+  .about-button-content {
+    @apply relative
+           bg-gradient-to-r from-miami-pink/80 to-miami-cyan/80
+           hover:from-miami-pink hover:to-miami-cyan
+           text-white
+           border-2 border-white/20
+           px-12 py-8
+           text-3xl
+           font-bold
+           rounded-full
+           shadow-lg
+           transition-all
+           duration-300
+           hover:scale-105
+           hover:shadow-xl
+           active:scale-95
+           overflow-hidden;
+  }
+
+  .about-button-shine {
+    @apply absolute inset-0
+           bg-gradient-to-r from-white/0 via-white/20 to-white/0
+           transform -skew-x-12
+           transition-transform duration-1000;
+  }
+
+  /* About page styles */
+  .about-page {
+    @apply min-h-screen relative;
+  }
+
+  .about-page::before {
+    content: '';
+    @apply absolute inset-0 -z-10;
+    background-image: url('https://res.cloudinary.com/dck5rzi4h/image/upload/v1742918384/la-esquinita/bg-rocks-color_ikxdem.jpg');
+    background-size: 300px;
+    background-repeat: repeat;
+    background-position: center;
+    opacity: 0.95;
+  }
+
+  .about-nav {
+    @apply fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/30;
+  }
+
+  .about-content {
+    @apply max-w-5xl mx-auto space-y-12 text-white/95 leading-relaxed;
+  }
+
+  .about-card {
+    @apply bg-black/30 backdrop-blur-md rounded-xl p-10 shadow-2xl border border-white/20;
+  }
+
+  .about-footer {
+    @apply fixed bottom-0 left-0 right-0 bg-black/20 backdrop-blur-md border-t border-white/30 py-8;
+  }
+
+  .about-heading {
+    @apply text-6xl font-bold mb-8 text-white;
+  }
+
+  .about-subheading {
+    @apply text-3xl font-semibold mb-6 text-white/95;
+  }
+
+  .about-text {
+    @apply text-xl leading-relaxed text-white/95 mb-6;
+  }
+
+  .about-link {
+    @apply text-miami-pink hover:text-miami-cyan transition-colors duration-300 font-medium;
   }
 }
 
