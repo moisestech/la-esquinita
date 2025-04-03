@@ -17,7 +17,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       textGeometry: JSX.IntrinsicElements['mesh'] & {
-        args?: [string, { font: Font; size: number; depth: number }]
+        args?: [string, { font: Font; size: number; height: number }]
         center?: boolean
       }
     }
@@ -67,7 +67,7 @@ function SimpleCssGlassText({
         position={position}
       >
         <textGeometry
-          args={[text, { font, size: size * 0.5, depth: 0.1 }]}
+          args={[text, { font, size: size * 0.5, height: 0.1 }]}
           center
         />
         <MeshTransmissionMaterial
