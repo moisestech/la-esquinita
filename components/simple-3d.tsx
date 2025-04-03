@@ -7,6 +7,7 @@ import * as THREE from 'three'
 import SugarCubesV2 from "./sugar-cubes"
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+import { Font } from 'three/examples/jsm/loaders/FontLoader'
 
 // Extend Three.js with TextGeometry and register it with JSX
 extend({ TextGeometry })
@@ -16,7 +17,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       textGeometry: JSX.IntrinsicElements['mesh'] & {
-        args?: [string, any]
+        args?: [string, { font: Font; size: number; depth: number }]
         center?: boolean
       }
     }
@@ -36,7 +37,7 @@ function SimpleCssGlassText({
   onClick?: () => void
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const [font, setFont] = useState<any>(null);
+  const [font, setFont] = useState<Font | null>(null);
 
   useEffect(() => {
     const loader = new FontLoader();
