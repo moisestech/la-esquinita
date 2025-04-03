@@ -12,6 +12,7 @@ import { Toaster } from "@/components/ui/toaster"
 import BackgroundPattern from '@/components/background-pattern'
 import NewsletterModal from "@/components/newsletter-modal"
 import AboutButton from "@/components/about-button"
+import ErrorBoundary from "@/components/error-boundary"
 
 // HOOKS
 import { useToast } from "@/hooks/use-toast"
@@ -20,7 +21,14 @@ import { db, DatabaseError } from "@/lib/supabase"
 
 // Dynamically import the simple 3D component with error handling
 const Simple3D = dynamic(
-  () => import("@/components/simple-3d"),
+  () => import("@/components/simple-3d").catch(err => {
+    console.error('Error loading 3D component:', err);
+    return () => (
+      <div className="flex items-center justify-center w-full h-screen bg-white">
+        <div className="text-2xl font-bold text-pink-600">Error loading 3D scene</div>
+      </div>
+    );
+  }),
   {
     ssr: false,
     loading: () => (
@@ -104,7 +112,9 @@ export default function HomePage() {
 
       {/* 3D Canvas layer */}
       <div className="absolute inset-0 z-10">
-        <Simple3D onTitleClick={() => setShowNewsletter(true)} />
+        <ErrorBoundary>
+          <Simple3D onTitleClick={() => setShowNewsletter(true)} />
+        </ErrorBoundary>
       </div>
 
       {/* UI Controls layer - highest z-index */}
