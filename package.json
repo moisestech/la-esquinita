@@ -11,8 +11,10 @@
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
-    "@react-three/drei": "^8.15.16",
+    "@react-three/drei": "^9.88.0",
     "@react-three/fiber": "^8.15.16",
+    "@react-three/postprocessing": "^2.15.13",
+    "@react-three/mesh-transmission": "^0.1.0",
     "@supabase/supabase-js": "^2.39.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

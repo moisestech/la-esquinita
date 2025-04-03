@@ -10,10 +10,15 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 
 // Extend Three.js with TextGeometry and register it with JSX
 extend({ TextGeometry })
+
+// Declare the JSX namespace for Three.js components
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      textGeometry: any
+      textGeometry: JSX.IntrinsicElements['mesh'] & {
+        args?: [string, any]
+        center?: boolean
+      }
     }
   }
 }
