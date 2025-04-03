@@ -9,6 +9,32 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { Font } from 'three/examples/jsm/loaders/FontLoader'
 
+// Custom useMediaQuery hook for responsive design
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window !== 'undefined') {
+      const media = window.matchMedia(query);
+      
+      // Update the state with the current match
+      setMatches(media.matches);
+      
+      // Create event listener for subsequent changes
+      const listener = () => setMatches(media.matches);
+      media.addEventListener('change', listener);
+      
+      // Cleanup function
+      return () => media.removeEventListener('change', listener);
+    }
+    
+    return undefined;
+  }, [query]);
+
+  return matches;
+}
+
 // Extend Three.js with TextGeometry and register it with JSX
 extend({ TextGeometry })
 
@@ -37,8 +63,54 @@ function SimpleCssGlassText({
   onClick?: () => void
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const glowRef = useRef<THREE.Mesh>(null);
+  const pinkGlowRef = useRef<THREE.Mesh>(null);
   const [font, setFont] = useState<Font | null>(null);
   const [geometry, setGeometry] = useState<THREE.BufferGeometry | null>(null);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const adjustedSize = isMobile ? size * 0.5 : size;
+
+  // Add shimmer effect with time
+  const [rotation, setRotation] = useState(0);
+  useFrame((state) => {
+    if (meshRef.current && glowRef.current && pinkGlowRef.current) {
+      // Subtle rotation for dynamism
+      meshRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.1;
+      
+      // Update shimmer rotation
+      const time = state.clock.getElapsedTime();
+      setRotation(time * 0.2);
+      
+      // Pulsing effect for emissive intensity
+      const emissiveIntensity = 0.2 + Math.sin(time * 1.5) * 0.1;
+      if (meshRef.current.material) {
+        (meshRef.current.material as THREE.MeshPhysicalMaterial).emissiveIntensity = emissiveIntensity;
+      }
+      
+      // Pulsing effect for blue glow
+      if (glowRef.current.material) {
+        const glowOpacity = 0.3 + Math.sin(time * 1.2) * 0.1;
+        (glowRef.current.material as THREE.MeshBasicMaterial).opacity = glowOpacity;
+        
+        // Subtle scale animation for the glow
+        const scale = 1.02 + Math.sin(time * 1.0) * 0.01;
+        glowRef.current.scale.set(scale, scale, scale);
+      }
+      
+      // Animated pink glow with different phase
+      if (pinkGlowRef.current.material) {
+        const pinkGlowOpacity = 0.35 + Math.sin(time * 0.8) * 0.15;
+        (pinkGlowRef.current.material as THREE.MeshBasicMaterial).opacity = pinkGlowOpacity;
+        
+        // Different scale animation for the pink glow
+        const pinkScale = 1.04 + Math.sin(time * 0.7) * 0.02;
+        pinkGlowRef.current.scale.set(pinkScale, pinkScale, pinkScale);
+        
+        // Slight position adjustment for the glow to create movement
+        pinkGlowRef.current.position.y = Math.sin(time * 0.5) * 0.03;
+      }
+    }
+  });
 
   useEffect(() => {
     const loader = new FontLoader();
@@ -60,45 +132,79 @@ function SimpleCssGlassText({
     if (font && text) {
       const textGeometry = new TextGeometry(text, {
         font,
-        size: size * 0.5,
-        height: 0.1
+        size: adjustedSize * 0.5,
+        height: 0.2, // Slightly deeper for better 3D effect
+        bevelEnabled: true,
+        bevelThickness: 0.03,
+        bevelSize: 0.02,
+        bevelSegments: 5
       });
       textGeometry.center();
       setGeometry(textGeometry);
     }
-  }, [font, text, size]);
+  }, [font, text, adjustedSize]);
 
   if (!font || !geometry) {
     console.log('Waiting for font to load...');
     return null;
   }
-
+  
   return (
     <group>
+      {/* Main text with enhanced material */}
       <mesh
         ref={meshRef}
         position={position}
         geometry={geometry}
+        onClick={(e: ThreeEvent<MouseEvent>) => {
+          e.stopPropagation();
+          if (onClick) onClick();
+        }}
       >
-        <MeshTransmissionMaterial
-          thickness={0.1}
-          roughness={0.05}
-          transmission={0.95}
-          ior={1.1}
-          chromaticAberration={0.01}
-          backside={true}
-          distortion={0.1}
-          distortionScale={0.3}
-          temporalDistortion={0.05}
-          attenuationDistance={1}
-          attenuationColor="#ffffff"
+        <meshPhysicalMaterial 
           color="#ffffff"
-          samples={16}
-          resolution={256}
-          anisotropy={0.1}
+          emissive="#223355"
+          emissiveIntensity={0.2}
+          roughness={0.2}
+          metalness={0.8}
           clearcoat={1}
-          clearcoatRoughness={0.1}
-          toneMapped={false}
+          clearcoatRoughness={0.2}
+          reflectivity={1}
+          transparent={true}
+          opacity={0.9}
+          side={THREE.DoubleSide}
+          envMapIntensity={1.5}
+        />
+      </mesh>
+      
+      {/* Add a subtle blue glow/outline effect */}
+      <mesh
+        ref={glowRef}
+        position={[position[0], position[1], position[2] - 0.01]}
+        geometry={geometry}
+        scale={1.02}
+      >
+        <meshBasicMaterial
+          color="#88ccff"
+          transparent={true}
+          opacity={0.3 + Math.sin(rotation) * 0.1}
+          side={THREE.BackSide}
+        />
+      </mesh>
+      
+      {/* Add a pink gradient glow for contrast */}
+      <mesh
+        ref={pinkGlowRef}
+        position={[position[0], position[1], position[2] - 0.02]}
+        geometry={geometry}
+        scale={1.04}
+      >
+        <meshBasicMaterial
+          color="#ff5599"
+          transparent={true}
+          opacity={0.35}
+          side={THREE.BackSide}
+          blending={THREE.AdditiveBlending}
         />
       </mesh>
     </group>
@@ -197,6 +303,24 @@ function FloatingObject({ url, position, scale = 2.5, onClick }: FloatingObjectP
 
 function MinimalScene({ onTitleClick }: { onTitleClick?: () => void }) {
   const [showDebug, setShowDebug] = useState(true);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  // Add a reference for animated lights
+  const pinkLightRef = useRef<THREE.SpotLight>(null);
+  const pointLightRef = useRef<THREE.PointLight>(null);
+  
+  // Animate the lights
+  useFrame((state) => {
+    if (pinkLightRef.current && pointLightRef.current) {
+      const time = state.clock.getElapsedTime();
+      
+      // Pink light movement
+      pinkLightRef.current.position.x = Math.sin(time * 0.3) * 3;
+      pinkLightRef.current.intensity = 5 + Math.sin(time * 0.5) * 2;
+      
+      // Secondary light pulse
+      pointLightRef.current.intensity = 1.5 + Math.sin(time * 0.7) * 0.5;
+    }
+  });
 
   // Define objects
   const objects = [
@@ -229,33 +353,57 @@ function MinimalScene({ onTitleClick }: { onTitleClick?: () => void }) {
 
   return (
     <>
-      {/* Debug controls */}
-      {/* <Html position={[0, 3, 0]}>
-        <button
-          onClick={() => setShowDebug(!showDebug)}
-          style={{
-            background: 'rgba(0,0,0,0.5)',
-            color: 'white',
-            border: 'none',
-            padding: '8px 16px',
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
-          {showDebug ? 'Hide Debug' : 'Show Debug'}
-        </button>
-      </Html> */}
-
-      {/* Brighter lights to enhance the frost effect */}
-      <ambientLight intensity={3} />
-      <directionalLight position={[5, 5, 5]} intensity={3} />
+      {/* Enhanced lighting setup */}
+      <ambientLight intensity={1.5} color="#e0e0ff" />
+      <directionalLight position={[5, 5, 5]} intensity={2.5} color="#ffffff" />
+      <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#ffaa88" />
       
-      {/* Additional light for frosted effect */}
-      <pointLight position={[0, 0, 2]} intensity={0.5} color="#ffffff" />
+      {/* Spotlight for dramatic effect on text */}
+      <spotLight 
+        position={[0, 5, 3]} 
+        intensity={5} 
+        color="#ffffff" 
+        angle={0.5} 
+        penumbra={0.5} 
+        castShadow 
+        distance={20}
+      />
+      
+      {/* Animated pink spotlight for contrast */}
+      <spotLight 
+        ref={pinkLightRef}
+        position={[3, -2, 4]} 
+        intensity={5} 
+        color="#ff5599" 
+        angle={0.6} 
+        penumbra={0.8} 
+        distance={15}
+      />
+      
+      {/* Additional colored lights for atmosphere */}
+      <pointLight position={[3, 0, 2]} intensity={0.8} color="#ff88aa" />
+      <pointLight 
+        ref={pointLightRef}
+        position={[-3, 0, 2]} 
+        intensity={1.5} 
+        color="#ff55aa" 
+        distance={10}
+      />
+      <pointLight position={[0, -3, 2]} intensity={1.0} color="#88aaff" />
+
+      {/* Gradient spotlight from below for extra pink glow */}
+      <spotLight 
+        position={[0, -5, 0]} 
+        intensity={3} 
+        color="#ff66aa" 
+        angle={0.8} 
+        penumbra={1} 
+        distance={10}
+      />
 
       {/* Sugar cubes background */}
       <Suspense fallback={null}>
-        <SugarCubesV2 count={200} />
+        <SugarCubesV2 count={isMobile ? 100 : 200} />
       </Suspense>
       
       {/* Glass text with frosted effect */}
@@ -271,18 +419,24 @@ function MinimalScene({ onTitleClick }: { onTitleClick?: () => void }) {
 
       {/* Floating objects */}
       {objects.map((obj, index) => {
+        // Position adjustment for mobile
+        const positionMultiplier = isMobile ? 1.0 : 1.5;
         const adjustedPosition: [number, number, number] = [
-          obj.position[0] * 1.5,
+          obj.position[0] * positionMultiplier,
           obj.position[1],
-          obj.position[2] * 1.5
+          obj.position[2] * positionMultiplier
         ];
+        
+        // Scale adjustment for mobile
+        const scaleMultiplier = isMobile ? 0.7 : 1.0;
+        const adjustedScale = obj.scale * scaleMultiplier;
         
         return (
           <FloatingObject
             key={index}
             url={obj.url}
             position={adjustedPosition}
-            scale={obj.scale}
+            scale={adjustedScale}
             onClick={() => {
               console.log('Object clicked!');
               if (onTitleClick) onTitleClick();
@@ -297,24 +451,29 @@ function MinimalScene({ onTitleClick }: { onTitleClick?: () => void }) {
         enableZoom={true} 
         enableRotate={true}
         makeDefault
-        minDistance={2}
-        maxDistance={10}
+        minDistance={isMobile ? 3 : 2}
+        maxDistance={isMobile ? 8 : 10}
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         target={[0, 0, 0]}
         domElement={document.body}
+        autoRotate={false}
+        autoRotateSpeed={0.5}
       />
     </>
   )
 }
 
 export default function Simple3D({ onTitleClick }: { onTitleClick?: () => void }) {
+  // Check if the device is mobile
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
     <div className="absolute inset-0 w-full h-full">
       <Canvas
         camera={{
-          position: [0, 0, 3],
-          fov: 75,
+          position: [0, 0, isMobile ? 4 : 3],
+          fov: isMobile ? 85 : 75,
         }}
         gl={{
           antialias: true,
