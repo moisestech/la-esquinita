@@ -261,7 +261,7 @@ function MinimalScene({ onTitleClick }: { onTitleClick?: () => void }) {
       {/* Glass text with frosted effect */}
       <SimpleCssGlassText
         text="La Esquinita" 
-        position={[-2.5, 0, 0]}
+        position={[0, 0, 0]}
         size={1.6}
         onClick={() => {
           console.log('Title clicked!');
@@ -302,7 +302,6 @@ function MinimalScene({ onTitleClick }: { onTitleClick?: () => void }) {
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         target={[0, 0, 0]}
-        pointerEvents="auto"
         domElement={document.body}
       />
     </>
