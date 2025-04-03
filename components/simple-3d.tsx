@@ -338,16 +338,18 @@ export default function Simple3D({ onTitleClick }: { onTitleClick?: () => void }
         }}
         className="w-full h-full"
         onPointerDown={(e) => {
+          e.stopPropagation();
           console.log('Canvas pointer down');
         }}
         onPointerUp={(e) => {
+          e.stopPropagation();
           console.log('Canvas pointer up');
         }}
-        eventSource={document.body}
-        eventPrefix="client"
         onWheel={(e) => {
           e.stopPropagation();
         }}
+        eventSource={document.body}
+        eventPrefix="client"
       >
         <Suspense fallback={null}>
           <MinimalScene onTitleClick={onTitleClick} />
