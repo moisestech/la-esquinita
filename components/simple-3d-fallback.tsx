@@ -4,6 +4,32 @@ import React, { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import Image from 'next/image'
 
+// Custom useMediaQuery hook for responsive design
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window !== 'undefined') {
+      const media = window.matchMedia(query);
+      
+      // Update the state with the current match
+      setMatches(media.matches);
+      
+      // Create event listener for subsequent changes
+      const listener = () => setMatches(media.matches);
+      media.addEventListener('change', listener);
+      
+      // Cleanup function
+      return () => media.removeEventListener('change', listener);
+    }
+    
+    return undefined;
+  }, [query]);
+
+  return matches;
+}
+
 interface FallbackProps {
   onTitleClick: () => void
 }
@@ -13,12 +39,14 @@ const FloatingObject = ({
   url, 
   position, 
   scale = 1, 
-  onClick 
+  onClick,
+  isMobile
 }: { 
   url: string;
   position: [number, number, number];
   scale?: number;
   onClick: () => void;
+  isMobile: boolean;
 }) => {
   const [hover, setHover] = useState(false);
   const [animation, setAnimation] = useState(Math.random() * 10); // Random starting point for animation
@@ -41,13 +69,18 @@ const FloatingObject = ({
   
   // Scale based on z position to simulate depth
   const depthScale = (position[2] + 2) / 3; // Convert z-range from -1~1 to roughly 0.3~1
+  
+  // Position adjustments for mobile
+  const positionFactor = isMobile ? 0.6 : 1.0; // Reduce spacing by 60% on mobile
+  const xPosition = position[0] * 120 * positionFactor;
+  const yPosition = -position[1] * 120 * positionFactor;
 
   return (
     <div 
       className="absolute transition-transform duration-300 transform-gpu"
       style={{
-        left: `calc(50% + ${position[0] * 120}px)`,
-        top: `calc(50% + ${-position[1] * 120}px)`,
+        left: `calc(50% + ${xPosition}px)`,
+        top: `calc(50% + ${yPosition}px)`,
         transform: `translateX(${floatX}px) translateY(${floatY}px) rotate(${rotate}deg) scale(${hover ? scale * 1.1 * depthScale : scale * depthScale})`,
         zIndex: 10 + Math.round(position[2] * 10),
         transition: 'transform 0.3s ease-out',
@@ -69,8 +102,8 @@ const FloatingObject = ({
         <Image
           src={url}
           alt="Floating object"
-          width={Math.round(120 * scale * depthScale)}
-          height={Math.round(120 * scale * depthScale)}
+          width={Math.round(120 * scale * depthScale * (isMobile ? 0.8 : 1.5))}
+          height={Math.round(120 * scale * depthScale * (isMobile ? 0.8 : 1.5))}
           className="pointer-events-auto object-contain"
           style={{ opacity: 0.7 + 0.3 * depthScale }} // More opaque for objects "closer" to viewer
         />
@@ -85,6 +118,7 @@ const FloatingObject = ({
 const Simple3DFallback: React.FC<FallbackProps> = ({ onTitleClick }) => {
   const [hovered, setHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const isMobile = useMediaQuery('(max-width: 768px)');
   
   // Define objects to match the 3D scene
   const objects = [
@@ -95,22 +129,22 @@ const Simple3DFallback: React.FC<FallbackProps> = ({ onTitleClick }) => {
     },
     {
       url: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1742918385/la-esquinita/object-bottle_hq76dx.png",
-      position: [2, 1.5, 1] as [number, number, number],
+      position: [0, 2.5, 0] as [number, number, number],
       scale: 2
     },
     {
       url: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1742918384/la-esquinita/object-candy_u5cxeb.png",
-      position: [-1.5, -1, 0] as [number, number, number],
+      position: [-2, -1.8, 0] as [number, number, number],
       scale: 2
     },
     {
       url: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1742918384/la-esquinita/object-banana_d4tckn.png",
-      position: [1.5, -1.5, 0] as [number, number, number],
+      position: [0, -3, 0] as [number, number, number],
       scale: 2
     },
     {
       url: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1742918384/la-esquinita/object-bag_eyaj57.png",
-      position: [0, 2.5, 0] as [number, number, number],
+      position: [-2, 4, 0] as [number, number, number],
       scale: 2
     }
   ];
@@ -165,6 +199,7 @@ const Simple3DFallback: React.FC<FallbackProps> = ({ onTitleClick }) => {
             console.log('Object clicked!');
             onTitleClick();
           }}
+          isMobile={isMobile}
         />
       ))}
       
