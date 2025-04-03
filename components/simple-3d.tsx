@@ -38,6 +38,7 @@ function SimpleCssGlassText({
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [font, setFont] = useState<Font | null>(null);
+  const [geometry, setGeometry] = useState<THREE.BufferGeometry | null>(null);
 
   useEffect(() => {
     const loader = new FontLoader();
@@ -55,7 +56,19 @@ function SimpleCssGlassText({
     });
   }, []);
 
-  if (!font) {
+  useEffect(() => {
+    if (font && text) {
+      const textGeometry = new TextGeometry(text, {
+        font,
+        size: size * 0.5,
+        height: 0.1
+      });
+      textGeometry.center();
+      setGeometry(textGeometry);
+    }
+  }, [font, text, size]);
+
+  if (!font || !geometry) {
     console.log('Waiting for font to load...');
     return null;
   }
@@ -65,11 +78,8 @@ function SimpleCssGlassText({
       <mesh
         ref={meshRef}
         position={position}
+        geometry={geometry}
       >
-        <textGeometry
-          args={[text, { font, size: size * 0.5, height: 0.1 }]}
-          center
-        />
         <MeshTransmissionMaterial
           thickness={0.1}
           roughness={0.05}
