@@ -29,7 +29,7 @@ export default function BackgroundPattern({ imageUrl, className = '' }: Backgrou
   return (
     <>
       <div 
-        className={`absolute inset-0 w-full h-full -z-10 ${className}`}
+        className={`absolute inset-0 w-full h-full -z-10 ${className} pointer-events-none`}
         style={{
           backgroundImage: `url(${imageUrl})`,
           backgroundRepeat: 'repeat',
@@ -39,12 +39,12 @@ export default function BackgroundPattern({ imageUrl, className = '' }: Backgrou
           backgroundColor: '#f5f5f5',
         }}
       />
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
         <Image
           src={imageUrl}
           alt="Background pattern"
           fill
-          className="object-cover"
+          className="object-cover pointer-events-none"
           onLoad={() => setLoaded(true)}
           onError={() => setError('Failed to load image')}
           priority

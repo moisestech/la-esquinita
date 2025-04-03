@@ -21,6 +21,11 @@ export default function NewsletterModal({ isOpen, onClose, onSubmit }: Newslette
   const [error, setError] = useState("")
   const { toast } = useToast()
 
+  // Debug useEffect to log when modal state changes
+  useEffect(() => {
+    console.log("Newsletter modal state changed:", { isOpen });
+  }, [isOpen]);
+
   // Email validation
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
