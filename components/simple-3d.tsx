@@ -1,13 +1,56 @@
 "use client"
 
 import { Canvas, useFrame, RootState, ThreeEvent, extend } from "@react-three/fiber"
-import { OrbitControls, useTexture, Environment, Html, MeshTransmissionMaterial } from "@react-three/drei"
+import { OrbitControls, useTexture, Environment } from "@react-three/drei"
 import { Suspense, useState, useEffect, useRef } from "react"
 import * as THREE from 'three'
 import SugarCubesV2 from "./sugar-cubes"
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { Font } from 'three/examples/jsm/loaders/FontLoader'
+
+// Debug instrumentation
+const DEBUG = process.env.NODE_ENV === 'development';
+
+// Log initialization
+if (DEBUG) {
+  console.log('Simple3D component initializing...');
+  console.log('three.js version:', THREE.REVISION);
+  
+  try {
+    if (typeof window !== 'undefined') {
+      // Check WebGL support
+      const canvas = document.createElement('canvas');
+      const gl = (
+        canvas.getContext('webgl') || 
+        canvas.getContext('experimental-webgl')
+      ) as WebGLRenderingContext | null;
+        
+      console.log('WebGL support:', gl ? 'Available' : 'Not available');
+      if (gl) {
+        try {
+          const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+          if (debugInfo) {
+            console.log('WebGL renderer:', gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL));
+            console.log('WebGL vendor:', gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL));
+          }
+        } catch (e) {
+          console.warn('WebGL debug info not available:', e);
+        }
+        console.log('Max texture size:', gl.getParameter(gl.MAX_TEXTURE_SIZE));
+      }
+    }
+  } catch (e) {
+    console.error('Error checking WebGL support:', e);
+  }
+}
+
+// Add a type definition to window for texture timing
+declare global {
+  interface Window {
+    textureStartTimes?: Record<string, number>;
+  }
+}
 
 // Custom useMediaQuery hook for responsive design
 function useMediaQuery(query: string): boolean {
@@ -67,6 +110,7 @@ function SimpleCssGlassText({
   const pinkGlowRef = useRef<THREE.Mesh>(null);
   const [font, setFont] = useState<Font | null>(null);
   const [geometry, setGeometry] = useState<THREE.BufferGeometry | null>(null);
+  const [fontError, setFontError] = useState<string | null>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const adjustedSize = isMobile ? size * 0.5 : size;
 
@@ -113,34 +157,63 @@ function SimpleCssGlassText({
   });
 
   useEffect(() => {
+    if (DEBUG) console.log('Starting font loading for:', text);
+    
     const loader = new FontLoader();
+    const startTime = performance.now();
+    
     loader.load('/fonts/skeleton-blood.json', (loadedFont) => {
-      console.log('Font loaded successfully:', loadedFont);
+      const loadTime = performance.now() - startTime;
+      console.log(`Font loaded successfully in ${loadTime.toFixed(2)}ms:`, loadedFont);
       setFont(loadedFont);
+      setFontError(null);
     }, 
     // Progress callback
     (progress) => {
-      console.log('Loading font:', (progress.loaded / progress.total * 100) + '%');
+      if (DEBUG) console.log('Loading font:', (progress.loaded / progress.total * 100).toFixed(1) + '%');
     },
     // Error callback
     (error) => {
       console.error('Error loading font:', error);
+      setFontError(error.message || 'Unknown font loading error');
+      
+      // Store error for debugging
+      if (typeof window !== 'undefined') {
+        try {
+          const existingErrors = JSON.parse(sessionStorage.getItem('3d-error') || '{}');
+          existingErrors.fontError = {
+            message: error.message,
+            time: new Date().toISOString(),
+            url: '/fonts/skeleton-blood.json'
+          };
+          sessionStorage.setItem('3d-error', JSON.stringify(existingErrors));
+        } catch (e) {
+          // Ignore storage errors
+        }
+      }
     });
-  }, []);
+  }, [text]);
 
   useEffect(() => {
     if (font && text) {
-      const textGeometry = new TextGeometry(text, {
-        font,
-        size: adjustedSize * 0.5,
-        height: 0.2, // Slightly deeper for better 3D effect
-        bevelEnabled: true,
-        bevelThickness: 0.03,
-        bevelSize: 0.02,
-        bevelSegments: 5
-      });
-      textGeometry.center();
-      setGeometry(textGeometry);
+      if (DEBUG) console.log('Creating text geometry for:', text);
+      try {
+        const textGeometry = new TextGeometry(text, {
+          font,
+          size: adjustedSize * 0.5,
+          height: 0.2, // Slightly deeper for better 3D effect
+          bevelEnabled: true,
+          bevelThickness: 0.03,
+          bevelSize: 0.02,
+          bevelSegments: 5
+        });
+        textGeometry.center();
+        setGeometry(textGeometry);
+        if (DEBUG) console.log('Text geometry created successfully');
+      } catch (error) {
+        console.error('Error creating text geometry:', error);
+        setFontError((error as Error).message || 'Unknown text geometry error');
+      }
     }
   }, [font, text, adjustedSize]);
 
@@ -221,14 +294,97 @@ interface FloatingObjectProps {
 
 // FloatingObject component with hover animation
 function FloatingObject({ url, position, scale = 2.5, onClick }: FloatingObjectProps) {
-  const texture = useTexture(url)
-  const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0])
-  const [hovered, setHovered] = useState(false)
-  const [clickable, setClickable] = useState(false)
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
+  const [textureError, setTextureError] = useState<string | null>(null);
+  const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
+  const [hovered, setHovered] = useState(false);
+  const [clickable, setClickable] = useState(false);
   
   // Reference to the sprite
-  const spriteRef = useRef<THREE.Sprite>(null)
+  const spriteRef = useRef<THREE.Sprite>(null);
   
+  // Load texture with error handling
+  useEffect(() => {
+    if (DEBUG) console.log(`Loading texture for object: ${url}`);
+    const startTime = performance.now();
+    
+    const loader = new THREE.TextureLoader();
+    loader.crossOrigin = 'anonymous'; // Ensure proper CORS handling
+    
+    // Add event listeners for texture loading issues
+    if (typeof window !== 'undefined') {
+      const errorHandler = (event: ErrorEvent) => {
+        if (event.target instanceof HTMLImageElement) {
+          const src = event.target.src || '';
+          if (src.includes(url)) {
+            console.error(`Image error for ${url}:`, event.error || event.message);
+            if (typeof window !== 'undefined') {
+              try {
+                const errorData = JSON.parse(sessionStorage.getItem('3d-error') || '{}');
+                if (!errorData.textureErrors) errorData.textureErrors = [];
+                errorData.textureErrors.push({
+                  url,
+                  time: new Date().toISOString(),
+                  message: event.error?.message || event.message || 'Unknown texture error'
+                });
+                sessionStorage.setItem('3d-error', JSON.stringify(errorData));
+              } catch (e) {
+                // Ignore storage errors
+              }
+            }
+          }
+        }
+      };
+      
+      window.addEventListener('error', errorHandler, { capture: true });
+      return () => window.removeEventListener('error', errorHandler, { capture: true });
+    }
+  }, [url]);
+  
+  // Use the useTexture hook with error handling
+  try {
+    // @ts-ignore - Typing issue with useTexture error handling
+    const loadedTexture = useTexture(url, 
+      (texture) => {
+        if (DEBUG) {
+          const loadTime = performance.now() - (window.textureStartTimes?.[url] || performance.now());
+          console.log(`Texture loaded successfully: ${url} (${loadTime.toFixed(2)}ms)`);
+        }
+        setTexture(texture);
+        setTextureError(null);
+      },
+      (error) => {
+        console.error(`Error loading texture ${url}:`, error);
+        setTextureError(error.message || 'Unknown texture loading error');
+        setTexture(null);
+        
+        // Log the error to sessionStorage for debugging
+        if (typeof window !== 'undefined') {
+          try {
+            const errorData = JSON.parse(sessionStorage.getItem('3d-error') || '{}');
+            if (!errorData.textureErrors) errorData.textureErrors = [];
+            errorData.textureErrors.push({
+              url,
+              time: new Date().toISOString(),
+              message: error.message
+            });
+            sessionStorage.setItem('3d-error', JSON.stringify(errorData));
+          } catch (e) {
+            // Ignore storage errors
+          }
+        }
+      }
+    );
+    
+    // If hook succeeded, use the texture
+    if (!texture && loadedTexture) setTexture(loadedTexture);
+  } catch (error) {
+    if (!textureError) {
+      console.error(`Exception loading texture ${url}:`, error);
+      setTextureError((error as Error)?.message || 'Unknown texture loading exception');
+    }
+  }
+
   // Normal animation
   useFrame((state: RootState) => {
     if (!spriteRef.current) return
