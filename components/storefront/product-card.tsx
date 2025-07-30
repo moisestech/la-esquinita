@@ -1,0 +1,160 @@
+"use client"
+
+import React, { useState } from "react"
+import { motion } from "framer-motion"
+import Link from "next/link"
+import { Product } from "@/lib/supabase"
+
+interface ProductCardProps {
+  product: Product
+  onAddToCart: (product: Product) => void
+}
+
+export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
+  const [showSprinkles, setShowSprinkles] = useState(false)
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    onAddToCart(product)
+    setShowSprinkles(true)
+    setTimeout(() => setShowSprinkles(false), 2000)
+  }
+
+  return (
+    <Link href={`/product/${product.slug}`}>
+      <motion.div
+        className="relative group cursor-pointer"
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+        whileHover={{ y: -8 }}
+        transition={{ duration: 0.3 }}
+      >
+      {/* Sprinkle Animation */}
+      {showSprinkles && (
+        <div className="absolute inset-0 pointer-events-none z-10">
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute text-2xl"
+              initial={{
+                x: "50%",
+                y: "50%",
+                opacity: 1,
+                scale: 0,
+              }}
+              animate={{
+                x: `${Math.random() * 100}%`,
+                y: `${Math.random() * 100}%`,
+                opacity: 0,
+                scale: 1,
+              }}
+              transition={{
+                duration: 2,
+                ease: "easeOut",
+              }}
+            >
+              ✨
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* Card Container */}
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-sugar-pink hover:border-miami-pink transition-colors duration-300">
+        {/* Product Image */}
+        <div className="relative h-64 bg-gradient-to-br from-sugar-pink to-fondant-blue overflow-hidden">
+          <img
+            src={product.image_urls[0] || "/placeholder-logo.png"}
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          />
+          
+          {/* Category Badge */}
+          <div className="absolute top-3 left-3">
+            <span className="bg-miami-pink text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+              {product.category}
+            </span>
+          </div>
+
+          {/* Tags */}
+          <div className="absolute top-3 right-3 flex flex-wrap gap-1">
+            {product.tags.slice(0, 2).map((tag, index) => (
+              <span
+                key={index}
+                className="bg-miami-yellow text-mint-rot px-2 py-1 rounded-full text-xs font-bold"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Hover Overlay */}
+          <motion.div
+            className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            initial={false}
+            animate={{ opacity: isHovered ? 1 : 0 }}
+          />
+        </div>
+
+        {/* Product Info */}
+        <div className="p-6">
+          {/* Product Name */}
+          <h3 className="text-xl font-skeleton text-mint-rot mb-2 line-clamp-2">
+            {product.name}
+          </h3>
+
+          {/* Description */}
+          <p className="text-mint-rot/70 text-sm mb-4 line-clamp-2">
+            {product.description}
+          </p>
+
+          {/* Price and Add to Cart */}
+          <div className="flex items-center justify-between">
+            {/* Price Tag */}
+            <motion.div
+              className="text-2xl font-bold text-miami-pink"
+              animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              ${product.price.toFixed(2)}
+            </motion.div>
+
+            {/* Add to Cart Button */}
+            <motion.button
+              onClick={handleAddToCart}
+              className="bg-gradient-to-r from-miami-pink to-miami-purple text-white px-4 py-2 rounded-full font-bold text-sm hover:shadow-neon-pink transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Add to Cart
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Neon Border Effect */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl border-2 border-transparent"
+          animate={isHovered ? { 
+            borderColor: "rgba(255, 105, 180, 0.6)",
+            boxShadow: "0 0 20px rgba(255, 105, 180, 0.4)"
+          } : { 
+            borderColor: "transparent",
+            boxShadow: "none"
+          }}
+          transition={{ duration: 0.3 }}
+        />
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute -top-2 -right-2 text-2xl animate-sprinkle">
+        🌴
+      </div>
+      <div className="absolute -bottom-2 -left-2 text-xl animate-sprinkle" style={{ animationDelay: "1s" }}>
+        ✨
+      </div>
+      </motion.div>
+    </Link>
+  )
+} 

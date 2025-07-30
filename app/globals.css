@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'SkeletonBlood';
   src: url('/fonts/skeleton-blood.woff2') format('woff2'),
@@ -8,10 +12,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer base {
   :root {
@@ -92,9 +92,64 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .text-shadow-neon {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .drop-shadow-neon-pink {
+    filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.6));
+  }
+
+  .drop-shadow-neon-blue {
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.6));
+  }
+
+  .drop-shadow-neon-yellow {
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+  }
+}
+
+/* Custom scrollbar for Miami kitsch */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff8f2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #ff69b4, #00d4ff, #ffd700);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #ff1493, #00bfff, #ffed4e);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(255, 105, 180, 0.3);
+  color: #2d6e57;
+}
+
+::-moz-selection {
+  background: rgba(255, 105, 180, 0.3);
+  color: #2d6e57;
 }
 
 @layer components {
@@ -129,8 +184,8 @@
 
   .about-button-content {
     @apply relative
-           bg-gradient-to-r from-miami-pink/80 to-miami-cyan/80
-           hover:from-miami-pink hover:to-miami-cyan
+           bg-gradient-to-r from-miami-pink/80 to-miami-blue/80
+           hover:from-miami-pink hover:to-miami-blue
            text-white
            border-2 border-white/20
            px-12 py-8
@@ -197,15 +252,15 @@
   }
 
   .about-link {
-    @apply text-miami-pink hover:text-miami-cyan transition-colors duration-300 font-medium;
+    @apply text-miami-pink hover:text-miami-blue transition-colors duration-300 font-medium;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-sugar-pink/20;
   }
   body {
-    @apply text-foreground;
+    @apply text-mint-rot;
   }
 }

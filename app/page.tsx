@@ -1,10 +1,6 @@
-import HomePage from "@/components/home-page"
+import { redirect } from 'next/navigation'
 
 export default function Page() {
-  return (
-    <div className="w-full h-full">
-      <HomePage />
-    </div>
-  )
+  redirect('/storefront')
 }
 

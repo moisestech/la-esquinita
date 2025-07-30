@@ -175,14 +175,14 @@ function SimpleCssGlassText({
     // Error callback
     (error) => {
       console.error('Error loading font:', error);
-      setFontError(error.message || 'Unknown font loading error');
+      setFontError(error instanceof Error ? error.message : 'Unknown font loading error');
       
       // Store error for debugging
       if (typeof window !== 'undefined') {
         try {
           const existingErrors = JSON.parse(sessionStorage.getItem('3d-error') || '{}');
           existingErrors.fontError = {
-            message: error.message,
+            message: error instanceof Error ? error.message : 'Unknown error',
             time: new Date().toISOString(),
             url: '/fonts/skeleton-blood.json'
           };
@@ -343,41 +343,20 @@ function FloatingObject({ url, position, scale = 2.5, onClick }: FloatingObjectP
   
   // Use the useTexture hook with error handling
   try {
-    // @ts-ignore - Typing issue with useTexture error handling
-    const loadedTexture = useTexture(url, 
-      (texture) => {
+    const loadedTexture = useTexture(url);
+    
+    // Handle successful texture loading
+    useEffect(() => {
+      if (loadedTexture) {
         if (DEBUG) {
           const loadTime = performance.now() - (window.textureStartTimes?.[url] || performance.now());
           console.log(`Texture loaded successfully: ${url} (${loadTime.toFixed(2)}ms)`);
         }
-        setTexture(texture);
+        setTexture(loadedTexture);
         setTextureError(null);
-      },
-      (error) => {
-        console.error(`Error loading texture ${url}:`, error);
-        setTextureError(error.message || 'Unknown texture loading error');
-        setTexture(null);
-        
-        // Log the error to sessionStorage for debugging
-        if (typeof window !== 'undefined') {
-          try {
-            const errorData = JSON.parse(sessionStorage.getItem('3d-error') || '{}');
-            if (!errorData.textureErrors) errorData.textureErrors = [];
-            errorData.textureErrors.push({
-              url,
-              time: new Date().toISOString(),
-              message: error.message
-            });
-            sessionStorage.setItem('3d-error', JSON.stringify(errorData));
-          } catch (e) {
-            // Ignore storage errors
-          }
-        }
       }
-    );
+    }, [loadedTexture, url]);
     
-    // If hook succeeded, use the texture
-    if (!texture && loadedTexture) setTexture(loadedTexture);
   } catch (error) {
     if (!textureError) {
       console.error(`Exception loading texture ${url}:`, error);
@@ -386,7 +365,7 @@ function FloatingObject({ url, position, scale = 2.5, onClick }: FloatingObjectP
   }
 
   // Normal animation
-  useFrame((state: RootState) => {
+  useFrame((state) => {
     if (!spriteRef.current) return
     
     // Base rotation animation

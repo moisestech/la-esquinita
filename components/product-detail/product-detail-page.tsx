@@ -1,0 +1,261 @@
+"use client"
+
+import React, { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { ChevronLeft, Star, Share2, Heart, ShoppingCart, MessageCircle } from "lucide-react"
+import ImageGallery from "./image-gallery"
+import ProductInfo from "./product-info"
+import StarRating from "./star-rating"
+import CommentsSection from "./comments-section"
+import RelatedProducts from "./related-products"
+import BreadcrumbNav from "./breadcrumb-nav"
+import { Product } from "@/lib/supabase"
+
+// Placeholder product data - replace with real data from Supabase
+const products: Product[] = [
+  {
+    id: "1",
+    slug: "miami-sugar-skull",
+    name: "I ❤️ Miami Sugar Skull",
+    price: 19.99,
+    description: "Hand-painted ceramic skull with Miami kitsch aesthetic. Each piece is uniquely crafted with vibrant colors and intricate details that capture the essence of Miami's artistic culture. Perfect for collectors and art enthusiasts who appreciate the fusion of traditional Mexican art with Miami's vibrant energy.",
+    image_urls: [
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=face",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=entropy",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=edges"
+    ],
+    status: "active" as const,
+    category: "art",
+    tags: ["miami", "skull", "ceramic", "hand-painted"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "2",
+    slug: "palm-tree-dreamcatcher",
+    name: "Palm Tree Dreamcatcher",
+    price: 29.99,
+    description: "Boho-chic dreamcatcher featuring palm tree motifs and Miami-inspired colors. Handcrafted with natural materials and adorned with beads, feathers, and palm tree charms. This piece brings the peaceful energy of Miami's palm-lined beaches into your home.",
+    image_urls: [
+      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&h=600&fit=crop&crop=face",
+      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&h=600&fit=crop&crop=entropy"
+    ],
+    status: "active" as const,
+    category: "home",
+    tags: ["boho", "palm", "dreamcatcher", "natural"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "3",
+    slug: "swamp-water-perfume",
+    name: "Swamp Water Perfume",
+    price: 45.00,
+    description: "Artisanal fragrance inspired by Miami's mysterious wetlands. A complex blend of earthy notes, tropical flowers, and the subtle hint of saltwater. Each bottle is hand-poured and numbered, making it a truly unique piece of Miami's natural essence.",
+    image_urls: [
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=600&fit=crop&crop=face"
+    ],
+    status: "active" as const,
+    category: "beauty",
+    tags: ["perfume", "swamp", "artisanal", "fragrance"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  }
+]
+
+const getProductBySlug = (slug: string): Product | null => {
+  
+  return products.find(p => p.slug === slug) || null
+}
+
+interface ProductDetailPageProps {
+  slug: string
+}
+
+export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleAddToCart = (product: Product) => {
+    // TODO: Implement add to cart functionality
+    console.log(`Adding ${product.name} to cart`)
+    // Add sprinkle animation effect
+    const sprinkle = document.createElement('div')
+    sprinkle.className = 'fixed pointer-events-none z-50 animate-sprinkle'
+    sprinkle.innerHTML = '✨'
+    sprinkle.style.left = '50%'
+    sprinkle.style.top = '50%'
+    document.body.appendChild(sprinkle)
+    
+    setTimeout(() => {
+      document.body.removeChild(sprinkle)
+    }, 2000)
+  }
+
+  useEffect(() => {
+    // Simulate API call
+    const loadProduct = async () => {
+      setLoading(true)
+      setError(null)
+      
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 500))
+      
+      const foundProduct = getProductBySlug(slug)
+      if (foundProduct) {
+        setProduct(foundProduct)
+      } else {
+        setError("Product not found")
+      }
+      
+      setLoading(false)
+    }
+
+    loadProduct()
+  }, [slug])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-miami-pink border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-mint-rot font-skeleton text-lg">Loading product...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error || !product) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">😔</div>
+          <h1 className="text-2xl font-skeleton text-mint-rot mb-2">Product Not Found</h1>
+          <p className="text-mint-rot/70 mb-4">The product you're looking for doesn't exist.</p>
+          <a 
+            href="/storefront"
+            className="inline-flex items-center space-x-2 bg-miami-pink text-white px-6 py-3 rounded-lg hover:bg-miami-purple transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span>Back to Storefront</span>
+          </a>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue">
+      {/* Header */}
+      <motion.header 
+        className="bg-white/80 backdrop-blur-sm border-b border-sugar-pink/20 p-4"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="container mx-auto flex items-center justify-between">
+          <a 
+            href="/storefront" 
+            className="flex items-center space-x-2 text-mint-rot hover:text-miami-pink transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            <span className="font-skeleton text-lg">Back to Storefront</span>
+          </a>
+          
+          <div className="flex items-center space-x-4">
+            <button className="p-2 text-mint-rot hover:text-miami-pink transition-colors">
+              <Heart className="w-5 h-5" />
+            </button>
+            <button className="p-2 text-mint-rot hover:text-miami-pink transition-colors">
+              <Share2 className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      <div className="container mx-auto p-4">
+        {/* Breadcrumb Navigation */}
+        <BreadcrumbNav productName={product.name} category={product.category} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          {/* Image Gallery */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <ImageGallery images={product.image_urls} productName={product.name} />
+          </motion.div>
+
+          {/* Product Information */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <ProductInfo product={product} onAddToCart={handleAddToCart} />
+          </motion.div>
+        </div>
+
+        {/* Star Rating and Reviews */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <StarRating rating={4.5} showScore />
+        </motion.div>
+
+        {/* Comments Section */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <CommentsSection productId={product.id} />
+        </motion.div>
+
+        {/* Related Products */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <RelatedProducts currentProduct={product} products={products} />
+        </motion.div>
+      </div>
+
+      {/* Floating Elements */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-2xl animate-sprinkle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 2 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          >
+            ✨
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  )
+} 
