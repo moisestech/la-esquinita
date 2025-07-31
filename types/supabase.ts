@@ -155,31 +155,37 @@ export interface Database {
       rsvps: {
         Row: {
           id: string
-          event_id: string
+          event_id: string | null
           email: string
           name: string | null
-          guest_count: number
-          status: 'confirmed' | 'waitlist' | 'cancelled'
+          plus_ones: number
+          dietary_restrictions: string | null
+          notes: string | null
+          status: 'confirmed' | 'cancelled' | 'waitlist'
           created_at: string
           updated_at: string
         }
         Insert: {
           id?: string
-          event_id: string
+          event_id?: string | null
           email: string
           name?: string | null
-          guest_count?: number
-          status?: 'confirmed' | 'waitlist' | 'cancelled'
+          plus_ones?: number
+          dietary_restrictions?: string | null
+          notes?: string | null
+          status?: 'confirmed' | 'cancelled' | 'waitlist'
           created_at?: string
           updated_at?: string
         }
         Update: {
           id?: string
-          event_id?: string
+          event_id?: string | null
           email?: string
           name?: string | null
-          guest_count?: number
-          status?: 'confirmed' | 'waitlist' | 'cancelled'
+          plus_ones?: number
+          dietary_restrictions?: string | null
+          notes?: string | null
+          status?: 'confirmed' | 'cancelled' | 'waitlist'
           created_at?: string
           updated_at?: string
         }
@@ -190,7 +196,7 @@ export interface Database {
           key: string
           title: string | null
           content: string | null
-          content_type: 'text' | 'html' | 'markdown' | 'json'
+          type: 'text' | 'html' | 'markdown' | 'json'
           is_published: boolean
           created_at: string
           updated_at: string
@@ -200,7 +206,7 @@ export interface Database {
           key: string
           title?: string | null
           content?: string | null
-          content_type?: 'text' | 'html' | 'markdown' | 'json'
+          type?: 'text' | 'html' | 'markdown' | 'json'
           is_published?: boolean
           created_at?: string
           updated_at?: string
@@ -210,7 +216,7 @@ export interface Database {
           key?: string
           title?: string | null
           content?: string | null
-          content_type?: 'text' | 'html' | 'markdown' | 'json'
+          type?: 'text' | 'html' | 'markdown' | 'json'
           is_published?: boolean
           created_at?: string
           updated_at?: string
@@ -221,7 +227,24 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_rsvp: {
+        Args: {
+          p_event_id: string
+          p_email: string
+          p_name?: string
+          p_plus_ones?: number
+          p_dietary_restrictions?: string
+          p_notes?: string
+        }
+        Returns: string
+      }
+      validate_secret_code: {
+        Args: {
+          p_code: string
+          p_target_route: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

@@ -2,74 +2,56 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { CheckCircle2, XCircle, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
-import { db } from "@/lib/supabase"
+import { useNewsletter } from "@/hooks/use-newsletter"
+import { X } from "lucide-react"
 
 interface NewsletterModalProps {
   isOpen: boolean
   onClose: () => void
-  onSubmit: (email: string) => Promise<void>
 }
 
-export default function NewsletterModal({ isOpen, onClose, onSubmit }: NewsletterModalProps) {
-  const [email, setEmail] = useState("")
-  const [isValid, setIsValid] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [error, setError] = useState("")
-  const { toast } = useToast()
+export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
+  const [fontLoaded, setFontLoaded] = useState(false)
+  const { email, error, isSubmitting, isSuccess, handleEmailChange, handleSubmit } = useNewsletter()
 
-  // Debug useEffect to log when modal state changes
   useEffect(() => {
-    console.log("Newsletter modal state changed:", { isOpen });
-  }, [isOpen]);
+    const style = document.createElement('style')
+    style.textContent = `
+      @font-face {
+        font-family: 'SkeletonBlood'
+        src: url('/fonts/skeleton-blood.woff2') format('woff2'),
+             url('/fonts/skeleton-blood.woff') format('woff'),
+             url('/fonts/skeleton-blood.ttf') format('truetype'),
+             url('/fonts/skeleton-blood.otf') format('opentype')
+        font-weight: normal
+        font-style: normal
+        font-display: swap
+      }
+    `
+    document.head.appendChild(style)
+    
+    if ('fonts' in document) {
+      document.fonts.ready.then(() => {
+        setFontLoaded(true)
+      })
+    } else {
+      setFontLoaded(true)
+    }
+    
+    return () => {
+      document.head.removeChild(style)
+    }
+  }, [])
 
-  // Email validation
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
-
-  // Handle email change
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = e.target.value
-    setEmail(newEmail)
-    setIsValid(validateEmail(newEmail))
-    setError("")
-  }
-
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!isValid) return
-
-    setIsSubmitting(true)
-    setError("")
-
-    try {
-      await onSubmit(email)
-      setIsSuccess(true)
+    await handleSubmit(e)
+    if (isSuccess) {
       setTimeout(() => {
         onClose()
       }, 2000)
-    } catch (err) {
-      setError("Something went wrong. Please try again.")
-    } finally {
-      setIsSubmitting(false)
     }
   }
-
-  // Reset form when modal closes
-  useEffect(() => {
-    if (!isOpen) {
-      setEmail("")
-      setIsValid(false)
-      setIsSuccess(false)
-      setError("")
-    }
-  }, [isOpen])
 
   return (
     <AnimatePresence>
@@ -78,125 +60,152 @@ export default function NewsletterModal({ isOpen, onClose, onSubmit }: Newslette
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm"
-          onClick={onClose}
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4"
         >
+          {/* Backdrop */}
           <motion.div
-            initial={{ scale: 0.95, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            transition={{ type: "spring", duration: 0.5 }}
-            className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 z-50 p-2 rounded-full hover:bg-white/10 transition-colors"
-              aria-label="Close modal"
-            >
-              <X className="w-6 h-6 text-white" />
-            </button>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={onClose}
+          />
 
-            {/* Success state */}
-            {isSuccess ? (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="text-center py-8"
+          {/* Modal */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative w-full max-w-md"
+          >
+            <motion.div
+              className="relative group"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-miami-pink via-miami-yellow to-miami-blue rounded-2xl blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
+              
+              {/* Main form container */}
+              <form
+                onSubmit={handleFormSubmit}
+                className="relative bg-white/95 backdrop-blur-md p-8 rounded-2xl shadow-2xl border-2 border-miami-pink/20 hover:border-miami-pink/40 transition-all duration-300"
               >
-                <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">Thank you!</h2>
-                <p className="text-gray-600">You've successfully subscribed to our newsletter.</p>
-              </motion.div>
-            ) : (
-              <>
+                {/* Close button */}
+                <motion.button
+                  type="button"
+                  onClick={onClose}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-miami-pink/10 hover:bg-miami-pink/20 transition-colors duration-200"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X size={20} className="text-miami-pink" />
+                </motion.button>
+
+                {/* Decorative elements */}
+                <div className="absolute -top-2 -left-2 w-4 h-4 bg-miami-pink rounded-full animate-pulse"></div>
+                <div className="absolute -top-2 -right-2 w-4 h-4 bg-miami-yellow rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-miami-blue rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-miami-pink rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+
                 {/* Header */}
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-2">
-                    Join Our Newsletter
+                <div className="text-center mb-6">
+                  <h2 
+                    className="text-2xl font-bold mb-2 bg-gradient-to-r from-miami-pink via-miami-yellow to-miami-blue bg-clip-text text-transparent"
+                    style={{
+                      fontFamily: fontLoaded ? "'SkeletonBlood', fantasy" : "fantasy",
+                    }}
+                  >
+                    ✨ Stay in the Loop ✨
                   </h2>
-                  <p className="text-gray-600">
-                    Stay updated with our latest news and exclusive offers!
+                  <p className="text-mint-rot/80 text-sm">
+                    Get exclusive updates, event announcements, and Miami kitsch inspiration
                   </p>
                 </div>
 
-                {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Email input with floating label */}
-                  <div className="relative">
+                {/* Email input with enhanced styling */}
+                <div className="space-y-4">
+                  <div className="relative group/input">
                     <input
                       type="email"
-                      id="email"
                       value={email}
-                      onChange={handleEmailChange}
-                      className={`peer w-full h-12 px-4 border-2 rounded-lg outline-none transition-colors
-                        ${isValid ? 'border-green-500' : 'border-gray-300 focus:border-pink-500'}
-                        ${error ? 'border-red-500' : ''}`}
-                      placeholder=" "
+                      onChange={(e) => handleEmailChange(e.target.value)}
+                      placeholder="Enter your email address"
+                      className="w-full px-6 py-4 rounded-xl border-2 border-miami-pink/30 bg-white/80 backdrop-blur-sm focus:outline-none focus:border-miami-pink focus:bg-white transition-all duration-300 placeholder-mint-rot/50 text-mint-rot font-medium"
+                      required
                     />
-                    <label
-                      htmlFor="email"
-                      className={`absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all
-                        peer-placeholder-shown:text-base peer-placeholder-shown:top-1/2
-                        peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-pink-500
-                        ${email ? '-top-2.5 text-sm' : ''}
-                        ${isValid ? 'text-green-500' : ''}
-                        ${error ? 'text-red-500' : ''}`}
-                    >
-                      Email address
-                    </label>
-                    {isValid && (
-                      <CheckCircle2 className="absolute right-4 top-1/2 -translate-y-1/2 text-green-500" />
-                    )}
-                    {error && (
-                      <XCircle className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500" />
-                    )}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-miami-pink/10 via-miami-yellow/10 to-miami-blue/10 opacity-0 group-hover/input:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   </div>
 
-                  {/* Error message */}
-                  {error && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-red-500 text-sm"
-                    >
-                      {error}
-                    </motion.p>
-                  )}
-
-                  {/* Submit button */}
+                  {/* Submit button with enhanced styling */}
                   <motion.button
                     type="submit"
-                    disabled={!isValid || isSubmitting}
-                    className={`w-full py-3 px-4 rounded-lg text-white font-medium
-                      ${isValid
-                        ? 'bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-600 hover:to-cyan-600'
-                        : 'bg-gray-300 cursor-not-allowed'
-                      } transition-all duration-300`}
-                    whileHover={isValid ? { scale: 1.02 } : {}}
-                    whileTap={isValid ? { scale: 0.98 } : {}}
+                    disabled={isSubmitting || !!error}
+                    className="w-full py-4 px-6 rounded-xl font-bold text-lg relative overflow-hidden group/button"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    {isSubmitting ? (
-                      <span className="flex items-center justify-center">
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Subscribing...
-                      </span>
-                    ) : (
-                      "Subscribe Now"
-                    )}
+                    {/* Button background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-miami-pink via-miami-yellow to-miami-blue rounded-xl"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-miami-pink/80 via-miami-yellow/80 to-miami-blue/80 rounded-xl opacity-0 group-hover/button:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Button content */}
+                    <span className="relative z-10 text-white flex items-center justify-center gap-2">
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          Subscribing...
+                        </>
+                      ) : (
+                        <>
+                          <span>🎉</span>
+                          Subscribe Now
+                          <span>🎉</span>
+                        </>
+                      )}
+                    </span>
                   </motion.button>
-                </form>
 
-                {/* Trust message */}
-                <p className="text-center text-sm text-gray-500 mt-6">
-                  No spam, we promise! You can unsubscribe at any time.
+                  {/* Cancel button */}
+                  <motion.button
+                    type="button"
+                    onClick={onClose}
+                    className="w-full py-3 px-6 rounded-xl font-medium text-lg border-2 border-miami-pink/30 text-miami-pink hover:bg-miami-pink/10 transition-all duration-300"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Maybe Later
+                  </motion.button>
+                </div>
+
+                {/* Status messages with enhanced styling */}
+                {error && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 text-sm text-center mt-3 bg-red-50 p-3 rounded-lg border border-red-200"
+                  >
+                    ❌ {error}
+                  </motion.p>
+                )}
+
+                {isSuccess && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-green-600 text-sm text-center mt-3 bg-green-50 p-3 rounded-lg border border-green-200"
+                  >
+                    🎉 Successfully subscribed to our newsletter!
+                  </motion.p>
+                )}
+
+                {/* Footer text */}
+                <p className="text-xs text-mint-rot/60 text-center mt-4">
+                  Join our Miami kitsch community • No spam, just art ✨
                 </p>
-              </>
-            )}
+              </form>
+            </motion.div>
           </motion.div>
         </motion.div>
       )}

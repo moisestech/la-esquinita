@@ -1,5 +1,5 @@
-import AboutPageClient from "@/components/about-page-client"
+import AboutPage from "@/components/about-page"
 
-export default function AboutPage() {
-  return <AboutPageClient />
+export default function About() {
+  return <AboutPage />
 }

@@ -5,14 +5,11 @@ import Link from "next/link"
 import { TextReveal } from "@/components/magicui/text-reveal"
 import { useState, useEffect } from "react"
 import NewsletterModal from "@/components/newsletter-modal"
-import { useToast } from "@/hooks/use-toast"
-import { db } from "@/lib/supabase"
 import { TbHandFinger } from "react-icons/tb"
 
 export default function AboutPageClient() {
   const [fontLoaded, setFontLoaded] = useState(false)
   const [showNewsletter, setShowNewsletter] = useState(false)
-  const { toast } = useToast()
 
   useEffect(() => {
     const style = document.createElement('style')
@@ -43,32 +40,7 @@ export default function AboutPageClient() {
     }
   }, [])
 
-  const handleNewsletterSubmit = async (email: string) => {
-    try {
-      await db.newsletter.subscribe(email)
-      toast({
-        title: "Success!",
-        description: "Your email has been captured. Thanks for subscribing!",
-        variant: "default",
-      })
-      setShowNewsletter(false)
-    } catch (error: any) {
-      // Check for the specific error code from Supabase for unique constraint violation
-      if (error.code === '23505') {
-        toast({
-          title: "Already Subscribed",
-          description: "This email is already on our newsletter list!",
-          variant: "default",
-        })
-      } else {
-        toast({
-          title: "Error",
-          description: "Something went wrong. Please try again later.",
-          variant: "destructive",
-        })
-      }
-    }
-  }
+
 
   return (
     <div className="about-page relative min-h-screen">
@@ -157,7 +129,6 @@ export default function AboutPageClient() {
       <NewsletterModal
         isOpen={showNewsletter}
         onClose={() => setShowNewsletter(false)}
-        onSubmit={handleNewsletterSubmit}
       />
     </div>
   )

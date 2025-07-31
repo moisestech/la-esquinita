@@ -4,18 +4,29 @@ import React, { useState } from "react"
 import { motion } from "framer-motion"
 import { Heart, Share2, ShoppingCart, Star, Tag, Calendar } from "lucide-react"
 import { Product } from "@/lib/supabase"
+import { useCart } from "@/contexts/cart-context"
+import { useToast } from "@/hooks/use-toast"
 
 interface ProductInfoProps {
   product: Product
-  onAddToCart: (product: Product) => void
 }
 
-export default function ProductInfo({ product, onAddToCart }: ProductInfoProps) {
+export default function ProductInfo({ product }: ProductInfoProps) {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [quantity, setQuantity] = useState(1)
+  const [isAddingToCart, setIsAddingToCart] = useState(false)
+  const { addToCart, isInCart } = useCart()
+  const { toast } = useToast()
 
-  const handleAddToCart = () => {
-    onAddToCart(product)
+  const handleAddToCart = async () => {
+    setIsAddingToCart(true)
+    
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 500))
+    
+    addToCart(product, quantity)
+    setIsAddingToCart(false)
+    
     // Add sprinkle animation effect
     const sprinkle = document.createElement('div')
     sprinkle.className = 'fixed pointer-events-none z-50 animate-sprinkle'
@@ -30,20 +41,42 @@ export default function ProductInfo({ product, onAddToCart }: ProductInfoProps) 
   }
 
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: product.name,
-          text: product.description || '',
-          url: window.location.href,
+    const shareData = {
+      title: product.name,
+      text: product.description || `Check out this amazing ${product.name} from La Esquinita!`,
+      url: window.location.href,
+    }
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData)
+      } else {
+        // Fallback: copy to clipboard
+        await navigator.clipboard.writeText(shareData.url)
+        toast({
+          title: "Link Copied! 📋",
+          description: "Product link has been copied to your clipboard.",
+          variant: "default",
         })
-      } catch (error) {
-        console.log('Error sharing:', error)
       }
-    } else {
+    } catch (error) {
+      console.log('Error sharing:', error)
       // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href)
-      // Show toast notification
+      try {
+        await navigator.clipboard.writeText(shareData.url)
+        toast({
+          title: "Link Copied! 📋",
+          description: "Product link has been copied to your clipboard.",
+          variant: "default",
+        })
+      } catch (clipboardError) {
+        console.log('Clipboard error:', clipboardError)
+        toast({
+          title: "Share Failed",
+          description: "Unable to copy link to clipboard.",
+          variant: "destructive",
+        })
+      }
     }
   }
 
@@ -171,13 +204,31 @@ export default function ProductInfo({ product, onAddToCart }: ProductInfoProps) 
       >
         <button
           onClick={handleAddToCart}
-          disabled={product.status === "coming_soon"}
-          className="flex-1 bg-mint-rot text-white py-4 px-6 rounded-2xl font-medium hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={product.status === "coming_soon" || isAddingToCart}
+          className={`flex-1 py-4 px-6 rounded-2xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+            isInCart(product.id)
+              ? 'bg-green-500 text-white hover:bg-green-600'
+              : 'bg-mint-rot text-white hover:bg-opacity-90'
+          }`}
         >
-          <ShoppingCart className="w-5 h-5" />
-          <span>
-            {product.status === "coming_soon" ? "Coming Soon" : "Add to Cart"}
-          </span>
+          {isAddingToCart ? (
+            <>
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <span>Adding...</span>
+            </>
+          ) : (
+            <>
+              <ShoppingCart className="w-5 h-5" />
+              <span>
+                {product.status === "coming_soon" 
+                  ? "Coming Soon" 
+                  : isInCart(product.id) 
+                    ? "In Cart ✓" 
+                    : "Add to Cart"
+                }
+              </span>
+            </>
+          )}
         </button>
         
         <button

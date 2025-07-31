@@ -63,6 +63,35 @@ export default function AboutPage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
+      {/* Landscape sponsorship image with cool effect */}
+      <motion.div
+        className="relative w-full h-96 md:h-[500px] overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      >
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 0.5 }}
+        />
+        <motion.img
+          src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753918202/la-esquinita/La_Esquinita_sponsorship_2025_Tara_Long-store-outside_n7z755.png"
+          alt="La Esquinita Sponsorship 2025 - Tara Long Store Outside"
+          className="w-full h-full object-cover"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+        />
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-t from-pink-200/60 via-pink-100/30 to-transparent"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 1 }}
+        />
+      </motion.div>
+
       <BackgroundPattern 
         imageUrl="https://res.cloudinary.com/dck5rzi4h/image/upload/v1742918384/la-esquinita/bg-rocks-color_ikxdem.jpg"
         className="opacity-90"
@@ -76,15 +105,34 @@ export default function AboutPage() {
         initial="hidden"
         animate="visible"
       >
-        <motion.h1 
-          className="text-6xl font-bold mb-12 bg-gradient-to-r from-miami-pink to-miami-cyan bg-clip-text text-transparent"
+        <motion.div 
+          className="flex justify-center mb-12"
           variants={textVariants}
-          style={{
-            fontFamily: fontLoaded ? "'SkeletonBlood', fantasy" : "fantasy",
-          }}
         >
-          La Esquinita
-        </motion.h1>
+          <motion.img
+            src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753892200/la-esquinita/LE-logo-tara-2_aurodr.png"
+            alt="La Esquinita"
+            className="h-32 md:h-48 w-auto drop-shadow-neon-pink"
+            whileHover={{ 
+              scale: 1.05,
+              filter: "drop-shadow(0 0 20px #ff69b4) drop-shadow(0 0 30px #4ecdc4)",
+              transition: { duration: 0.3 }
+            }}
+            whileTap={{ scale: 0.95 }}
+            animate={{ 
+              y: [0, -5, 0],
+              filter: [
+                "drop-shadow(0 0 10px #ff69b4)",
+                "drop-shadow(0 0 20px #ff69b4) drop-shadow(0 0 15px #4ecdc4)",
+                "drop-shadow(0 0 10px #ff69b4)"
+              ]
+            }}
+            transition={{ 
+              y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+              filter: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+            }}
+          />
+        </motion.div>
 
         <motion.p 
           className="text-xl mb-8 text-gray-300"
@@ -130,6 +178,30 @@ export default function AboutPage() {
             to our community. Join our newsletter to be part of this journey into 
             the heart of Miami&apos;s corner store culture.
           </p>
+        </motion.div>
+
+        <motion.div
+          className="bg-gradient-to-r from-miami-pink/10 to-miami-cyan/10 backdrop-blur-sm p-8 rounded-lg mb-12 border border-miami-pink/20"
+          variants={textVariants}
+        >
+          <h2 className="text-2xl font-semibold mb-4 text-miami-pink">
+            Special Thanks
+          </h2>
+          <p className="text-gray-400 mb-4">
+            This exhibition would not be possible without the generous support and 
+            creative vision of our partners in the Miami arts community.
+          </p>
+          <div className="bg-white/5 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-2 text-miami-cyan">
+              Locust Projects
+            </h3>
+            <p className="text-gray-400">
+              We extend our deepest gratitude to Locust Projects for their unwavering 
+              support and commitment to contemporary art in Miami. Their dedication 
+              to fostering innovative artistic practices has made this exploration 
+              of Miami&apos;s cultural landscape possible.
+            </p>
+          </div>
         </motion.div>
 
         <motion.div

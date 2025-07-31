@@ -9,6 +9,8 @@ import StarRating from "./star-rating"
 import CommentsSection from "./comments-section"
 import RelatedProducts from "./related-products"
 import BreadcrumbNav from "./breadcrumb-nav"
+import FloatingSprinkles from "../storefront/floating-sprinkles"
+import { Toaster } from "@/components/ui/toaster"
 import { Product } from "@/lib/supabase"
 
 // Placeholder product data - replace with real data from Supabase
@@ -63,11 +65,90 @@ const products: Product[] = [
     tags: ["perfume", "swamp", "artisanal", "fragrance"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
+  },
+  {
+    id: "4",
+    slug: "neon-pink-sunglasses",
+    name: "Neon Pink Sunglasses",
+    price: 35.00,
+    description: "Vibrant neon pink sunglasses with Miami kitsch charm. Perfect for those sunny Florida days when you want to make a statement. These eye-catching shades feature a retro design with modern comfort.",
+    image_urls: [
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop&crop=face"
+    ],
+    status: "active" as const,
+    category: "fashion",
+    tags: ["sunglasses", "neon", "pink", "miami"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "5",
+    slug: "flamingo-pool-float",
+    name: "Flamingo Pool Float",
+    price: 25.00,
+    description: "Inflatable flamingo pool float with Miami kitsch design. Perfect for pool parties and beach days. This iconic pink flamingo brings the Miami vibe to any water adventure.",
+    image_urls: [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=face"
+    ],
+    status: "active" as const,
+    category: "lifestyle",
+    tags: ["pool", "float", "flamingo", "summer"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "6",
+    slug: "miami-vice-candle",
+    name: "Miami Vice Candle",
+    price: 22.00,
+    description: "Scented candle with notes of coconut, lime, and ocean breeze. Inspired by the iconic Miami Vice aesthetic. Each candle is hand-poured and creates the perfect atmosphere for your Miami-inspired space.",
+    image_urls: [
+      "https://images.unsplash.com/photo-1603006905004-6f2c0c0c0c0c?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1603006905004-6f2c0c0c0c0c?w=800&h=600&fit=crop&crop=face"
+    ],
+    status: "active" as const,
+    category: "home",
+    tags: ["candle", "scented", "miami", "vice"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "7",
+    slug: "alligator-keychain",
+    name: "Alligator Keychain",
+    price: 15.00,
+    description: "Handcrafted alligator keychain made from recycled materials. A perfect Miami souvenir that's both cute and eco-friendly. Each piece is unique and represents the wild side of Florida.",
+    image_urls: [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=face"
+    ],
+    status: "active" as const,
+    category: "accessories",
+    tags: ["alligator", "keychain", "recycled", "miami"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "8",
+    slug: "coconut-shell-bowl",
+    name: "Coconut Shell Bowl",
+    price: 28.00,
+    description: "Natural coconut shell bowl hand-carved and polished. Perfect for serving tropical fruits or as a decorative piece. Each bowl is unique and brings the tropical essence of Miami into your home.",
+    image_urls: [
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=face"
+    ],
+    status: "active" as const,
+    category: "home",
+    tags: ["coconut", "bowl", "natural", "tropical"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   }
 ]
 
 const getProductBySlug = (slug: string): Product | null => {
-  
   return products.find(p => p.slug === slug) || null
 }
 
@@ -80,21 +161,7 @@ export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const handleAddToCart = (product: Product) => {
-    // TODO: Implement add to cart functionality
-    console.log(`Adding ${product.name} to cart`)
-    // Add sprinkle animation effect
-    const sprinkle = document.createElement('div')
-    sprinkle.className = 'fixed pointer-events-none z-50 animate-sprinkle'
-    sprinkle.innerHTML = '✨'
-    sprinkle.style.left = '50%'
-    sprinkle.style.top = '50%'
-    document.body.appendChild(sprinkle)
-    
-    setTimeout(() => {
-      document.body.removeChild(sprinkle)
-    }, 2000)
-  }
+
 
   useEffect(() => {
     // Simulate API call
@@ -197,7 +264,7 @@ export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <ProductInfo product={product} onAddToCart={handleAddToCart} />
+            <ProductInfo product={product} />
           </motion.div>
         </div>
 
@@ -232,30 +299,10 @@ export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
       </div>
 
       {/* Floating Elements */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-2xl animate-sprinkle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 2 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          >
-            ✨
-          </motion.div>
-        ))}
-      </div>
+      <FloatingSprinkles />
+      
+      {/* Toast Notifications */}
+      <Toaster />
     </div>
   )
 } 

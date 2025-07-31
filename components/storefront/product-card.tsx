@@ -3,23 +3,91 @@
 import React, { useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { Share2, ShoppingCart, Heart } from "lucide-react"
 import { Product } from "@/lib/supabase"
+import { useToast } from "@/hooks/use-toast"
+import { useCart } from "@/contexts/cart-context"
 
 interface ProductCardProps {
   product: Product
-  onAddToCart: (product: Product) => void
 }
 
-export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [showSprinkles, setShowSprinkles] = useState(false)
+  const [isAddingToCart, setIsAddingToCart] = useState(false)
+  const [isShared, setIsShared] = useState(false)
+  const { toast } = useToast()
+  const { addToCart } = useCart()
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    onAddToCart(product)
+    
+    setIsAddingToCart(true)
+    
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 500))
+    
+    addToCart(product)
     setShowSprinkles(true)
+    setIsAddingToCart(false)
+    
+    // Show success toast
+    toast({
+      title: "Added to Cart! 🛒",
+      description: `${product.name} has been added to your cart.`,
+      variant: "default",
+    })
+    
     setTimeout(() => setShowSprinkles(false), 2000)
+  }
+
+  const handleShare = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
+    const shareData = {
+      title: product.name,
+      text: product.description || `Check out this amazing ${product.name} from La Esquinita!`,
+      url: `${window.location.origin}/product/${product.slug}`,
+    }
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData)
+      } else {
+              // Fallback: copy to clipboard
+      await navigator.clipboard.writeText(shareData.url)
+      setIsShared(true)
+      toast({
+        title: "Link Copied! 📋",
+        description: "Product link has been copied to your clipboard.",
+        variant: "default",
+      })
+      setTimeout(() => setIsShared(false), 2000)
+      }
+    } catch (error) {
+      console.log('Error sharing:', error)
+      // Fallback: copy to clipboard
+      try {
+        await navigator.clipboard.writeText(shareData.url)
+        setIsShared(true)
+        toast({
+          title: "Link Copied! 📋",
+          description: "Product link has been copied to your clipboard.",
+          variant: "default",
+        })
+        setTimeout(() => setIsShared(false), 2000)
+      } catch (clipboardError) {
+        console.log('Clipboard error:', clipboardError)
+        toast({
+          title: "Share Failed",
+          description: "Unable to copy link to clipboard.",
+          variant: "destructive",
+        })
+      }
+    }
   }
 
   return (
@@ -61,6 +129,18 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         </div>
       )}
 
+      {/* Share Success Feedback */}
+      {isShared && (
+        <motion.div
+          className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-20"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+        >
+          Link copied to clipboard! 📋
+        </motion.div>
+      )}
+
       {/* Card Container */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-sugar-pink hover:border-miami-pink transition-colors duration-300">
         {/* Product Image */}
@@ -78,8 +158,32 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             </span>
           </div>
 
+          {/* Action Buttons */}
+          <div className="absolute top-3 right-3 flex flex-col gap-2">
+            {/* Share Button */}
+            <motion.button
+              onClick={handleShare}
+              className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="Share"
+            >
+              <Share2 size={16} className="text-miami-pink" />
+            </motion.button>
+            
+            {/* Favorite Button */}
+            <motion.button
+              className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="Add to Favorites"
+            >
+              <Heart size={16} className="text-miami-pink" />
+            </motion.button>
+          </div>
+
           {/* Tags */}
-          <div className="absolute top-3 right-3 flex flex-wrap gap-1">
+          <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
             {product.tags.slice(0, 2).map((tag, index) => (
               <span
                 key={index}
@@ -124,11 +228,26 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             {/* Add to Cart Button */}
             <motion.button
               onClick={handleAddToCart}
-              className="bg-gradient-to-r from-miami-pink to-miami-purple text-white px-4 py-2 rounded-full font-bold text-sm hover:shadow-neon-pink transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              disabled={isAddingToCart}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-all duration-300 ${
+                isAddingToCart 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-gradient-to-r from-miami-pink to-miami-purple text-white hover:shadow-neon-pink'
+              }`}
+              whileHover={!isAddingToCart ? { scale: 1.05 } : {}}
+              whileTap={!isAddingToCart ? { scale: 0.95 } : {}}
             >
-              Add to Cart
+              {isAddingToCart ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Adding...
+                </>
+              ) : (
+                <>
+                  <ShoppingCart size={16} />
+                  Add to Cart
+                </>
+              )}
             </motion.button>
           </div>
         </div>

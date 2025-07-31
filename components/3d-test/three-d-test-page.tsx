@@ -1,186 +1,230 @@
 "use client"
-
 import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import ModelViewer from "./model-viewer"
-import ModelSelector from "./model-selector"
-import PerformanceMonitor from "./performance-monitor"
-import { ChevronLeft, Settings, RotateCcw, ZoomIn, ZoomOut } from "lucide-react"
+import { Loader2, AlertCircle, Box } from "lucide-react"
 
-// Available 3D models from /public/obj directory
-const availableModels = [
-  {
-    id: "asset-1",
-    name: "Asset 1",
-    objPath: "/obj/Asset 1.obj",
-    mtlPath: "/obj/Asset 1.mtl",
-    thumbnail: "/placeholder-logo.png",
-    description: "First 3D asset for La Esquinita"
-  },
-  {
-    id: "asset-2", 
-    name: "Asset 2",
-    objPath: "/obj/Asset 2.obj",
-    mtlPath: "/obj/Asset 2.mtl",
-    thumbnail: "/placeholder-logo.png",
-    description: "Second 3D asset for La Esquinita"
-  }
-]
-
+// Main 3D Test Page Component
 export default function ThreeDTestPage() {
-  const [selectedModel, setSelectedModel] = useState(availableModels[0])
-  const [showControls, setShowControls] = useState(false)
   const [isClient, setIsClient] = useState(false)
-  const [performanceMetrics, setPerformanceMetrics] = useState({
-    fps: 0,
-    memory: 0,
-    triangles: 0,
-    loadTime: 0
-  })
+  const [show3D, setShow3D] = useState(false)
 
-  useEffect(() => {
+  React.useEffect(() => {
     setIsClient(true)
   }, [])
 
-  // Don't render anything until we're on the client
   if (!isClient) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-mint-rot via-stucco to-icing-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-miami-pink border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-mint-rot font-skeleton text-lg">Loading 3D Testing Lab...</p>
+      <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue flex items-center justify-center">
+        <div className="text-center text-mint-rot">
+          <Loader2 className="w-12 h-12 mx-auto mb-4 animate-spin" />
+          <p className="text-xl font-skeleton">Loading 3D Test Environment...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-mint-rot via-stucco to-icing-white">
+    <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue">
       {/* Header */}
-      <motion.header 
-        className="bg-white/80 backdrop-blur-sm border-b border-sugar-pink/20 p-4"
+      <motion.div
+        className="absolute top-0 left-0 right-0 z-10 p-6"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <a 
-              href="/storefront" 
-              className="flex items-center space-x-2 text-mint-rot hover:text-miami-pink transition-colors"
-            >
-              <ChevronLeft className="w-5 h-5" />
-              <span className="font-skeleton text-lg">Back to Storefront</span>
-            </a>
-          </div>
-          
-          <h1 className="text-3xl font-skeleton text-miami-pink">
-            3D Testing Lab
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-skeleton text-mint-rot mb-4">
+            3D Test Environment
           </h1>
-          
-          <button
-            onClick={() => setShowControls(!showControls)}
-            className="p-2 bg-miami-pink text-white rounded-lg hover:bg-miami-purple transition-colors"
-          >
-            <Settings className="w-5 h-5" />
-          </button>
+          <p className="text-lg text-mint-rot/80 max-w-2xl">
+            Testing React Three Fiber compatibility with Next.js 15 and React 19
+          </p>
         </div>
-      </motion.header>
+      </motion.div>
 
-      <div className="container mx-auto p-4">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Model Selector Sidebar */}
-          <motion.div 
-            className="lg:col-span-1"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <ModelSelector
-              models={availableModels}
-              selectedModel={selectedModel}
-              onModelSelect={setSelectedModel}
-            />
-          </motion.div>
-
-          {/* Main 3D Viewer */}
-          <motion.div 
-            className="lg:col-span-3"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-sugar-pink">
-              {/* Viewer Header */}
-              <div className="bg-gradient-to-r from-miami-pink to-miami-purple p-4 text-white">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="text-xl font-skeleton">{selectedModel.name}</h2>
-                    <p className="text-sm opacity-90">{selectedModel.description}</p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <button className="p-2 hover:bg-white/20 rounded-lg transition-colors">
-                      <RotateCcw className="w-4 h-4" />
-                    </button>
-                    <button className="p-2 hover:bg-white/20 rounded-lg transition-colors">
-                      <ZoomIn className="w-4 h-4" />
-                    </button>
-                    <button className="p-2 hover:bg-white/20 rounded-lg transition-colors">
-                      <ZoomOut className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* 3D Viewer */}
-              <div className="h-96 md:h-[500px] lg:h-[600px] relative">
-                <ModelViewer
-                  model={selectedModel}
-                  onPerformanceUpdate={setPerformanceMetrics}
-                />
-              </div>
+      {/* 3D Canvas */}
+      <div className="w-full h-screen">
+        {show3D ? (
+          <ThreeDScene />
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <Box className="w-24 h-24 text-miami-pink mx-auto mb-6" />
+              <h2 className="text-2xl font-skeleton text-mint-rot mb-4">
+                Ready to Test 3D?
+              </h2>
+              <p className="text-mint-rot/80 mb-6 max-w-md">
+                Click the button below to load the 3D scene. If there are any compatibility issues, 
+                you'll see a graceful error message.
+              </p>
+              <button
+                onClick={() => setShow3D(true)}
+                className="px-6 py-3 bg-miami-pink text-white rounded-lg font-medium hover:bg-miami-purple transition-colors"
+              >
+                Load 3D Scene
+              </button>
             </div>
-          </motion.div>
-        </div>
-
-        {/* Performance Monitor */}
-        {showControls && (
-          <motion.div
-            className="mt-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <PerformanceMonitor metrics={performanceMetrics} />
-          </motion.div>
+          </div>
         )}
       </div>
 
-      {/* Floating Elements */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-2xl animate-sprinkle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 2 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          >
-            ✨
-          </motion.div>
-        ))}
-      </div>
+      {/* Info Panel */}
+      <motion.div
+        className="absolute bottom-6 left-6 right-6 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 max-w-md">
+          <div className="flex items-center gap-3 mb-3">
+            <Box className="w-5 h-5 text-miami-pink" />
+            <h3 className="font-skeleton text-mint-rot font-semibold">3D Scene Info</h3>
+          </div>
+          <ul className="text-sm text-mint-rot/80 space-y-1">
+            <li>• Interactive 3D scene with basic geometry</li>
+            <li>• Orbit controls for camera movement</li>
+            <li>• Auto-rotation enabled</li>
+            <li>• Miami kitsch color palette</li>
+            <li>• Error boundary protection</li>
+          </ul>
+        </div>
+      </motion.div>
     </div>
+  )
+}
+
+// Simple 3D Scene Component with Error Boundary
+function ThreeDScene() {
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [Canvas, setCanvas] = useState<any>(null)
+  const [OrbitControls, setOrbitControls] = useState<any>(null)
+
+  useEffect(() => {
+    const load3DComponents = async () => {
+      try {
+        setIsLoading(true)
+        setError(null)
+        
+        // Load 3D components
+        const fiberModule = await import("@react-three/fiber")
+        const dreiModule = await import("@react-three/drei")
+        
+        setCanvas(() => fiberModule.Canvas)
+        setOrbitControls(() => dreiModule.OrbitControls)
+        setIsLoading(false)
+      } catch (err) {
+        console.error("3D Component Error:", err)
+        setError("Failed to load 3D components. This might be due to browser compatibility or missing WebGL support.")
+        setIsLoading(false)
+      }
+    }
+
+    load3DComponents()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full bg-gradient-to-br from-miami-pink to-miami-blue">
+        <div className="text-center text-white">
+          <Loader2 className="w-8 h-8 mx-auto mb-4 animate-spin" />
+          <p>Loading 3D Components...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-full bg-gradient-to-br from-miami-pink to-miami-blue text-white p-8">
+        <div className="text-center">
+          <AlertCircle className="w-16 h-16 mx-auto mb-4" />
+          <h3 className="text-xl font-bold mb-2">3D Rendering Error</h3>
+          <p className="text-sm opacity-80 mb-4">
+            {error}
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-white text-miami-pink rounded-lg font-medium hover:bg-gray-100 transition-colors"
+          >
+            Reload Page
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (!Canvas || !OrbitControls) {
+    return (
+      <div className="flex items-center justify-center h-full bg-gradient-to-br from-miami-pink to-miami-blue text-white p-8">
+        <div className="text-center">
+          <AlertCircle className="w-16 h-16 mx-auto mb-4" />
+          <h3 className="text-xl font-bold mb-2">3D Components Not Loaded</h3>
+          <p className="text-sm opacity-80 mb-4">
+            Failed to load 3D components.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-white text-miami-pink rounded-lg font-medium hover:bg-gray-100 transition-colors"
+          >
+            Reload Page
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 8], fov: 75 }}
+      style={{ background: 'linear-gradient(135deg, #ff6b9d, #4ecdc4)' }}
+      onError={(error: any) => {
+        console.error("Canvas error:", error)
+        setError("Failed to initialize 3D canvas")
+      }}
+    >
+      {/* Lighting */}
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#ff69b4" />
+      
+      {/* Simple Geometry */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[2, 2, 2]} />
+        <meshStandardMaterial 
+          color="#ff69b4" 
+          metalness={0.1}
+          roughness={0.8}
+        />
+      </mesh>
+      
+      {/* Additional decorative elements */}
+      <mesh position={[3, 0, 0]}>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial 
+          color="#4ecdc4" 
+          metalness={0.3}
+          roughness={0.6}
+        />
+      </mesh>
+      
+      <mesh position={[-3, 0, 0]}>
+        <cylinderGeometry args={[0.5, 0.5, 1, 32]} />
+        <meshStandardMaterial 
+          color="#ffe66d" 
+          metalness={0.2}
+          roughness={0.7}
+        />
+      </mesh>
+      
+      {/* Controls */}
+      <OrbitControls 
+        enablePan
+        enableZoom
+        enableRotate
+        autoRotate={true}
+        autoRotateSpeed={1}
+      />
+    </Canvas>
   )
 } 

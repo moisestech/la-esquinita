@@ -457,7 +457,6 @@ export default function HomePage() {
       <NewsletterModal
         isOpen={showNewsletter}
         onClose={() => setShowNewsletter(false)}
-        onSubmit={handleNewsletterSubmit}
       />
 
       <Toaster />

@@ -273,31 +273,16 @@ export const db = {
   },
 
   secretPasses: {
-    // Validate secret code
+    // Validate secret code using the database function
     validate: async (code: string, targetRoute: string) => {
       const { data, error } = await supabase
-        .from(TABLES.SECRET_PASSES)
-        .select('*')
-        .eq('code', code)
-        .eq('target_route', targetRoute)
-        .eq('is_active', true)
-        .single()
+        .rpc('validate_secret_code', {
+          p_code: code,
+          p_target_route: targetRoute
+        })
 
       if (error) {
-        if (error.code === 'PGRST116') { // No rows returned
-          return null
-        }
-        throw error
-      }
-
-      // Check if expired
-      if (data.expires_at && new Date(data.expires_at) < new Date()) {
-        return null
-      }
-
-      // Check usage limits
-      if (data.max_uses && data.current_uses >= data.max_uses) {
-        return null
+        throw new DatabaseError(error.message || 'An unexpected error occurred', error.code)
       }
 
       return data
@@ -361,19 +346,29 @@ export const db = {
   },
 
   rsvps: {
-    // Create RSVP
-    create: async (rsvp: RSVPInsert) => {
+    // Create RSVP using the database function
+    create: async (eventId: string, email: string, name?: string, plusOnes: number = 0, dietaryRestrictions?: string, notes?: string) => {
       const { data, error } = await supabase
-        .from(TABLES.RSVPS)
-        .insert([rsvp])
-        .select()
-        .single()
+        .rpc('create_rsvp', {
+          p_event_id: eventId,
+          p_email: email,
+          p_name: name,
+          p_plus_ones: plusOnes,
+          p_dietary_restrictions: dietaryRestrictions,
+          p_notes: notes
+        })
 
       if (error) {
+        if (error.message.includes('Event not found')) {
+          throw new DatabaseError('Event not found', 'EVENT_NOT_FOUND')
+        }
+        if (error.message.includes('Event is at capacity')) {
+          throw new DatabaseError('Event is at capacity', 'EVENT_FULL')
+        }
         if (error.code === '23505') { // Unique violation
           throw new DatabaseError('You have already RSVP\'d for this event.', error.code)
         }
-        throw error
+        throw new DatabaseError(error.message || 'An unexpected error occurred', error.code)
       }
 
       return data
@@ -492,6 +487,71 @@ export const db = {
         .eq('id', id)
 
       if (error) throw error
+    }
+  }
+}
+
+export const coupons = {
+  async validate(code: string): Promise<{ valid: boolean; discount?: number; type?: 'percentage' | 'fixed'; message?: string }> {
+    try {
+      const { data, error } = await supabase
+        .from('coupons')
+        .select('*')
+        .eq('code', code.toUpperCase())
+        .eq('active', true)
+        .single()
+
+      if (error || !data) {
+        return { valid: false, message: 'Invalid coupon code' }
+      }
+
+      // Check if coupon is expired
+      if (data.expires_at && new Date(data.expires_at) < new Date()) {
+        return { valid: false, message: 'Coupon has expired' }
+      }
+
+      // Check usage limits
+      if (data.max_uses && data.used_count >= data.max_uses) {
+        return { valid: false, message: 'Coupon usage limit reached' }
+      }
+
+      return {
+        valid: true,
+        discount: data.discount_amount,
+        type: data.discount_type,
+        message: 'Coupon applied successfully!'
+      }
+    } catch (error) {
+      console.error('Error validating coupon:', error)
+      return { valid: false, message: 'Error validating coupon' }
+    }
+  },
+
+  async apply(code: string, orderId: string): Promise<{ success: boolean; message?: string }> {
+    try {
+      const { error } = await supabase
+        .from('coupon_usage')
+        .insert({
+          coupon_code: code.toUpperCase(),
+          order_id: orderId,
+          used_at: new Date().toISOString()
+        })
+
+      if (error) {
+        console.error('Error applying coupon:', error)
+        return { success: false, message: 'Error applying coupon' }
+      }
+
+      // Update usage count
+      await supabase
+        .from('coupons')
+        .update({ used_count: supabase.rpc('increment') })
+        .eq('code', code.toUpperCase())
+
+      return { success: true, message: 'Coupon applied successfully!' }
+    } catch (error) {
+      console.error('Error applying coupon:', error)
+      return { success: false, message: 'Error applying coupon' }
     }
   }
 }

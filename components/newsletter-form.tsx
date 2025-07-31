@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
 import { useNewsletter } from "@/hooks/use-newsletter"
 
 export default function NewsletterForm() {
@@ -38,48 +38,112 @@ export default function NewsletterForm() {
   }, [])
 
   return (
-    <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-md px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-miami-cyan/30"
+    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-lg px-4">
+      <motion.div
+        className="relative group"
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.3 }}
       >
-        <h2 
-          className="text-xl font-bold mb-4 text-center bg-gradient-to-r from-miami-pink to-miami-cyan bg-clip-text text-transparent"
-          style={{
-            fontFamily: fontLoaded ? "'SkeletonBlood', fantasy" : "fantasy",
-          }}
+        {/* Glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-miami-pink via-miami-yellow to-miami-blue rounded-2xl blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
+        
+        {/* Main form container */}
+        <form
+          onSubmit={handleSubmit}
+          className="relative bg-white/95 backdrop-blur-md p-8 rounded-2xl shadow-2xl border-2 border-miami-pink/20 hover:border-miami-pink/40 transition-all duration-300"
         >
-          Subscribe to Our Newsletter
-        </h2>
+          {/* Decorative elements */}
+          <div className="absolute -top-2 -left-2 w-4 h-4 bg-miami-pink rounded-full animate-pulse"></div>
+          <div className="absolute -top-2 -right-2 w-4 h-4 bg-miami-yellow rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-miami-blue rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-miami-pink rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-2">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => handleEmailChange(e.target.value)}
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-miami-pink"
-              required
-            />
-            <Button
-              type="submit"
-              disabled={isSubmitting || !!error}
-              className="bg-gradient-to-r from-miami-pink to-miami-cyan hover:from-miami-pink/90 hover:to-miami-cyan/90 text-white"
+          {/* Header */}
+          <div className="text-center mb-6">
+            <h2 
+              className="text-2xl font-bold mb-2 bg-gradient-to-r from-miami-pink via-miami-yellow to-miami-blue bg-clip-text text-transparent"
+              style={{
+                fontFamily: fontLoaded ? "'SkeletonBlood', fantasy" : "fantasy",
+              }}
             >
-              {isSubmitting ? 'Subscribing...' : 'Subscribe'}
-            </Button>
+              ✨ Stay in the Loop ✨
+            </h2>
+            <p className="text-mint-rot/80 text-sm">
+              Get exclusive updates, event announcements, and Miami kitsch inspiration
+            </p>
           </div>
 
+          {/* Email input with enhanced styling */}
+          <div className="space-y-4">
+            <div className="relative group/input">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => handleEmailChange(e.target.value)}
+                placeholder="Enter your email address"
+                className="w-full px-6 py-4 rounded-xl border-2 border-miami-pink/30 bg-white/80 backdrop-blur-sm focus:outline-none focus:border-miami-pink focus:bg-white transition-all duration-300 placeholder-mint-rot/50 text-mint-rot font-medium"
+                required
+              />
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-miami-pink/10 via-miami-yellow/10 to-miami-blue/10 opacity-0 group-hover/input:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+            </div>
+
+            {/* Submit button with enhanced styling */}
+            <motion.button
+              type="submit"
+              disabled={isSubmitting || !!error}
+              className="w-full py-4 px-6 rounded-xl font-bold text-lg relative overflow-hidden group/button"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {/* Button background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-miami-pink via-miami-yellow to-miami-blue rounded-xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-miami-pink/80 via-miami-yellow/80 to-miami-blue/80 rounded-xl opacity-0 group-hover/button:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Button content */}
+              <span className="relative z-10 text-white flex items-center justify-center gap-2">
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Subscribing...
+                  </>
+                ) : (
+                  <>
+                    <span>🎉</span>
+                    Subscribe Now
+                    <span>🎉</span>
+                  </>
+                )}
+              </span>
+            </motion.button>
+          </div>
+
+          {/* Status messages with enhanced styling */}
           {error && (
-            <p className="text-red-500 text-sm">{error}</p>
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-red-500 text-sm text-center mt-3 bg-red-50 p-3 rounded-lg border border-red-200"
+            >
+              ❌ {error}
+            </motion.p>
           )}
 
           {isSuccess && (
-            <p className="text-green-500 text-sm">Successfully subscribed to our newsletter!</p>
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-green-600 text-sm text-center mt-3 bg-green-50 p-3 rounded-lg border border-green-200"
+            >
+              🎉 Successfully subscribed to our newsletter!
+            </motion.p>
           )}
-        </div>
-      </form>
+
+          {/* Footer text */}
+          <p className="text-xs text-mint-rot/60 text-center mt-4">
+            Join our Miami kitsch community • No spam, just art ✨
+          </p>
+        </form>
+      </motion.div>
     </div>
   )
 } 

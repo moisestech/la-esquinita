@@ -242,35 +242,21 @@ const Simple3DFallback: React.FC<FallbackProps> = ({ onTitleClick }) => {
             onTitleClick();
           }}
         >
-          <h1 
-            className={`text-6xl md:text-8xl font-bold text-transparent bg-clip-text pointer-events-auto
-                        transition-all duration-700 ease-in-out
+          <div className="relative">
+            <Image
+              src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753892200/la-esquinita/LE-logo-tara-2_aurodr.png"
+              alt="La Esquinita"
+              width={400}
+              height={200}
+              className={`pointer-events-auto transition-all duration-700 ease-in-out
                         ${hovered ? 'scale-105' : 'scale-100'}`}
-            style={{ 
-              fontFamily: 'SkeletonBlood, fantasy',
-              backgroundImage: 'linear-gradient(90deg, #ff66bb, #ffffff, #22ccff)',
-              backgroundSize: '200% auto',
-              animation: 'gradientText 4s linear infinite',
-              textShadow: `
-                0 1px 0 #ccc,
-                0 2px 0 #c9c9c9,
-                0 3px 0 #bbb,
-                0 4px 0 #b9b9b9,
-                0 5px 0 #aaa,
-                0 6px 1px rgba(0,0,0,.1),
-                0 0 5px rgba(0,0,0,.1),
-                0 1px 3px rgba(0,0,0,.3),
-                0 3px 5px rgba(0,0,0,.2),
-                0 5px 10px rgba(0,0,0,.25),
-                0 10px 10px rgba(0,0,0,.2),
-                0 20px 20px rgba(0,0,0,.15)
-              `,
-              transform: 'translateZ(20px)',
-              transformStyle: 'preserve-3d',
-            }}
-          >
-            La Esquinita
-          </h1>
+              style={{ 
+                transform: 'translateZ(20px)',
+                transformStyle: 'preserve-3d',
+                filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))',
+              }}
+            />
+          </div>
           
           {/* Glowing border effect */}
           <div 

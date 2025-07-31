@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Navigation from '@/components/navigation'
+import Footer from '@/components/footer'
+import { CartProvider } from '@/contexts/cart-context'
 
 export const metadata: Metadata = {
   title: 'La Esquinita',
@@ -15,7 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="h-full w-full m-0 p-0">
-        {children}
+        <CartProvider>
+          <Navigation />
+          <main className="pt-16 pb-32">
+            {children}
+          </main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   )
