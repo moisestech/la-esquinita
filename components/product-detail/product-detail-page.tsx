@@ -22,10 +22,10 @@ const products: Product[] = [
     price: 19.99,
     description: "Hand-painted ceramic skull with Miami kitsch aesthetic. Each piece is uniquely crafted with vibrant colors and intricate details that capture the essence of Miami's artistic culture. Perfect for collectors and art enthusiasts who appreciate the fusion of traditional Mexican art with Miami's vibrant energy.",
     image_urls: [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=face",
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=entropy",
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=edges"
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-parrot_zkp47z.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-parrot_zkp47z.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-parrot_zkp47z.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-parrot_zkp47z.png"
     ],
     status: "active" as const,
     category: "art",
@@ -40,9 +40,9 @@ const products: Product[] = [
     price: 29.99,
     description: "Boho-chic dreamcatcher featuring palm tree motifs and Miami-inspired colors. Handcrafted with natural materials and adorned with beads, feathers, and palm tree charms. This piece brings the peaceful energy of Miami's palm-lined beaches into your home.",
     image_urls: [
-      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&h=600&fit=crop&crop=face",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&h=600&fit=crop&crop=entropy"
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-baby_tlplfi.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-baby_tlplfi.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-baby_tlplfi.png"
     ],
     status: "active" as const,
     category: "home",
@@ -57,8 +57,8 @@ const products: Product[] = [
     price: 45.00,
     description: "Artisanal fragrance inspired by Miami's mysterious wetlands. A complex blend of earthy notes, tropical flowers, and the subtle hint of saltwater. Each bottle is hand-poured and numbered, making it a truly unique piece of Miami's natural essence.",
     image_urls: [
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=600&fit=crop&crop=face"
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-fish_tpgtwq.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-fish_tpgtwq.png"
     ],
     status: "active" as const,
     category: "beauty",
@@ -73,8 +73,8 @@ const products: Product[] = [
     price: 35.00,
     description: "Vibrant neon pink sunglasses with Miami kitsch charm. Perfect for those sunny Florida days when you want to make a statement. These eye-catching shades feature a retro design with modern comfort.",
     image_urls: [
-      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop&crop=face"
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-woman_rdz1b2.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-woman_rdz1b2.png"
     ],
     status: "active" as const,
     category: "fashion",
@@ -89,8 +89,8 @@ const products: Product[] = [
     price: 25.00,
     description: "Inflatable flamingo pool float with Miami kitsch design. Perfect for pool parties and beach days. This iconic pink flamingo brings the Miami vibe to any water adventure.",
     image_urls: [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=face"
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-swan_ufmolk.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-swan_ufmolk.png"
     ],
     status: "active" as const,
     category: "lifestyle",
@@ -105,8 +105,8 @@ const products: Product[] = [
     price: 22.00,
     description: "Scented candle with notes of coconut, lime, and ocean breeze. Inspired by the iconic Miami Vice aesthetic. Each candle is hand-poured and creates the perfect atmosphere for your Miami-inspired space.",
     image_urls: [
-      "https://images.unsplash.com/photo-1603006905004-6f2c0c0c0c0c?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1603006905004-6f2c0c0c0c0c?w=800&h=600&fit=crop&crop=face"
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-egg_jcys6k.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-egg_jcys6k.png"
     ],
     status: "active" as const,
     category: "home",
@@ -121,8 +121,8 @@ const products: Product[] = [
     price: 15.00,
     description: "Handcrafted alligator keychain made from recycled materials. A perfect Miami souvenir that's both cute and eco-friendly. Each piece is unique and represents the wild side of Florida.",
     image_urls: [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=face"
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-parrot_zkp47z.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-parrot_zkp47z.png"
     ],
     status: "active" as const,
     category: "accessories",
@@ -137,8 +137,8 @@ const products: Product[] = [
     price: 28.00,
     description: "Natural coconut shell bowl hand-carved and polished. Perfect for serving tropical fruits or as a decorative piece. Each bowl is unique and brings the tropical essence of Miami into your home.",
     image_urls: [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=face"
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-baby_tlplfi.png",
+      "https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-baby_tlplfi.png"
     ],
     status: "active" as const,
     category: "home",
