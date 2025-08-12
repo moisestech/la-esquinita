@@ -82,6 +82,36 @@ export default function Navigation() {
               userEmail={userEmail}
               onSignOut={() => setIsAuthenticated(false)}
             />
+            
+            {/* Sponsor Logo */}
+            <motion.div
+              className="flex items-center ml-4 pl-4 border-l border-miami-pink/20"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <motion.a
+                href="https://locustprojects.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <img
+                  src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1755037348/locust-projects/locus-projects-logo_bmsolz.png"
+                  alt="Locust Projects - Sponsor"
+                  className="h-6 w-auto opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                />
+                <motion.div
+                  className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap"
+                  initial={{ y: 5 }}
+                  whileHover={{ y: 0 }}
+                >
+                  Sponsored by Locust Projects
+                </motion.div>
+              </motion.a>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -140,6 +170,24 @@ export default function Navigation() {
                     userEmail={userEmail}
                     onSignOut={() => setIsAuthenticated(false)}
                   />
+                </div>
+                
+                {/* Mobile Sponsor Logo */}
+                <div className="pt-4 border-t border-miami-pink/20">
+                  <motion.a
+                    href="https://locustprojects.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 text-gray-600 hover:text-miami-pink transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <img
+                      src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1755037348/locust-projects/locus-projects-logo_bmsolz.png"
+                      alt="Locust Projects - Sponsor"
+                      className="h-5 w-auto opacity-70"
+                    />
+                    <span className="text-xs">Sponsored by Locust Projects</span>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
