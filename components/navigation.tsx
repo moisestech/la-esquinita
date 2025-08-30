@@ -19,6 +19,7 @@ export default function Navigation() {
     { href: "/about", label: "About" },
     { href: "/events", label: "Events" },
     { href: "/contact", label: "Contact" },
+    { href: "/invoice", label: "Invoice" },
   ]
 
   return (

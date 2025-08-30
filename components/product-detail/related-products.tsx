@@ -53,7 +53,7 @@ export default function RelatedProducts({ currentProduct, products }: RelatedPro
                   <img
                     src={product.image_urls[0]}
                     alt={product.name}
-                    className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-32 object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                   
                   {/* Status Badge */}

@@ -29,7 +29,7 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
           key={currentImageIndex}
           src={images[currentImageIndex]}
           alt={`${productName} - Image ${currentImageIndex + 1}`}
-          className="w-full h-96 md:h-[500px] object-cover"
+          className="w-full h-96 md:h-[500px] object-contain"
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
@@ -78,7 +78,7 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
               <img
                 src={image}
                 alt={`${productName} thumbnail ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </button>
           ))}

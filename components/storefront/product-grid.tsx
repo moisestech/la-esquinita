@@ -61,7 +61,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                   <motion.img
                     src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753918203/la-esquinita/La_Esquinita_sponsorship_2025_Tara_Long-store_jx4rl5.png"
                     alt="La Esquinita Sponsorship 2025 - Tara Long Store"
-                    className="w-full h-64 md:h-80 object-cover"
+                    className="w-full h-64 md:h-80 object-contain"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   />
