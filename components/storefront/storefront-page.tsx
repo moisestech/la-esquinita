@@ -7,6 +7,7 @@ import ProductGrid from "./product-grid"
 import CartDrawer from "./cart-drawer"
 import HiddenDoor from "./hidden-door"
 import FloatingSprinkles from "./floating-sprinkles"
+import LogoAndSponsor from "@/components/logo-and-sponsor"
 import { Toaster } from "@/components/ui/toaster"
 import { useCart } from "@/contexts/cart-context"
 import { Product } from "@/lib/supabase"
@@ -275,35 +276,12 @@ export default function StorefrontPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="flex justify-center mb-4">
-            <motion.img
-              src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753892200/la-esquinita/LE-logo-tara-2_aurodr.png"
-              alt="La Esquinita"
-              className="h-32 md:h-48 w-auto drop-shadow-neon-pink cursor-pointer"
-              whileHover={{ 
-                scale: 1.1,
-                filter: "drop-shadow(0 0 20px #ff69b4) drop-shadow(0 0 30px #4ecdc4)",
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ scale: 0.95 }}
-              animate={{ 
-                y: [0, -5, 0],
-                filter: [
-                  "drop-shadow(0 0 10px #ff69b4)",
-                  "drop-shadow(0 0 20px #ff69b4) drop-shadow(0 0 15px #4ecdc4)",
-                  "drop-shadow(0 0 10px #ff69b4)"
-                ]
-              }}
-              transition={{ 
-                y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-                filter: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-              }}
-              onClick={() => {
-                // Add a fun interaction - could trigger a sprinkle animation or sound
-                console.log("La Esquinita logo clicked!")
-              }}
-            />
-          </div>
+          <LogoAndSponsor 
+            onLogoClick={() => {
+              // Add a fun interaction - could trigger a sprinkle animation or sound
+              console.log("La Esquinita at Locust Projects logo clicked!")
+            }}
+          />
           <p className="text-xl md:text-2xl text-mint-rot font-display">
             Convenience Store
           </p>
