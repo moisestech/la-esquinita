@@ -4,7 +4,11 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { Mail, Instagram, Facebook, MapPin, Clock, Sparkles } from "lucide-react"
 
-export default function Footer() {
+interface FooterProps {
+  photographerName?: string;
+}
+
+export default function Footer({ photographerName }: FooterProps = {}) {
   return (
     <footer className="bg-gradient-to-r from-mint-rot via-stucco to-icing-white border-t-2 border-miami-pink/20">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -233,6 +237,28 @@ export default function Footer() {
               Special thanks to <span className="font-semibold text-miami-pink">Locust Projects</span> for their generous support 
               in making this digital experience possible.
             </motion.p>
+          </div>
+        </motion.div>
+
+        {/* Credit Line Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-8 pt-6 border-t border-miami-pink/20"
+        >
+          <div className="text-center space-y-2">
+            <p className="text-gray-600 text-sm">
+              <span className="font-semibold text-miami-pink">Tara Long, La Esquinita</span> is commissioned by{" "}
+              <span className="font-semibold text-miami-pink">Locust Projects</span> and supported in part with a grant from
+            </p>
+            <p className="text-gray-600 text-sm">
+              Photograph: <span className="font-semibold text-miami-pink">Tara Long, La Esquinita</span> Installation view at{" "}
+              <span className="font-semibold text-miami-pink">Locust Projects 2025/2026</span>
+              {photographerName && (
+                <span>, © {photographerName}</span>
+              )}
+            </p>
           </div>
         </motion.div>
 
