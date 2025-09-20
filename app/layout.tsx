@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: 'La Esquinita',
   description: 'La Esquinita by Tara Long, Locust Projects 2025',
   generator: 'v0.dev',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({

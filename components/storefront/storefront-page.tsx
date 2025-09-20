@@ -192,8 +192,8 @@ export default function StorefrontPage() {
           transition={{ duration: 2, delay: 0.5 }}
         />
         <motion.img
-          src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753918202/la-esquinita/La_Esquinita_sponsorship_2025_Tara_Long-store-outside_n7z755.png"
-          alt="La Esquinita Sponsorship 2025 - Tara Long Store Outside"
+          src="/esquinita1.jpg"
+          alt="La Esquinita - Colorful storefront with birthday cake theme"
           className="w-full h-full object-cover"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -205,62 +205,6 @@ export default function StorefrontPage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 1 }}
         />
-        
-        {/* Newsletter Subscription Overlay */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center z-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.5 }}
-        >
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-2xl border-2 border-miami-pink/20 max-w-md mx-4">
-            <motion.h2
-              className="text-2xl md:text-3xl font-bold text-mint-rot mb-2 text-center"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2 }}
-            >
-              Stay Sweet! 🍭
-            </motion.h2>
-            <motion.p
-              className="text-mint-rot/80 text-center mb-6"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.2 }}
-            >
-              Subscribe to our newsletter for Miami kitsch updates, exclusive offers, and artistic adventures!
-            </motion.p>
-            
-            <motion.div
-              className="flex flex-col sm:flex-row gap-3"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.4 }}
-            >
-              <input
-                type="email"
-                placeholder="Enter your email..."
-                className="flex-1 px-4 py-3 rounded-lg border-2 border-miami-pink/30 focus:border-miami-pink focus:outline-none bg-white/80 backdrop-blur-sm text-mint-rot placeholder-mint-rot/60"
-              />
-              <motion.button
-                className="px-6 py-3 bg-gradient-to-r from-miami-pink to-miami-purple text-white font-semibold rounded-lg hover:from-miami-purple hover:to-miami-pink transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Subscribe ✨
-              </motion.button>
-            </motion.div>
-            
-            <motion.p
-              className="text-xs text-mint-rot/60 text-center mt-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 2.6 }}
-            >
-              Join us! No spam, just sweetness.
-            </motion.p>
-          </div>
-        </motion.div>
       </motion.div>
 
       {/* Sugar Icing Marquee */}
@@ -269,16 +213,16 @@ export default function StorefrontPage() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Storefront Header */}
-        <motion.div 
-          className="text-center mb-12"
+        <motion.div
+          className="text-center mb-12 pt-[15px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           <div className="flex justify-center mb-4">
             <motion.img
-              src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753892200/la-esquinita/LE-logo-tara-2_aurodr.png"
-              alt="La Esquinita"
+              src="/logo/locustprojects1.png"
+              alt="La Esquinita at Locust Projects"
               className="h-32 md:h-48 w-auto drop-shadow-neon-pink cursor-pointer"
               whileHover={{ 
                 scale: 1.1,
@@ -302,26 +246,6 @@ export default function StorefrontPage() {
                 // Add a fun interaction - could trigger a sprinkle animation or sound
                 console.log("La Esquinita logo clicked!")
               }}
-            />
-          </div>
-          <p className="text-xl md:text-2xl text-mint-rot font-display">
-            Convenience Store
-          </p>
-          <div className="flex justify-center mt-6 space-x-4">
-            <motion.div 
-              className="w-8 h-8 bg-miami-yellow rounded-full animate-neon-pulse"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <motion.div 
-              className="w-8 h-8 bg-miami-blue rounded-full animate-neon-pulse"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-            />
-            <motion.div 
-              className="w-8 h-8 bg-miami-pink rounded-full animate-neon-pulse"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
             />
           </div>
         </motion.div>

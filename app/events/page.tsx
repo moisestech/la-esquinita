@@ -7,7 +7,7 @@ import { Calendar, MapPin, Clock, Users } from "lucide-react"
 const events = [
   {
     id: "1",
-    title: "Sugar & Swamp Rave",
+    title: "Black Friday Rave",
     description: "A night of Miami kitsch and electronic beats in the heart of the swamp. Experience the intersection of art, music, and Miami culture.",
     date: "December 28, 2024",
     time: "9:00 PM - 2:00 AM",

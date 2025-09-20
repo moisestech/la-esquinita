@@ -19,12 +19,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <h2 className="text-4xl md:text-5xl font-skeleton text-mint-rot mb-4">
-          Miami Kitsch Collection
+        <h2 className="text-4xl md:text-5xl font-skeleton text-white mb-4">
+          Souvenir and Sweet Shop
         </h2>
-        <p className="text-lg text-mint-rot/80 font-display">
-          Discover the magic of Miami's artistic convenience store
-        </p>
       </motion.div>
 
       {/* Product Grid */}
@@ -68,10 +65,10 @@ export default function ProductGrid({ products }: ProductGridProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="text-white text-lg md:text-xl font-bold mb-1">
-                      La Esquinita Sponsorship 2025
+                      
                     </h3>
                     <p className="text-white/90 text-sm">
-                      Supporting Miami's artistic community
+                    "Keeping Convenience Sweet"
                     </p>
                   </div>
                 </div>

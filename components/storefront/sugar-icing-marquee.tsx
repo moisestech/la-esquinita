@@ -4,12 +4,11 @@ import React from "react"
 import { motion } from "framer-motion"
 
 const marqueeItems = [
-  "🌟 Sugar & Swamp Rave → Nov 28 @ 9 PM 🌟",
-  "🎂 Meet the Artist: Tara Long → Dec 5 @ 7 PM 🎂",
-  "🍸 Speakeasy Opening → Dec 12 @ 8 PM 🍸",
-  "✨ Limited Edition Miami Kitsch Collection ✨",
-  "🌴 Palm Tree Dreamcatchers - 50% Off! 🌴",
-  "💖 I ❤️ Miami Sugar Skulls - Back in Stock! 💖",
+  "🏴‍☠️ Opening Reception → Nov 19th @ 6 PM 🌟",
+  "🏴‍☠️ Black Friday Rave → Nov 28 @ 9 PM 🌟",
+  "🎂 Miami Art Week Pres Preview → Dec 2 @ 10 AM 🎂",
+  "🎂 Meet the Artist VIP Basel Reception → Dec 6 @ 7 PM 🎂",
+  "🏴‍☠️ Closing Reception → January 17th @ 6 PM 🌟",
 ]
 
 export default function SugarIcingMarquee() {
