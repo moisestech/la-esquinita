@@ -144,7 +144,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Card Container */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-sugar-pink hover:border-miami-pink transition-colors duration-300">
         {/* Product Image */}
-        <div className="relative h-64 bg-gradient-to-br from-sugar-pink to-fondant-blue overflow-hidden">
+        <div className="relative h-64 bg-gradient-to-br from-sugar-pink to-fondant-blue overflow-hidden p-4">
           <img
             src={product.image_urls[0] || "/placeholder-logo.png"}
             alt={product.name}
@@ -205,7 +205,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Product Info */}
         <div className="p-6">
           {/* Product Name */}
-          <h3 className="text-xl font-skeleton text-mint-rot mb-2 line-clamp-2">
+          <h3 className="text-xl font-bold text-mint-rot mb-2 line-clamp-2">
             {product.name}
           </h3>
 
@@ -222,27 +222,8 @@ export default function ProductCard({ product }: ProductCardProps) {
               animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
               transition={{ duration: 0.2 }}
             >
-              {/* Discount Badge */}
-              <div className="flex items-center space-x-2 mb-1">
-                <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold animate-pulse">
-                  🔥 67% OFF
-                </span>
-                <span className="text-xs text-gray-500">Limited Time</span>
-              </div>
-              
-              {/* Price Display */}
-              <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-bold text-miami-pink">
-                  ${product.price.toFixed(2)}
-                </span>
-                <span className="text-lg text-gray-400 line-through">
-                  $1,800.00
-                </span>
-              </div>
-              
-              {/* Savings Amount */}
-              <span className="text-sm text-green-600 font-semibold">
-                You Save $1,200.00!
+              <span className="text-2xl font-bold text-miami-pink">
+                ${product.price.toFixed(2)}
               </span>
             </motion.div>
 

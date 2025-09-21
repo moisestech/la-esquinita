@@ -191,7 +191,7 @@ export default function FavoritesPage() {
             >
               My Favorites
             </motion.h1>
-            <p className="text-mint-rot/70">Your beloved Miami kitsch collection</p>
+            <p className="text-mint-rot/70">Your beloved sugar-coated collection</p>
           </motion.div>
 
           {/* Filters and Search */}
@@ -319,7 +319,7 @@ export default function FavoritesPage() {
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-miami-pink/20">
                 <Heart className="w-16 h-16 text-miami-pink/50 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-mint-rot mb-2">No favorites yet</h3>
-                <p className="text-mint-rot/70 mb-6">Start building your Miami kitsch collection!</p>
+                <p className="text-mint-rot/70 mb-6">Start building your sugar-coated collection!</p>
                 <Link href="/storefront">
                   <motion.button
                     className="bg-gradient-to-r from-miami-pink to-miami-blue text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity"

@@ -5,15 +5,16 @@ export function useNewsletterModal() {
   const [hasShown, setHasShown] = useState(false)
 
   useEffect(() => {
+    // Disabled automatic popup
     // Show modal after 5 seconds if user hasn't seen it
-    const timer = setTimeout(() => {
-      if (!hasShown) {
-        setIsOpen(true)
-        setHasShown(true)
-      }
-    }, 5000)
+    // const timer = setTimeout(() => {
+    //   if (!hasShown) {
+    //     setIsOpen(true)
+    //     setHasShown(true)
+    //   }
+    // }, 5000)
 
-    return () => clearTimeout(timer)
+    // return () => clearTimeout(timer)
   }, [hasShown])
 
   const openModal = () => setIsOpen(true)

@@ -7,7 +7,6 @@ import ProductGrid from "./product-grid"
 import CartDrawer from "./cart-drawer"
 import HiddenDoor from "./hidden-door"
 import FloatingSprinkles from "./floating-sprinkles"
-import LogoAndSponsor from "@/components/logo-and-sponsor"
 import { Toaster } from "@/components/ui/toaster"
 import { useCart } from "@/contexts/cart-context"
 import { Product } from "@/lib/supabase"
@@ -16,157 +15,313 @@ import { Product } from "@/lib/supabase"
 const placeholderProducts: Product[] = [
   {
     id: "1",
-    slug: "miami-sugar-skull",
-    name: "I ❤️ Miami Sugar Skull",
-    price: 600.00,
-    description: "Hand-painted ceramic skull with Miami kitsch aesthetic. Each piece is uniquely crafted with vibrant colors and intricate details that capture the essence of Miami's artistic culture. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-parrot_zkp47z.png"],
+    slug: "parrot-companion-ceramic",
+    name: "Parrot Companion Ceramic",
+    price: 40.00,
+    description: "Vibrant companion vessel. Hand poured, fired, and glazed ceramic approximately 12 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/parrot1.png"],
     status: "active",
     category: "art",
-    tags: ["miami", "skull", "ceramic", "hand-painted", "discount"],
+    tags: ["parrot", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "2",
-    slug: "palm-tree-dreamcatcher",
-    name: "Palm Tree Dreamcatcher",
-    price: 600.00,
-    description: "Boho-chic dreamcatcher featuring palm tree motifs and Miami-inspired colors. Handcrafted with natural materials and adorned with beads, feathers, and palm tree charms. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
+    slug: "baby-doll-head-ceramic",
+    name: "Baby Doll Head Ceramic",
+    price: 25.00,
+    description: "Innocent porcelain portrait. Hand poured, fired, and glazed ceramic approximately 3 inches tall. Slip cast ceramic object.",
     image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-baby_tlplfi.png"],
     status: "active",
-    category: "home",
-    tags: ["boho", "palm", "dreamcatcher", "natural", "discount"],
+    category: "art",
+    tags: ["baby", "doll", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "3",
-    slug: "swamp-water-perfume",
-    name: "Swamp Water Perfume",
-    price: 600.00,
-    description: "Artisanal fragrance inspired by Miami's mysterious wetlands. A complex blend of earthy notes, tropical flowers, and the subtle hint of saltwater. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-fish_tpgtwq.png"],
+    slug: "fragile-goddess-statue",
+    name: "Fragile Goddess Statue",
+    price: 30.00,
+    description: "Ethereal feminine form. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Delicate slip cast ceramic object.",
+    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-woman_rdz1b2.png"],
     status: "active",
-    category: "beauty",
-    tags: ["perfume", "swamp", "artisanal", "fragrance", "discount"],
+    category: "art",
+    tags: ["goddess", "statue", "ceramic", "slip-cast", "glazed", "delicate"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "4",
-    slug: "neon-pink-sunglasses",
-    name: "Neon Pink Sunglasses",
-    price: 600.00,
-    description: "Vibrant neon pink sunglasses with Miami kitsch charm. Perfect for those sunny Florida days when you want to make a statement. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-woman_rdz1b2.png"],
+    slug: "small-swan-dish",
+    name: "Small Swan Dish",
+    price: 22.00,
+    description: "Graceful aquatic vessel. Hand poured, fired, and glazed ceramic approximately 2.5 inches tall. Slip cast ceramic object.",
+    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-swan_ufmolk.png"],
     status: "active",
-    category: "fashion",
-    tags: ["sunglasses", "neon", "pink", "miami", "discount"],
+    category: "art",
+    tags: ["swan", "dish", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "5",
-    slug: "flamingo-pool-float",
-    name: "Flamingo Pool Float",
-    price: 600.00,
-    description: "Inflatable flamingo pool float with Miami kitsch design. Perfect for pool parties and beach days. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-swan_ufmolk.png"],
+    slug: "anxious-egg-head",
+    name: "Anxious Egg Head",
+    price: 20.00,
+    description: "Contemplative ovoid portrait. Hand poured, fired, and glazed ceramic approximately 3 inches tall. Slip cast ceramic object.",
+    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-egg_jcys6k.png"],
     status: "active",
-    category: "lifestyle",
-    tags: ["pool", "float", "flamingo", "summer", "discount"],
+    category: "art",
+    tags: ["anxious", "egg", "head", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "6",
-    slug: "miami-vice-candle",
-    name: "Miami Vice Candle",
-    price: 600.00,
-    description: "Scented candle with notes of coconut, lime, and ocean breeze. Inspired by the iconic Miami Vice aesthetic. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-egg_jcys6k.png"],
+    slug: "happy-egg-head",
+    name: "Happy Egg Head",
+    price: 35.00,
+    description: "Joyful ovoid expression. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/babyhead2.png"],
     status: "active",
-    category: "home",
-    tags: ["candle", "scented", "miami", "vice", "discount"],
+    category: "art",
+    tags: ["happy", "egg", "head", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "7",
-    slug: "alligator-keychain",
-    name: "Alligator Keychain",
-    price: 600.00,
-    description: "Handcrafted alligator keychain made from recycled materials. A perfect Miami souvenir that's both cute and eco-friendly. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-parrot_zkp47z.png"],
+    slug: "sad-egg-head",
+    name: "Sad Egg Head",
+    price: 28.00,
+    description: "Melancholic ovoid visage. Hand poured, fired, and glazed ceramic approximately 3.5 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/eggheadsad.png"],
     status: "active",
-    category: "accessories",
-    tags: ["alligator", "keychain", "recycled", "miami", "discount"],
+    category: "art",
+    tags: ["sad", "egg", "head", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "8",
-    slug: "coconut-shell-bowl",
-    name: "Coconut Shell Bowl",
-    price: 600.00,
-    description: "Natural coconut shell bowl hand-carved and polished. Perfect for serving tropical fruits or as a decorative piece. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-baby_tlplfi.png"],
+    slug: "jolly-egg-head",
+    name: "Jolly Egg Head",
+    price: 24.00,
+    description: "Whimsical ovoid character. Hand poured, fired, and glazed ceramic approximately 3.5 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/jollyegghead.png"],
     status: "active",
-    category: "home",
-    tags: ["coconut", "bowl", "natural", "tropical", "discount"],
+    category: "art",
+    tags: ["jolly", "egg", "head", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "9",
-    slug: "miami-sunset-print",
-    name: "Miami Sunset Print",
-    price: 600.00,
-    description: "Limited edition art print capturing the iconic Miami sunset. Hand-signed by the artist and printed on archival paper. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-fish_tpgtwq.png"],
+    slug: "boy-fish-wall-ornament",
+    name: "Boy Fish Wall Ornament",
+    price: 38.00,
+    description: "Aquatic wall sculpture. Hand poured, fired, and glazed ceramic approximately 5 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/boyfishwallornament.png"],
     status: "active",
     category: "art",
-    tags: ["print", "sunset", "miami", "limited-edition", "discount"],
+    tags: ["boy", "fish", "wall", "ornament", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "10",
-    slug: "palm-tree-keychain",
-    name: "Palm Tree Keychain",
-    price: 600.00,
-    description: "Charming palm tree keychain with Miami kitsch charm. Perfect for adding a touch of tropical flair to your keys. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-woman_rdz1b2.png"],
+    slug: "girl-fish-wall-ornament",
+    name: "Girl Fish Wall Ornament",
+    price: 38.00,
+    description: "Feminine aquatic sculpture. Hand poured, fired, and glazed ceramic approximately 5 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/girlfishwallornament.png"],
     status: "active",
-    category: "accessories",
-    tags: ["palm", "keychain", "tropical", "miami", "discount"],
+    category: "art",
+    tags: ["girl", "fish", "wall", "ornament", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "11",
-    slug: "fondant-cake-sculpture",
-    name: "Fondant Cake Sculpture",
-    price: 600.00,
-    description: "Exquisite fondant cake sculpture inspired by Miami's architectural landmarks. Each piece is handcrafted and unique. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-swan_ufmolk.png"],
+    slug: "potato-ceramic",
+    name: "Potato Ceramic",
+    price: 26.00,
+    description: "Earthy organic form. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/potato1.png"],
     status: "active",
     category: "art",
-    tags: ["fondant", "cake", "sculpture", "miami", "discount"],
+    tags: ["potato", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
   {
     id: "12",
-    slug: "neon-pink-sunglasses-v2",
-    name: "Neon Pink Sunglasses V2",
-    price: 600.00,
-    description: "Vibrant neon pink sunglasses with Miami kitsch charm. Perfect for those sunny Florida days when you want to make a statement. **SPECIAL DISCOUNT PRICE** - Originally valued at $1,800.",
-    image_urls: ["https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop"],
+    slug: "et-ceramic",
+    name: "ET Ceramic",
+    price: 45.00,
+    description: "Otherworldly visitor sculpture. Hand poured, fired, and glazed ceramic approximately 6 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/ET.png"],
     status: "active",
-    category: "fashion",
-    tags: ["sunglasses", "neon", "pink", "miami", "discount"],
+    category: "art",
+    tags: ["ET", "extraterrestrial", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "13",
+    slug: "yoda-ceramic",
+    name: "Yoda Ceramic",
+    price: 42.00,
+    description: "Wise mentor figure. Hand poured, fired, and glazed ceramic approximately 5 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/yoda.png"],
+    status: "active",
+    category: "art",
+    tags: ["yoda", "starwars", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "14",
+    slug: "bride-groom-ceramic",
+    name: "Bride and Groom Cake Topper",
+    price: 15.00,
+    description: "Ceremonial cake topper duo. Hand poured, fired, and glazed ceramic approximately 7 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/bride and groom.png"],
+    status: "active",
+    category: "art",
+    tags: ["bride", "groom", "wedding", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "15",
+    slug: "tuba-ashtray",
+    name: "Tuba Ashtray",
+    price: 55.00,
+    description: "Musical receptacle sculpture. Hand poured, fired, and glazed ceramic approximately 6 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/tuba_ashtray.png"],
+    status: "active",
+    category: "art",
+    tags: ["tuba", "ashtray", "music", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "16",
+    slug: "denim-jean-mug",
+    name: "Denim Jean Mug",
+    price: 38.00,
+    description: "Textile-inspired drinking vessel. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/denimjeanmug.png"],
+    status: "active",
+    category: "art",
+    tags: ["denim", "jean", "mug", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "17",
+    slug: "flamingo-neck-ceramic",
+    name: "Flamingo Neck Ceramic",
+    price: 48.00,
+    description: "Elongated avian silhouette. Hand poured, fired, and glazed ceramic approximately 8 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/flamingoneck.png"],
+    status: "active",
+    category: "art",
+    tags: ["flamingo", "neck", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "18",
+    slug: "turtle-lobster-leaf-dish",
+    name: "Turtle Lobster Leaf Dish",
+    price: 44.00,
+    description: "Multi-creature botanical dish. Hand poured, fired, and glazed ceramic approximately 5 inches wide. Slip cast ceramic object.",
+    image_urls: ["/shop/turtlelobsterleafdish.png"],
+    status: "active",
+    category: "art",
+    tags: ["turtle", "lobster", "leaf", "dish", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "19",
+    slug: "cat-head-ceramic",
+    name: "Cat Head Ceramic",
+    price: 36.00,
+    description: "Feline portrait vessel. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/cathead.png"],
+    status: "active",
+    category: "art",
+    tags: ["cat", "head", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "20",
+    slug: "small-ornate-pitcher",
+    name: "Small Ornate Pitcher",
+    price: 42.00,
+    description: "Ornate pouring vessel. Hand poured, fired, and glazed ceramic approximately 5 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/smallornatepitcher.png"],
+    status: "active",
+    category: "art",
+    tags: ["small", "ornate", "pitcher", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "21",
+    slug: "baby-hand-right",
+    name: "Baby Hand Right",
+    price: 32.00,
+    description: "Human gesture cast. Hand poured, fired, and glazed ceramic approximately 4.5 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/babyhandright.png"],
+    status: "active",
+    category: "art",
+    tags: ["baby", "hand", "right", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "22",
+    slug: "baby-hand-left",
+    name: "Baby Hand Left",
+    price: 32.00,
+    description: "Mirror human gesture. Hand poured, fired, and glazed ceramic approximately 4.5 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/babyhandleft.png"],
+    status: "active",
+    category: "art",
+    tags: ["baby", "hand", "left", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "23",
+    slug: "shallow-dish-pedestal",
+    name: "Shallow Dish Pedestal",
+    price: 35.00,
+    description: "Curved serving platform. Hand poured, fired, and glazed ceramic approximately 3 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/shallowDishPedestal.png"],
+    status: "active",
+    category: "art",
+    tags: ["shallow", "dish", "pedestal", "ceramic", "slip-cast", "glazed"],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "24",
+    slug: "shallow-dish",
+    name: "Shallow Dish",
+    price: 28.00,
+    description: "Minimal serving basin. Hand poured, fired, and glazed ceramic approximately 2 inches tall. Slip cast ceramic object.",
+    image_urls: ["/shop/shallowdish.png"],
+    status: "active",
+    category: "art",
+    tags: ["shallow", "dish", "ceramic", "slip-cast", "glazed"],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
@@ -193,8 +348,8 @@ export default function StorefrontPage() {
           transition={{ duration: 2, delay: 0.5 }}
         />
         <motion.img
-          src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753918202/la-esquinita/La_Esquinita_sponsorship_2025_Tara_Long-store-outside_n7z755.png"
-          alt="La Esquinita Sponsorship 2025 - Tara Long Store Outside"
+          src="/esquinita1.jpg"
+          alt="La Esquinita - Colorful storefront with birthday cake theme"
           className="w-full h-full object-cover"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -206,62 +361,6 @@ export default function StorefrontPage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 1 }}
         />
-        
-        {/* Newsletter Subscription Overlay */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center z-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.5 }}
-        >
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-2xl border-2 border-miami-pink/20 max-w-md mx-4">
-            <motion.h2
-              className="text-2xl md:text-3xl font-bold text-mint-rot mb-2 text-center"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2 }}
-            >
-              Stay Sweet! 🍭
-            </motion.h2>
-            <motion.p
-              className="text-mint-rot/80 text-center mb-6"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.2 }}
-            >
-              Subscribe to our newsletter for Miami kitsch updates, exclusive offers, and artistic adventures!
-            </motion.p>
-            
-            <motion.div
-              className="flex flex-col sm:flex-row gap-3"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.4 }}
-            >
-              <input
-                type="email"
-                placeholder="Enter your email..."
-                className="flex-1 px-4 py-3 rounded-lg border-2 border-miami-pink/30 focus:border-miami-pink focus:outline-none bg-white/80 backdrop-blur-sm text-mint-rot placeholder-mint-rot/60"
-              />
-              <motion.button
-                className="px-6 py-3 bg-gradient-to-r from-miami-pink to-miami-purple text-white font-semibold rounded-lg hover:from-miami-purple hover:to-miami-pink transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Subscribe ✨
-              </motion.button>
-            </motion.div>
-            
-            <motion.p
-              className="text-xs text-mint-rot/60 text-center mt-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 2.6 }}
-            >
-              Join our Miami kitsch community! No spam, just sweetness.
-            </motion.p>
-          </div>
-        </motion.div>
       </motion.div>
 
       {/* Sugar Icing Marquee */}
@@ -270,36 +369,39 @@ export default function StorefrontPage() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Storefront Header */}
-        <motion.div 
-          className="text-center mb-12"
+        <motion.div
+          className="text-center mb-12 pt-[15px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <LogoAndSponsor 
-            onLogoClick={() => {
-              // Add a fun interaction - could trigger a sprinkle animation or sound
-              console.log("La Esquinita at Locust Projects logo clicked!")
-            }}
-          />
-          <p className="text-xl md:text-2xl text-mint-rot font-display">
-            Convenience Store
-          </p>
-          <div className="flex justify-center mt-6 space-x-4">
-            <motion.div 
-              className="w-8 h-8 bg-miami-yellow rounded-full animate-neon-pulse"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <motion.div 
-              className="w-8 h-8 bg-miami-blue rounded-full animate-neon-pulse"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-            />
-            <motion.div 
-              className="w-8 h-8 bg-miami-pink rounded-full animate-neon-pulse"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+          <div className="flex justify-center mb-4">
+            <motion.img
+              src="/logo/locustprojects1.png"
+              alt="La Esquinita at Locust Projects"
+              className="h-32 md:h-48 w-auto drop-shadow-neon-pink cursor-pointer"
+              whileHover={{ 
+                scale: 1.1,
+                filter: "drop-shadow(0 0 20px #ff69b4) drop-shadow(0 0 30px #4ecdc4)",
+                transition: { duration: 0.3 }
+              }}
+              whileTap={{ scale: 0.95 }}
+              animate={{ 
+                y: [0, -5, 0],
+                filter: [
+                  "drop-shadow(0 0 10px #ff69b4)",
+                  "drop-shadow(0 0 20px #ff69b4) drop-shadow(0 0 15px #4ecdc4)",
+                  "drop-shadow(0 0 10px #ff69b4)"
+                ]
+              }}
+              transition={{ 
+                y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                filter: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+              }}
+              onClick={() => {
+                // Add a fun interaction - could trigger a sprinkle animation or sound
+                console.log("La Esquinita logo clicked!")
+              }}
             />
           </div>
         </motion.div>

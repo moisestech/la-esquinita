@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: 'La Esquinita',
   description: 'La Esquinita by Tara Long, Locust Projects 2025',
   generator: 'v0.dev',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({
@@ -20,7 +24,7 @@ export default function RootLayout({
       <body className="h-full w-full m-0 p-0">
         <CartProvider>
           <Navigation />
-          <main className="pt-16 pb-32">
+          <main className="pt-16">
             {children}
           </main>
           <Footer />

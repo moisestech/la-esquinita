@@ -97,7 +97,7 @@ export default function CartDrawer({
                 <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
                   <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-700 mb-2">Your cart is empty</h3>
-                  <p className="text-gray-600">Add some Miami kitsch to your collection!</p>
+                  <p className="text-gray-600">Add some treasures to your collection...</p>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -195,18 +195,10 @@ export default function CartDrawer({
 
                 {/* Checkout Button */}
                 <Button
-                  onClick={handleCheckout}
-                  disabled={isCheckingOut}
-                  className="w-full bg-gradient-to-r from-miami-pink to-miami-cyan hover:opacity-90 text-white py-3"
+                  disabled
+                  className="w-full bg-gray-500 text-white py-3 cursor-not-allowed opacity-75"
                 >
-                  {isCheckingOut ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>Processing...</span>
-                    </div>
-                  ) : (
-                    "Checkout"
-                  )}
+                  Checkout Opens November 19th
                 </Button>
 
                 {/* Continue Shopping */}

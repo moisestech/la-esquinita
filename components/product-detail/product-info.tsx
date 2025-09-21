@@ -84,8 +84,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     <div className="space-y-6">
       {/* Product Header */}
       <div className="space-y-2">
-        <motion.h1 
-          className="text-3xl md:text-4xl font-skeleton text-mint-rot"
+        <motion.h1
+          className="text-3xl md:text-4xl font-bold text-mint-rot"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

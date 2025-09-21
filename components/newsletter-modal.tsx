@@ -120,7 +120,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                     ✨ Stay in the Loop ✨
                   </h2>
                   <p className="text-mint-rot/80 text-sm">
-                    Get exclusive updates, event announcements, and Miami kitsch inspiration
+                    Get exclusive updates, event announcements, and sugar-sweet inspiration
                   </p>
                 </div>
 
@@ -202,7 +202,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
 
                 {/* Footer text */}
                 <p className="text-xs text-mint-rot/60 text-center mt-4">
-                  Join our Miami kitsch community • No spam, just art ✨
+                  Join us • No spam, just art ✨
                 </p>
               </form>
             </motion.div>
