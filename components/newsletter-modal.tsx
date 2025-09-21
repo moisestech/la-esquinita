@@ -120,7 +120,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                     ✨ Stay in the Loop ✨
                   </h2>
                   <p className="text-mint-rot/80 text-sm">
-                    Get exclusive updates, event announcements, and Miami kitsch inspiration
+                    Get exclusive updates, event announcements, and sugar-sweet inspiration
                   </p>
                 </div>
 

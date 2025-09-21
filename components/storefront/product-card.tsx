@@ -144,11 +144,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Card Container */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-sugar-pink hover:border-miami-pink transition-colors duration-300">
         {/* Product Image */}
-        <div className="relative h-64 bg-gradient-to-br from-sugar-pink to-fondant-blue overflow-hidden">
+        <div className="relative h-64 bg-gradient-to-br from-sugar-pink to-fondant-blue overflow-hidden p-4">
           <img
             src={product.image_urls[0] || "/placeholder-logo.png"}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
           />
           
           {/* Category Badge */}
@@ -205,7 +205,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Product Info */}
         <div className="p-6">
           {/* Product Name */}
-          <h3 className="text-xl font-skeleton text-mint-rot mb-2 line-clamp-2">
+          <h3 className="text-xl font-bold text-mint-rot mb-2 line-clamp-2">
             {product.name}
           </h3>
 

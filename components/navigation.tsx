@@ -3,22 +3,20 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ShoppingBag, Heart, User } from "lucide-react"
+import { Menu, X, ShoppingBag, Heart } from "lucide-react"
 import CartDrawer from "./storefront/cart-drawer"
-import UserMenu from "./user-menu"
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [cartItems, setCartItems] = useState<any[]>([])
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [userEmail, setUserEmail] = useState("")
 
   const navItems = [
     { href: "/storefront", label: "Storefront" },
-    { href: "/about", label: "About" },
+    { href: "/cake-hall", label: "Cake Hall" },
+    { href: "/mosquito-bar", label: "Mosquito Lounge" },
     { href: "/events", label: "Events" },
-    { href: "/contact", label: "Contact" },
+    { href: "/about", label: "About" },
   ]
 
   return (
@@ -77,11 +75,6 @@ export default function Navigation() {
                 </span>
               )}
             </motion.button>
-            <UserMenu 
-              isAuthenticated={isAuthenticated}
-              userEmail={userEmail}
-              onSignOut={() => setIsAuthenticated(false)}
-            />
           </div>
 
           {/* Mobile Menu Button */}
@@ -135,11 +128,6 @@ export default function Navigation() {
                       </span>
                     )}
                   </button>
-                  <UserMenu 
-                    isAuthenticated={isAuthenticated}
-                    userEmail={userEmail}
-                    onSignOut={() => setIsAuthenticated(false)}
-                  />
                 </div>
               </div>
             </motion.div>

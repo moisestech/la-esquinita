@@ -40,8 +40,8 @@ export default function Contact() {
                   <div>
                     <h3 className="font-bold text-mint-rot">Address</h3>
                     <p className="text-mint-rot/70">
-                      123 Miami Kitsch Ave<br />
-                      Miami, FL 33101
+                    297 NE 67th St<br />
+                    Miami, FL 33138
                     </p>
                   </div>
                 </div>

@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className="h-full w-full m-0 p-0">
         <CartProvider>
           <Navigation />
-          <main className="pt-16 pb-32">
+          <main className="pt-16">
             {children}
           </main>
           <Footer />

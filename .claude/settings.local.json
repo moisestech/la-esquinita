@@ -5,7 +5,9 @@
       "Bash(find:*)",
       "Bash(mv:*)",
       "Bash(ls:*)",
-      "Read(//Users/bp/Library/Application Support/Cursor/User/**)"
+      "Read(//Users/bp/Library/Application Support/Cursor/User/**)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_57bIKK/**)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_F8iz8B/**)"
     ],
     "deny": []
   }
