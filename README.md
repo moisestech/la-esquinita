@@ -1,17 +1,17 @@
-# La Esquinita - Miami Artistic Convenience Store
+# La Esquinita - Sugar-Laced Parable About Power
 
 ## 🎨 Project Overview
 
-**La Esquinita** is an immersive web experience that transforms the digital space into a Miami artistic convenience store. Created by Tara Long for Locust Projects 2025, this project explores the themes of **Seduction → Exposure → Rebirth** through a three-act narrative structure.
+**La Esquinita** is the debut solo exhibition by Miami-based artist Tara Long at Locust Projects (November 2025 - January 2026). This digital experience serves as both a companion to and extension of the physical installation, exploring Miami's cycles of exploitation from "Big Sugar" to Big Tech.
 
 ### Core Concept
-Think of it as an artistic dollar store that exists both physically in Miami and digitally as an interactive web experience. The project plays with the contrast between sugar-coated fantasy and the underlying decay, creating a Miami tourist kitsch aesthetic that reveals deeper artistic commentary.
+A 2,500 sq ft walk-through installation that juxtaposes Florida's early 20th-century "Big Sugar" land grab with today's influx of Big Tech capital, showing how both sweeten—and hollow—local culture. The materials oscillate between confectionery fantasy and rot: fondant-like plaster, glossy ceramic "snacks," cracked stucco, and projected spores.
 
 ### Brand Identity
 - **Logo**: [La Esquinita Logo](https://res.cloudinary.com/dck5rzi4h/image/upload/v1753892032/la-esquinita/LE-logo-tara_jdjyo9.png)
 - **Alternative Logo**: [La Esquinita Logo 2](https://res.cloudinary.com/dck5rzi4h/image/upload/v1753892200/la-esquinita/LE-logo-tara-2_aurodr.png)
-- **Theme**: Miami tourist kitsch meets artistic commentary
-- **Aesthetic**: Sugar fantasy vs. rot, glossy pastels vs. cracked textures
+- **Theme**: Sugar-coated critique of power and consumption
+- **Aesthetic**: Confectionery fantasy vs. decay, sugar sculptures vs. cracked stucco
 
 ## 🏗️ Technical Architecture
 
@@ -44,37 +44,37 @@ la-esquinita/
 
 ### Three-Act Narrative Structure
 
-#### Act 1: Seduction (Storefront)
-- **Route**: `/` (default landing)
-- **Experience**: Welcoming bodega-style interface
-- **Elements**: 
+#### Act 1: Facade & Storefront (Seduction)
+- **Route**: `/storefront`
+- **Experience**: Corner-store mural blends bodega graphics with dripping icing
+- **Elements**:
   - Sugar-icing marquee with animated sprinkles
-  - Product grid with Miami kitsch items
-  - Fake cart system (no actual checkout)
-  - Hidden door CTA for secret access
+  - Hand-made ceramic "sugar-coated" souvenirs
+  - Shopping cart (checkout opens November 19th)
+  - Clean product display with art-speak descriptions
 
-#### Act 2: Exposure (Backstage Cake)
-- **Route**: `/cake` (hidden, requires secret code)
-- **Experience**: Behind-the-scenes artistic content
+#### Act 2: Backstage (Exposure)
+- **Route**: `/cake-hall`
+- **Experience**: Hidden door reveals consumption's darker appetite
 - **Elements**:
-  - Full-bleed hero video of breathing cake
-  - Ritual gallery with performer clips
-  - Visual crack textures
-  - Progressive disclosure of content
+  - Monumental cake sculpture (part stage, part crumbling high-rise)
+  - Three performers embody female archetypes—Sweetheart, Siren, Fury
+  - Sacred clown imagery and performance documentation
+  - Background audio accompaniment
 
-#### Act 3: Rebirth (Speakeasy)
-- **Route**: `/speakeasy` (time-gated or code-accessed)
-- **Experience**: Dark, swampy underground space
+#### Act 3: Speakeasy (Collapse / Rebirth)
+- **Route**: `/mosquito-bar` (Mosquito Lounge)
+- **Experience**: Rear lounge overrun by swamp life
 - **Elements**:
-  - Dark mode with neon accents
-  - Live event streaming
-  - RSVP functionality
-  - Exclusive content access
+  - Dark atmospheric design with projected Everglades
+  - Craft cocktails inspired by Miami's swamp consumption
+  - Nature's primacy and resilience themes
+  - Secret speakeasy ambiance
 
 ### Additional Routes
-- `/events` - Calendar and event management
-- `/about` - Artist statement and project ethos
-- `/admin` - Content management (auth-gated)
+- `/events` - Exhibition events and performances
+- `/about` - Artist statement, bio, and project context
+- Home page with immersive landing experience
 
 ## 🎨 Design System
 
@@ -87,14 +87,16 @@ la-esquinita/
 ```
 
 ### Typography
-- **Display Font**: Skeleton Blood (custom font)
+- **Display Font**: Skeleton Blood (custom dripping font)
+- **Product Titles**: Arial/Helvetica Bold (clean, non-dripping)
 - **Body Font**: System fonts with fallbacks
-- **Accent Fonts**: Miami-style decorative elements
+- **Navigation**: Clean sans-serif matching scrolling banner
 
 ### Micro-Interactions
-- **Hover Sprinkle**: Sugar grains fall and dissolve on product hover
-- **Rot Timer**: Cracks widen after 45s idle on cake page
-- **Speakeasy Fog**: WebGL noise overlay for atmospheric effect
+- **Sprinkle Animations**: Sugar particles on product interactions
+- **Floating Elements**: Animated backgrounds and atmospheric particles
+- **Neon Effects**: Glowing borders and hover states
+- **Audio Integration**: Background music in Cake Hall
 
 ## 🗄️ Database Schema
 
@@ -216,10 +218,10 @@ secret_passes (
 ## 📞 Contact & Resources
 
 ### Team
-- **Artist**: Tara Long
-- **Technical Lead**: [To be assigned]
-- **Design Lead**: [To be assigned]
-- **Content Manager**: [To be assigned]
+- **Artist**: Tara Long (b. 1984, Miami)
+- **Institution**: Locust Projects, Little River, Miami
+- **Exhibition**: November 2025 - January 2026
+- **Contact**: egodeathllc@gmail.com
 
 ### Resources
 - [Project Figma](link-to-be-added)
