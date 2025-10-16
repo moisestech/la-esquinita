@@ -7,31 +7,32 @@ import { Calendar, MapPin, Clock, Users } from "lucide-react"
 const events = [
   {
     id: "1",
+    title: "Delight & Devour Annual Benefit Dinner",
+    description: "Join us for Locust Projects' Annual Benefit Dinner Fundraiser honoring Sarah Harrison. A special evening celebrating art, community, and Miami culture.",
+    date: "November 14, 2025",
+    time: "6:00 PM - 10:00 PM",
+    location: "Locust Projects, Miami",
+    type: "dinner",
+    capacity: 80,
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop"
+  },
+  {
+    id: "2",
     title: "Opening Reception",
     description: "Join us for the grand opening of La Esquinita at Locust Projects. Experience the intersection of art, convenience, and Miami culture in this unique installation.",
-    date: "November 19, 2024",
+    date: "November 21, 2025",
     time: "6:00 PM - 9:00 PM",
     location: "Locust Projects, Miami",
     type: "reception",
     capacity: 100,
-    image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&h=600&fit=crop"
-  },
-  {
-    id: "2",
-    title: "Black Friday Rave",
-    description: "A night of Miami revelry and electronic beats. Experience the intersection of art, music, and Miami culture in this unique after-hours event.",
-    date: "November 28, 2024",
-    time: "9:00 PM - 2:00 AM",
-    location: "La Esquinita at Locust Projects",
-    type: "rave",
-    capacity: 150,
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop"
+    image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&h=600&fit=crop",
+    rsvpUrl: "https://partiful.com/e/9ojzbO78cQiUitnzaRyb"
   },
   {
     id: "3",
     title: "Miami Art Week Press Preview",
     description: "Exclusive press preview during Miami Art Week. Get a first look at the latest ceramic works and installations before the public opening.",
-    date: "December 2, 2024",
+    date: "December 2, 2025",
     time: "10:00 AM - 12:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "preview",
@@ -42,7 +43,7 @@ const events = [
     id: "4",
     title: "Meet the Artist VIP Basel Reception",
     description: "An intimate VIP reception during Art Basel Miami Beach. Meet artist Tara Long and discover the stories behind the ceramic works.",
-    date: "December 6, 2024",
+    date: "December 6, 2025",
     time: "7:00 PM - 10:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "reception",
@@ -51,9 +52,20 @@ const events = [
   },
   {
     id: "5",
+    title: "Annual Holiday Makers Mart",
+    description: "Annual Holiday Makers Mart + Little River Art Days. A festive marketplace featuring local artists and makers. Free and open to all!",
+    date: "December 13, 2025",
+    time: "12:00 PM - 5:00 PM",
+    location: "Locust Projects, Miami",
+    type: "market",
+    capacity: 200,
+    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=600&fit=crop"
+  },
+  {
+    id: "6",
     title: "Closing Reception",
     description: "Join us for the closing celebration of La Esquinita. A final opportunity to experience this unique art installation and celebrate the community that formed around it.",
-    date: "January 17, 2025",
+    date: "January 17, 2026",
     time: "6:00 PM - 9:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "reception",
@@ -133,16 +145,41 @@ export default function Events() {
                 </div>
 
                 {/* RSVP Button */}
-                <motion.button
-                  className="w-full bg-gray-500 text-white py-3 rounded-lg font-bold transition-all duration-300 relative overflow-hidden cursor-not-allowed opacity-75"
-                  disabled
-                >
-                  <span className="relative z-10">RSVP Opening Soon</span>
-                </motion.button>
+                {event.rsvpUrl ? (
+                  <motion.a
+                    href={event.rsvpUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full bg-gradient-to-r from-miami-pink to-miami-purple text-white py-3 rounded-lg font-bold text-center transition-all duration-300 relative overflow-hidden hover:opacity-90"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span className="relative z-10">RSVP Now</span>
+                  </motion.a>
+                ) : (
+                  <motion.button
+                    className="w-full bg-gray-500 text-white py-3 rounded-lg font-bold transition-all duration-300 relative overflow-hidden cursor-not-allowed opacity-75"
+                    disabled
+                  >
+                    <span className="relative z-10">RSVP Opening Soon</span>
+                  </motion.button>
+                )}
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Grant Acknowledgment */}
+        <motion.div
+          className="max-w-2xl mx-auto text-center mt-12 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <p className="text-sm text-mint-rot/70">
+            Tara Long, La Esquinita is commissioned by Locust Projects and supported in part with a grant from Funding Arts Network.
+          </p>
+        </motion.div>
       </div>
     </div>
   )

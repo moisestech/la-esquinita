@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { User, Settings, Heart, LogOut, ChevronDown } from "lucide-react"
+import { User, Settings, LogOut, ChevronDown } from "lucide-react"
 import Link from "next/link"
 
 interface UserMenuProps {
@@ -76,16 +76,6 @@ export default function UserMenu({ isAuthenticated = false, userEmail, onSignOut
                 >
                   <User className="w-5 h-5 text-gray-600" />
                   <span className="text-gray-700">Profile</span>
-                </motion.div>
-              </Link>
-
-              <Link href="/favorites" onClick={closeMenu}>
-                <motion.div
-                  className="flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer"
-                  whileHover={{ x: 4 }}
-                >
-                  <Heart className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-700">Favorites</span>
                 </motion.div>
               </Link>
 

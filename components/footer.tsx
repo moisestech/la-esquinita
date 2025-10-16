@@ -103,8 +103,11 @@ export default function Footer({ photographerName }: FooterProps = {}) {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="border-t border-miami-pink/20 mt-8 pt-8 text-center"
+          className="border-t border-miami-pink/20 mt-8 pt-8 text-center space-y-2"
         >
+          <p className="text-gray-600 text-sm">
+             La Esquinita is commissioned by Locust Projects and supported in part with a grant from Funding Arts Network.
+          </p>
           <p className="text-gray-600 text-sm">
             © 2025 Ego Death LLC. All rights reserved.
           </p>

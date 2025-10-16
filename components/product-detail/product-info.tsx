@@ -6,6 +6,7 @@ import { Heart, Share2, ShoppingCart, Star, Tag, Calendar } from "lucide-react"
 import { Product } from "@/lib/supabase"
 import { useCart } from "@/contexts/cart-context"
 import { useToast } from "@/hooks/use-toast"
+import { isCartEnabled, getCartLockedMessage } from "@/lib/constants/cart-config"
 
 interface ProductInfoProps {
   product: Product
@@ -17,6 +18,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const [isAddingToCart, setIsAddingToCart] = useState(false)
   const { addToCart, isInCart } = useCart()
   const { toast } = useToast()
+  const cartEnabled = isCartEnabled()
 
   const handleAddToCart = async () => {
     setIsAddingToCart(true)
@@ -204,26 +206,32 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       >
         <button
           onClick={handleAddToCart}
-          disabled={product.status === "coming_soon" || isAddingToCart}
+          disabled={product.status === "coming_soon" || isAddingToCart || !cartEnabled}
           className={`flex-1 py-4 px-6 rounded-2xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed ${
             isInCart(product.id)
               ? 'bg-green-500 text-white hover:bg-green-600'
               : 'bg-mint-rot text-white hover:bg-opacity-90'
           }`}
+          title={!cartEnabled ? getCartLockedMessage() : undefined}
         >
           {isAddingToCart ? (
             <>
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
               <span>Adding...</span>
             </>
+          ) : !cartEnabled ? (
+            <>
+              <ShoppingCart className="w-5 h-5" />
+              <span>{getCartLockedMessage()}</span>
+            </>
           ) : (
             <>
               <ShoppingCart className="w-5 h-5" />
               <span>
-                {product.status === "coming_soon" 
-                  ? "Coming Soon" 
-                  : isInCart(product.id) 
-                    ? "In Cart ✓" 
+                {product.status === "coming_soon"
+                  ? "Coming Soon"
+                  : isInCart(product.id)
+                    ? "In Cart ✓"
                     : "Add to Cart"
                 }
               </span>

@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ShoppingBag, Heart } from "lucide-react"
+import { Menu, X, ShoppingBag } from "lucide-react"
 import CartDrawer from "./storefront/cart-drawer"
 
 export default function Navigation() {
@@ -14,7 +14,7 @@ export default function Navigation() {
   const navItems = [
     { href: "/storefront", label: "Storefront" },
     { href: "/cake-hall", label: "Cake Hall" },
-    { href: "/mosquito-bar", label: "Mosquito Lounge" },
+    { href: "/mosquito-bar", label: "Lounge" },
     { href: "/events", label: "Events" },
     { href: "/about", label: "About" },
   ]
@@ -53,15 +53,6 @@ export default function Navigation() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/favorites">
-              <motion.button
-                className="p-2 text-mint-rot hover:text-miami-pink transition-colors relative"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Heart className="w-5 h-5" />
-              </motion.button>
-            </Link>
             <motion.button
               onClick={() => setIsCartOpen(true)}
               className="p-2 text-mint-rot hover:text-miami-pink transition-colors relative"
@@ -109,15 +100,7 @@ export default function Navigation() {
                   </Link>
                 ))}
                 <div className="flex items-center space-x-4 pt-4 border-t border-miami-pink/20">
-                  <button className="p-2 text-mint-rot hover:text-miami-pink transition-colors relative">
-                    <Heart className="w-5 h-5" />
-                    {cartItems.length > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-miami-pink text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                        {cartItems.length}
-                      </span>
-                    )}
-                  </button>
-                  <button 
+                  <button
                     onClick={() => setIsCartOpen(true)}
                     className="p-2 text-mint-rot hover:text-miami-pink transition-colors relative"
                   >

@@ -41,7 +41,7 @@ export default function MosquitoBar() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <img
-              src="/shop/esquinita4.jpg"
+              src="/mosquitobar.jpg"
               alt="Mosquito Lounge Cocktails"
               className="w-full h-96 md:h-[600px] object-cover"
             />

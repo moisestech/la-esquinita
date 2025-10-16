@@ -100,6 +100,92 @@ export default function CakeHall() {
             />
           </motion.div>
 
+          {/* Mysterious Performance Dates */}
+          <motion.div
+            className="mt-16 mb-8 relative"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.5 }}
+          >
+            <div className="bg-gradient-to-b from-miami-pink/10 to-transparent border border-miami-pink/30 rounded-xl p-8 backdrop-blur-sm">
+              <motion.h3
+                className="text-2xl md:text-3xl font-bold text-miami-pink text-center mb-6 tracking-wider"
+                animate={{
+                  opacity: [0.7, 1, 0.7],
+                  textShadow: [
+                    "0 0 10px rgba(255, 105, 180, 0.5)",
+                    "0 0 20px rgba(255, 105, 180, 0.8)",
+                    "0 0 10px rgba(255, 105, 180, 0.5)"
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                ✨ When the Moon Rises ✨
+              </motion.h3>
+
+              <div className="space-y-4 text-center">
+                <motion.p
+                  className="text-white/80 text-lg italic"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 1.8 }}
+                >
+                  The clowns will perform their ritual dance on three sacred nights...
+                </motion.p>
+
+                <div className="grid md:grid-cols-3 gap-6 mt-8">
+                  <motion.div
+                    className="bg-black/40 border border-miami-pink/20 rounded-lg p-6 hover:border-miami-pink/60 transition-all duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 2.0 }}
+                    whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 105, 180, 0.3)" }}
+                  >
+                    <div className="text-miami-pink text-4xl mb-3">🌙</div>
+                    <p className="text-white/60 text-sm uppercase tracking-widest mb-2">The Opening</p>
+                    <p className="text-miami-pink font-bold text-xl">November 21st</p>
+                    <p className="text-white/40 text-xs mt-2 italic">When the door first opens...</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="bg-black/40 border border-miami-pink/20 rounded-lg p-6 hover:border-miami-pink/60 transition-all duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 2.2 }}
+                    whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 105, 180, 0.3)" }}
+                  >
+                    <div className="text-miami-pink text-4xl mb-3">🎭</div>
+                    <p className="text-white/60 text-sm uppercase tracking-widest mb-2">Art Basel</p>
+                    <p className="text-miami-pink font-bold text-xl">December 6th</p>
+                    <p className="text-white/40 text-xs mt-2 italic">When the city dreams in neon...</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="bg-black/40 border border-miami-pink/20 rounded-lg p-6 hover:border-miami-pink/60 transition-all duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 2.4 }}
+                    whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 105, 180, 0.3)" }}
+                  >
+                    <div className="text-miami-pink text-4xl mb-3">🌟</div>
+                    <p className="text-white/60 text-sm uppercase tracking-widest mb-2">The Finale</p>
+                    <p className="text-miami-pink font-bold text-xl">January 17th</p>
+                    <p className="text-white/40 text-xs mt-2 italic">When the sweetness returns to earth...</p>
+                  </motion.div>
+                </div>
+
+                <motion.p
+                  className="text-white/50 text-sm italic mt-8"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 2.8 }}
+                >
+                  More details will be revealed as the dates approach...
+                </motion.p>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </div>

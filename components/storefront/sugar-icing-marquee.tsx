@@ -4,10 +4,11 @@ import React from "react"
 import { motion } from "framer-motion"
 
 const marqueeItems = [
-  "🏴‍☠️ Opening Reception → Nov 19th @ 6 PM 🌟",
-  "🏴‍☠️ Black Friday Rave → Nov 28 @ 9 PM 🌟",
-  "🎂 Miami Art Week Pres Preview → Dec 2 @ 10 AM 🎂",
+  "🍒 Delight & Devour Benefit Dinner → Nov 14th @ 6 PM 🍒",
+  "🏴‍☠️ Opening Reception → Nov 21st @ 6 PM 🌟",
+  "🎂 Miami Art Week Press Preview → Dec 2 @ 10 AM 🎂",
   "🎂 Meet the Artist VIP Basel Reception → Dec 6 @ 7 PM 🎂",
+  "🎁 Holiday Makers Mart → Dec 13 @ 12 PM 🎁",
   "🏴‍☠️ Closing Reception → January 17th @ 6 PM 🌟",
 ]
 

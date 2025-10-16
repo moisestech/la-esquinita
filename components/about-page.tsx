@@ -68,7 +68,7 @@ export default function AboutPage() {
         className="opacity-90"
       />
 
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
       
       <motion.div
         className="relative max-w-3xl mx-auto px-6 py-20 z-10"
@@ -106,22 +106,38 @@ export default function AboutPage() {
         </motion.div>
 
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-16"
           variants={textVariants}
         >
-          <p className="text-3xl md:text-4xl font-bold text-white mb-6 leading-relaxed">
-            La Esquinita is the debut solo show by Miami-based artist Tara Long.
+          <h2 className="text-3xl md:text-4xl font-bold text-miami-pink mb-8 leading-tight">
+            LA ESQUINITA (Little Corner)
+          </h2>
+          <p className="text-xl md:text-2xl font-light text-white mb-6 leading-relaxed">
+            The first major solo exhibition by Miami-born artist and musician Tara Long.
           </p>
-          <p className="text-2xl md:text-3xl font-light text-miami-pink leading-relaxed tracking-wide">
-            In this show, Long juxtaposes Florida&apos;s early 20th-century &quot;Big Sugar&quot; land grab
-            with today&apos;s influx of Big Tech capital, showing how both sweeten—and hollow—local
-            culture. Her materials oscillate between confectionery fantasy and rot: fondant-like plaster,
-            glossy ceramic &quot;snacks,&quot; cracked stucco, and projected spores.
+          <p className="text-lg md:text-xl text-gray-100 mb-4 leading-relaxed">
+            Transforming the gallery&apos;s interior and exterior into a surreal &quot;Sweets & Souvenirs&quot; shop of over 500 miniature sculptures,
+            Long stages a candy-coated critique of consumerism and cultural decay.
+          </p>
+          <p className="text-lg md:text-xl text-gray-100 mb-4 leading-relaxed">
+            Visitors move from a playful storefront into an immersive dreamscape—a teetering, 20-foot cake under a glowing moon lightbox—accompanied
+            by a haunting original score.
+          </p>
+          <p className="text-lg md:text-xl text-gray-100 mb-4 leading-relaxed">
+            The installation culminates in a lush &quot;swamp-scape&quot; where nature overtakes the artificial, evoking Florida&apos;s ecological
+            and cultural precarity.
+          </p>
+          <p className="text-lg md:text-xl text-white italic leading-relaxed">
+            Curated by Executive Director Lorie Mertes, &quot;LA ESQUINITA&quot; blurs fantasy and critique, tracing Miami&apos;s transformation
+            from sugar fields to tech hub while inviting reflection on indulgence, loss, and reclamation.
+          </p>
+          <p className="text-sm md:text-base text-gray-300 mt-8 leading-relaxed">
+            La Esquinita is commissioned by Locust Projects and supported in part with a grant from Funding Arts Network.
           </p>
         </motion.div>
 
         <motion.div
-          className="bg-miami-pink/10 backdrop-blur-sm p-8 rounded-lg mb-12 border border-miami-pink/30"
+          className="bg-miami-pink/10 backdrop-blur-sm p-8 rounded-lg mb-16 border border-miami-pink/30"
           variants={textVariants}
         >
           <h2 className="text-3xl font-bold mb-6 text-miami-pink">
@@ -163,13 +179,13 @@ export default function AboutPage() {
         </motion.div>
 
         <motion.div
-          className="bg-miami-cyan/10 backdrop-blur-sm p-8 rounded-lg mb-12 border border-miami-cyan/30"
+          className="text-center mb-16"
           variants={textVariants}
         >
-          <h2 className="text-2xl font-light mb-4 text-miami-cyan tracking-wide">
+          <h2 className="text-2xl font-light mb-6 text-miami-cyan tracking-wide">
             Artist Bio
           </h2>
-          <p className="text-gray-100 italic">
+          <p className="text-gray-100 italic leading-relaxed">
             Tara Long (b. 1984, Miami) transforms vernacular and popular iconography into immersive allegories. Raised in Miami's cultural cross-currents—and a survivor of personal tragedy—Long's practice spans installation, performance, and sound, exploring how communities metabolize trauma and change. Previous work includes underground left-field pop persona Poorgrrrl and collaborative exhibitions across South Florida. She has shown work and performed at Moma PS1, ICA and the PAMM in Miami. Long holds a studio at Bakehouse Art Complex. LA ESQUINITA is her first major solo institutional exhibition.
           </p>
         </motion.div>

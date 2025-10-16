@@ -2,11 +2,13 @@ import { Database } from '@/types/supabase'
 import { createClient } from '@supabase/supabase-js'
 import { TABLES } from './constants/tables'
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+// Initialize Supabase client - COMMENTED OUT (not using Supabase)
+// const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+// const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+// export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
+// Dummy supabase export to prevent errors
+export const supabase = null as any
 
 // Database types
 export type Tables = Database['public']['Tables']
@@ -491,68 +493,35 @@ export const db = {
   }
 }
 
+// Hardcoded coupon validation (no Supabase needed)
 export const coupons = {
   async validate(code: string): Promise<{ valid: boolean; discount?: number; type?: 'percentage' | 'fixed'; message?: string }> {
-    try {
-      const { data, error } = await supabase
-        .from('coupons')
-        .select('*')
-        .eq('code', code.toUpperCase())
-        .eq('active', true)
-        .single()
+    // Hardcoded coupons for demo
+    const hardcodedCoupons: Record<string, { discount: number; type: 'percentage' | 'fixed' }> = {
+      'MIAMI10': { discount: 10, type: 'percentage' },
+      'WELCOME5': { discount: 5, type: 'fixed' },
+      'SUGAR20': { discount: 20, type: 'percentage' },
+      'ESQUINITA15': { discount: 15, type: 'percentage' }
+    }
 
-      if (error || !data) {
-        return { valid: false, message: 'Invalid coupon code' }
-      }
+    const normalizedCode = code.toUpperCase().trim()
+    const coupon = hardcodedCoupons[normalizedCode]
 
-      // Check if coupon is expired
-      if (data.expires_at && new Date(data.expires_at) < new Date()) {
-        return { valid: false, message: 'Coupon has expired' }
-      }
-
-      // Check usage limits
-      if (data.max_uses && data.used_count >= data.max_uses) {
-        return { valid: false, message: 'Coupon usage limit reached' }
-      }
-
+    if (coupon) {
       return {
         valid: true,
-        discount: data.discount_amount,
-        type: data.discount_type,
+        discount: coupon.discount,
+        type: coupon.type,
         message: 'Coupon applied successfully!'
       }
-    } catch (error) {
-      console.error('Error validating coupon:', error)
-      return { valid: false, message: 'Error validating coupon' }
     }
+
+    return { valid: false, message: 'Invalid coupon code' }
   },
 
   async apply(code: string, orderId: string): Promise<{ success: boolean; message?: string }> {
-    try {
-      const { error } = await supabase
-        .from('coupon_usage')
-        .insert({
-          coupon_code: code.toUpperCase(),
-          order_id: orderId,
-          used_at: new Date().toISOString()
-        })
-
-      if (error) {
-        console.error('Error applying coupon:', error)
-        return { success: false, message: 'Error applying coupon' }
-      }
-
-      // Update usage count
-      await supabase
-        .from('coupons')
-        .update({ used_count: supabase.rpc('increment') })
-        .eq('code', code.toUpperCase())
-
-      return { success: true, message: 'Coupon applied successfully!' }
-    } catch (error) {
-      console.error('Error applying coupon:', error)
-      return { success: false, message: 'Error applying coupon' }
-    }
+    // No-op for now since we're not using Supabase
+    return { success: true, message: 'Coupon applied successfully!' }
   }
 }
 

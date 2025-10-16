@@ -7,6 +7,7 @@ import { Share2, ShoppingCart, Heart } from "lucide-react"
 import { Product } from "@/lib/supabase"
 import { useToast } from "@/hooks/use-toast"
 import { useCart } from "@/contexts/cart-context"
+import { isCartEnabled, getCartLockedMessage } from "@/lib/constants/cart-config"
 
 interface ProductCardProps {
   product: Product
@@ -19,6 +20,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [isShared, setIsShared] = useState(false)
   const { toast } = useToast()
   const { addToCart } = useCart()
+  const cartEnabled = isCartEnabled()
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault()
@@ -230,19 +232,25 @@ export default function ProductCard({ product }: ProductCardProps) {
             {/* Add to Cart Button */}
             <motion.button
               onClick={handleAddToCart}
-              disabled={isAddingToCart}
+              disabled={isAddingToCart || !cartEnabled}
               className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-all duration-300 ${
-                isAddingToCart 
-                  ? 'bg-gray-400 cursor-not-allowed' 
+                isAddingToCart || !cartEnabled
+                  ? 'bg-gray-400 cursor-not-allowed text-white'
                   : 'bg-gradient-to-r from-miami-pink to-miami-purple text-white hover:shadow-neon-pink'
               }`}
-              whileHover={!isAddingToCart ? { scale: 1.05 } : {}}
-              whileTap={!isAddingToCart ? { scale: 0.95 } : {}}
+              whileHover={!isAddingToCart && cartEnabled ? { scale: 1.05 } : {}}
+              whileTap={!isAddingToCart && cartEnabled ? { scale: 0.95 } : {}}
+              title={!cartEnabled ? getCartLockedMessage() : undefined}
             >
               {isAddingToCart ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   Adding...
+                </>
+              ) : !cartEnabled ? (
+                <>
+                  <ShoppingCart size={16} />
+                  <span className="text-xs">Nov 14th</span>
                 </>
               ) : (
                 <>
