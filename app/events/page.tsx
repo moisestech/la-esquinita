@@ -1,31 +1,30 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Calendar, MapPin, Clock, Users } from "lucide-react"
+import { Calendar, MapPin, Clock } from "lucide-react"
 
 // Events data from the scrolling banner
 const events = [
   {
     id: "1",
     title: "Delight & Devour Annual Benefit Dinner",
-    description: "Join us for Locust Projects' Annual Benefit Dinner Fundraiser honoring Sarah Harrison. A special evening celebrating art, community, and Miami culture.",
+    description: "Indulge in a decadent feast for the senses under the imagination of Miami multi-disciplinary artist Tara Long. Expect the unexpected. Savor the spectacle. Share the table and gather for an experience of connection, creation, and a little bit of magic.",
     date: "November 14, 2025",
     time: "6:00 PM - 10:00 PM",
     location: "Locust Projects, Miami",
     type: "dinner",
-    capacity: 80,
-    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop"
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
+    rsvpUrl: "https://www.locustprojects.org/pages/delight-devour-2025-benefit-dinner.html"
   },
   {
     id: "2",
     title: "Opening Reception",
-    description: "Join us for the grand opening of La Esquinita at Locust Projects. Experience the intersection of art, convenience, and Miami culture in this unique installation.",
+    description: "Join us for the grand opening of La Esquinita at Locust Projects.",
     date: "November 21, 2025",
     time: "6:00 PM - 9:00 PM",
     location: "Locust Projects, Miami",
     type: "reception",
-    capacity: 100,
-    image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&h=600&fit=crop",
+    image: "/mosquitobar.jpg",
     rsvpUrl: "https://partiful.com/e/9ojzbO78cQiUitnzaRyb"
   },
   {
@@ -36,18 +35,16 @@ const events = [
     time: "10:00 AM - 12:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "preview",
-    capacity: 50,
     image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
   },
   {
     id: "4",
     title: "Meet the Artist VIP Basel Reception",
-    description: "An intimate VIP reception during Art Basel Miami Beach. Meet artist Tara Long and discover the stories behind the ceramic works.",
+    description: "An intimate VIP reception during Art Basel Miami Beach. Meet artist Tara Long and discover the stories behind La Esquinita.",
     date: "December 6, 2025",
     time: "7:00 PM - 10:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "reception",
-    capacity: 75,
     image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&h=600&fit=crop"
   },
   {
@@ -58,18 +55,16 @@ const events = [
     time: "12:00 PM - 5:00 PM",
     location: "Locust Projects, Miami",
     type: "market",
-    capacity: 200,
     image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=600&fit=crop"
   },
   {
     id: "6",
     title: "Closing Reception",
-    description: "Join us for the closing celebration of La Esquinita. A final opportunity to experience this unique art installation and celebrate the community that formed around it.",
+    description: "Join us for the closing celebration of La Esquinita.",
     date: "January 17, 2026",
     time: "6:00 PM - 9:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "reception",
-    capacity: 100,
     image: "/esquinita3.jpg"
   }
 ]
@@ -138,10 +133,6 @@ export default function Events() {
                     <MapPin className="w-4 h-4 mr-2" />
                     {event.location}
                   </div>
-                  <div className="flex items-center text-sm text-mint-rot/80">
-                    <Users className="w-4 h-4 mr-2" />
-                    Capacity: {event.capacity}
-                  </div>
                 </div>
 
                 {/* RSVP Button */}
@@ -177,7 +168,7 @@ export default function Events() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <p className="text-sm text-mint-rot/70">
-            Tara Long, La Esquinita is commissioned by Locust Projects and supported in part with a grant from Funding Arts Network.
+            La Esquinita is commissioned by Locust Projects and supported in part with a grant from Funding Arts Network.
           </p>
         </motion.div>
       </div>

@@ -45,8 +45,10 @@ export default function Footer({ photographerName }: FooterProps = {}) {
                   href="mailto:egodeathllc@gmail.com"
                   whileHover={{ scale: 1.1 }}
                   className="text-miami-pink hover:text-miami-cyan transition-colors"
+                  aria-label="Email us"
                 >
                   <Mail size={24} />
+                  <span className="sr-only">Email us</span>
                 </motion.a>
               </div>
 
@@ -89,7 +91,7 @@ export default function Footer({ photographerName }: FooterProps = {}) {
               <div className="flex items-center space-x-2">
                 <Mail size={16} className="text-miami-pink" />
                 <a href="mailto:egodeathllc@gmail.com" className="text-gray-700 hover:text-miami-pink transition-colors">
-                  egodeathllc@gmail.com
+                  Email us
                 </a>
               </div>
             </div>
