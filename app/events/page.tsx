@@ -8,7 +8,7 @@ const events = [
   {
     id: "1",
     title: "Delight & Devour Annual Benefit Dinner",
-    description: "Indulge in a decadent feast for the senses under the imagination of Miami multi-disciplinary artist Tara Long. Expect the unexpected. Savor the spectacle. Share the table and gather for an experience of connection, creation, and a little bit of magic.",
+    description: "Join us to honor Sarah Arison and celebrate visual artist and musician Tara Long and the premiere of her all-encompassing installation LA ESQUINITA.",
     date: "November 14, 2025",
     time: "6:00 PM - 10:00 PM",
     location: "Locust Projects, Miami",
@@ -39,8 +39,8 @@ const events = [
   },
   {
     id: "4",
-    title: "Meet the Artist VIP Basel Reception",
-    description: "An intimate VIP reception during Art Basel Miami Beach. Meet artist Tara Long and discover the stories behind La Esquinita.",
+    title: "Delight in the Mire: Miami Art Week Meet the Artist Party",
+    description: "Presented with NILOR, meet exhibiting artist Tara Long for the Miami Art Week opening of LA ESQUINITA.",
     date: "December 6, 2025",
     time: "7:00 PM - 10:00 PM",
     location: "La Esquinita at Locust Projects",
@@ -49,13 +49,13 @@ const events = [
   },
   {
     id: "5",
-    title: "Annual Holiday Makers Mart",
-    description: "Annual Holiday Makers Mart + Little River Art Days. A festive marketplace featuring local artists and makers. Free and open to all!",
-    date: "December 13, 2025",
-    time: "12:00 PM - 5:00 PM",
-    location: "Locust Projects, Miami",
-    type: "market",
-    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=600&fit=crop"
+    title: "Wednesdays with Locust Projects: Tara Long",
+    description: "Enjoy conversations and musical/performance interactions with exhibiting artist Tara Long in her immersive exhibition LA ESQUINITA and Speakeasy bar.",
+    date: "December 17, 2025",
+    time: "6:00 PM - 10:00 PM",
+    location: "La Esquinita at Locust Projects",
+    type: "program",
+    image: "/TL_Portrait.jpeg"
   },
   {
     id: "6",
