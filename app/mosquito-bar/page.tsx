@@ -79,7 +79,7 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
   },
 ]
 
-export default function MosquitoBar() {
+export default function mosquitobar() {
   return (
     <div className="relative min-h-screen bg-[#040b06] text-[#7cff6b] font-mono">
       <div className="pointer-events-none absolute inset-0 opacity-20 mix-blend-screen bg-[repeating-linear-gradient(180deg,rgba(124,255,107,0.07)_0px,rgba(124,255,107,0.07)_1px,transparent_1px,transparent_3px)]" />
@@ -93,9 +93,21 @@ export default function MosquitoBar() {
               <span className="text-base text-[#7cff6b] animate-pulse">▌</span>
             </p>
             <p className="text-sm text-[#94ff9a]/80 md:text-base">
-              An Everglades cyber-saloon projection staged by La Esquinita. Minimal bar,
-              maximal swamp signal.
+        
             </p>
+            <div className="mx-auto mt-6 max-w-xl border-4 border-[#1d5b2a] bg-[#06150c] p-3 shadow-[0_0_30px_rgba(40,141,70,0.35)]">
+              <div className="border border-[#2e7d3f] bg-[#030804]/90 p-2 shadow-[inset_0_0_18px_rgba(0,0,0,0.6)]">
+                <img
+                  src="/mosquitobar.png"
+                  alt="Glitch feed from the Mosquito Lounge projection"
+                  className="w-full"
+                  style={{ imageRendering: "pixelated" }}
+                />
+                <p className="mt-3 text-center text-[0.65rem] uppercase tracking-[0.35em] text-[#94ff9a]/70">
+                  <span className="text-[#7cff6b]">[</span> 0x <span className="text-[#7cff6b]">]</span>
+                </p>
+              </div>
+            </div>
           </header>
 
           <hr className="my-6 border-[#1d5b2a]" />
