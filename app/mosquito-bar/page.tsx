@@ -1,138 +1,167 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Wine, Clock, Users, MapPin } from "lucide-react"
+const meta = [
+  { label: "CURATOR / PROGRAMMING MANAGER", value: "Marianna Angel" },
+  { label: "DATE RANGE", value: "Selected nights · Nov 14 → Jan 17" },
+  { label: "LOCATION", value: "Locust Projects · Project Room" },
+  { label: "SYSTEM HOURS", value: "1900 hrs → 0000 hrs" },
+  { label: "BAR STATUS", value: "Counter goes live Nov 21" },
+]
+
+type ScheduleEntry = {
+  date: string
+  status: string
+  note?: string
+}
+
+const schedule: { month: string; entries: ScheduleEntry[] }[] = [
+  {
+    month: "NOVEMBER 2024",
+    entries: [
+      {
+        date: "Nov 21",
+        status: "Programming TBA",
+        note: "Artist open. DITM performance @ 18:30. Karaoke feedback loop encouraged.",
+      },
+      {
+        date: "Nov 22",
+        status: "Programming TBA",
+        note: "Punk / garage frequency under consideration.",
+      },
+    ],
+  },
+  {
+    month: "DECEMBER 2024",
+    entries: [
+      {
+        date: "Dec 5",
+        status: "Programming TBA",
+        note: "Basel night. Visiting + local artists (pending confirmation).",
+      },
+      {
+        date: "Dec 6",
+        status: "Programming TBA",
+        note: "Big Basel collision. DITM performance @ 18:30 with space for rogue inserts.",
+      },
+      {
+        date: "Dec 12",
+        status: "Programming TBA",
+        note: "Folk-leaning transmissions under review.",
+      },
+      {
+        date: "Dec 13",
+        status: "Programming TBA",
+        note: "Blindfolded ceramics w/ Brigette Hoffman + Moonbeam Mike on vinyl. Little Haiti happy hour · Makers Mart · daytime food trucks.",
+      },
+      {
+        date: "Dec 19",
+        status: "Programming TBA",
+      },
+      {
+        date: "Dec 20",
+        status: "Programming TBA",
+      },
+      {
+        date: "Dec 21 → Jan 8",
+        status: "Holiday Break",
+        note: "System idling. Bar lights in low-power mode.",
+      },
+    ],
+  },
+  {
+    month: "JANUARY 2025",
+    entries: [
+      { date: "Jan 9", status: "Programming TBA" },
+      { date: "Jan 10", status: "Programming TBA" },
+      { date: "Jan 16", status: "Programming TBA" },
+      { date: "Jan 17", status: "Programming TBA" },
+    ],
+  },
+]
 
 export default function MosquitoBar() {
   return (
-    <div className="min-h-screen bg-black">
-      {/* Header */}
-      <motion.div
-        className="text-center py-16 px-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <motion.div
-          className="flex justify-center mb-6"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <Wine className="w-16 h-16 text-miami-pink" />
-        </motion.div>
+    <div className="relative min-h-screen bg-[#040b06] text-[#7cff6b] font-mono">
+      <div className="pointer-events-none absolute inset-0 opacity-20 mix-blend-screen bg-[repeating-linear-gradient(180deg,rgba(124,255,107,0.07)_0px,rgba(124,255,107,0.07)_1px,transparent_1px,transparent_3px)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_center,rgba(124,255,107,0.25),transparent_65%)]" />
 
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 drop-shadow-neon-pink">
-          Mosquito Lounge
-        </h1>
-        <p className="text-lg md:text-xl italic text-white font-display max-w-2xl mx-auto">
-          The secret speakeasy hidden within La Esquinita
-        </p>
-      </motion.div>
-
-      {/* Main Content */}
-      <div className="container mx-auto px-4 pb-16">
-        <div className="max-w-4xl mx-auto">
-          {/* Featured Image */}
-          <motion.div
-            className="relative overflow-hidden rounded-2xl shadow-2xl mb-12"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <img
-              src="/mosquitobar.jpg"
-              alt="Mosquito Lounge Cocktails"
-              className="w-full h-96 md:h-[600px] object-cover"
-            />
-          </motion.div>
-
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Wine className="w-8 h-8 text-miami-pink mx-auto mb-3" />
-              <h4 className="text-lg font-bold text-white mb-2">Craft Cocktails</h4>
-              <p className="text-white/80 text-sm">
-                Inspired by Miami's Swamp Consumption
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <Clock className="w-8 h-8 text-miami-yellow mx-auto mb-3" />
-              <h4 className="text-lg font-bold text-white mb-2">Weekend Hours</h4>
-              <p className="text-white/80 text-sm">
-                Open late for the Miami Night Owls
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <Users className="w-8 h-8 text-miami-cyan mx-auto mb-3" />
-              <h4 className="text-lg font-bold text-white mb-2">Intimate Setting</h4>
-              <p className="text-white/80 text-sm">
-                Hidden speakeasy for close gatherings
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-            >
-              <MapPin className="w-8 h-8 text-miami-pink mx-auto mb-3" />
-              <h4 className="text-lg font-bold text-white mb-2">Secret Location</h4>
-              <p className="text-white/80 text-sm">
-                Find the hidden entrance at La Esquinita
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Coming Soon Text */}
-          <motion.div
-            className="text-center mt-8 mb-12"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            <p className="text-white/60 italic text-lg">
-              Details and hours of service coming soon...
+      <div className="relative mx-auto max-w-4xl px-4 py-12 md:py-16">
+        <div className="border border-[#1d5b2a] bg-black/80 p-6 shadow-[0_0_45px_rgba(28,133,56,0.25)] md:p-10">
+          <header className="space-y-4">
+            <p className="flex items-center gap-3 text-xs uppercase tracking-[0.45em] text-[#94ff9a]/70">
+              <span>System Boot // 1999.ESQ</span>
+              <span className="text-base text-[#7cff6b] animate-pulse">▌</span>
             </p>
-          </motion.div>
+            <p className="text-sm text-[#94ff9a]/80 md:text-base">
+              An Everglades cyber-saloon projection staged by La Esquinita. Minimal bar,
+              maximal swamp signal.
+            </p>
+          </header>
 
+          <hr className="my-6 border-[#1d5b2a]" />
+
+          <section className="grid gap-4 text-sm md:text-base">
+            {meta.map(({ label, value }) => (
+              <div
+                key={label}
+                className="flex flex-col gap-1 md:flex-row md:items-center md:gap-4"
+              >
+                <span className="text-xs uppercase tracking-[0.35em] text-[#94ff9a]/60 md:w-64">
+                  {label}
+                </span>
+                <span className="text-[#e8ffe9]">{value}</span>
+              </div>
+            ))}
+          </section>
+
+          <hr className="my-6 border-[#1d5b2a]" />
+
+          <section>
+            <p className="text-xs uppercase tracking-[0.4em] text-[#94ff9a]/70">
+              Run Schedule
+            </p>
+            <p className="mt-2 text-xs uppercase tracking-[0.3em] text-[#94ff9a]/50">
+              All programming currently marked TBA. Expect uploads + glitches.
+            </p>
+
+            <div className="mt-6 space-y-10">
+              {schedule.map((block) => (
+                <div key={block.month} className="space-y-4">
+                  <div className="text-sm uppercase tracking-[0.4em] text-[#7cff6b]">
+                    {block.month}
+                  </div>
+                  <div className="space-y-3">
+                    {block.entries.map((entry) => (
+                      <div
+                        key={entry.date + entry.status}
+                        className="border border-[#1d5b2a]/80 bg-[#09170f]/70 px-4 py-3 md:flex md:items-start md:gap-6"
+                      >
+                        <span className="block text-sm uppercase tracking-[0.28em] text-[#a0ffa5] md:w-48">
+                          {entry.date}
+                        </span>
+                        <div className="mt-2 text-sm text-[#e8ffe9] md:mt-0 md:flex-1 md:text-base">
+                          <div>{entry.status}</div>
+                          {entry.note && (
+                            <div className="mt-2 text-xs text-[#94ff9a]/75 md:text-sm">
+                              {entry.note}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <hr className="my-6 border-[#1d5b2a]" />
+
+          <footer className="flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-[#94ff9a]/60">
+            <span>Everglades mode engaged</span>
+            <span className="animate-pulse">▌</span>
+          </footer>
         </div>
-      </div>
-
-      {/* Floating Elements */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute top-20 right-10 text-4xl opacity-30"
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
-          🦟
-        </motion.div>
-        <motion.div
-          className="absolute bottom-40 left-20 text-3xl opacity-20"
-          animate={{ y: [-10, 10, -10] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        >
-          🍸
-        </motion.div>
       </div>
     </div>
   )
