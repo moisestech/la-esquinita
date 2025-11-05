@@ -89,7 +89,7 @@ export default function mosquitobar() {
         <div className="border border-[#1d5b2a] bg-black/80 p-6 shadow-[0_0_45px_rgba(28,133,56,0.25)] md:p-10">
           <header className="space-y-4">
             <p className="flex items-center gap-3 text-xs uppercase tracking-[0.45em] text-[#94ff9a]/70">
-              <span>System Boot // 1999.ESQ</span>
+              <span>RunOff.exe</span>
               <span className="text-base text-[#7cff6b] animate-pulse">▌</span>
             </p>
             <p className="text-sm text-[#94ff9a]/80 md:text-base">
