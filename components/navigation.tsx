@@ -14,7 +14,6 @@ export default function Navigation() {
   const navItems = [
     { href: "/storefront", label: "Storefront" },
     { href: "/cake-hall", label: "Cake Hall" },
-    { href: "/mosquito-bar", label: "Lounge" },
     { href: "/events", label: "Events" },
     { href: "/about", label: "About" },
   ]
@@ -24,22 +23,24 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <motion.div
-              className="flex items-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img
-                src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753892032/la-esquinita/LE-logo-tara_jdjyo9.png"
-                alt="La Esquinita"
-                className="h-8 w-auto"
-              />
-            </motion.div>
-          </Link>
+          <div className="flex items-center md:flex-1">
+            <Link href="/" className="flex items-center space-x-2">
+              <motion.div
+                className="flex items-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <img
+                  src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1753892032/la-esquinita/LE-logo-tara_jdjyo9.png"
+                  alt="La Esquinita"
+                  className="h-8 w-auto"
+                />
+              </motion.div>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center justify-center space-x-8 md:flex-1">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -52,7 +53,7 @@ export default function Navigation() {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center justify-end space-x-4 md:flex-1">
             <motion.button
               onClick={() => setIsCartOpen(true)}
               className="p-2 text-mint-rot hover:text-miami-pink transition-colors relative"

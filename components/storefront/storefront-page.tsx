@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useState } from "react"
-import { motion } from "framer-motion"
+import React, { useEffect, useState } from "react"
+import { motion, useAnimation } from "framer-motion"
 import SugarIcingMarquee from "./sugar-icing-marquee"
 import ProductGrid from "./product-grid"
 import CartDrawer from "./cart-drawer"
@@ -301,6 +301,57 @@ const placeholderProducts: Product[] = [
   },
 ]
 
+const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min
+
+const generateMosquitoPosition = () => ({
+  top: `${randomBetween(5, 85)}vh`,
+  left: `${randomBetween(5, 90)}vw`,
+  rotate: randomBetween(-25, 25),
+})
+
+function FloatingMosquitoLink() {
+  const controls = useAnimation()
+  const initialPosition = { top: "50vh", left: "10vw", rotate: 0 }
+
+  useEffect(() => {
+    let isMounted = true
+
+    const glideAcrossScreen = async () => {
+      while (isMounted) {
+        const nextPosition = generateMosquitoPosition()
+        await controls.start({
+          ...nextPosition,
+          transition: {
+            duration: randomBetween(10, 16),
+            ease: "easeInOut",
+          },
+        })
+      }
+    }
+
+    glideAcrossScreen()
+
+    return () => {
+      isMounted = false
+      controls.stop()
+    }
+  }, [controls])
+
+  return (
+    <motion.a
+      href="/mosquito-bar"
+      aria-label="Visit the Mosquito Lounge"
+      className="fixed z-40 text-5xl pointer-events-auto"
+      initial={initialPosition}
+      animate={controls}
+      whileHover={{ scale: 1.2, rotate: 0 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      🦟
+    </motion.a>
+  )
+}
+
 export default function StorefrontPage() {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [showHiddenDoor, setShowHiddenDoor] = useState(false)
@@ -400,6 +451,9 @@ export default function StorefrontPage() {
           onClose={() => setIsCartOpen(false)}
         />
       </main>
+
+      {/* Floating Mosquito Link */}
+      <FloatingMosquitoLink />
 
       {/* Miami Atmosphere Elements */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden">

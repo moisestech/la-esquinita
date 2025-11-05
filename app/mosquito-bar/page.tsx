@@ -25,7 +25,7 @@ export default function MosquitoBar() {
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 drop-shadow-neon-pink">
           Mosquito Lounge
         </h1>
-        <p className="text-xl md:text-2xl text-white font-display max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl italic text-white font-display max-w-2xl mx-auto">
           The secret speakeasy hidden within La Esquinita
         </p>
       </motion.div>
