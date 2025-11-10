@@ -161,8 +161,8 @@ export default function AboutPage() {
             </p>
             <p>
               <strong className="text-white">2. Backstage (Exposure)</strong> – A hidden door reveals consumption&apos;s darker appetite. A monumental
-              cake resembles a toppled condo; performers embody female archetypes—Sweetheart, Siren,
-              Fury—surfacing from its cavities.
+              cake resembles a toppled condo; performers embody female archetypes—maiden mother crone—surfacing
+              from its cavities.
             </p>
             <p>
               <strong className="text-white">3. Speakeasy (Collapse / Rebirth)</strong> - The rear lounge, overrun by swamp life, underscores nature&apos;s

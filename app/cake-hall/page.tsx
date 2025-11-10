@@ -75,7 +75,7 @@ export default function CakeHall() {
           >
             <p className="text-white/70 italic text-sm leading-relaxed max-w-md mx-auto">
               Three sacred clowns emerge from sugar cavities—<br />
-              Sweetheart, Siren, Fury dance<br />
+              maiden mother crone dance<br />
               in episodic rituals of desire and decay,<br />
               ancient archetypes surfacing<br />
               from the crumbling sweetness below.

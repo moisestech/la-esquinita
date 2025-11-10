@@ -58,7 +58,7 @@ la-esquinita/
 - **Experience**: Hidden door reveals consumption's darker appetite
 - **Elements**:
   - Monumental cake sculpture (part stage, part crumbling high-rise)
-  - Three performers embody female archetypes—Sweetheart, Siren, Fury
+  - Three performers embody female archetypes—maiden mother crone
   - Sacred clown imagery and performance documentation
   - Background audio accompaniment
 

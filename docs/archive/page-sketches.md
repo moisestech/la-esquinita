@@ -40,7 +40,7 @@ Behind the sugary facade lies the artistic heart—a full-bleed video experience
 
 ### Key Features
 - **Video Hero**: 5-second loop of cake "breathing" with low-opacity text overlay
-- **Ritual Gallery**: 15-second clips of performers (Siren, Sweetheart, Fury)
+- **Ritual Gallery**: 15-second clips of performers (maiden mother crone)
 - **Crack Textures**: Visual decay that progresses over time
 - **Progressive Disclosure**: Content reveals as users scroll deeper
 - **Secret Access**: Requires code entry (FONDANT, SUGAR)
