@@ -21,12 +21,10 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
       {
         date: "Nov 21",
         status: "Programming TBA",
-        note: "Artist open. DITM performance @ 18:30. Karaoke feedback loop encouraged.",
       },
       {
         date: "Nov 22",
         status: "Programming TBA",
-        note: "Punk / garage frequency under consideration.",
       },
     ],
   },
@@ -36,22 +34,18 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
       {
         date: "Dec 5",
         status: "Programming TBA",
-        note: "Basel night. Visiting + local artists (pending confirmation).",
       },
       {
         date: "Dec 6",
         status: "Programming TBA",
-        note: "Big Basel collision. DITM performance @ 18:30 with space for rogue inserts.",
       },
       {
         date: "Dec 12",
         status: "Programming TBA",
-        note: "Folk-leaning transmissions under review.",
       },
       {
         date: "Dec 13",
         status: "Programming TBA",
-        note: "Blindfolded ceramics w/ Brigette Hoffman + Moonbeam Mike on vinyl. Little Haiti happy hour · Makers Mart · daytime food trucks.",
       },
       {
         date: "Dec 19",
@@ -60,11 +54,6 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
       {
         date: "Dec 20",
         status: "Programming TBA",
-      },
-      {
-        date: "Dec 21 → Jan 8",
-        status: "Holiday Break",
-        note: "System idling. Bar lights in low-power mode.",
       },
     ],
   },
@@ -171,7 +160,7 @@ export default function mosquitobar.png() {
           <hr className="my-6 border-[#1d5b2a]" />
 
           <footer className="flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-[#94ff9a]/60">
-            <span>Everglades mode engaged</span>
+            <span>Sugar mill mode engaged</span>
             <span className="animate-pulse">▌</span>
           </footer>
         </div>
