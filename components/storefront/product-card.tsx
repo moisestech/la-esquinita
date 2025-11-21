@@ -105,15 +105,15 @@ export default function ProductCard({ product }: ProductCardProps) {
     }
   }
 
-  return (
-    <Link href={`/product/${product.slug}`} id={`inventory-${product.id}`}>
-      <motion.div
-        className="relative group cursor-pointer"
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
-        whileHover={{ y: -8 }}
-        transition={{ duration: 0.3 }}
-      >
+  const cardContent = (
+    <motion.div
+      className={`relative group ${isSold ? "cursor-default" : "cursor-pointer"}`}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      whileHover={isSold ? {} : { y: -8 }}
+      transition={{ duration: 0.3 }}
+      id={`inventory-${product.id}`}
+    >
       {/* Sprinkle Animation */}
       {showSprinkles && (
         <div className="absolute inset-0 pointer-events-none z-10">
@@ -211,7 +211,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
           {/* Tags */}
           <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
-            {product.tags.slice(0, 2).map((tag, index) => (
+          {product.tags.slice(0, 2).map((tag, index) => (
               <span
                 key={index}
                 className="bg-miami-yellow text-mint-rot px-2 py-1 rounded-full text-xs font-bold"
@@ -228,10 +228,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             animate={{ opacity: isHovered ? 1 : 0 }}
           />
 
-          {isUnavailable && (
-            <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-lg font-bold">
-              <span>{isSold ? "Sold Out" : isReserved ? "Reserved" : "Coming Soon"}</span>
-              <span className="text-xs uppercase tracking-wide mt-1">Text us about restocks</span>
+          {isSold && (
+            <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+              <span className="text-2xl font-extrabold uppercase text-white tracking-[0.4em]">
+                Sold Out
+              </span>
             </div>
           )}
         </div>
@@ -328,7 +329,16 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="absolute -bottom-2 -left-2 text-xl animate-sprinkle" style={{ animationDelay: "1s" }}>
         ✨
       </div>
-      </motion.div>
+    </motion.div>
+  )
+
+  if (isSold) {
+    return cardContent
+  }
+
+  return (
+    <Link href={`/product/${product.slug}`} className="block">
+      {cardContent}
     </Link>
   )
 } 

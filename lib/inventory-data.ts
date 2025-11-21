@@ -20,7 +20,7 @@ const recordToProduct = (record: InventoryRecord): Product => ({
   price: record.price,
   description: record.description,
   image_urls: record.gallery,
-  status: "active",
+  status: record.status ?? (record.availability === "sold" ? "sold" : "active"),
   category: record.category,
   tags: record.tags,
   created_at: BASE_TIMESTAMP,

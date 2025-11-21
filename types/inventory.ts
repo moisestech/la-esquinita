@@ -1,4 +1,5 @@
 export type InventoryAvailability = "available" | "reserved" | "sold"
+export type InventoryStatus = "active" | "sold" | "reserved" | "coming_soon"
 
 export interface InventoryRecord {
   inventoryNumber: number
@@ -17,6 +18,7 @@ export interface InventoryRecord {
   undersideImage?: string
   gallery: string[]
   availability: InventoryAvailability
+  status: InventoryStatus
   dimensions?: string | null
   squareSku?: string | null
   isUnique: boolean

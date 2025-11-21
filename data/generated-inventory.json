@@ -9,7 +9,7 @@
     "slug": "001-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 1 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -23,6 +23,7 @@
       "/La_Esquinita_Inventory/1_Pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -39,7 +40,7 @@
     "slug": "002-parrot",
     "description": "Hand-poured ceramic Parrot from the La Esquinita inventory.",
     "altText": "No. 2 Parrot ceramic object",
-    "price": 175,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "parrot",
@@ -53,6 +54,7 @@
       "/La_Esquinita_Inventory/2_Parrot_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -69,7 +71,7 @@
     "slug": "003-parrot",
     "description": "Hand-poured ceramic Parrot from the La Esquinita inventory.",
     "altText": "No. 3 Parrot ceramic object",
-    "price": 175,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "parrot",
@@ -83,6 +85,7 @@
       "/La_Esquinita_Inventory/3_Parrot_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -99,7 +102,7 @@
     "slug": "004-tuba-ash-tray",
     "description": "Hand-poured ceramic Tuba Ash Tray from the La Esquinita inventory.",
     "altText": "No. 4 Tuba Ash Tray ceramic object",
-    "price": 55,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "tuba",
@@ -113,6 +116,7 @@
       "/La_Esquinita_Inventory/4_tubaAsh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -129,7 +133,7 @@
     "slug": "005-tuba-ash-tray",
     "description": "Hand-poured ceramic Tuba Ash Tray from the La Esquinita inventory.",
     "altText": "No. 5 Tuba Ash Tray ceramic object",
-    "price": 55,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "tuba",
@@ -143,6 +147,7 @@
       "/La_Esquinita_Inventory/5_tubaAsh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -172,11 +177,12 @@
       "/La_Esquinita_Inventory/6_woundedMug_1.jpg",
       "/La_Esquinita_Inventory/6_woundedMug_2.jpg"
     ],
-    "availability": "available",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2025-11-21T21:24:20.271Z",
     "squareCatalogObjectId": null
   },
   {
@@ -189,7 +195,7 @@
     "slug": "007-cat-head",
     "description": "Hand-poured ceramic Cat Head from the La Esquinita inventory.",
     "altText": "No. 7 Cat Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -202,6 +208,7 @@
       "/La_Esquinita_Inventory/7_catHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -218,7 +225,7 @@
     "slug": "008-fragile-goddess",
     "description": "Hand-poured ceramic Fragile Goddess from the La Esquinita inventory.",
     "altText": "No. 8 Fragile Goddess ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -231,6 +238,7 @@
       "/La_Esquinita_Inventory/8_fragileGoddess_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -247,7 +255,7 @@
     "slug": "009-lobster-dish",
     "description": "Hand-poured ceramic Lobster Dish from the La Esquinita inventory.",
     "altText": "No. 9 Lobster Dish ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -260,6 +268,7 @@
       "/La_Esquinita_Inventory/9_lobsterDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -276,7 +285,7 @@
     "slug": "010-lobster-dish",
     "description": "Hand-poured ceramic Lobster Dish from the La Esquinita inventory.",
     "altText": "No. 10 Lobster Dish ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -289,6 +298,7 @@
       "/La_Esquinita_Inventory/10_lobsterDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -305,7 +315,7 @@
     "slug": "011-dish",
     "description": "Hand-poured ceramic Dish from the La Esquinita inventory.",
     "altText": "No. 11 Dish ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -318,6 +328,7 @@
       "/La_Esquinita_Inventory/11_dish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -334,7 +345,7 @@
     "slug": "012-flamingo",
     "description": "Hand-poured ceramic Flamingo from the La Esquinita inventory.",
     "altText": "No. 12 Flamingo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -347,6 +358,7 @@
       "/La_Esquinita_Inventory/12_flamingo_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -377,6 +389,7 @@
       "/La_Esquinita_Inventory/13_eggSmile_2.jpeg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -407,6 +420,7 @@
       "/La_Esquinita_Inventory/14_eggFrown_2.jpeg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -423,7 +437,7 @@
     "slug": "015-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 15 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -437,6 +451,7 @@
       "/La_Esquinita_Inventory/15_cakeTopper_2.jpeg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -467,6 +482,7 @@
       "/La_Esquinita_Inventory/16_eggSmile_2.jpeg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -497,6 +513,7 @@
       "/La_Esquinita_Inventory/17_eggSmile_2.jpeg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -527,6 +544,7 @@
       "/La_Esquinita_Inventory/18_eggFrown_2.jpeg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -557,6 +575,7 @@
       "/La_Esquinita_Inventory/19_eggSing_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -587,6 +606,7 @@
       "/La_Esquinita_Inventory/20_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -603,7 +623,7 @@
     "slug": "021-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 21 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -617,6 +637,7 @@
       "/La_Esquinita_Inventory/21_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -633,7 +654,7 @@
     "slug": "022-ornate-pitcher",
     "description": "Hand-poured ceramic Ornate Pitcher from the La Esquinita inventory.",
     "altText": "No. 22 Ornate Pitcher ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -646,6 +667,7 @@
       "/La_Esquinita_Inventory/22_ornatePitcher_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -662,7 +684,7 @@
     "slug": "023-cat-head",
     "description": "Hand-poured ceramic Cat Head from the La Esquinita inventory.",
     "altText": "No. 23 Cat Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -675,6 +697,7 @@
       "/La_Esquinita_Inventory/23_catHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -691,7 +714,7 @@
     "slug": "024-baby-doll-head-and-hands",
     "description": "Hand-poured ceramic Baby Doll Head And Hands from the La Esquinita inventory.",
     "altText": "No. 24 Baby Doll Head And Hands ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -704,6 +727,7 @@
       "/La_Esquinita_Inventory/24_babyDollHeadAndHands_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -720,7 +744,7 @@
     "slug": "025-baby-doll-head-and-hands",
     "description": "Hand-poured ceramic Baby Doll Head And Hands from the La Esquinita inventory.",
     "altText": "No. 25 Baby Doll Head And Hands ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -733,6 +757,7 @@
       "/La_Esquinita_Inventory/25_babyDollHeadAndHands_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -749,7 +774,7 @@
     "slug": "026-baby-doll-head-and-hands",
     "description": "Hand-poured ceramic Baby Doll Head And Hands from the La Esquinita inventory.",
     "altText": "No. 26 Baby Doll Head And Hands ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -762,6 +787,7 @@
       "/La_Esquinita_Inventory/26_babyDollHeadAndHands_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -778,7 +804,7 @@
     "slug": "027-wall-fish-boy",
     "description": "Hand-poured ceramic Wall Fish Boy from the La Esquinita inventory.",
     "altText": "No. 27 Wall Fish Boy ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -791,6 +817,7 @@
       "/La_Esquinita_Inventory/27_wallFishBoy_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -807,7 +834,7 @@
     "slug": "028-diamond-dish",
     "description": "Hand-poured ceramic Diamond Dish from the La Esquinita inventory.",
     "altText": "No. 28 Diamond Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -820,6 +847,7 @@
       "/La_Esquinita_Inventory/28_diamondDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -836,7 +864,7 @@
     "slug": "029-club-dish",
     "description": "Hand-poured ceramic Club Dish from the La Esquinita inventory.",
     "altText": "No. 29 Club Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -849,6 +877,7 @@
       "/La_Esquinita_Inventory/29_clubDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -865,7 +894,7 @@
     "slug": "030-tuba-ash-tray",
     "description": "Hand-poured ceramic Tuba Ash Tray from the La Esquinita inventory.",
     "altText": "No. 30 Tuba Ash Tray ceramic object",
-    "price": 55,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "tuba",
@@ -879,6 +908,7 @@
       "/La_Esquinita_Inventory/30_tubaAsh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -909,6 +939,7 @@
       "/La_Esquinita_Inventory/31_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -939,6 +970,7 @@
       "/La_Esquinita_Inventory/32_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -955,7 +987,7 @@
     "slug": "033-lobster-dish",
     "description": "Hand-poured ceramic Lobster Dish from the La Esquinita inventory.",
     "altText": "No. 33 Lobster Dish ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -968,6 +1000,7 @@
       "/La_Esquinita_Inventory/33_lobsterDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -984,7 +1017,7 @@
     "slug": "034-lobster-dish",
     "description": "Hand-poured ceramic Lobster Dish from the La Esquinita inventory.",
     "altText": "No. 34 Lobster Dish ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -997,6 +1030,7 @@
       "/La_Esquinita_Inventory/34_lobsterDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1027,6 +1061,7 @@
       "/La_Esquinita_Inventory/35_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1057,6 +1092,7 @@
       "/La_Esquinita_Inventory/36_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1086,6 +1122,7 @@
       "/La_Esquinita_Inventory/37_flaming_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1116,6 +1153,7 @@
       "/La_Esquinita_Inventory/38_eggSmirk_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1132,7 +1170,7 @@
     "slug": "039-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 39 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -1146,6 +1184,7 @@
       "/La_Esquinita_Inventory/39_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1162,7 +1201,7 @@
     "slug": "040-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 40 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -1176,6 +1215,7 @@
       "/La_Esquinita_Inventory/40_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1192,7 +1232,7 @@
     "slug": "041-cat-head",
     "description": "Hand-poured ceramic Cat Head from the La Esquinita inventory.",
     "altText": "No. 41 Cat Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1205,6 +1245,7 @@
       "/La_Esquinita_Inventory/41_catHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1221,7 +1262,7 @@
     "slug": "042-wall-fish-boy",
     "description": "Hand-poured ceramic Wall Fish Boy from the La Esquinita inventory.",
     "altText": "No. 42 Wall Fish Boy ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1234,6 +1275,7 @@
       "/La_Esquinita_Inventory/42_wallFishBoy_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1250,7 +1292,7 @@
     "slug": "043-wall-fish-girl",
     "description": "Hand-poured ceramic Wall Fish Girl from the La Esquinita inventory.",
     "altText": "No. 43 Wall Fish Girl ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1263,6 +1305,7 @@
       "/La_Esquinita_Inventory/43_wallFishGirl_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1279,7 +1322,7 @@
     "slug": "044-ornate-pitcher",
     "description": "Hand-poured ceramic Ornate Pitcher from the La Esquinita inventory.",
     "altText": "No. 44 Ornate Pitcher ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1292,6 +1335,7 @@
       "/La_Esquinita_Inventory/44_ornatePitcher_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1308,7 +1352,7 @@
     "slug": "045-fragile-goddess",
     "description": "Hand-poured ceramic Fragile Goddess from the La Esquinita inventory.",
     "altText": "No. 45 Fragile Goddess ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1321,6 +1365,7 @@
       "/La_Esquinita_Inventory/45_fragileGoddess_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1337,7 +1382,7 @@
     "slug": "046-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 46 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -1351,6 +1396,7 @@
       "/La_Esquinita_Inventory/46_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1381,6 +1427,7 @@
       "/La_Esquinita_Inventory/47_eggSmirk_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1397,7 +1444,7 @@
     "slug": "048-wave",
     "description": "Hand-poured ceramic Wave from the La Esquinita inventory.",
     "altText": "No. 48 Wave ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1410,6 +1457,7 @@
       "/La_Esquinita_Inventory/48_wave_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1426,7 +1474,7 @@
     "slug": "049-broken-swan",
     "description": "Hand-poured ceramic Broken Swan from the La Esquinita inventory.",
     "altText": "No. 49 Broken Swan ceramic object",
-    "price": 160,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1439,6 +1487,7 @@
       "/La_Esquinita_Inventory/49_brokenSwan_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1455,7 +1504,7 @@
     "slug": "050-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 50 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -1469,6 +1518,7 @@
       "/La_Esquinita_Inventory/50_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1485,7 +1535,7 @@
     "slug": "051-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 51 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -1499,6 +1549,7 @@
       "/La_Esquinita_Inventory/51_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1515,7 +1566,7 @@
     "slug": "052-flamingo",
     "description": "Hand-poured ceramic Flamingo from the La Esquinita inventory.",
     "altText": "No. 52 Flamingo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1528,6 +1579,7 @@
       "/La_Esquinita_Inventory/52_flamingo_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1544,7 +1596,7 @@
     "slug": "053-diamond-dish",
     "description": "Hand-poured ceramic Diamond Dish from the La Esquinita inventory.",
     "altText": "No. 53 Diamond Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1557,6 +1609,7 @@
       "/La_Esquinita_Inventory/53_diamondDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1573,7 +1626,7 @@
     "slug": "054-club-dish",
     "description": "Hand-poured ceramic Club Dish from the La Esquinita inventory.",
     "altText": "No. 54 Club Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1586,6 +1639,7 @@
       "/La_Esquinita_Inventory/54_clubDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1602,7 +1656,7 @@
     "slug": "055-club-dish",
     "description": "Hand-poured ceramic Club Dish from the La Esquinita inventory.",
     "altText": "No. 55 Club Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1615,6 +1669,7 @@
       "/La_Esquinita_Inventory/55_clubDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1631,7 +1686,7 @@
     "slug": "056-diamond-dish",
     "description": "Hand-poured ceramic Diamond Dish from the La Esquinita inventory.",
     "altText": "No. 56 Diamond Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1644,6 +1699,7 @@
       "/La_Esquinita_Inventory/56_diamondDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1660,7 +1716,7 @@
     "slug": "057-swan",
     "description": "Hand-poured ceramic Swan from the La Esquinita inventory.",
     "altText": "No. 57 Swan ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1673,6 +1729,7 @@
       "/La_Esquinita_Inventory/57_swan_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1689,7 +1746,7 @@
     "slug": "058-dish",
     "description": "Hand-poured ceramic Dish from the La Esquinita inventory.",
     "altText": "No. 58 Dish ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1702,6 +1759,7 @@
       "/La_Esquinita_Inventory/58_dish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1718,7 +1776,7 @@
     "slug": "059-tuba-ash-tray",
     "description": "Hand-poured ceramic Tuba Ash Tray from the La Esquinita inventory.",
     "altText": "No. 59 Tuba Ash Tray ceramic object",
-    "price": 55,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "tuba",
@@ -1732,6 +1790,7 @@
       "/La_Esquinita_Inventory/59_tubaAsh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1748,7 +1807,7 @@
     "slug": "060-tuba-ash-tray",
     "description": "Hand-poured ceramic Tuba Ash Tray from the La Esquinita inventory.",
     "altText": "No. 60 Tuba Ash Tray ceramic object",
-    "price": 55,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "tuba",
@@ -1762,6 +1821,7 @@
       "/La_Esquinita_Inventory/60_tubaAsh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1778,7 +1838,7 @@
     "slug": "061-club-dish",
     "description": "Hand-poured ceramic Club Dish from the La Esquinita inventory.",
     "altText": "No. 61 Club Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1791,6 +1851,7 @@
       "/La_Esquinita_Inventory/61_clubDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1807,7 +1868,7 @@
     "slug": "062-cat-head",
     "description": "Hand-poured ceramic Cat Head from the La Esquinita inventory.",
     "altText": "No. 62 Cat Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1820,6 +1881,7 @@
       "/La_Esquinita_Inventory/62_catHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1836,7 +1898,7 @@
     "slug": "063-cat-head",
     "description": "Hand-poured ceramic Cat Head from the La Esquinita inventory.",
     "altText": "No. 63 Cat Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1849,6 +1911,7 @@
       "/La_Esquinita_Inventory/63_catHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1865,7 +1928,7 @@
     "slug": "064-tuba-ash-tray",
     "description": "Hand-poured ceramic Tuba Ash Tray from the La Esquinita inventory.",
     "altText": "No. 64 Tuba Ash Tray ceramic object",
-    "price": 55,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "tuba",
@@ -1879,6 +1942,7 @@
       "/La_Esquinita_Inventory/64_tubaAsh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1895,7 +1959,7 @@
     "slug": "065-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 65 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -1909,6 +1973,7 @@
       "/La_Esquinita_Inventory/65_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1925,7 +1990,7 @@
     "slug": "066-baby-doll-head-and-hands",
     "description": "Hand-poured ceramic Baby Doll Head And Hands from the La Esquinita inventory.",
     "altText": "No. 66 Baby Doll Head And Hands ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1938,6 +2003,7 @@
       "/La_Esquinita_Inventory/66_babyDollHeadAndHands_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1968,6 +2034,7 @@
       "/La_Esquinita_Inventory/67_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -1984,7 +2051,7 @@
     "slug": "068-baby-doll-head-and-hands",
     "description": "Hand-poured ceramic Baby Doll Head And Hands from the La Esquinita inventory.",
     "altText": "No. 68 Baby Doll Head And Hands ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -1997,6 +2064,7 @@
       "/La_Esquinita_Inventory/68_babyDollHeadAndHands_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2027,6 +2095,7 @@
       "/La_Esquinita_Inventory/69_eggScheme_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2057,6 +2126,7 @@
       "/La_Esquinita_Inventory/70_eggSad_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2087,6 +2157,7 @@
       "/La_Esquinita_Inventory/71_eggScared_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2117,6 +2188,7 @@
       "/La_Esquinita_Inventory/72_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2133,7 +2205,7 @@
     "slug": "073-baby-head",
     "description": "Hand-poured ceramic Baby Head from the La Esquinita inventory.",
     "altText": "No. 73 Baby Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -2146,6 +2218,7 @@
       "/La_Esquinita_Inventory/73_babyHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2162,7 +2235,7 @@
     "slug": "074-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 74 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -2176,6 +2249,7 @@
       "/La_Esquinita_Inventory/74_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2192,7 +2266,7 @@
     "slug": "075-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 75 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -2206,6 +2280,7 @@
       "/La_Esquinita_Inventory/75_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2222,7 +2297,7 @@
     "slug": "076-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 76 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -2236,6 +2311,7 @@
       "/La_Esquinita_Inventory/76_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2252,7 +2328,7 @@
     "slug": "077-tuba-ash-tray",
     "description": "Hand-poured ceramic Tuba Ash Tray from the La Esquinita inventory.",
     "altText": "No. 77 Tuba Ash Tray ceramic object",
-    "price": 55,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "tuba",
@@ -2266,6 +2342,7 @@
       "/La_Esquinita_Inventory/77_tubaAsh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2282,7 +2359,7 @@
     "slug": "078-tuba-ash-tray",
     "description": "Hand-poured ceramic Tuba Ash Tray from the La Esquinita inventory.",
     "altText": "No. 78 Tuba Ash Tray ceramic object",
-    "price": 55,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "tuba",
@@ -2296,6 +2373,7 @@
       "/La_Esquinita_Inventory/78_tubaAsh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2326,6 +2404,7 @@
       "/La_Esquinita_Inventory/79_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2356,6 +2435,7 @@
       "/La_Esquinita_Inventory/80_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2386,6 +2466,7 @@
       "/La_Esquinita_Inventory/81_eggSing_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2416,6 +2497,7 @@
       "/La_Esquinita_Inventory/82_eggLaugh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2432,7 +2514,7 @@
     "slug": "083-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 83 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -2445,6 +2527,7 @@
       "/La_Esquinita_Inventory/83_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2461,7 +2544,7 @@
     "slug": "084-parrot",
     "description": "Hand-poured ceramic Parrot from the La Esquinita inventory.",
     "altText": "No. 84 Parrot ceramic object",
-    "price": 175,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "parrot",
@@ -2475,6 +2558,7 @@
       "/La_Esquinita_Inventory/84_parrot_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2491,7 +2575,7 @@
     "slug": "085-flamingo",
     "description": "Hand-poured ceramic Flamingo from the La Esquinita inventory.",
     "altText": "No. 85 Flamingo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -2504,6 +2588,7 @@
       "/La_Esquinita_Inventory/85_flamingo_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2534,6 +2619,7 @@
       "/La_Esquinita_Inventory/86_eggLaugh_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2564,6 +2650,7 @@
       "/La_Esquinita_Inventory/87_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2580,7 +2667,7 @@
     "slug": "088-baby-doll-head-and-hands",
     "description": "Hand-poured ceramic Baby Doll Head And Hands from the La Esquinita inventory.",
     "altText": "No. 88 Baby Doll Head And Hands ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -2593,6 +2680,7 @@
       "/La_Esquinita_Inventory/88_babyDollHeadAndHands_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2623,6 +2711,7 @@
       "/La_Esquinita_Inventory/89_eggScared_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2653,6 +2742,7 @@
       "/La_Esquinita_Inventory/90_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2683,6 +2773,7 @@
       "/La_Esquinita_Inventory/91_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2713,6 +2804,7 @@
       "/La_Esquinita_Inventory/92_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2729,7 +2821,7 @@
     "slug": "093-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 93 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -2743,6 +2835,7 @@
       "/La_Esquinita_Inventory/93_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2759,7 +2852,7 @@
     "slug": "094-swan",
     "description": "Hand-poured ceramic Swan from the La Esquinita inventory.",
     "altText": "No. 94 Swan ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -2772,6 +2865,7 @@
       "/La_Esquinita_Inventory/94_swan_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2788,7 +2882,7 @@
     "slug": "095-flamingo",
     "description": "Hand-poured ceramic Flamingo from the La Esquinita inventory.",
     "altText": "No. 95 Flamingo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -2801,6 +2895,7 @@
       "/La_Esquinita_Inventory/95_flamingo_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2817,7 +2912,7 @@
     "slug": "096-flamingo",
     "description": "Hand-poured ceramic Flamingo from the La Esquinita inventory.",
     "altText": "No. 96 Flamingo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -2830,6 +2925,7 @@
       "/La_Esquinita_Inventory/96_flamingo_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2860,6 +2956,7 @@
       "/La_Esquinita_Inventory/97_eggScared_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2890,6 +2987,7 @@
       "/La_Esquinita_Inventory/98_eggScared_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2906,7 +3004,7 @@
     "slug": "099-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 99 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -2920,6 +3018,7 @@
       "/La_Esquinita_Inventory/99_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2936,7 +3035,7 @@
     "slug": "100-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 100 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -2949,6 +3048,7 @@
       "/La_Esquinita_Inventory/100_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2979,6 +3079,7 @@
       "/La_Esquinita_Inventory/101_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -2995,7 +3096,7 @@
     "slug": "102-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 102 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3009,6 +3110,7 @@
       "/La_Esquinita_Inventory/102_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3025,7 +3127,7 @@
     "slug": "103-wave",
     "description": "Hand-poured ceramic Wave from the La Esquinita inventory.",
     "altText": "No. 103 Wave ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3038,6 +3140,7 @@
       "/La_Esquinita_Inventory/103_wave_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3054,7 +3157,7 @@
     "slug": "104-baby-head",
     "description": "Hand-poured ceramic Baby Head from the La Esquinita inventory.",
     "altText": "No. 104 Baby Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3067,6 +3170,7 @@
       "/La_Esquinita_Inventory/104_babyHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3083,7 +3187,7 @@
     "slug": "105-wave",
     "description": "Hand-poured ceramic Wave from the La Esquinita inventory.",
     "altText": "No. 105 Wave ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3096,6 +3200,7 @@
       "/La_Esquinita_Inventory/105_wave_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3126,6 +3231,7 @@
       "/La_Esquinita_Inventory/106_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3156,6 +3262,7 @@
       "/La_Esquinita_Inventory/107_eggScheme_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3186,6 +3293,7 @@
       "/La_Esquinita_Inventory/108_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3216,6 +3324,7 @@
       "/La_Esquinita_Inventory/109_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3246,6 +3355,7 @@
       "/La_Esquinita_Inventory/110_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3262,7 +3372,7 @@
     "slug": "111-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 111 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3276,6 +3386,7 @@
       "/La_Esquinita_Inventory/111_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3292,7 +3403,7 @@
     "slug": "112-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 112 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3306,6 +3417,7 @@
       "/La_Esquinita_Inventory/112_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3322,7 +3434,7 @@
     "slug": "113-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 113 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3336,6 +3448,7 @@
       "/La_Esquinita_Inventory/113_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3352,7 +3465,7 @@
     "slug": "114-fragile-goddess",
     "description": "Hand-poured ceramic Fragile Goddess from the La Esquinita inventory.",
     "altText": "No. 114 Fragile Goddess ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3365,6 +3478,7 @@
       "/La_Esquinita_Inventory/114_fragileGoddess_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3381,7 +3495,7 @@
     "slug": "115-swan",
     "description": "Hand-poured ceramic Swan from the La Esquinita inventory.",
     "altText": "No. 115 Swan ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3394,6 +3508,7 @@
       "/La_Esquinita_Inventory/115_swan_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3410,7 +3525,7 @@
     "slug": "116-flamingo",
     "description": "Hand-poured ceramic Flamingo from the La Esquinita inventory.",
     "altText": "No. 116 Flamingo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3423,6 +3538,7 @@
       "/La_Esquinita_Inventory/116_flamingo_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3439,7 +3555,7 @@
     "slug": "117-wall-fish-girl",
     "description": "Hand-poured ceramic Wall Fish Girl from the La Esquinita inventory.",
     "altText": "No. 117 Wall Fish Girl ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3452,6 +3568,7 @@
       "/La_Esquinita_Inventory/117_wallFishGirl_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3468,7 +3585,7 @@
     "slug": "118-wall-fish-boy",
     "description": "Hand-poured ceramic Wall Fish Boy from the La Esquinita inventory.",
     "altText": "No. 118 Wall Fish Boy ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3481,6 +3598,7 @@
       "/La_Esquinita_Inventory/118_wallFishBoy_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3511,6 +3629,7 @@
       "/La_Esquinita_Inventory/119_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3541,6 +3660,7 @@
       "/La_Esquinita_Inventory/120_eggScared_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3557,7 +3677,7 @@
     "slug": "121-flamingo",
     "description": "Hand-poured ceramic Flamingo from the La Esquinita inventory.",
     "altText": "No. 121 Flamingo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3570,6 +3690,7 @@
       "/La_Esquinita_Inventory/121_flamingo_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3586,7 +3707,7 @@
     "slug": "122-cat-head",
     "description": "Hand-poured ceramic Cat Head from the La Esquinita inventory.",
     "altText": "No. 122 Cat Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3599,6 +3720,7 @@
       "/La_Esquinita_Inventory/122_catHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3629,6 +3751,7 @@
       "/La_Esquinita_Inventory/123_eggScared_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3645,7 +3768,7 @@
     "slug": "124-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 124 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3659,6 +3782,7 @@
       "/La_Esquinita_Inventory/124_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3675,7 +3799,7 @@
     "slug": "125-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 125 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3689,6 +3813,7 @@
       "/La_Esquinita_Inventory/125_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3719,6 +3844,7 @@
       "/La_Esquinita_Inventory/126_eggSing_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3735,7 +3861,7 @@
     "slug": "127-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 127 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3749,6 +3875,7 @@
       "/La_Esquinita_Inventory/127_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3765,7 +3892,7 @@
     "slug": "128-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 128 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3777,6 +3904,7 @@
       "/La_Esquinita_Inventory/128_cakeTopper_1.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3805,6 +3933,7 @@
       "/La_Esquinita_Inventory/129_eggSmile_1.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3821,7 +3950,7 @@
     "slug": "130-wave",
     "description": "Hand-poured ceramic Wave from the La Esquinita inventory.",
     "altText": "No. 130 Wave ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3834,6 +3963,7 @@
       "/La_Esquinita_Inventory/130_wave_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3850,7 +3980,7 @@
     "slug": "131-wave",
     "description": "Hand-poured ceramic Wave from the La Esquinita inventory.",
     "altText": "No. 131 Wave ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3863,6 +3993,7 @@
       "/La_Esquinita_Inventory/131_wave_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3879,7 +4010,7 @@
     "slug": "132-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 132 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3893,6 +4024,7 @@
       "/La_Esquinita_Inventory/132_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3909,7 +4041,7 @@
     "slug": "133-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 133 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -3923,6 +4055,7 @@
       "/La_Esquinita_Inventory/133_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3939,7 +4072,7 @@
     "slug": "134-ornate-pitcher",
     "description": "Hand-poured ceramic Ornate Pitcher from the La Esquinita inventory.",
     "altText": "No. 134 Ornate Pitcher ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3952,6 +4085,7 @@
       "/La_Esquinita_Inventory/134_ornatePitcher_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3968,7 +4102,7 @@
     "slug": "135-baby-doll-head-and-hands",
     "description": "Hand-poured ceramic Baby Doll Head And Hands from the La Esquinita inventory.",
     "altText": "No. 135 Baby Doll Head And Hands ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -3981,6 +4115,7 @@
       "/La_Esquinita_Inventory/135_babyDollHeadAndHands_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -3997,7 +4132,7 @@
     "slug": "136-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 136 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4011,6 +4146,7 @@
       "/La_Esquinita_Inventory/136_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4041,6 +4177,7 @@
       "/La_Esquinita_Inventory/137_eggSad_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4071,6 +4208,7 @@
       "/La_Esquinita_Inventory/138_eggSad_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4087,7 +4225,7 @@
     "slug": "139-lobster-dish",
     "description": "Hand-poured ceramic Lobster Dish from the La Esquinita inventory.",
     "altText": "No. 139 Lobster Dish ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -4100,6 +4238,7 @@
       "/La_Esquinita_Inventory/139_lobsterDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4116,7 +4255,7 @@
     "slug": "140-wave",
     "description": "Hand-poured ceramic Wave from the La Esquinita inventory.",
     "altText": "No. 140 Wave ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -4129,6 +4268,7 @@
       "/La_Esquinita_Inventory/140_wave_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4145,7 +4285,7 @@
     "slug": "141-fragile-goddess",
     "description": "Hand-poured ceramic Fragile Goddess from the La Esquinita inventory.",
     "altText": "No. 141 Fragile Goddess ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -4158,6 +4298,7 @@
       "/La_Esquinita_Inventory/141_fragileGoddess_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4174,7 +4315,7 @@
     "slug": "142-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 142 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4188,6 +4329,7 @@
       "/La_Esquinita_Inventory/142_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4204,7 +4346,7 @@
     "slug": "143-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 143 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4218,6 +4360,7 @@
       "/La_Esquinita_Inventory/143_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4248,6 +4391,7 @@
       "/La_Esquinita_Inventory/144_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4278,6 +4422,7 @@
       "/La_Esquinita_Inventory/145_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4294,7 +4439,7 @@
     "slug": "146-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 146 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4308,6 +4453,7 @@
       "/La_Esquinita_Inventory/146_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4324,7 +4470,7 @@
     "slug": "147-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 147 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4338,6 +4484,7 @@
       "/La_Esquinita_Inventory/147_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4368,6 +4515,7 @@
       "/La_Esquinita_Inventory/148_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4398,6 +4546,7 @@
       "/La_Esquinita_Inventory/149_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4428,6 +4577,7 @@
       "/La_Esquinita_Inventory/150_eggScared_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4458,6 +4608,7 @@
       "/La_Esquinita_Inventory/151_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4488,6 +4639,7 @@
       "/La_Esquinita_Inventory/152_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4518,6 +4670,7 @@
       "/La_Esquinita_Inventory/153_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4534,7 +4687,7 @@
     "slug": "154-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 154 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4548,6 +4701,7 @@
       "/La_Esquinita_Inventory/154_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4564,7 +4718,7 @@
     "slug": "155-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 155 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4578,6 +4732,7 @@
       "/La_Esquinita_Inventory/155_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4594,7 +4749,7 @@
     "slug": "156-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 156 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4608,6 +4763,7 @@
       "/La_Esquinita_Inventory/156_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4624,7 +4780,7 @@
     "slug": "157-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 157 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4638,6 +4794,7 @@
       "/La_Esquinita_Inventory/157_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4654,7 +4811,7 @@
     "slug": "158-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 158 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4668,6 +4825,7 @@
       "/La_Esquinita_Inventory/158_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4684,7 +4842,7 @@
     "slug": "159-baby-head",
     "description": "Hand-poured ceramic Baby Head from the La Esquinita inventory.",
     "altText": "No. 159 Baby Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -4697,6 +4855,7 @@
       "/La_Esquinita_Inventory/159_babyHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4713,7 +4872,7 @@
     "slug": "160-baby-head",
     "description": "Hand-poured ceramic Baby Head from the La Esquinita inventory.",
     "altText": "No. 160 Baby Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -4726,6 +4885,7 @@
       "/La_Esquinita_Inventory/160_babyHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4756,6 +4916,7 @@
       "/La_Esquinita_Inventory/161_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4772,7 +4933,7 @@
     "slug": "162-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 162 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4786,6 +4947,7 @@
       "/La_Esquinita_Inventory/162_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4816,6 +4978,7 @@
       "/La_Esquinita_Inventory/163_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4832,7 +4995,7 @@
     "slug": "164-parrot",
     "description": "Hand-poured ceramic Parrot from the La Esquinita inventory.",
     "altText": "No. 164 Parrot ceramic object",
-    "price": 175,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "parrot",
@@ -4846,6 +5009,7 @@
       "/La_Esquinita_Inventory/164_parrot_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4862,7 +5026,7 @@
     "slug": "165-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 165 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4876,6 +5040,7 @@
       "/La_Esquinita_Inventory/165_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4892,7 +5057,7 @@
     "slug": "166-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 166 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -4906,6 +5071,7 @@
       "/La_Esquinita_Inventory/166_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4922,7 +5088,7 @@
     "slug": "167-ornate-pitcher",
     "description": "Hand-poured ceramic Ornate Pitcher from the La Esquinita inventory.",
     "altText": "No. 167 Ornate Pitcher ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -4935,6 +5101,7 @@
       "/La_Esquinita_Inventory/167_ornatePitcher_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4965,6 +5132,7 @@
       "/La_Esquinita_Inventory/168_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -4995,6 +5163,7 @@
       "/La_Esquinita_Inventory/169_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5025,6 +5194,7 @@
       "/La_Esquinita_Inventory/170_eggSing_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5041,7 +5211,7 @@
     "slug": "171-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 171 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -5055,6 +5225,7 @@
       "/La_Esquinita_Inventory/171_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5071,7 +5242,7 @@
     "slug": "172-wall-fish-boy",
     "description": "Hand-poured ceramic Wall Fish Boy from the La Esquinita inventory.",
     "altText": "No. 172 Wall Fish Boy ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5084,6 +5255,7 @@
       "/La_Esquinita_Inventory/172_wallFishBoy_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5114,6 +5286,7 @@
       "/La_Esquinita_Inventory/173_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5130,7 +5303,7 @@
     "slug": "174-baby-head",
     "description": "Hand-poured ceramic Baby Head from the La Esquinita inventory.",
     "altText": "No. 174 Baby Head ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5143,6 +5316,7 @@
       "/La_Esquinita_Inventory/174_babyHead_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5159,7 +5333,7 @@
     "slug": "175-diamond-dish",
     "description": "Hand-poured ceramic Diamond Dish from the La Esquinita inventory.",
     "altText": "No. 175 Diamond Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5172,6 +5346,7 @@
       "/La_Esquinita_Inventory/175_diamondDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5188,7 +5363,7 @@
     "slug": "176-diamond-dish",
     "description": "Hand-poured ceramic Diamond Dish from the La Esquinita inventory.",
     "altText": "No. 176 Diamond Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5201,6 +5376,7 @@
       "/La_Esquinita_Inventory/176_diamondDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5217,7 +5393,7 @@
     "slug": "177-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 177 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -5231,6 +5407,7 @@
       "/La_Esquinita_Inventory/177_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5247,7 +5424,7 @@
     "slug": "178-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 178 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -5261,6 +5438,7 @@
       "/La_Esquinita_Inventory/178_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5291,6 +5469,7 @@
       "/La_Esquinita_Inventory/179_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5307,7 +5486,7 @@
     "slug": "180-parrot",
     "description": "Hand-poured ceramic Parrot from the La Esquinita inventory.",
     "altText": "No. 180 Parrot ceramic object",
-    "price": 175,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "parrot",
@@ -5321,6 +5500,7 @@
       "/La_Esquinita_Inventory/180_parrot_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5337,7 +5517,7 @@
     "slug": "181-ornate-pitcher",
     "description": "Hand-poured ceramic Ornate Pitcher from the La Esquinita inventory.",
     "altText": "No. 181 Ornate Pitcher ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5347,11 +5527,12 @@
     "gallery": [
       "/La_Esquinita_Inventory/181_ornatePitcher_1.jpg"
     ],
-    "availability": "available",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2025-11-21T21:24:20.272Z",
     "squareCatalogObjectId": null
   },
   {
@@ -5378,6 +5559,7 @@
       "/La_Esquinita_Inventory/182_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5408,6 +5590,7 @@
       "/La_Esquinita_Inventory/183_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5438,6 +5621,7 @@
       "/La_Esquinita_Inventory/184_eggScheme_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5454,7 +5638,7 @@
     "slug": "185-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 185 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -5468,6 +5652,7 @@
       "/La_Esquinita_Inventory/185_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5484,7 +5669,7 @@
     "slug": "186-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 186 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -5498,6 +5683,7 @@
       "/La_Esquinita_Inventory/186_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5514,7 +5700,7 @@
     "slug": "187-swan",
     "description": "Hand-poured ceramic Swan from the La Esquinita inventory.",
     "altText": "No. 187 Swan ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5527,6 +5713,7 @@
       "/La_Esquinita_Inventory/187_swan_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5543,7 +5730,7 @@
     "slug": "188-et",
     "description": "Hand-poured ceramic Et from the La Esquinita inventory.",
     "altText": "No. 188 Et ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5556,6 +5743,7 @@
       "/La_Esquinita_Inventory/188_ET_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5586,6 +5774,7 @@
       "/La_Esquinita_Inventory/189_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5602,7 +5791,7 @@
     "slug": "190-wall-fish-boy",
     "description": "Hand-poured ceramic Wall Fish Boy from the La Esquinita inventory.",
     "altText": "No. 190 Wall Fish Boy ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5615,6 +5804,7 @@
       "/La_Esquinita_Inventory/190_wallFishBoy_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5631,7 +5821,7 @@
     "slug": "191-wall-fish-girl",
     "description": "Hand-poured ceramic Wall Fish Girl from the La Esquinita inventory.",
     "altText": "No. 191 Wall Fish Girl ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5644,6 +5834,7 @@
       "/La_Esquinita_Inventory/191_wallFishGirl_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5660,7 +5851,7 @@
     "slug": "192-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 192 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5673,6 +5864,7 @@
       "/La_Esquinita_Inventory/192_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5689,7 +5881,7 @@
     "slug": "193-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 193 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5702,6 +5894,7 @@
       "/La_Esquinita_Inventory/193_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5718,7 +5911,7 @@
     "slug": "194-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 194 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5731,6 +5924,7 @@
       "/La_Esquinita_Inventory/194_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5761,6 +5955,7 @@
       "/La_Esquinita_Inventory/195_eggSmash_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5777,7 +5972,7 @@
     "slug": "196-cake-topper",
     "description": "Hand-poured ceramic Cake Topper from the La Esquinita inventory.",
     "altText": "No. 196 Cake Topper ceramic object",
-    "price": 70,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "cake",
@@ -5791,6 +5986,7 @@
       "/La_Esquinita_Inventory/196_cakeTopper_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5807,7 +6003,7 @@
     "slug": "197-lobster-dish",
     "description": "Hand-poured ceramic Lobster Dish from the La Esquinita inventory.",
     "altText": "No. 197 Lobster Dish ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5820,6 +6016,7 @@
       "/La_Esquinita_Inventory/197_lobsterDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5836,7 +6033,7 @@
     "slug": "198-lobster-dish",
     "description": "Hand-poured ceramic Lobster Dish from the La Esquinita inventory.",
     "altText": "No. 198 Lobster Dish ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5849,6 +6046,7 @@
       "/La_Esquinita_Inventory/198_lobsterDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5865,7 +6063,7 @@
     "slug": "199-lobster-dish",
     "description": "Hand-poured ceramic Lobster Dish from the La Esquinita inventory.",
     "altText": "No. 199 Lobster Dish ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5878,6 +6076,7 @@
       "/La_Esquinita_Inventory/199_lobsterDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5894,7 +6093,7 @@
     "slug": "200-diamond-dish",
     "description": "Hand-poured ceramic Diamond Dish from the La Esquinita inventory.",
     "altText": "No. 200 Diamond Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5907,6 +6106,7 @@
       "/La_Esquinita_Inventory/200_diamondDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5923,7 +6123,7 @@
     "slug": "201-club-dish",
     "description": "Hand-poured ceramic Club Dish from the La Esquinita inventory.",
     "altText": "No. 201 Club Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5936,6 +6136,7 @@
       "/La_Esquinita_Inventory/201_clubDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5952,7 +6153,7 @@
     "slug": "202-et",
     "description": "Hand-poured ceramic Et from the La Esquinita inventory.",
     "altText": "No. 202 Et ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5965,6 +6166,7 @@
       "/La_Esquinita_Inventory/202_ET_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -5974,14 +6176,14 @@
   {
     "inventoryNumber": 203,
     "numberPadded": "203",
-    "label": "ETand_UFO",
-    "labelSlug": "etand-ufo",
-    "title": "Etand Ufo",
+    "label": "ET_and_UFO",
+    "labelSlug": "et-and-ufo",
+    "title": "Et And Ufo",
     "displayNumber": "No. 203",
-    "slug": "203-etand-ufo",
-    "description": "Hand-poured ceramic Etand Ufo from the La Esquinita inventory.",
-    "altText": "No. 203 Etand Ufo ceramic object",
-    "price": 160,
+    "slug": "203-et-and-ufo",
+    "description": "Hand-poured ceramic Et And Ufo from the La Esquinita inventory.",
+    "altText": "No. 203 Et And Ufo ceramic object",
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -5994,6 +6196,7 @@
       "/La_Esquinita_Inventory/203_ETandUFO_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6010,7 +6213,7 @@
     "slug": "204-diamond-dish",
     "description": "Hand-poured ceramic Diamond Dish from the La Esquinita inventory.",
     "altText": "No. 204 Diamond Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6023,6 +6226,7 @@
       "/La_Esquinita_Inventory/204_diamondDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6039,7 +6243,7 @@
     "slug": "205-wall-fish-girl",
     "description": "Hand-poured ceramic Wall Fish Girl from the La Esquinita inventory.",
     "altText": "No. 205 Wall Fish Girl ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6052,6 +6256,7 @@
       "/La_Esquinita_Inventory/205_wallFishGirl_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6068,7 +6273,7 @@
     "slug": "206-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 206 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6081,6 +6286,7 @@
       "/La_Esquinita_Inventory/206_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6097,7 +6303,7 @@
     "slug": "207-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 207 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6110,6 +6316,7 @@
       "/La_Esquinita_Inventory/207_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6126,7 +6333,7 @@
     "slug": "208-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 208 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6139,6 +6346,7 @@
       "/La_Esquinita_Inventory/208_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6155,7 +6363,7 @@
     "slug": "209-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 209 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6168,6 +6376,7 @@
       "/La_Esquinita_Inventory/209_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6198,6 +6407,7 @@
       "/La_Esquinita_Inventory/210_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6214,7 +6424,7 @@
     "slug": "211-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 211 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6227,6 +6437,7 @@
       "/La_Esquinita_Inventory/211_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6243,7 +6454,7 @@
     "slug": "212-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 212 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6256,6 +6467,7 @@
       "/La_Esquinita_Inventory/212_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6272,7 +6484,7 @@
     "slug": "213-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 213 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6285,6 +6497,7 @@
       "/La_Esquinita_Inventory/213_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6301,7 +6514,7 @@
     "slug": "214-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 214 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6314,6 +6527,7 @@
       "/La_Esquinita_Inventory/214_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6330,7 +6544,7 @@
     "slug": "215-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 215 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6343,6 +6557,7 @@
       "/La_Esquinita_Inventory/215_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6359,7 +6574,7 @@
     "slug": "216-yoda",
     "description": "Hand-poured ceramic Yoda from the La Esquinita inventory.",
     "altText": "No. 216 Yoda ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6372,6 +6587,7 @@
       "/La_Esquinita_Inventory/216_yoda_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6388,7 +6604,7 @@
     "slug": "217-et",
     "description": "Hand-poured ceramic Et from the La Esquinita inventory.",
     "altText": "No. 217 Et ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6401,6 +6617,7 @@
       "/La_Esquinita_Inventory/217_ET_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6417,7 +6634,7 @@
     "slug": "218-ufo",
     "description": "Hand-poured ceramic Ufo from the La Esquinita inventory.",
     "altText": "No. 218 Ufo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6430,6 +6647,7 @@
       "/La_Esquinita_Inventory/218_UFO_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6446,7 +6664,7 @@
     "slug": "219-dish",
     "description": "Hand-poured ceramic Dish from the La Esquinita inventory.",
     "altText": "No. 219 Dish ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6459,6 +6677,7 @@
       "/La_Esquinita_Inventory/219_dish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6475,7 +6694,7 @@
     "slug": "220-et",
     "description": "Hand-poured ceramic Et from the La Esquinita inventory.",
     "altText": "No. 220 Et ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6488,6 +6707,7 @@
       "/La_Esquinita_Inventory/220_ET_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6504,7 +6724,7 @@
     "slug": "221-et",
     "description": "Hand-poured ceramic Et from the La Esquinita inventory.",
     "altText": "No. 221 Et ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6517,6 +6737,7 @@
       "/La_Esquinita_Inventory/221_ET_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6533,7 +6754,7 @@
     "slug": "222-diamond-dish",
     "description": "Hand-poured ceramic Diamond Dish from the La Esquinita inventory.",
     "altText": "No. 222 Diamond Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6546,6 +6767,7 @@
       "/La_Esquinita_Inventory/222_diamondDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6562,7 +6784,7 @@
     "slug": "223-club-dish",
     "description": "Hand-poured ceramic Club Dish from the La Esquinita inventory.",
     "altText": "No. 223 Club Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6575,6 +6797,7 @@
       "/La_Esquinita_Inventory/223_clubDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6591,7 +6814,7 @@
     "slug": "224-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 224 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6604,6 +6827,7 @@
       "/La_Esquinita_Inventory/224_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6620,7 +6844,7 @@
     "slug": "225-flamingo",
     "description": "Hand-poured ceramic Flamingo from the La Esquinita inventory.",
     "altText": "No. 225 Flamingo ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6633,6 +6857,7 @@
       "/La_Esquinita_Inventory/225_flamingo_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6649,7 +6874,7 @@
     "slug": "226-dish",
     "description": "Hand-poured ceramic Dish from the La Esquinita inventory.",
     "altText": "No. 226 Dish ceramic object",
-    "price": 160,
+    "price": 200,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6662,6 +6887,7 @@
       "/La_Esquinita_Inventory/226_dish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6692,6 +6918,7 @@
       "/La_Esquinita_Inventory/227_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6722,6 +6949,7 @@
       "/La_Esquinita_Inventory/228_eggScared_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6752,6 +6980,7 @@
       "/La_Esquinita_Inventory/228_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6782,6 +7011,7 @@
       "/La_Esquinita_Inventory/229_eggSmile_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6812,6 +7042,7 @@
       "/La_Esquinita_Inventory/230_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6842,6 +7073,7 @@
       "/La_Esquinita_Inventory/231_eggSing_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6858,7 +7090,7 @@
     "slug": "232-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 232 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6871,6 +7103,7 @@
       "/La_Esquinita_Inventory/232_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6887,7 +7120,7 @@
     "slug": "233-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 233 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6900,6 +7133,7 @@
       "/La_Esquinita_Inventory/233_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6930,6 +7164,7 @@
       "/La_Esquinita_Inventory/234_eggSad_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6946,7 +7181,7 @@
     "slug": "235-wall-fish-girl",
     "description": "Hand-poured ceramic Wall Fish Girl from the La Esquinita inventory.",
     "altText": "No. 235 Wall Fish Girl ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -6959,6 +7194,7 @@
       "/La_Esquinita_Inventory/235_wallFishGirl_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -6989,6 +7225,7 @@
       "/La_Esquinita_Inventory/236_eggFrown_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7019,6 +7256,7 @@
       "/La_Esquinita_Inventory/237_eggSing_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7035,7 +7273,7 @@
     "slug": "239-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 239 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7048,6 +7286,7 @@
       "/La_Esquinita_Inventory/239_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7064,7 +7303,7 @@
     "slug": "240-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 240 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7077,6 +7316,7 @@
       "/La_Esquinita_Inventory/240_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7093,7 +7333,7 @@
     "slug": "241-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 241 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7106,6 +7346,7 @@
       "/La_Esquinita_Inventory/241_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7122,7 +7363,7 @@
     "slug": "242-potato",
     "description": "Hand-poured ceramic Potato from the La Esquinita inventory.",
     "altText": "No. 242 Potato ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7135,6 +7376,7 @@
       "/La_Esquinita_Inventory/242_potato_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7151,7 +7393,7 @@
     "slug": "243-club-dish",
     "description": "Hand-poured ceramic Club Dish from the La Esquinita inventory.",
     "altText": "No. 243 Club Dish ceramic object",
-    "price": 160,
+    "price": 60,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7164,6 +7406,7 @@
       "/La_Esquinita_Inventory/243_clubDish_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7180,7 +7423,7 @@
     "slug": "244-fragile-goddess",
     "description": "Hand-poured ceramic Fragile Goddess from the La Esquinita inventory.",
     "altText": "No. 244 Fragile Goddess ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7193,6 +7436,7 @@
       "/La_Esquinita_Inventory/244_fragileGoddess_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7209,7 +7453,7 @@
     "slug": "245-fragile-goddess",
     "description": "Hand-poured ceramic Fragile Goddess from the La Esquinita inventory.",
     "altText": "No. 245 Fragile Goddess ceramic object",
-    "price": 160,
+    "price": 100,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7222,6 +7466,7 @@
       "/La_Esquinita_Inventory/245_fragileGoddess_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7250,11 +7495,12 @@
       "/La_Esquinita_Inventory/246_denimMug_1.jpg",
       "/La_Esquinita_Inventory/246_denimMug_2.jpg"
     ],
-    "availability": "available",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2025-11-21T21:24:20.272Z",
     "squareCatalogObjectId": null
   },
   {
@@ -7280,6 +7526,7 @@
       "/La_Esquinita_Inventory/247_denimMug_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7296,7 +7543,7 @@
     "slug": "248-wall-fish-boy",
     "description": "Hand-poured ceramic Wall Fish Boy from the La Esquinita inventory.",
     "altText": "No. 248 Wall Fish Boy ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7309,6 +7556,7 @@
       "/La_Esquinita_Inventory/248_wallFishBoy_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7325,7 +7573,7 @@
     "slug": "249-wall-fish-girl",
     "description": "Hand-poured ceramic Wall Fish Girl from the La Esquinita inventory.",
     "altText": "No. 249 Wall Fish Girl ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7338,6 +7586,7 @@
       "/La_Esquinita_Inventory/249_wallFishGirl_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7354,7 +7603,7 @@
     "slug": "250-wall-fish-boy",
     "description": "Hand-poured ceramic Wall Fish Boy from the La Esquinita inventory.",
     "altText": "No. 250 Wall Fish Boy ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7367,6 +7616,7 @@
       "/La_Esquinita_Inventory/250_wallFishBoy_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7383,7 +7633,7 @@
     "slug": "251-wall-fish-girl",
     "description": "Hand-poured ceramic Wall Fish Girl from the La Esquinita inventory.",
     "altText": "No. 251 Wall Fish Girl ceramic object",
-    "price": 160,
+    "price": 75,
     "category": "ceramic-object",
     "tags": [
       "ceramic",
@@ -7396,6 +7646,7 @@
       "/La_Esquinita_Inventory/251_wallFishGirl_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7412,7 +7663,7 @@
     "slug": "252-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 252 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7426,6 +7677,7 @@
       "/La_Esquinita_Inventory/252_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7442,7 +7694,7 @@
     "slug": "253-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 253 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7456,6 +7708,7 @@
       "/La_Esquinita_Inventory/253_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7472,7 +7725,7 @@
     "slug": "254-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 254 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7486,6 +7739,7 @@
       "/La_Esquinita_Inventory/254_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7502,7 +7756,7 @@
     "slug": "255-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 255 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7516,6 +7770,7 @@
       "/La_Esquinita_Inventory/255_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7532,7 +7787,7 @@
     "slug": "256-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 256 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7546,6 +7801,7 @@
       "/La_Esquinita_Inventory/256_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7562,7 +7818,7 @@
     "slug": "257-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 257 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7576,6 +7832,7 @@
       "/La_Esquinita_Inventory/257_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7592,7 +7849,7 @@
     "slug": "258-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 258 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7606,6 +7863,7 @@
       "/La_Esquinita_Inventory/258_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7622,7 +7880,7 @@
     "slug": "259-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 259 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7636,6 +7894,7 @@
       "/La_Esquinita_Inventory/259_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7652,7 +7911,7 @@
     "slug": "260-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 260 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7666,6 +7925,7 @@
       "/La_Esquinita_Inventory/260_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7682,7 +7942,7 @@
     "slug": "261-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 261 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7696,6 +7956,7 @@
       "/La_Esquinita_Inventory/261_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7712,7 +7973,7 @@
     "slug": "262-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 262 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7726,6 +7987,7 @@
       "/La_Esquinita_Inventory/262_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7742,7 +8004,7 @@
     "slug": "263-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 263 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7756,6 +8018,7 @@
       "/La_Esquinita_Inventory/263_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7772,7 +8035,7 @@
     "slug": "264-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 264 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7786,6 +8049,7 @@
       "/La_Esquinita_Inventory/264_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7802,7 +8066,7 @@
     "slug": "265-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 265 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7816,6 +8080,7 @@
       "/La_Esquinita_Inventory/265_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7832,7 +8097,7 @@
     "slug": "266-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 266 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7846,6 +8111,7 @@
       "/La_Esquinita_Inventory/266_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7862,7 +8128,7 @@
     "slug": "267-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 267 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7876,6 +8142,7 @@
       "/La_Esquinita_Inventory/267_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7892,7 +8159,7 @@
     "slug": "268-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 268 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7906,6 +8173,7 @@
       "/La_Esquinita_Inventory/268_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7922,7 +8190,7 @@
     "slug": "269-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 269 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7935,11 +8203,12 @@
       "/La_Esquinita_Inventory/269_pie_1.jpg",
       "/La_Esquinita_Inventory/269_pie_2.jpg"
     ],
-    "availability": "available",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2025-11-21T21:24:20.272Z",
     "squareCatalogObjectId": null
   },
   {
@@ -7952,7 +8221,7 @@
     "slug": "270-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 270 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7966,6 +8235,7 @@
       "/La_Esquinita_Inventory/270_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -7982,7 +8252,7 @@
     "slug": "271-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 271 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -7996,6 +8266,7 @@
       "/La_Esquinita_Inventory/271_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8012,7 +8283,7 @@
     "slug": "272-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 272 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -8026,6 +8297,7 @@
       "/La_Esquinita_Inventory/272_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8042,7 +8314,7 @@
     "slug": "273-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 273 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -8056,6 +8328,7 @@
       "/La_Esquinita_Inventory/273_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8072,7 +8345,7 @@
     "slug": "274-pie",
     "description": "Hand-poured ceramic Pie from the La Esquinita inventory.",
     "altText": "No. 274 Pie ceramic object",
-    "price": 140,
+    "price": 50,
     "category": "ceramic-object",
     "tags": [
       "pie",
@@ -8086,6 +8359,7 @@
       "/La_Esquinita_Inventory/274_pie_2.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8113,6 +8387,7 @@
       "/La_Esquinita_Inventory/275_deer_1.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8140,6 +8415,7 @@
       "/La_Esquinita_Inventory/276_deer_1.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8167,6 +8443,7 @@
       "/La_Esquinita_Inventory/277_deer_1.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8194,6 +8471,7 @@
       "/La_Esquinita_Inventory/278_deer_1.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8221,6 +8499,7 @@
       "/La_Esquinita_Inventory/279_deer_1.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
@@ -8248,6 +8527,7 @@
       "/La_Esquinita_Inventory/280_deerHead_1.jpg"
     ],
     "availability": "available",
+    "status": "active",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,

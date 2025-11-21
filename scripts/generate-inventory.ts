@@ -35,6 +35,49 @@ const DEFAULT_METADATA: MetadataDefaults = {
   tags: ["ceramic", "limited"],
 }
 
+type PriceRule = {
+  test: (slug: string) => boolean
+  price: number
+}
+
+const PRICE_RULES: PriceRule[] = [
+  { test: (slug) => slug.includes("et-and-ufo"), price: 100 },
+  { test: (slug) => slug.includes("et") && !slug.includes("ufo"), price: 75 },
+  { test: (slug) => slug === "ufo" || slug.endsWith("-ufo"), price: 100 },
+  { test: (slug) => slug.includes("yoda"), price: 200 },
+  { test: (slug) => slug.includes("pie"), price: 50 },
+  { test: (slug) => slug.includes("egg"), price: 60 },
+  { test: (slug) => slug.includes("fragile"), price: 100 },
+  { test: (slug) => slug.includes("parrot"), price: 200 },
+  { test: (slug) => slug.includes("tuba"), price: 75 },
+  { test: (slug) => slug.includes("cake"), price: 60 },
+  { test: (slug) => slug.includes("flamingo"), price: 100 },
+  { test: (slug) => slug.includes("club-dish"), price: 60 },
+  { test: (slug) => slug.includes("broken-swan"), price: 50 },
+  { test: (slug) => slug.includes("swan"), price: 200 },
+  { test: (slug) => slug.includes("potato"), price: 75 },
+  { test: (slug) => slug.includes("diamond"), price: 60 },
+  { test: (slug) => slug.includes("lobster"), price: 75 },
+  { test: (slug) => slug.includes("ornate-pitcher"), price: 200 },
+  { test: (slug) => slug.includes("cat-head"), price: 100 },
+  { test: (slug) => slug.includes("baby"), price: 100 },
+  { test: (slug) => slug.includes("wall") && slug.includes("fish"), price: 75 },
+  { test: (slug) => slug.includes("wave"), price: 100 },
+  { test: (slug) => slug.includes("dish"), price: 200 },
+]
+
+const STATUS_OVERRIDES: Record<number, { status: "sold"; soldAt?: string }> = {
+  6: { status: "sold" },
+  181: { status: "sold" },
+  246: { status: "sold" },
+  269: { status: "sold" },
+}
+
+function applyPriceRules(slug: string, basePrice: number) {
+  const match = PRICE_RULES.find((rule) => rule.test(slug))
+  return match ? match.price : basePrice
+}
+
 type ParsedAsset = {
   number: number
   label: string
@@ -46,6 +89,8 @@ const LABEL_NAME_OVERRIDES: Record<string, string> = {
   tubaash: "Tuba Ash Tray",
   woundmug: "Wounded Mug",
   woundedmug: "Wounded Mug",
+  etandufo: "ET and UFO",
+  etandufoufo: "ET and UFO",
 }
 
 const IMAGE_PATTERN =
@@ -151,6 +196,7 @@ function buildRecords(grouped: Map<string, { number: number; label: string; imag
     const slug = `${padded}-${labelSlug}`
     const displayNumber = `No. ${number}`
     const metadata = LABEL_METADATA[labelSlug] ?? (labelSlug.startsWith("egg-") ? EGG_METADATA : DEFAULT_METADATA)
+    const price = applyPriceRules(labelSlug, metadata.price)
 
     const gallery = images
       .sort((a, b) => a.variant - b.variant)
@@ -171,18 +217,26 @@ function buildRecords(grouped: Map<string, { number: number; label: string; imag
       slug,
       description: descriptionFor(title),
       altText: altTextFor(displayNumber, title),
-      price: metadata.price,
+      price,
       category: metadata.category,
       tags: metadata.tags,
       primaryImage: gallery[0],
       undersideImage: gallery[1],
       gallery,
       availability: "available",
+      status: "active",
       dimensions: null,
       squareSku: null,
       isUnique: true,
       soldAt: null,
       squareCatalogObjectId: null,
+    }
+
+    const override = STATUS_OVERRIDES[number]
+    if (override) {
+      record.status = override.status
+      record.availability = "sold"
+      record.soldAt = override.soldAt ?? new Date().toISOString()
     }
 
     records.push(record)
