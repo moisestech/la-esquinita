@@ -3,10 +3,10 @@
 import React from "react"
 import { motion } from "framer-motion"
 import ProductCard from "./product-card"
-import { Product } from "@/lib/supabase"
+import { InventoryProduct } from "@/lib/inventory-data"
 
 interface ProductGridProps {
-  products: Product[]
+  products: InventoryProduct[]
 }
 
 const SPONSOR_INTERVAL = 16 // adjust to show banner every N items

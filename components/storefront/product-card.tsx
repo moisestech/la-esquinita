@@ -4,13 +4,13 @@ import React, { useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Share2, ShoppingCart, Heart } from "lucide-react"
-import { Product } from "@/lib/supabase"
+import { InventoryProduct } from "@/lib/inventory-data"
 import { useToast } from "@/hooks/use-toast"
 import { useCart } from "@/contexts/cart-context"
 import { isCartEnabled, getCartLockedMessage } from "@/lib/constants/cart-config"
 
 interface ProductCardProps {
-  product: Product
+  product: InventoryProduct
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
@@ -19,8 +19,21 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [isShared, setIsShared] = useState(false)
   const { toast } = useToast()
-  const { addToCart } = useCart()
+  const { addToCart, isInCart } = useCart()
   const cartEnabled = isCartEnabled()
+  const inventoryNumber =
+    (product as InventoryProduct).displayNumber ||
+    product.display_number ||
+    (product.inventory_number ? `No. ${product.inventory_number}` : null)
+  const productStatus = (product.status || "active") as string
+  const isSold = productStatus === "archived" || productStatus === "sold"
+  const isReserved = productStatus === "reserved"
+  const isComingSoon = productStatus === "coming_soon"
+  const isUnavailable = isSold || isReserved || isComingSoon
+  const primaryImage =
+    product.primary_image || product.image_urls?.[0] || "/placeholder-logo.png"
+  const secondaryImage = product.underside_image || product.image_urls?.[1]
+  const inCart = isInCart(product.id)
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault()
@@ -93,7 +106,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <Link href={`/product/${product.slug}`}>
+    <Link href={`/product/${product.slug}`} id={`inventory-${product.id}`}>
       <motion.div
         className="relative group cursor-pointer"
         onHoverStart={() => setIsHovered(true)}
@@ -148,18 +161,30 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Product Image */}
         <div className="relative h-64 bg-gradient-to-br from-sugar-pink to-fondant-blue overflow-hidden p-4">
           <img
-            src={product.image_urls[0] || "/placeholder-logo.png"}
+            src={primaryImage}
             alt={product.name}
-            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+            loading="lazy"
+            className={`w-full h-full object-contain transition-opacity duration-300 ${
+              secondaryImage ? "group-hover:opacity-0" : ""
+            }`}
           />
+          {secondaryImage && (
+            <img
+              src={secondaryImage}
+              alt={`${product.name} underside`}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+          )}
           
-          {/* Category Badge */}
-          <div className="absolute top-3 left-3">
-            <span className="bg-miami-pink text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
-              {product.category}
-            </span>
-          </div>
-
+          {/* Display Number */}
+          {inventoryNumber && (
+            <div className="absolute top-3 left-3">
+              <span className="bg-black/70 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                {inventoryNumber}
+              </span>
+            </div>
+          )}
           {/* Action Buttons */}
           <div className="absolute top-3 right-3 flex flex-col gap-2">
             {/* Share Button */}
@@ -202,6 +227,13 @@ export default function ProductCard({ product }: ProductCardProps) {
             initial={false}
             animate={{ opacity: isHovered ? 1 : 0 }}
           />
+
+          {isUnavailable && (
+            <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-lg font-bold">
+              <span>{isSold ? "Sold Out" : isReserved ? "Reserved" : "Coming Soon"}</span>
+              <span className="text-xs uppercase tracking-wide mt-1">Text us about restocks</span>
+            </div>
+          )}
         </div>
 
         {/* Product Info */}
@@ -210,6 +242,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           <h3 className="text-xl font-bold text-mint-rot mb-2 line-clamp-2">
             {product.name}
           </h3>
+          {inventoryNumber && (
+            <p className="text-sm font-semibold text-miami-pink mb-2">{inventoryNumber}</p>
+          )}
 
           {/* Description */}
           <p className="text-mint-rot/70 text-sm mb-4 line-clamp-2">
@@ -232,9 +267,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             {/* Add to Cart Button */}
             <motion.button
               onClick={handleAddToCart}
-              disabled={isAddingToCart || !cartEnabled}
+              disabled={isAddingToCart || !cartEnabled || isUnavailable || inCart}
               className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-all duration-300 ${
-                isAddingToCart || !cartEnabled
+                isAddingToCart || !cartEnabled || isUnavailable || inCart
                   ? 'bg-gray-400 cursor-not-allowed text-white'
                   : 'bg-gradient-to-r from-miami-pink to-miami-purple text-white hover:shadow-neon-pink'
               }`}
@@ -251,6 +286,16 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <>
                   <ShoppingCart size={16} />
                   <span className="text-xs">Nov 14th</span>
+                </>
+              ) : isUnavailable ? (
+                <>
+                  <ShoppingCart size={16} />
+                  <span>{isSold ? "Sold Out" : isReserved ? "Reserved" : "Coming Soon"}</span>
+                </>
+              ) : inCart ? (
+                <>
+                  <ShoppingCart size={16} />
+                  In Cart
                 </>
               ) : (
                 <>

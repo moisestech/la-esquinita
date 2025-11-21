@@ -8,7 +8,6 @@ import CartDrawer from "./cart-drawer"
 import HiddenDoor from "./hidden-door"
 import FloatingSprinkles from "./floating-sprinkles"
 import { Toaster } from "@/components/ui/toaster"
-import { useCart } from "@/contexts/cart-context"
 import { InventoryProduct, inventoryProducts } from "@/lib/inventory-data"
 
 interface StorefrontPageProps {
@@ -17,6 +16,8 @@ interface StorefrontPageProps {
 }
 
 const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min
+const INITIAL_BATCH = 48
+const BATCH_SIZE = 48
 
 const generateMosquitoPosition = () => ({
   top: `${randomBetween(5, 85)}vh`,
@@ -70,7 +71,6 @@ function FloatingMosquitoLink() {
 export default function StorefrontPage({ initialProducts, initialSource }: StorefrontPageProps) {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [showHiddenDoor, setShowHiddenDoor] = useState(false)
-  const { cartItems, addToCart, removeFromCart, updateQuantity } = useCart()
   const [products, setProducts] = useState<InventoryProduct[]>(
     initialProducts.length ? initialProducts : inventoryProducts
   )
@@ -78,6 +78,10 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
 
   const [searchTerm, setSearchTerm] = useState("")
   const gridRef = useRef<HTMLDivElement | null>(null)
+  const loadMoreRef = useRef<HTMLDivElement | null>(null)
+  const [visibleCount, setVisibleCount] = useState(
+    Math.min(INITIAL_BATCH, (initialProducts.length ? initialProducts : inventoryProducts).length)
+  )
 
   const filteredProducts = useMemo(() => {
     if (!searchTerm.trim()) return products
@@ -86,11 +90,18 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
       const numberMatch = product.inventoryNumber
         ?.toString()
         .startsWith(normalized)
+      const displayMatch = product.displayNumber?.toLowerCase().includes(normalized)
       const slugMatch = product.slug.toLowerCase().includes(normalized)
       const nameMatch = product.name.toLowerCase().includes(normalized)
-      return numberMatch || slugMatch || nameMatch
+      return numberMatch || displayMatch || slugMatch || nameMatch
     })
   }, [products, searchTerm])
+
+  const isSearching = Boolean(searchTerm.trim())
+  const displayedProducts = useMemo(() => {
+    if (isSearching) return filteredProducts
+    return filteredProducts.slice(0, visibleCount)
+  }, [filteredProducts, isSearching, visibleCount])
 
   useEffect(() => {
     if (!searchTerm.trim() || filteredProducts.length === 0) return
@@ -103,6 +114,29 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
 
     element.scrollIntoView({ behavior: "smooth", block: "start" })
   }, [filteredProducts, searchTerm])
+
+  useEffect(() => {
+    if (isSearching) return
+    const target = loadMoreRef.current
+    if (!target) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        if (entry.isIntersecting) {
+          setVisibleCount((prev) =>
+            Math.min(prev + BATCH_SIZE, filteredProducts.length)
+          )
+        }
+      },
+      { rootMargin: "200px" }
+    )
+
+    observer.observe(target)
+    return () => {
+      observer.disconnect()
+    }
+  }, [filteredProducts.length, isSearching])
 
   useEffect(() => {
     let isMounted = true
@@ -122,6 +156,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
 
         if (Array.isArray(payload.items) && payload.items.length) {
           setProducts(payload.items)
+          setVisibleCount(Math.min(INITIAL_BATCH, payload.items.length))
         }
         if (payload.source === "supabase" || payload.source === "static") {
           setInventorySource(payload.source)
@@ -137,6 +172,10 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
       isMounted = false
     }
   }, [inventorySource])
+
+  useEffect(() => {
+    setVisibleCount(Math.min(INITIAL_BATCH, products.length))
+  }, [products])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue">
@@ -231,8 +270,14 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
         </div>
 
         <div ref={gridRef}>
-          <ProductGrid products={filteredProducts} />
+          <ProductGrid products={displayedProducts} />
         </div>
+
+        {!isSearching && visibleCount < filteredProducts.length && (
+          <div ref={loadMoreRef} className="mt-8 text-center text-mint-rot font-medium">
+            Loading more objects...
+          </div>
+        )}
 
         {/* Hidden Door */}
         <HiddenDoor 

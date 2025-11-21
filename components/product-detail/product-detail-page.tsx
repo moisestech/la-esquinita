@@ -21,6 +21,14 @@ const getFallbackProduct = (slug: string): InventoryProduct | null => {
   )
 }
 
+const getStatusLabel = (status?: string | null) => {
+  const normalized = (status || "active").toLowerCase()
+  if (normalized === "archived" || normalized === "sold") return "Sold Out"
+  if (normalized === "reserved") return "Reserved"
+  if (normalized === "coming_soon") return "Coming Soon"
+  return null
+}
+
 interface ProductDetailPageProps {
   slug: string
   initialProduct: InventoryProduct | null
@@ -38,6 +46,7 @@ export default function ProductDetailPage({
   const [loading, setLoading] = useState(!initialProduct)
   const [error, setError] = useState<string | null>(null)
   const relatedPool = relatedProducts.length ? relatedProducts : inventoryProducts
+  const statusLabel = product ? getStatusLabel(product.status) : null
 
   useEffect(() => {
     let isMounted = true
@@ -158,7 +167,11 @@ export default function ProductDetailPage({
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <ImageGallery images={product.image_urls} productName={product.name} />
+            <ImageGallery
+              images={product.image_urls}
+              productName={product.name}
+              statusLabel={statusLabel}
+            />
           </motion.div>
 
           {/* Product Information */}

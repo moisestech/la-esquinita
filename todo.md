@@ -17,9 +17,10 @@
 ## Sprint 3 – Storefront & Product Experience Refresh
 - [x] Replace placeholder product arrays with live Supabase queries so `/storefront` and `/product/[slug]` render real inventory (SSR for fast mobile loads, fallback client fetch for hydration).
 - [x] Add a sticky search input at the top of the storefront that filters by number while typing (“19” should match `19`, `190`, `191`, etc.) and scroll-locks to the first hit on mobile.
-- [ ] Surface the inventory number on `ProductCard` and `ProductDetailPage`, add hover/secondary image swaps (`_2` photo) so shoppers immediately see the stamped number.
-- [ ] Update cart behavior so unique objects are limited to quantity 1, and automatically disable “Add to cart” when Supabase says `status = sold` or when another shopper is checking out.
-- [ ] Design a sold-out overlay/badge plus optional “text us about restocks” CTA so gallery visitors know an object is gone even if they still hold it physically.
+- [x] Virtualize or paginate the storefront grid, lazy-load images, and decouple search from DOM nodes so the full catalog renders and searches instantly on mobile.
+- [x] Surface the inventory number on `ProductCard` and `ProductDetailPage`, add hover/secondary image swaps (`_2` photo) so shoppers immediately see the stamped number.
+- [x] Update cart behavior so unique objects are limited to quantity 1, and automatically disable “Add to cart” when Supabase says `status = sold` or when another shopper is checking out.
+- [x] Design a sold-out overlay/badge plus optional “text us about restocks” CTA so gallery visitors know an object is gone even if they still hold it physically.
 
 ## Sprint 4 – Square Checkout & Fulfillment Sync
 - [ ] Configure Square environment variables (application ID, location ID, access token) in `.env.local` and create a server route (`app/api/checkout/square/route.ts`) that builds Square orders from the current cart.

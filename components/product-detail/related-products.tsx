@@ -4,11 +4,11 @@ import React from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { Product } from "@/lib/supabase"
+import { InventoryProduct } from "@/lib/inventory-data"
 
 interface RelatedProductsProps {
-  currentProduct: Product
-  products: Product[]
+  currentProduct: InventoryProduct
+  products: InventoryProduct[]
 }
 
 export default function RelatedProducts({ currentProduct, products }: RelatedProductsProps) {
