@@ -22,11 +22,18 @@
 - [x] Update cart behavior so unique objects are limited to quantity 1, and automatically disable “Add to cart” when Supabase says `status = sold` or when another shopper is checking out.
 - [x] Design a sold-out overlay/badge plus optional “text us about restocks” CTA so gallery visitors know an object is gone even if they still hold it physically.
 
+## Sprint 3.5 – Product Detail Speed Pass
+- [x] SSR inventory detail pages so `/product/[slug]` renders instantly with Supabase data (client fetch becomes enhancement only).
+- [x] Cache `/api/inventory` responses (Next revalidation or `force-cache`) and tighten Supabase selects so list/detail requests stay snappy.
+- [x] Load the full catalog once per session and scope search to the in-memory list (no extra network per query).
+- [x] Confirm `inventory_number` indexes are in place and Supabase log-level shows <100 ms queries; adjust policies if needed. *(Migration doc now includes the index + EXPLAIN template.)*
+
 ## Sprint 4 – Square Checkout & Fulfillment Sync
-- [ ] Configure Square environment variables (application ID, location ID, access token) in `.env.local` and create a server route (`app/api/checkout/square/route.ts`) that builds Square orders from the current cart.
-- [ ] Implement the Square Web Payments SDK (or Checkout API redirect) so the drawer’s Checkout button actually starts a payment flow that works on desktop + mobile Safari.
-- [ ] Upon checkout creation, soft-reserve items in Supabase (set `status = reserved`, store `square_order_id`, and expiration timestamp) to prevent double-selling.
-- [ ] Add Square webhook handling (`app/api/square/webhook/route.ts`) to verify signatures, mark items `sold` on payment success, and release reservations on failure/timeout.
+- [x] Configure Square environment variables (application ID, location ID, access token) in `.env.local` and create a server route (`app/api/checkout/square/route.ts`) that builds Square orders from the current cart.
+- [x] Implement the Square Web Payments SDK so the drawer’s Checkout button actually starts a payment flow that works on desktop, and clears the cart on success.
+- [x] Update Supabase inventory rows directly from the checkout response (set `status = 'sold'`, `sold_at`, and store `square_order_id` for each cart item).
+- [x] Add Square webhook handling (`app/api/square/webhook/route.ts`) to verify signatures and backstop the sold-state updates.
+- [ ] Re-enable Apple Pay once the Square account is certified, and expose native wallet buttons in the cart drawer.
 - [ ] Build success + failure pages that Square redirects back to, showing order summary, pickup instructions, and a button to keep browsing.
 
 ## Sprint 5 – Bulk Load, QA, and Launch Ops

@@ -43,6 +43,7 @@ export interface Database {
           underside_image: string | null
           square_catalog_object_id: string | null
           square_sku: string | null
+          square_order_id: string | null
           dimensions: string | null
           sold_at: string | null
           is_unique: boolean | null
@@ -65,6 +66,7 @@ export interface Database {
           underside_image?: string | null
           square_catalog_object_id?: string | null
           square_sku?: string | null
+          square_order_id?: string | null
           dimensions?: string | null
           sold_at?: string | null
           is_unique?: boolean | null
@@ -87,6 +89,7 @@ export interface Database {
           underside_image?: string | null
           square_catalog_object_id?: string | null
           square_sku?: string | null
+          square_order_id?: string | null
           dimensions?: string | null
           sold_at?: string | null
           is_unique?: boolean | null

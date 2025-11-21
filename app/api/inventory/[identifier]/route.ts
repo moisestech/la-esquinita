@@ -1,15 +1,15 @@
 import { NextResponse } from "next/server"
 import { getInventoryItem } from "@/lib/server/inventory-source"
 
-interface Params {
+interface ParamsPromise {
   identifier: string
 }
 
 export async function GET(
   _request: Request,
-  { params }: { params: Params }
+  { params }: { params: Promise<ParamsPromise> }
 ) {
-  const { identifier } = params
+  const { identifier } = await params
   const { item, source } = await getInventoryItem(identifier)
 
   if (!item) {

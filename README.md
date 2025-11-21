@@ -48,6 +48,11 @@ la-esquinita/
 - Full details live in `docs/inventory-playbook.md` and power the 250-item storefront rollout.
 - Supabase schema updates for these objects live in `docs/supabase-inventory-migration.sql`.
 
+### Square Checkout Configuration
+- `.env.local` needs `SQUARE_ENV`, `SQUARE_SANDBOX_ID`, `SQUARE_PROD_ID`, `SQUARE_SANDBOX_TOKEN`, `SQUARE_PROD_TOKEN`, and `LOCATION_ID`.
+- Web checkout pulls `/api/square/config` for the public IDs and posts to `/api/checkout/square`.
+- Webhook verification requires `SQUARE_WEBHOOK_SIGNATURE_KEY` and `SQUARE_WEBHOOK_NOTIFICATION_URL` set to the exact URL you register inside Square’s dashboard.
+
 ## 🎭 Experience Design
 
 ### Three-Act Narrative Structure

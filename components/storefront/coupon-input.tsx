@@ -173,7 +173,7 @@ export default function CouponInput({ onCouponApplied, onCouponRemoved, appliedC
           className="bg-miami-yellow/10 border border-miami-yellow/30 rounded-lg p-3"
         >
           <p className="text-sm text-mint-rot/70 text-center">
-            💡 Try: <span className="font-mono text-miami-yellow">MIAMI10</span> for 10% off or <span className="font-mono text-miami-yellow">WELCOME5</span> for $5 off
+            💡 Try: <span className="font-mono text-miami-yellow">BUZZBITCH</span> for $5 off
           </p>
         </motion.div>
       )}

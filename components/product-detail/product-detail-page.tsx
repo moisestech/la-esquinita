@@ -47,11 +47,12 @@ export default function ProductDetailPage({
   const [error, setError] = useState<string | null>(null)
   const relatedPool = relatedProducts.length ? relatedProducts : inventoryProducts
   const statusLabel = product ? getStatusLabel(product.status) : null
+  const shouldFetchFromApi = !initialProduct || initialSource !== "supabase"
 
   useEffect(() => {
     let isMounted = true
 
-    if (initialProduct && initialSource === "supabase") {
+    if (!shouldFetchFromApi) {
       setProduct(initialProduct)
       setLoading(false)
       setError(null)
@@ -61,7 +62,9 @@ export default function ProductDetailPage({
     }
 
     const loadProduct = async () => {
-      setLoading(true)
+      if (!initialProduct) {
+        setLoading(true)
+      }
       setError(null)
 
       try {
@@ -72,20 +75,20 @@ export default function ProductDetailPage({
 
         if (payload.item) {
           setProduct(payload.item)
-      setLoading(false)
-      return
-    }
-  } catch (err) {
-    console.error("Failed to fetch inventory item", err)
+          setLoading(false)
+          return
+        }
+      } catch (err) {
+        console.error("Failed to fetch inventory item", err)
       }
 
       const fallback = getFallbackProduct(slug)
       if (isMounted) {
-      if (fallback) {
-        setProduct(fallback)
-      } else {
-        setError("Product not found")
-      }
+        if (fallback) {
+          setProduct(fallback)
+        } else {
+          setError("Product not found")
+        }
         setLoading(false)
       }
     }
@@ -95,7 +98,7 @@ export default function ProductDetailPage({
     return () => {
       isMounted = false
     }
-  }, [slug, initialProduct, initialSource])
+  }, [slug, initialProduct, initialSource, shouldFetchFromApi])
 
   if (loading) {
     return (

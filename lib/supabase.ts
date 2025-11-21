@@ -498,10 +498,7 @@ export const coupons = {
   async validate(code: string): Promise<{ valid: boolean; discount?: number; type?: 'percentage' | 'fixed'; message?: string }> {
     // Hardcoded coupons for demo
     const hardcodedCoupons: Record<string, { discount: number; type: 'percentage' | 'fixed' }> = {
-      'MIAMI10': { discount: 10, type: 'percentage' },
-      'WELCOME5': { discount: 5, type: 'fixed' },
-      'SUGAR20': { discount: 20, type: 'percentage' },
-      'ESQUINITA15': { discount: 15, type: 'percentage' }
+      'BUZZBITCH': { discount: 5, type: 'fixed' },
     }
 
     const normalizedCode = code.toUpperCase().trim()

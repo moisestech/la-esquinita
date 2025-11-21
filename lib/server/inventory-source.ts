@@ -1,3 +1,4 @@
+import { cache } from "react"
 import { createClient } from "@supabase/supabase-js"
 import { InventoryProduct, inventoryProducts, mapSupabaseProduct } from "@/lib/inventory-data"
 import { Database } from "@/types/supabase"
@@ -7,6 +8,7 @@ type Source = "supabase" | "static"
 const TABLE = process.env.SUPABASE_INVENTORY_TABLE || "products"
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const SELECT_COLUMNS = "*"
 
 const getClient = () => {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
@@ -33,13 +35,13 @@ const staticResponse = (item?: InventoryProduct | null) => ({
   item: item ?? null,
 })
 
-export async function getInventoryList() {
+export const getInventoryList = cache(async function getInventoryList() {
   const client = getClient()
   if (client) {
     try {
       const { data, error } = await client
         .from(TABLE)
-        .select("*")
+        .select(SELECT_COLUMNS)
         .eq("status", "active")
         .not("inventory_number", "is", null)
         .order("inventory_number", { ascending: true })
@@ -60,14 +62,18 @@ export async function getInventoryList() {
     source: "static" as Source,
     items: inventoryProducts,
   }
-}
+})
 
-export async function getInventoryItem(identifier: string) {
+export const getInventoryItem = cache(async function getInventoryItem(identifier: string) {
   const client = getClient()
   if (client) {
     try {
       const number = Number(identifier)
-      const query = client.from(TABLE).select("*").eq("status", "active").limit(1)
+      const query = client
+        .from(TABLE)
+        .select(SELECT_COLUMNS)
+        .eq("status", "active")
+        .limit(1)
 
       if (!Number.isNaN(number)) {
         query.eq("inventory_number", number)
@@ -93,7 +99,7 @@ export async function getInventoryItem(identifier: string) {
       (product) =>
         product.slug === identifier ||
         product.inventoryNumber === Number(identifier)
-    ) || null
+  ) || null
 
   return staticResponse(fallback)
-}
+})

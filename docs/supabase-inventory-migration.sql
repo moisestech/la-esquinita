@@ -7,6 +7,7 @@ ALTER TABLE products
   ADD COLUMN IF NOT EXISTS primary_image text,
   ADD COLUMN IF NOT EXISTS underside_image text,
   ADD COLUMN IF NOT EXISTS square_catalog_object_id text,
+  ADD COLUMN IF NOT EXISTS square_order_id text,
   ADD COLUMN IF NOT EXISTS square_sku text,
   ADD COLUMN IF NOT EXISTS dimensions text,
   ADD COLUMN IF NOT EXISTS sold_at timestamptz,
@@ -22,3 +23,8 @@ SET
   display_number = CONCAT('No. ', inventory_number),
   is_unique = COALESCE(is_unique, true)
 WHERE display_number IS NULL;
+
+-- Performance check template (run in Supabase SQL Editor when needed)
+-- EXPLAIN ANALYZE SELECT slug, name, price
+-- FROM products
+-- WHERE inventory_number = 123;

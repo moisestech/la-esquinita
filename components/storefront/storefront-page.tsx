@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useDeferredValue, useEffect, useMemo, useRef, useState } from "react"
 import { motion, useAnimation } from "framer-motion"
 import SugarIcingMarquee from "./sugar-icing-marquee"
 import ProductGrid from "./product-grid"
@@ -77,34 +77,49 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
   const [inventorySource, setInventorySource] = useState<"static" | "supabase">(initialSource)
 
   const [searchTerm, setSearchTerm] = useState("")
+  const deferredSearchTerm = useDeferredValue(searchTerm)
   const gridRef = useRef<HTMLDivElement | null>(null)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
   const [visibleCount, setVisibleCount] = useState(
     Math.min(INITIAL_BATCH, (initialProducts.length ? initialProducts : inventoryProducts).length)
   )
 
-  const filteredProducts = useMemo(() => {
-    if (!searchTerm.trim()) return products
-    const normalized = searchTerm.trim().toLowerCase()
-    return products.filter((product) => {
-      const numberMatch = product.inventoryNumber
-        ?.toString()
-        .startsWith(normalized)
-      const displayMatch = product.displayNumber?.toLowerCase().includes(normalized)
-      const slugMatch = product.slug.toLowerCase().includes(normalized)
-      const nameMatch = product.name.toLowerCase().includes(normalized)
-      return numberMatch || displayMatch || slugMatch || nameMatch
-    })
-  }, [products, searchTerm])
+  const searchPool = useMemo(
+    () =>
+      products.map((product) => ({
+        product,
+        number: product.inventoryNumber?.toString().toLowerCase() ?? "",
+        display: product.displayNumber?.toLowerCase() ?? "",
+        slug: product.slug.toLowerCase(),
+        name: product.name.toLowerCase(),
+      })),
+    [products]
+  )
 
-  const isSearching = Boolean(searchTerm.trim())
+  const filteredProducts = useMemo(() => {
+    const normalized = deferredSearchTerm.trim().toLowerCase()
+    if (!normalized) return products
+
+    return searchPool
+      .filter(({ number, display, slug, name }) => {
+        return (
+          (number && number.startsWith(normalized)) ||
+          (display && display.includes(normalized)) ||
+          slug.includes(normalized) ||
+          name.includes(normalized)
+        )
+      })
+      .map(({ product }) => product)
+  }, [products, deferredSearchTerm, searchPool])
+
+  const isSearching = Boolean(deferredSearchTerm.trim())
   const displayedProducts = useMemo(() => {
     if (isSearching) return filteredProducts
     return filteredProducts.slice(0, visibleCount)
   }, [filteredProducts, isSearching, visibleCount])
 
   useEffect(() => {
-    if (!searchTerm.trim() || filteredProducts.length === 0) return
+    if (!deferredSearchTerm.trim() || filteredProducts.length === 0) return
 
     const targetId = filteredProducts[0]?.id
     if (!targetId) return
@@ -113,7 +128,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
     if (!element) return
 
     element.scrollIntoView({ behavior: "smooth", block: "start" })
-  }, [filteredProducts, searchTerm])
+  }, [filteredProducts, deferredSearchTerm])
 
   useEffect(() => {
     if (isSearching) return
@@ -206,6 +221,17 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 1 }}
         />
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-end pb-10 pointer-events-none"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 1.2 }}
+        >
+          <p className="text-white text-xl md:text-2xl font-semibold tracking-[0.3em] uppercase drop-shadow-lg">
+            Scroll down to purchase
+          </p>
+          <span className="mt-2 text-4xl md:text-5xl text-white animate-bounce">↓</span>
+        </motion.div>
       </motion.div>
 
       {/* Sugar Icing Marquee */}
@@ -249,9 +275,6 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
               }}
             />
           </div>
-          <p className="text-sm text-gray-700">
-            {inventorySource === "supabase" ? "Live inventory feed" : "Demo inventory (sample data)"}
-          </p>
         </motion.div>
 
       {/* Product Grid */}

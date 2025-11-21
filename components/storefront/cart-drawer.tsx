@@ -1,11 +1,19 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, ShoppingBag, Trash2, Plus, Minus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/contexts/cart-context"
+import { useToast } from "@/hooks/use-toast"
 import CouponInput from "./coupon-input"
+
+declare global {
+  interface Window {
+    Square?: any
+    ApplePaySession?: any
+  }
+}
 
 interface CartDrawerProps {
   isOpen: boolean
@@ -16,7 +24,6 @@ export default function CartDrawer({
   isOpen, 
   onClose
 }: CartDrawerProps) {
-  const [isCheckingOut, setIsCheckingOut] = useState(false)
   const { 
     cartItems, 
     appliedCoupon,
@@ -27,21 +34,23 @@ export default function CartDrawer({
     getCartDiscount, 
     getCartItemCount,
     applyCoupon,
-    removeCoupon
+    removeCoupon,
+    clearCart,
   } = useCart()
+  const { toast } = useToast()
 
   const totalItems = getCartItemCount()
   const subtotal = getCartSubtotal()
   const discount = getCartDiscount()
   const total = getCartTotal()
 
-  const handleCheckout = async () => {
-    setIsCheckingOut(true)
-    // TODO: Implement checkout logic
-    setTimeout(() => {
-      setIsCheckingOut(false)
-      onClose()
-    }, 2000)
+  const handlePaymentSuccess = () => {
+    toast({
+      title: "Payment successful",
+      description: "Thanks for supporting La Esquinita!",
+    })
+    clearCart()
+    onClose()
   }
 
   return (
@@ -193,13 +202,11 @@ export default function CartDrawer({
                   </div>
                 </div>
 
-                {/* Checkout Button */}
-                <Button
-                  disabled
-                  className="w-full bg-gray-500 text-white py-3 cursor-not-allowed opacity-75"
-                >
-                  Checkout Opens November 19th
-                </Button>
+                <SquarePaymentSection
+                  cartItems={cartItems}
+                  total={total}
+                  onSuccess={handlePaymentSuccess}
+                />
 
                 {/* Continue Shopping */}
                 <Button
@@ -216,4 +223,182 @@ export default function CartDrawer({
       )}
     </AnimatePresence>
   )
-} 
+}
+
+type SquarePaymentSectionProps = {
+  cartItems: Array<{
+    id: string
+    name: string
+    price: number
+    quantity: number
+    slug: string
+  }>
+  total: number
+  onSuccess: () => void
+}
+
+function SquarePaymentSection({
+  cartItems,
+  total,
+  onSuccess,
+}: SquarePaymentSectionProps) {
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [card, setCard] = useState<any>(null)
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [statusMessage, setStatusMessage] = useState<string | null>(null)
+  const [squareEnv, setSquareEnv] = useState<"sandbox" | "production">("sandbox")
+
+  const paymentItems = useMemo(
+    () =>
+      cartItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        slug: item.slug,
+      })),
+    [cartItems]
+  )
+
+  useEffect(() => {
+    if (cartItems.length === 0) return
+    let isMounted = true
+
+    const loadSquareScript = (env: "sandbox" | "production") => {
+      const scriptId = "square-payments-sdk"
+      const existingScript = document.getElementById(scriptId)
+      const src =
+        env === "production"
+          ? "https://web.squarecdn.com/v1/square.js"
+          : "https://sandbox.web.squarecdn.com/v1/square.js"
+
+      return new Promise<void>((resolve, reject) => {
+        if (window.Square) {
+          resolve()
+          return
+        }
+
+        if (existingScript) {
+          existingScript.addEventListener("load", () => resolve(), { once: true })
+          existingScript.addEventListener("error", () => reject(new Error("Square script failed")), { once: true })
+          return
+        }
+
+        const script = document.createElement("script")
+        script.id = scriptId
+        script.src = src
+        script.async = true
+        script.onload = () => resolve()
+        script.onerror = () => reject(new Error("Square script failed"))
+        document.body.appendChild(script)
+      })
+    }
+
+    const initPayments = async () => {
+      try {
+        setStatusMessage("Preparing checkout...")
+        const response = await fetch("/api/square/config")
+        if (!response.ok) {
+          throw new Error("Checkout temporarily unavailable")
+        }
+        const config = await response.json()
+        if (!isMounted) return
+        setSquareEnv(config.environment === "production" ? "production" : "sandbox")
+        await loadSquareScript(config.environment === "production" ? "production" : "sandbox")
+        if (!window.Square) {
+          throw new Error("Square failed to initialize")
+        }
+
+        const payments = window.Square.payments(config.applicationId, config.locationId, {
+          environment: config.environment,
+        })
+        const cardInstance = await payments.card()
+        await cardInstance.attach("#square-card-container")
+
+        if (!isMounted) return
+        setCard(cardInstance)
+        setStatusMessage(null)
+        setIsLoading(false)
+
+        // Apple Pay support is disabled for now. See Sprint 4 tasks if needed later.
+      } catch (err) {
+        if (!isMounted) return
+        console.error(err)
+        setError(err instanceof Error ? err.message : "Unable to load checkout")
+        setIsLoading(false)
+        setStatusMessage(null)
+      }
+    }
+
+    initPayments()
+    return () => {
+      isMounted = false
+    }
+  }, [cartItems.length])
+
+  const sendPayment = async (token: string) => {
+    const response = await fetch("/api/checkout/square", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sourceId: token,
+        cartItems: paymentItems,
+        totalAmount: total,
+      }),
+    })
+
+    if (!response.ok) {
+      const payload = await response.json().catch(() => ({}))
+      throw new Error(payload.error || "Square payment failed")
+    }
+    return response.json()
+  }
+
+  const handleCardPayment = async () => {
+    if (!card) return
+    setIsProcessing(true)
+    setError(null)
+    try {
+      const result = await card.tokenize()
+      if (result.status !== "OK") {
+        throw new Error(result.errors?.[0]?.message || "Card tokenization failed")
+      }
+      await sendPayment(result.token)
+      onSuccess()
+    } catch (err) {
+      console.error(err)
+      setError(err instanceof Error ? err.message : "Payment failed")
+    } finally {
+      setIsProcessing(false)
+    }
+  }
+
+  if (cartItems.length === 0) return null
+
+  return (
+    <div className="space-y-4">
+      {statusMessage && (
+        <p className="text-sm text-gray-500">{statusMessage}</p>
+      )}
+      {error && (
+        <p className="text-sm text-red-500">{error}</p>
+      )}
+      <div className="border border-gray-200 rounded-lg p-3">
+        <div id="square-card-container" className="min-h-[120px] flex items-center justify-center">
+          {isLoading && <span className="text-sm text-gray-500">Loading secure card form...</span>}
+        </div>
+      </div>
+      <Button
+        disabled={!card || isProcessing}
+        onClick={handleCardPayment}
+        className="w-full bg-miami-pink text-white py-3"
+      >
+        {isProcessing ? "Processing..." : `Pay $${total.toFixed(2)} with Card`}
+      </Button>
+      <p className="text-xs text-gray-500 text-center">
+        Powered by Square ({squareEnv === "production" ? "Live" : "Sandbox"})
+      </p>
+    </div>
+  )
+}
