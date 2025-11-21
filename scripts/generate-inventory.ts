@@ -15,9 +15,16 @@ type MetadataDefaults = {
   tags: string[]
 }
 
+const EGG_METADATA: MetadataDefaults = {
+  price: 60,
+  category: "ceramic-object",
+  tags: ["egg", "ceramic", "limited"],
+}
+
 const LABEL_METADATA: Record<string, MetadataDefaults> = {
   pie: { price: 140, category: "ceramic-object", tags: ["pie", "ceramic", "one-of-one"] },
-  parrot: { price: 185, category: "ceramic-object", tags: ["parrot", "ceramic", "one-of-one"] },
+  parrot: { price: 175, category: "ceramic-object", tags: ["parrot", "ceramic", "one-of-one"] },
+  "cake-topper": { price: 70, category: "ceramic-object", tags: ["cake", "topper", "ceramic"] },
   "tuba-ash-tray": { price: 55, category: "ceramic-object", tags: ["tuba", "ashtray", "ceramic"] },
   "wounded-mug": { price: 70, category: "ceramic-object", tags: ["mug", "ceramic", "limited"] },
 }
@@ -143,7 +150,7 @@ function buildRecords(grouped: Map<string, { number: number; label: string; imag
     const padded = padNumber(number)
     const slug = `${padded}-${labelSlug}`
     const displayNumber = `No. ${number}`
-    const metadata = LABEL_METADATA[labelSlug] ?? DEFAULT_METADATA
+    const metadata = LABEL_METADATA[labelSlug] ?? (labelSlug.startsWith("egg-") ? EGG_METADATA : DEFAULT_METADATA)
 
     const gallery = images
       .sort((a, b) => a.variant - b.variant)
