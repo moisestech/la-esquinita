@@ -37,6 +37,16 @@ export interface Database {
           status: 'active' | 'coming_soon' | 'archived'
           category: string | null
           tags: string[]
+          inventory_number: number | null
+          display_number: string | null
+          primary_image: string | null
+          underside_image: string | null
+          square_catalog_object_id: string | null
+          square_sku: string | null
+          square_order_id: string | null
+          dimensions: string | null
+          sold_at: string | null
+          is_unique: boolean | null
           created_at: string
           updated_at: string
         }
@@ -50,6 +60,16 @@ export interface Database {
           status?: 'active' | 'coming_soon' | 'archived'
           category?: string | null
           tags?: string[]
+          inventory_number?: number | null
+          display_number?: string | null
+          primary_image?: string | null
+          underside_image?: string | null
+          square_catalog_object_id?: string | null
+          square_sku?: string | null
+          square_order_id?: string | null
+          dimensions?: string | null
+          sold_at?: string | null
+          is_unique?: boolean | null
           created_at?: string
           updated_at?: string
         }
@@ -63,6 +83,16 @@ export interface Database {
           status?: 'active' | 'coming_soon' | 'archived'
           category?: string | null
           tags?: string[]
+          inventory_number?: number | null
+          display_number?: string | null
+          primary_image?: string | null
+          underside_image?: string | null
+          square_catalog_object_id?: string | null
+          square_sku?: string | null
+          square_order_id?: string | null
+          dimensions?: string | null
+          sold_at?: string | null
+          is_unique?: boolean | null
           created_at?: string
           updated_at?: string
         }

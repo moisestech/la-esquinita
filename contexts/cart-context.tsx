@@ -11,6 +11,7 @@ interface CartItem {
   image: string
   quantity: number
   slug: string
+  isUnique: boolean
 }
 
 interface CartContextType {
@@ -42,7 +43,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const savedCart = localStorage.getItem('la-esquinita-cart')
       if (savedCart) {
-        setCartItems(JSON.parse(savedCart))
+        const parsed: CartItem[] = JSON.parse(savedCart)
+        setCartItems(
+          parsed.map((item) => ({
+            ...item,
+            isUnique: typeof item.isUnique === 'boolean' ? item.isUnique : false,
+          }))
+        )
       }
     } catch (error) {
       console.log('Error loading cart from localStorage:', error)
@@ -70,12 +77,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addToCart = (product: Product, quantity: number = 1) => {
     setCartItems(prev => {
       const existingItem = prev.find(item => item.id === product.id)
+      const productIsUnique = product.is_unique ?? true
+      const normalizedQuantity = productIsUnique ? 1 : quantity
       
       if (existingItem) {
+        if (existingItem.isUnique) {
+          setToastQueue(prev => [
+            ...prev,
+            {
+              title: "Already in Cart",
+              description: `${product.name} is a one-of-one treasure. Only one per guest!`,
+              variant: "default",
+            },
+          ])
+          return prev
+        }
         // Update existing item quantity
         const updatedItems = prev.map(item => 
           item.id === product.id 
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: item.quantity + normalizedQuantity }
             : item
         )
         
@@ -93,8 +113,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
           name: product.name,
           price: product.price,
           image: product.image_urls[0] || "/placeholder-logo.png",
-          quantity,
+          quantity: normalizedQuantity,
           slug: product.slug,
+          isUnique: productIsUnique,
         }
         
         setToastQueue(prev => [...prev, {
@@ -125,9 +146,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
     
     setCartItems(prev => 
-      prev.map(item => 
-        item.id === productId ? { ...item, quantity } : item
-      )
+      prev.map(item => {
+        if (item.id !== productId) return item
+        if (item.isUnique) {
+          return { ...item, quantity: 1 }
+        }
+        return { ...item, quantity }
+      })
     )
   }
 

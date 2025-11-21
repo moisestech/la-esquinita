@@ -68,7 +68,7 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
   },
 ]
 
-export default function mosquitobar.png() {
+export default function EventsPage() {
   return (
     <div className="relative min-h-screen bg-[#040b06] text-[#7cff6b] font-mono">
       <div className="pointer-events-none absolute inset-0 opacity-20 mix-blend-screen bg-[repeating-linear-gradient(180deg,rgba(124,255,107,0.07)_0px,rgba(124,255,107,0.07)_1px,transparent_1px,transparent_3px)]" />

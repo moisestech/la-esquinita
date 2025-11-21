@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Heart, Share2, ShoppingCart, Star, Tag, Calendar } from "lucide-react"
 import { Product } from "@/lib/supabase"
@@ -19,6 +19,20 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const { addToCart, isInCart } = useCart()
   const { toast } = useToast()
   const cartEnabled = isCartEnabled()
+  const isUnique = product.is_unique ?? true
+  const productStatus = (product.status || "active") as string
+  const isSold = productStatus === "archived" || productStatus === "sold"
+  const isReserved = productStatus === "reserved"
+  const isComingSoon = productStatus === "coming_soon"
+  const isUnavailable = isSold || isReserved || isComingSoon
+  const inCart = isInCart(product.id)
+  const restockHref = `mailto:hello@laesquinita.com?subject=Restock%20Request%20for%20${encodeURIComponent(
+    product.name
+  )}`
+
+  useEffect(() => {
+    setQuantity(1)
+  }, [product.id])
 
   const handleAddToCart = async () => {
     setIsAddingToCart(true)
@@ -94,6 +108,11 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         >
           {product.name}
         </motion.h1>
+        {product.display_number && (
+          <p className="text-miami-pink font-semibold tracking-wide uppercase">
+            {product.display_number}
+          </p>
+        )}
         
         <motion.div 
           className="flex items-center space-x-4"
@@ -124,9 +143,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           <span className="text-3xl font-bold text-mint-rot">
             ${product.price.toFixed(2)}
           </span>
-          {product.status === "coming_soon" && (
-            <span className="px-3 py-1 bg-miami-yellow text-black text-sm font-medium rounded-full">
-              Coming Soon
+          {isUnavailable && (
+            <span className="px-3 py-1 bg-black text-white text-sm font-medium rounded-full">
+              {isSold ? "Sold" : isReserved ? "Reserved" : "Coming Soon"}
             </span>
           )}
         </div>
@@ -171,31 +190,38 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       )}
 
       {/* Quantity Selector */}
-      <motion.div 
-        className="space-y-2"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-      >
-        <h3 className="text-lg font-medium text-mint-rot">Quantity</h3>
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="w-10 h-10 rounded-full bg-sugar-pink text-mint-rot flex items-center justify-center hover:bg-miami-pink transition-colors"
-          >
-            -
-          </button>
-          <span className="text-xl font-medium text-mint-rot min-w-[3rem] text-center">
-            {quantity}
-          </span>
-          <button
-            onClick={() => setQuantity(quantity + 1)}
-            className="w-10 h-10 rounded-full bg-sugar-pink text-mint-rot flex items-center justify-center hover:bg-miami-pink transition-colors"
-          >
-            +
-          </button>
+      {!isUnique && (
+        <motion.div 
+          className="space-y-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <h3 className="text-lg font-medium text-mint-rot">Quantity</h3>
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              className="w-10 h-10 rounded-full bg-sugar-pink text-mint-rot flex items-center justify-center hover:bg-miami-pink transition-colors"
+            >
+              -
+            </button>
+            <span className="text-xl font-medium text-mint-rot min-w-[3rem] text-center">
+              {quantity}
+            </span>
+            <button
+              onClick={() => setQuantity(quantity + 1)}
+              className="w-10 h-10 rounded-full bg-sugar-pink text-mint-rot flex items-center justify-center hover:bg-miami-pink transition-colors"
+            >
+              +
+            </button>
+          </div>
+        </motion.div>
+      )}
+      {isUnique && (
+        <div className="p-4 rounded-2xl bg-sugar-pink/60 text-sm text-mint-rot font-medium">
+          One-of-one object. Limited to a single piece per customer.
         </div>
-      </motion.div>
+      )}
 
       {/* Action Buttons */}
       <motion.div 
@@ -206,9 +232,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       >
         <button
           onClick={handleAddToCart}
-          disabled={product.status === "coming_soon" || isAddingToCart || !cartEnabled}
+          disabled={isUnavailable || isAddingToCart || !cartEnabled || (isUnique && inCart)}
           className={`flex-1 py-4 px-6 rounded-2xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed ${
-            isInCart(product.id)
+            inCart
               ? 'bg-green-500 text-white hover:bg-green-600'
               : 'bg-mint-rot text-white hover:bg-opacity-90'
           }`}
@@ -224,16 +250,16 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               <ShoppingCart className="w-5 h-5" />
               <span>{getCartLockedMessage()}</span>
             </>
+          ) : isUnavailable ? (
+            <>
+              <ShoppingCart className="w-5 h-5" />
+              <span>{isSold ? "Sold Out" : isReserved ? "Reserved" : "Coming Soon"}</span>
+            </>
           ) : (
             <>
               <ShoppingCart className="w-5 h-5" />
               <span>
-                {product.status === "coming_soon"
-                  ? "Coming Soon"
-                  : isInCart(product.id)
-                    ? "In Cart ✓"
-                    : "Add to Cart"
-                }
+                {inCart ? "In Cart ✓" : "Add to Cart"}
               </span>
             </>
           )}
@@ -270,6 +296,20 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           <span>Category: {product.category}</span>
         </div>
       </motion.div>
+
+      {isUnavailable && (
+        <div className="mt-6 p-4 rounded-2xl border border-miami-pink bg-white/70">
+          <p className="text-mint-rot font-semibold mb-2">
+            Want to know when this piece returns?
+          </p>
+          <a
+            href={restockHref}
+            className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-miami-pink text-white font-medium"
+          >
+            Text us about restocks
+          </a>
+        </div>
+      )}
     </div>
   )
-} 
+}

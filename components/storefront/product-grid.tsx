@@ -3,11 +3,51 @@
 import React from "react"
 import { motion } from "framer-motion"
 import ProductCard from "./product-card"
-import { Product } from "@/lib/supabase"
+import { InventoryProduct } from "@/lib/inventory-data"
 
 interface ProductGridProps {
-  products: Product[]
+  products: InventoryProduct[]
 }
+
+const SPONSOR_INTERVAL = 16 // adjust to show banner every N items
+
+const sponsorImages = [
+  {
+    src: "/front.jpg",
+    alt: "La Esquinita storefront exterior",
+    caption: "Our Locust Projects takeover in full bloom",
+  },
+  {
+    src: "/storefront/420M5713.jpg",
+    alt: "La Esquinita shelving close-up",
+    caption: "New arrivals straight from the kiln",
+  },
+  {
+    src: "/storefront/420M5717.jpg",
+    alt: "Gallery view with shoppers",
+    caption: "Gallery magic captured mid-visit",
+  },
+  {
+    src: "/storefront/420M5723.jpg",
+    alt: "Wall display detail",
+    caption: "Handmade minis, lined up and glowing",
+  },
+  {
+    src: "/storefront/420M5730.jpg",
+    alt: "Interior corner vignette",
+    caption: "Ceramics, sweets, and archival finds",
+  },
+  {
+    src: "/storefront/420M5861.jpg",
+    alt: "Checkout counter styling",
+    caption: "Thank you for stepping into La Esquinita",
+  },
+  {
+    src: "/storefront/196A5134.jpg",
+    alt: "Shelf portrait from the pop-up",
+    caption: "Every object numbered, every story unique",
+  },
+]
 
 export default function ProductGrid({ products }: ProductGridProps) {
   return (
@@ -42,74 +82,37 @@ export default function ProductGrid({ products }: ProductGridProps) {
               />
             </motion.div>
             
-            {/* Sponsorship Image after every 4th product */}
-            {(index + 1) % 4 === 0 && (
+            {/* Sponsorship Image after every SPONSOR_INTERVAL products */}
+            {(index + 1) % SPONSOR_INTERVAL === 0 && (
               <motion.div
                 className="md:col-span-2 lg:col-span-3 xl:col-span-4"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{
                   duration: 0.8,
-                  delay: 0.1 * (index + 1),
-                  ease: "easeOut"
+                  delay: 0.05 * (index + 1),
+                  ease: "easeOut",
                 }}
               >
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl border-2 border-miami-pink/20">
-                  <motion.img
-                    src={
-                      // Rotate between different images
-                      (() => {
-                        const imageIndex = Math.floor((index + 1) / 4) % 6;
-                        const images = [
-                          "https://res.cloudinary.com/dck5rzi4h/image/upload/v1753918203/la-esquinita/La_Esquinita_sponsorship_2025_Tara_Long-store_jx4rl5.png",
-                          "/shop/path1.png",
-                          "/shop/path2.png",
-                          "/shop/path3.png",
-                          "/shop/path4.png",
-                          "/shop/path5.png"
-                        ];
-                        return images[imageIndex];
-                      })()
-                    }
-                    alt={
-                      (() => {
-                        const imageIndex = Math.floor((index + 1) / 4) % 6;
-                        const alts = [
-                          "La Esquinita Sponsorship 2025 - Tara Long Store",
-                          "La Esquinita Collection",
-                          "La Esquinita Gallery",
-                          "La Esquinita at Locust Projects",
-                          "Sweet Fragments",
-                          "Celebration Pieces"
-                        ];
-                        return alts[imageIndex];
-                      })()
-                    }
-                    className="w-full h-64 md:h-80 object-cover"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-white text-lg md:text-xl font-bold mb-1">
-
-                    </h3>
-                    <p className="text-white/90 text-sm">
-                    {(() => {
-                      const imageIndex = Math.floor((index + 1) / 4) % 6;
-                      const captions = [
-                        '"Keeping Convenience Sweet"',
-                        '"Ceramic Treasures from Miami"',
-                        '"Handcrafted with Love"',
-                        '"Art Meets Function"',
-                        '"Fragments of Joy"',
-                        '"Celebrating Every Moment"'
-                      ];
-                      return captions[imageIndex];
-                    })()}
-                    </p>
-                  </div>
-                </div>
+                {(() => {
+                  const imageIndex = Math.floor((index + 1) / SPONSOR_INTERVAL)
+                  const asset = sponsorImages[imageIndex % sponsorImages.length]
+                  return (
+                    <div className="relative overflow-hidden rounded-2xl shadow-2xl border-2 border-miami-pink/20">
+                      <motion.img
+                        src={asset.src}
+                        alt={asset.alt}
+                        className="w-full h-64 md:h-80 object-cover"
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <p className="text-white/90 text-sm">{asset.caption}</p>
+                      </div>
+                    </div>
+                  )
+                })()}
               </motion.div>
             )}
           </React.Fragment>
