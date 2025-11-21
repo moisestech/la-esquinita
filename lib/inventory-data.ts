@@ -14,7 +14,7 @@ export type InventoryProduct = Product & {
 export const inventoryRecords = rawInventory as InventoryRecord[]
 
 const recordToProduct = (record: InventoryRecord): Product => ({
-  id: `inventory-${record.numberPadded}`,
+  id: record.slug,
   slug: record.slug,
   name: `${record.displayNumber} · ${record.title}`,
   price: record.price,
