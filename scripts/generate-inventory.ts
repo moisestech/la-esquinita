@@ -84,7 +84,7 @@ function padNumber(value: number) {
 }
 
 function descriptionFor(title: string) {
-  return `Hand-built ceramic ${title} from the La Esquinita inventory.`
+  return `Hand-poured ceramic ${title} from the La Esquinita inventory.`
 }
 
 function altTextFor(displayNumber: string, title: string) {

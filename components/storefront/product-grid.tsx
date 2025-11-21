@@ -13,15 +13,40 @@ const SPONSOR_INTERVAL = 16 // adjust to show banner every N items
 
 const sponsorImages = [
   {
-    src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1753918203/la-esquinita/La_Esquinita_sponsorship_2025_Tara_Long-store_jx4rl5.png",
-    alt: "La Esquinita Sponsorship 2025 - Tara Long Store",
-    caption: '"Keeping Convenience Sweet"',
+    src: "/front.jpg",
+    alt: "La Esquinita storefront exterior",
+    caption: "Our Locust Projects takeover in full bloom",
   },
-  { src: "/shop/path1.png", alt: "La Esquinita Collection", caption: '"Ceramic Treasures from Miami"' },
-  { src: "/shop/path2.png", alt: "La Esquinita Gallery", caption: '"Handcrafted with Love"' },
-  { src: "/shop/path3.png", alt: "La Esquinita at Locust Projects", caption: '"Art Meets Function"' },
-  { src: "/shop/path4.png", alt: "Sweet Fragments", caption: '"Fragments of Joy"' },
-  { src: "/shop/path5.png", alt: "Celebration Pieces", caption: '"Celebrating Every Moment"' },
+  {
+    src: "/storefront/420M5713.jpg",
+    alt: "La Esquinita shelving close-up",
+    caption: "New arrivals straight from the kiln",
+  },
+  {
+    src: "/storefront/420M5717.jpg",
+    alt: "Gallery view with shoppers",
+    caption: "Gallery magic captured mid-visit",
+  },
+  {
+    src: "/storefront/420M5723.jpg",
+    alt: "Wall display detail",
+    caption: "Handmade minis, lined up and glowing",
+  },
+  {
+    src: "/storefront/420M5730.jpg",
+    alt: "Interior corner vignette",
+    caption: "Ceramics, sweets, and archival finds",
+  },
+  {
+    src: "/storefront/420M5861.jpg",
+    alt: "Checkout counter styling",
+    caption: "Thank you for stepping into La Esquinita",
+  },
+  {
+    src: "/storefront/196A5134.jpg",
+    alt: "Shelf portrait from the pop-up",
+    caption: "Every object numbered, every story unique",
+  },
 ]
 
 export default function ProductGrid({ products }: ProductGridProps) {

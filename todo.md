@@ -15,8 +15,8 @@
 - [ ] Prototype an admin-only mutation (protected by service role key) to flip status back to `available` in case we need to restock or undo a Square sale.
 
 ## Sprint 3 – Storefront & Product Experience Refresh
-- [ ] Replace placeholder product arrays with live Supabase queries so `/storefront` and `/product/[slug]` render real inventory (SSR for fast mobile loads, fallback client fetch for hydration).
-- [ ] Add a sticky search input at the top of the storefront that filters by number while typing (“19” should match `19`, `190`, `191`, etc.) and scroll-locks to the first hit on mobile.
+- [x] Replace placeholder product arrays with live Supabase queries so `/storefront` and `/product/[slug]` render real inventory (SSR for fast mobile loads, fallback client fetch for hydration).
+- [x] Add a sticky search input at the top of the storefront that filters by number while typing (“19” should match `19`, `190`, `191`, etc.) and scroll-locks to the first hit on mobile.
 - [ ] Surface the inventory number on `ProductCard` and `ProductDetailPage`, add hover/secondary image swaps (`_2` photo) so shoppers immediately see the stamped number.
 - [ ] Update cart behavior so unique objects are limited to quantity 1, and automatically disable “Add to cart” when Supabase says `status = sold` or when another shopper is checking out.
 - [ ] Design a sold-out overlay/badge plus optional “text us about restocks” CTA so gallery visitors know an object is gone even if they still hold it physically.

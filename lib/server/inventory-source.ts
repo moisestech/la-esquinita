@@ -9,8 +9,23 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 const getClient = () => {
-  if (!SUPABASE_URL || !SUPABASE_KEY) return null
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn(
+        "[inventory] Supabase credentials missing; falling back to static inventory"
+      )
+    }
+    return null
+  }
   return createClient<Database>(SUPABASE_URL, SUPABASE_KEY)
+}
+
+const formatSupabaseError = (err: unknown) => {
+  if (err instanceof Error) return err.message
+  if (typeof err === "object" && err !== null) {
+    return JSON.stringify(err)
+  }
+  return String(err)
 }
 
 const staticResponse = (item?: InventoryProduct | null) => ({
@@ -37,7 +52,7 @@ export async function getInventoryList() {
         }
       }
     } catch (err) {
-      console.error("[inventory] Supabase fetch failed:", err)
+      console.warn("[inventory] Supabase fetch failed:", formatSupabaseError(err))
     }
   }
 
@@ -69,7 +84,7 @@ export async function getInventoryItem(identifier: string) {
         }
       }
     } catch (err) {
-      console.error("[inventory] Supabase lookup failed:", err)
+      console.warn("[inventory] Supabase lookup failed:", formatSupabaseError(err))
     }
   }
 

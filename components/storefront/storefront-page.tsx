@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import { motion, useAnimation } from "framer-motion"
 import SugarIcingMarquee from "./sugar-icing-marquee"
 import ProductGrid from "./product-grid"
@@ -10,6 +10,11 @@ import FloatingSprinkles from "./floating-sprinkles"
 import { Toaster } from "@/components/ui/toaster"
 import { useCart } from "@/contexts/cart-context"
 import { InventoryProduct, inventoryProducts } from "@/lib/inventory-data"
+
+interface StorefrontPageProps {
+  initialProducts: InventoryProduct[]
+  initialSource: "supabase" | "static"
+}
 
 const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min
 
@@ -62,15 +67,51 @@ function FloatingMosquitoLink() {
   )
 }
 
-export default function StorefrontPage() {
+export default function StorefrontPage({ initialProducts, initialSource }: StorefrontPageProps) {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [showHiddenDoor, setShowHiddenDoor] = useState(false)
   const { cartItems, addToCart, removeFromCart, updateQuantity } = useCart()
-  const [products, setProducts] = useState<InventoryProduct[]>(inventoryProducts)
-  const [inventorySource, setInventorySource] = useState<"static" | "supabase">("static")
+  const [products, setProducts] = useState<InventoryProduct[]>(
+    initialProducts.length ? initialProducts : inventoryProducts
+  )
+  const [inventorySource, setInventorySource] = useState<"static" | "supabase">(initialSource)
+
+  const [searchTerm, setSearchTerm] = useState("")
+  const gridRef = useRef<HTMLDivElement | null>(null)
+
+  const filteredProducts = useMemo(() => {
+    if (!searchTerm.trim()) return products
+    const normalized = searchTerm.trim().toLowerCase()
+    return products.filter((product) => {
+      const numberMatch = product.inventoryNumber
+        ?.toString()
+        .startsWith(normalized)
+      const slugMatch = product.slug.toLowerCase().includes(normalized)
+      const nameMatch = product.name.toLowerCase().includes(normalized)
+      return numberMatch || slugMatch || nameMatch
+    })
+  }, [products, searchTerm])
+
+  useEffect(() => {
+    if (!searchTerm.trim() || filteredProducts.length === 0) return
+
+    const targetId = filteredProducts[0]?.id
+    if (!targetId) return
+
+    const element = document.getElementById(`inventory-${targetId}`)
+    if (!element) return
+
+    element.scrollIntoView({ behavior: "smooth", block: "start" })
+  }, [filteredProducts, searchTerm])
 
   useEffect(() => {
     let isMounted = true
+
+    if (inventorySource === "supabase") {
+      return () => {
+        isMounted = false
+      }
+    }
 
     const loadInventory = async () => {
       try {
@@ -79,7 +120,7 @@ export default function StorefrontPage() {
         const payload = await response.json()
         if (!isMounted) return
 
-        if (Array.isArray(payload.items)) {
+        if (Array.isArray(payload.items) && payload.items.length) {
           setProducts(payload.items)
         }
         if (payload.source === "supabase" || payload.source === "static") {
@@ -95,7 +136,7 @@ export default function StorefrontPage() {
     return () => {
       isMounted = false
     }
-  }, [])
+  }, [inventorySource])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue">
@@ -174,10 +215,24 @@ export default function StorefrontPage() {
           </p>
         </motion.div>
 
-        {/* Product Grid */}
-        <ProductGrid 
-          products={products} 
-        />
+      {/* Product Grid */}
+        <div className="sticky top-0 z-30 pb-4 bg-gradient-to-b from-icing-white via-icing-white/95 to-transparent">
+          <label className="flex items-center gap-3 bg-white/90 border border-miami-pink/40 rounded-full px-4 py-3 shadow-lg">
+            <span className="text-sm font-semibold text-miami-pink uppercase tracking-wide">
+              Search No.
+            </span>
+            <input
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Try 19, 190, No. 21..."
+              className="flex-1 bg-transparent focus:outline-none text-mint-rot placeholder:text-mint-rot/60"
+            />
+          </label>
+        </div>
+
+        <div ref={gridRef}>
+          <ProductGrid products={filteredProducts} />
+        </div>
 
         {/* Hidden Door */}
         <HiddenDoor 

@@ -23,15 +23,33 @@ const getFallbackProduct = (slug: string): InventoryProduct | null => {
 
 interface ProductDetailPageProps {
   slug: string
+  initialProduct: InventoryProduct | null
+  initialSource: "supabase" | "static"
+  relatedProducts: InventoryProduct[]
 }
 
-export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
-  const [product, setProduct] = useState<InventoryProduct | null>(null)
-  const [loading, setLoading] = useState(true)
+export default function ProductDetailPage({
+  slug,
+  initialProduct,
+  initialSource,
+  relatedProducts,
+}: ProductDetailPageProps) {
+  const [product, setProduct] = useState<InventoryProduct | null>(initialProduct)
+  const [loading, setLoading] = useState(!initialProduct)
   const [error, setError] = useState<string | null>(null)
+  const relatedPool = relatedProducts.length ? relatedProducts : inventoryProducts
 
   useEffect(() => {
     let isMounted = true
+
+    if (initialProduct && initialSource === "supabase") {
+      setProduct(initialProduct)
+      setLoading(false)
+      setError(null)
+      return () => {
+        isMounted = false
+      }
+    }
 
     const loadProduct = async () => {
       setLoading(true)
@@ -45,20 +63,20 @@ export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
 
         if (payload.item) {
           setProduct(payload.item)
-          setLoading(false)
-          return
-        }
-      } catch (err) {
-        console.error("Failed to fetch inventory item", err)
+      setLoading(false)
+      return
+    }
+  } catch (err) {
+    console.error("Failed to fetch inventory item", err)
       }
 
       const fallback = getFallbackProduct(slug)
       if (isMounted) {
-        if (fallback) {
-          setProduct(fallback)
-        } else {
-          setError("Product not found")
-        }
+      if (fallback) {
+        setProduct(fallback)
+      } else {
+        setError("Product not found")
+      }
         setLoading(false)
       }
     }
@@ -68,7 +86,7 @@ export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
     return () => {
       isMounted = false
     }
-  }, [slug])
+  }, [slug, initialProduct, initialSource])
 
   if (loading) {
     return (
@@ -179,7 +197,7 @@ export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <RelatedProducts currentProduct={product} products={products} />
+          <RelatedProducts currentProduct={product} products={relatedPool} />
         </motion.div>
       </div>
 
