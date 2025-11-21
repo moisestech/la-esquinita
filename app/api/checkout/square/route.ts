@@ -67,9 +67,8 @@ export async function POST(request: Request) {
     const discountCents = Math.max(0, subtotalCents - totalAmountCents)
 
     const client = getSquareClient()
-    const { ordersApi, paymentsApi } = client
 
-    const orderResponse = await ordersApi.createOrder({
+    const orderResponse = await client.orders.create({
       order: {
         idempotencyKey: randomUUID(),
         locationId: squareConfig.locationId,
@@ -90,9 +89,9 @@ export async function POST(request: Request) {
       },
     })
 
-    const orderId = orderResponse.result.order?.id
+    const orderId = orderResponse.data?.order?.id
 
-    const paymentResponse = await paymentsApi.createPayment({
+    const paymentResponse = await client.payments.create({
       idempotencyKey: randomUUID(),
       sourceId: body.sourceId,
       locationId: squareConfig.locationId,
@@ -107,19 +106,19 @@ export async function POST(request: Request) {
 
     const soldAt = new Date().toISOString()
     const slugs = body.cartItems.map((item) => item.slug)
-    const paymentId = paymentResponse.result.payment?.id || null
-    const orderIdentifier = orderId || paymentResponse.result.payment?.orderId || paymentId
+    const paymentId = paymentResponse.data?.payment?.id || null
+    const orderIdentifier = orderId || paymentResponse.data?.payment?.orderId || paymentId
 
     if (slugs.length) {
       try {
         const supabase = getSupabaseAdmin()
-        const { error: updateError } = await supabase
-          .from(INVENTORY_TABLE)
-          .update({
-            status: "active",
-            sold_at: soldAt,
-            square_order_id: orderIdentifier,
-          })
+      const { error: updateError } = await supabase
+        .from(INVENTORY_TABLE)
+        .update({
+          status: "active",
+          sold_at: soldAt,
+          square_order_id: orderIdentifier,
+        })
           .in("slug", slugs)
 
         if (updateError) {
@@ -131,7 +130,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      payment: paymentResponse.result.payment,
+      payment: paymentResponse.data?.payment,
       orderId: orderIdentifier,
     })
   } catch (error) {
