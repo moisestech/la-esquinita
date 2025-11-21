@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useCart } from "@/contexts/cart-context"
 import { useToast } from "@/hooks/use-toast"
 import CouponInput from "./coupon-input"
+import { useRouter } from "next/navigation"
 
 declare global {
   interface Window {
@@ -18,6 +19,11 @@ declare global {
 interface CartDrawerProps {
   isOpen: boolean
   onClose: () => void
+}
+
+type CheckoutResult = {
+  orderId?: string
+  paymentId?: string
 }
 
 export default function CartDrawer({ 
@@ -38,19 +44,43 @@ export default function CartDrawer({
     clearCart,
   } = useCart()
   const { toast } = useToast()
+  const router = useRouter()
 
   const totalItems = getCartItemCount()
   const subtotal = getCartSubtotal()
   const discount = getCartDiscount()
   const total = getCartTotal()
 
-  const handlePaymentSuccess = () => {
+  const handlePaymentSuccess = (details?: CheckoutResult) => {
     toast({
       title: "Payment successful",
       description: "Thanks for supporting La Esquinita!",
     })
     clearCart()
     onClose()
+
+    const params = new URLSearchParams()
+    if (details?.orderId) {
+      params.set("orderId", details.orderId)
+    } else if (details?.paymentId) {
+      params.set("paymentId", details.paymentId)
+    }
+    const query = params.toString()
+    router.push(`/checkout/success${query ? `?${query}` : ""}`)
+  }
+
+  const handlePaymentFailure = (message: string) => {
+    toast({
+      title: "Payment failed",
+      description: message,
+      variant: "destructive",
+    })
+    onClose()
+    const params = new URLSearchParams()
+    if (message) {
+      params.set("reason", message)
+    }
+    router.push(`/checkout/failure${message ? `?${params.toString()}` : ""}`)
   }
 
   return (
@@ -206,6 +236,7 @@ export default function CartDrawer({
                   cartItems={cartItems}
                   total={total}
                   onSuccess={handlePaymentSuccess}
+                  onFailure={handlePaymentFailure}
                 />
 
                 {/* Continue Shopping */}
@@ -234,13 +265,22 @@ type SquarePaymentSectionProps = {
     slug: string
   }>
   total: number
-  onSuccess: () => void
+  onSuccess: (details?: CheckoutResult) => void
+  onFailure?: (message: string) => void
+}
+
+type CheckoutResponsePayload = {
+  orderId?: string | null
+  payment?: {
+    id?: string | null
+  } | null
 }
 
 function SquarePaymentSection({
   cartItems,
   total,
   onSuccess,
+  onFailure,
 }: SquarePaymentSectionProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -248,6 +288,9 @@ function SquarePaymentSection({
   const [isProcessing, setIsProcessing] = useState(false)
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
   const [squareEnv, setSquareEnv] = useState<"sandbox" | "production">("sandbox")
+  const [payments, setPayments] = useState<any>(null)
+  const [applePay, setApplePay] = useState<any>(null)
+  const [applePayReady, setApplePayReady] = useState(false)
 
   const paymentItems = useMemo(
     () =>
@@ -310,18 +353,18 @@ function SquarePaymentSection({
           throw new Error("Square failed to initialize")
         }
 
-        const payments = window.Square.payments(config.applicationId, config.locationId, {
+        const paymentsInstance = window.Square.payments(config.applicationId, config.locationId, {
           environment: config.environment,
         })
-        const cardInstance = await payments.card()
+        const cardInstance = await paymentsInstance.card()
         await cardInstance.attach("#square-card-container")
 
         if (!isMounted) return
+        setPayments(paymentsInstance)
         setCard(cardInstance)
         setStatusMessage(null)
         setIsLoading(false)
 
-        // Apple Pay support is disabled for now. See Sprint 4 tasks if needed later.
       } catch (err) {
         if (!isMounted) return
         console.error(err)
@@ -337,7 +380,55 @@ function SquarePaymentSection({
     }
   }, [cartItems.length])
 
-  const sendPayment = async (token: string) => {
+  useEffect(() => {
+    if (!payments || cartItems.length === 0) {
+      setApplePay(null)
+      setApplePayReady(false)
+      return
+    }
+
+    let isActive = true
+    const setupApplePay = async () => {
+      try {
+        const paymentRequest = payments.paymentRequest({
+          countryCode: "US",
+          currencyCode: "USD",
+          total: {
+            amount: total.toFixed(2),
+            label: "La Esquinita",
+          },
+          lineItems: cartItems.map((item) => ({
+            amount: (item.price * item.quantity).toFixed(2),
+            label: item.name,
+          })),
+        })
+
+        const applePayInstance = await payments.applePay(paymentRequest)
+        if (!applePayInstance) return
+        const canUse = await applePayInstance.canUse()
+        if (!isActive) return
+        if (canUse) {
+          setApplePay(applePayInstance)
+          setApplePayReady(true)
+        } else {
+          setApplePay(null)
+          setApplePayReady(false)
+        }
+      } catch (err) {
+        console.warn("Apple Pay unavailable:", err)
+        if (!isActive) return
+        setApplePay(null)
+        setApplePayReady(false)
+      }
+    }
+
+    setupApplePay()
+    return () => {
+      isActive = false
+    }
+  }, [payments, cartItems, total])
+
+  const sendPayment = async (token: string): Promise<CheckoutResponsePayload> => {
     const response = await fetch("/api/checkout/square", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -348,11 +439,11 @@ function SquarePaymentSection({
       }),
     })
 
+    const payload = await response.json().catch(() => ({}))
     if (!response.ok) {
-      const payload = await response.json().catch(() => ({}))
       throw new Error(payload.error || "Square payment failed")
     }
-    return response.json()
+    return payload as CheckoutResponsePayload
   }
 
   const handleCardPayment = async () => {
@@ -364,11 +455,40 @@ function SquarePaymentSection({
       if (result.status !== "OK") {
         throw new Error(result.errors?.[0]?.message || "Card tokenization failed")
       }
-      await sendPayment(result.token)
-      onSuccess()
+      const paymentResult = await sendPayment(result.token)
+      onSuccess({
+        orderId: paymentResult.orderId ?? undefined,
+        paymentId: paymentResult.payment?.id ?? undefined,
+      })
     } catch (err) {
       console.error(err)
-      setError(err instanceof Error ? err.message : "Payment failed")
+      const message = err instanceof Error ? err.message : "Payment failed"
+      setError(message)
+      onFailure?.(message)
+    } finally {
+      setIsProcessing(false)
+    }
+  }
+
+  const handleApplePayPayment = async () => {
+    if (!applePay) return
+    setIsProcessing(true)
+    setError(null)
+    try {
+      const result = await applePay.tokenize()
+      if (result.status !== "OK") {
+        throw new Error(result.errors?.[0]?.message || "Apple Pay tokenization failed")
+      }
+      const paymentResult = await sendPayment(result.token)
+      onSuccess({
+        orderId: paymentResult.orderId ?? undefined,
+        paymentId: paymentResult.payment?.id ?? undefined,
+      })
+    } catch (err) {
+      console.error(err)
+      const message = err instanceof Error ? err.message : "Apple Pay payment failed"
+      setError(message)
+      onFailure?.(message)
     } finally {
       setIsProcessing(false)
     }
@@ -396,6 +516,18 @@ function SquarePaymentSection({
       >
         {isProcessing ? "Processing..." : `Pay $${total.toFixed(2)} with Card`}
       </Button>
+      {applePayReady && (
+        <button
+          onClick={handleApplePayPayment}
+          disabled={isProcessing}
+          className="w-full flex items-center justify-center gap-2 rounded-lg border border-black bg-black py-3 text-white text-lg transition-opacity disabled:opacity-60"
+        >
+          <span className="text-xl font-semibold tracking-tight">Apple Pay</span>
+          <span className="text-base">
+            {isProcessing ? "Processing..." : `Pay $${total.toFixed(2)}`}
+          </span>
+        </button>
+      )}
       <p className="text-xs text-gray-500 text-center">
         Powered by Square ({squareEnv === "production" ? "Live" : "Sandbox"})
       </p>

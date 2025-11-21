@@ -105,28 +105,34 @@ export async function POST(request: Request) {
       buyerEmailAddress: body.customerEmail,
     })
 
-    const supabase = getSupabaseAdmin()
     const soldAt = new Date().toISOString()
     const slugs = body.cartItems.map((item) => item.slug)
+    const paymentId = paymentResponse.result.payment?.id || null
+    const orderIdentifier = orderId || paymentResponse.result.payment?.orderId || paymentId
 
     if (slugs.length) {
-      const { error: updateError } = await supabase
-        .from(INVENTORY_TABLE)
-        .update({
-          status: "sold",
-          sold_at: soldAt,
-          square_order_id: orderId || paymentResponse.result.payment?.id || null,
-        })
-        .in("slug", slugs)
+      try {
+        const supabase = getSupabaseAdmin()
+        const { error: updateError } = await supabase
+          .from(INVENTORY_TABLE)
+          .update({
+            status: "active",
+            sold_at: soldAt,
+            square_order_id: orderIdentifier,
+          })
+          .in("slug", slugs)
 
-      if (updateError) {
-        console.error("[square] Failed to update Supabase status", updateError)
+        if (updateError) {
+          console.error("[square] Failed to update Supabase status", updateError)
+        }
+      } catch (err) {
+        console.error("[square] Supabase admin unavailable", err)
       }
     }
 
     return NextResponse.json({
       payment: paymentResponse.result.payment,
-      orderId,
+      orderId: orderIdentifier,
     })
   } catch (error) {
     console.error("[square] checkout error", error)

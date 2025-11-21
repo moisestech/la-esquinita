@@ -57,7 +57,9 @@ export default function RelatedProducts({ currentProduct, products }: RelatedPro
                   />
                   
                   {/* Status Badge */}
-                  {product.status === "coming_soon" && (
+                  {["coming_soon", "coming-soon"].includes(
+                    (product.inventoryStatus || product.status || "active").toLowerCase()
+                  ) && (
                     <div className="absolute top-2 right-2 bg-miami-yellow text-black text-xs px-2 py-1 rounded-full font-medium">
                       Coming Soon
                     </div>

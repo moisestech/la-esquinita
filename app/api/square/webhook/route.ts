@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       const { error } = await supabase
         .from(INVENTORY_TABLE)
         .update({
-          status: "sold",
+          status: "active",
           sold_at: paidAt,
           square_order_id: orderId,
         })

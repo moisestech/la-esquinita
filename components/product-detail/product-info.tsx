@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Heart, Share2, ShoppingCart, Star, Tag, Calendar } from "lucide-react"
-import { Product } from "@/lib/supabase"
+import { InventoryProduct } from "@/lib/inventory-data"
 import { useCart } from "@/contexts/cart-context"
 import { useToast } from "@/hooks/use-toast"
 import { isCartEnabled, getCartLockedMessage } from "@/lib/constants/cart-config"
 
 interface ProductInfoProps {
-  product: Product
+  product: InventoryProduct
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
@@ -20,10 +20,11 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const { toast } = useToast()
   const cartEnabled = isCartEnabled()
   const isUnique = product.is_unique ?? true
-  const productStatus = (product.status || "active") as string
-  const isSold = productStatus === "archived" || productStatus === "sold"
+  const productStatus = (product.inventoryStatus || product.status || "active") as string
+  const isSold = productStatus === "sold" || Boolean(product.sold_at)
   const isReserved = productStatus === "reserved"
-  const isComingSoon = productStatus === "coming_soon"
+  const isComingSoon =
+    productStatus === "coming_soon" || productStatus === "coming-soon"
   const isUnavailable = isSold || isReserved || isComingSoon
   const inCart = isInCart(product.id)
   const restockHref = `mailto:hello@laesquinita.com?subject=Restock%20Request%20for%20${encodeURIComponent(

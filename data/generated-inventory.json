@@ -182,7 +182,7 @@
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": "2025-11-21T21:24:20.271Z",
+    "soldAt": "2025-11-21T22:22:18.039Z",
     "squareCatalogObjectId": null
   },
   {
@@ -5532,7 +5532,7 @@
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": "2025-11-21T21:24:20.272Z",
+    "soldAt": "2025-11-21T22:22:18.040Z",
     "squareCatalogObjectId": null
   },
   {
@@ -6928,37 +6928,6 @@
   {
     "inventoryNumber": 228,
     "numberPadded": "228",
-    "label": "egg_Scared",
-    "labelSlug": "egg-scared",
-    "title": "Egg Scared",
-    "displayNumber": "No. 228",
-    "slug": "228-egg-scared",
-    "description": "Hand-poured ceramic Egg Scared from the La Esquinita inventory.",
-    "altText": "No. 228 Egg Scared ceramic object",
-    "price": 60,
-    "category": "ceramic-object",
-    "tags": [
-      "egg",
-      "ceramic",
-      "limited"
-    ],
-    "primaryImage": "/La_Esquinita_Inventory/228_eggScared_1.jpg",
-    "undersideImage": "/La_Esquinita_Inventory/228_eggScared_2.jpg",
-    "gallery": [
-      "/La_Esquinita_Inventory/228_eggScared_1.jpg",
-      "/La_Esquinita_Inventory/228_eggScared_2.jpg"
-    ],
-    "availability": "available",
-    "status": "active",
-    "dimensions": null,
-    "squareSku": null,
-    "isUnique": true,
-    "soldAt": null,
-    "squareCatalogObjectId": null
-  },
-  {
-    "inventoryNumber": 228,
-    "numberPadded": "228",
     "label": "egg_Smile",
     "labelSlug": "egg-smile",
     "title": "Egg Smile",
@@ -7264,6 +7233,37 @@
     "squareCatalogObjectId": null
   },
   {
+    "inventoryNumber": 238,
+    "numberPadded": "238",
+    "label": "egg_Scared",
+    "labelSlug": "egg-scared",
+    "title": "Egg Scared",
+    "displayNumber": "No. 238",
+    "slug": "238-egg-scared",
+    "description": "Hand-poured ceramic Egg Scared from the La Esquinita inventory.",
+    "altText": "No. 238 Egg Scared ceramic object",
+    "price": 60,
+    "category": "ceramic-object",
+    "tags": [
+      "egg",
+      "ceramic",
+      "limited"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/238_eggScared_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/238_eggScared_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/238_eggScared_1.jpg",
+      "/La_Esquinita_Inventory/238_eggScared_2.jpg"
+    ],
+    "availability": "available",
+    "status": "active",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
     "inventoryNumber": 239,
     "numberPadded": "239",
     "label": "potato",
@@ -7500,7 +7500,7 @@
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": "2025-11-21T21:24:20.272Z",
+    "soldAt": "2025-11-21T22:22:18.041Z",
     "squareCatalogObjectId": null
   },
   {
@@ -8208,7 +8208,7 @@
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": "2025-11-21T21:24:20.272Z",
+    "soldAt": "2025-11-21T22:22:18.041Z",
     "squareCatalogObjectId": null
   },
   {

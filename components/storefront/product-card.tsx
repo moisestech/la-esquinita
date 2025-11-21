@@ -25,10 +25,11 @@ export default function ProductCard({ product }: ProductCardProps) {
     (product as InventoryProduct).displayNumber ||
     product.display_number ||
     (product.inventory_number ? `No. ${product.inventory_number}` : null)
-  const productStatus = (product.status || "active") as string
-  const isSold = productStatus === "archived" || productStatus === "sold"
+  const productStatus = (product.inventoryStatus || product.status || "active") as string
+  const isSold = productStatus === "sold"
   const isReserved = productStatus === "reserved"
-  const isComingSoon = productStatus === "coming_soon"
+  const isComingSoon =
+    productStatus === "coming_soon" || productStatus === "coming-soon"
   const isUnavailable = isSold || isReserved || isComingSoon
   const primaryImage =
     product.primary_image || product.image_urls?.[0] || "/placeholder-logo.png"

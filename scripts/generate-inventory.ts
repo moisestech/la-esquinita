@@ -184,6 +184,7 @@ function groupAssets(assets: ParsedAsset[]) {
 
 function buildRecords(grouped: Map<string, { number: number; label: string; images: ParsedAsset[] }>) {
   const records: InventoryRecord[] = []
+  const seenNumbers = new Map<number, string>()
 
   for (const { number, label, images } of Array.from(grouped.values()).sort(
     (a, b) => a.number - b.number
@@ -197,6 +198,15 @@ function buildRecords(grouped: Map<string, { number: number; label: string; imag
     const displayNumber = `No. ${number}`
     const metadata = LABEL_METADATA[labelSlug] ?? (labelSlug.startsWith("egg-") ? EGG_METADATA : DEFAULT_METADATA)
     const price = applyPriceRules(labelSlug, metadata.price)
+
+    if (seenNumbers.has(number)) {
+      const existingSlug = seenNumbers.get(number)
+      console.warn(
+        `Duplicate inventory number ${number} detected. Keeping ${existingSlug} and skipping ${slug}. ` +
+          `Rename one of the files if both pieces should remain in the catalog.`
+      )
+      continue
+    }
 
     const gallery = images
       .sort((a, b) => a.variant - b.variant)
@@ -240,6 +250,7 @@ function buildRecords(grouped: Map<string, { number: number; label: string; imag
     }
 
     records.push(record)
+    seenNumbers.set(number, slug)
   }
 
   return records
@@ -262,7 +273,7 @@ async function syncRecordsToSupabase(records: InventoryRecord[]) {
     price: record.price,
     description: record.description,
     image_urls: record.gallery,
-    status: record.availability === "sold" ? "archived" : "active",
+    status: "active",
     category: record.category,
     tags: record.tags,
     inventory_number: record.inventoryNumber,
@@ -277,7 +288,7 @@ async function syncRecordsToSupabase(records: InventoryRecord[]) {
   }))
 
   const { error } = await supabase.from(table).upsert(payload, {
-    onConflict: "slug",
+    onConflict: "inventory_number",
   })
 
   if (error) {

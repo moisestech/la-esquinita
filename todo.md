@@ -33,8 +33,8 @@
 - [x] Implement the Square Web Payments SDK so the drawer’s Checkout button actually starts a payment flow that works on desktop, and clears the cart on success.
 - [x] Update Supabase inventory rows directly from the checkout response (set `status = 'sold'`, `sold_at`, and store `square_order_id` for each cart item).
 - [x] Add Square webhook handling (`app/api/square/webhook/route.ts`) to verify signatures and backstop the sold-state updates.
-- [ ] Re-enable Apple Pay once the Square account is certified, and expose native wallet buttons in the cart drawer.
-- [ ] Build success + failure pages that Square redirects back to, showing order summary, pickup instructions, and a button to keep browsing.
+- [x] Re-enable Apple Pay once the Square account is certified, and expose native wallet buttons in the cart drawer.
+- [x] Build success + failure pages that Square redirects back to, showing order summary, pickup instructions, and a button to keep browsing.
 
 ## Sprint 5 – Bulk Load, QA, and Launch Ops
 - [ ] Run the ingestion pipeline on the initial 3 sample objects, validate the storefront end-to-end, then repeat for the remaining ~247 files as soon as they land.
@@ -43,4 +43,4 @@
 - [ ] Document the nightly operation checklist: ingest new items, verify counts vs. physical shelf, reconcile Square payouts, and mark any manually sold pieces as `sold`.
 - [ ] Prepare deployment steps (env secrets, Supabase URL/key swap, Vercel redeploy) and a rollback plan in case Square or Supabase acts up opening night.
 
-[ ] lets make the mosquito bigger 
+[x] lets make the mosquito bigger 

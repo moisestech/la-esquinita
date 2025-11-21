@@ -21,7 +21,8 @@ const getFallbackProduct = (slug: string): InventoryProduct | null => {
   )
 }
 
-const getStatusLabel = (status?: string | null) => {
+const getStatusLabel = (status?: string | null, soldAt?: string | null) => {
+  if (soldAt) return "Sold Out"
   const normalized = (status || "active").toLowerCase()
   if (normalized === "archived" || normalized === "sold") return "Sold Out"
   if (normalized === "reserved") return "Reserved"
@@ -46,7 +47,9 @@ export default function ProductDetailPage({
   const [loading, setLoading] = useState(!initialProduct)
   const [error, setError] = useState<string | null>(null)
   const relatedPool = relatedProducts.length ? relatedProducts : inventoryProducts
-  const statusLabel = product ? getStatusLabel(product.status) : null
+  const statusLabel = product
+    ? getStatusLabel(product.inventoryStatus ?? product.status, product.sold_at as any)
+    : null
   const shouldFetchFromApi = !initialProduct || initialSource !== "supabase"
 
   useEffect(() => {

@@ -70,7 +70,11 @@ export const mapSupabaseProduct = (product: Product): InventoryProduct => {
   const derivedNumber = product.inventory_number ?? deriveInventoryNumberFromSlug(product.slug)
   const displayNumber = product.display_number ?? buildDisplayNumber(derivedNumber, product.name)
   const primaryImage = product.primary_image ?? product.image_urls?.[0] ?? ""
-  const inventoryStatus = (product as InventoryProduct).inventoryStatus ?? fromProductStatus(product.status || "active")
+  const existingStatus = (product as InventoryProduct).inventoryStatus
+  const derivedStatus = fromProductStatus(product.status || "active")
+  const inventoryStatus = product.sold_at
+    ? "sold"
+    : existingStatus ?? derivedStatus
 
   return {
     ...product,
