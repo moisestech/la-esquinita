@@ -29,6 +29,9 @@ export default function CheckoutFailureScreen({ reason }: Props) {
           <p className="text-mint-rot/70">
             No worries—your cart is still intact. Double-check the tips below and try again.
           </p>
+          <p className="text-sm text-miami-pink">
+            If you&apos;re on-site, please proceed to the bar and pay for ceramics with the bartender.
+          </p>
           {reason && (
             <p className="text-xs uppercase tracking-wide text-red-500">
               {reason}

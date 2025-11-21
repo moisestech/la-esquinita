@@ -30,6 +30,12 @@ export async function POST(request: Request) {
       { status: 503 }
     )
   }
+  console.log(
+    "[square] checkout env=%s location=%s token=%s",
+    squareConfig.env,
+    squareConfig.locationId,
+    squareConfig.accessToken ? `${squareConfig.accessToken.slice(0, 6)}***` : "missing"
+  )
 
   try {
     const body = (await request.json()) as CheckoutRequest
