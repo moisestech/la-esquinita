@@ -1,0 +1,356 @@
+[
+  {
+    "inventoryNumber": 1,
+    "numberPadded": "001",
+    "label": "Pie",
+    "labelSlug": "pie",
+    "title": "Pie",
+    "displayNumber": "No. 1",
+    "slug": "001-pie",
+    "description": "Hand-built ceramic Pie from the La Esquinita inventory.",
+    "altText": "No. 1 Pie ceramic object",
+    "price": 140,
+    "category": "ceramic-object",
+    "tags": [
+      "pie",
+      "ceramic",
+      "one-of-one"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/1_Pie_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/1_Pie_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/1_Pie_1.jpg",
+      "/La_Esquinita_Inventory/1_Pie_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 2,
+    "numberPadded": "002",
+    "label": "Parrot",
+    "labelSlug": "parrot",
+    "title": "Parrot",
+    "displayNumber": "No. 2",
+    "slug": "002-parrot",
+    "description": "Hand-built ceramic Parrot from the La Esquinita inventory.",
+    "altText": "No. 2 Parrot ceramic object",
+    "price": 185,
+    "category": "ceramic-object",
+    "tags": [
+      "parrot",
+      "ceramic",
+      "one-of-one"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/2_Parrot_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/2_Parrot_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/2_Parrot_1.jpg",
+      "/La_Esquinita_Inventory/2_Parrot_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 3,
+    "numberPadded": "003",
+    "label": "Parrot",
+    "labelSlug": "parrot",
+    "title": "Parrot",
+    "displayNumber": "No. 3",
+    "slug": "003-parrot",
+    "description": "Hand-built ceramic Parrot from the La Esquinita inventory.",
+    "altText": "No. 3 Parrot ceramic object",
+    "price": 185,
+    "category": "ceramic-object",
+    "tags": [
+      "parrot",
+      "ceramic",
+      "one-of-one"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/3_Parrot_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/3_Parrot_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/3_Parrot_1.jpg",
+      "/La_Esquinita_Inventory/3_Parrot_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 4,
+    "numberPadded": "004",
+    "label": "Tuba_Ash_Tray",
+    "labelSlug": "tuba-ash-tray",
+    "title": "Tuba Ash Tray",
+    "displayNumber": "No. 4",
+    "slug": "004-tuba-ash-tray",
+    "description": "Hand-built ceramic Tuba Ash Tray from the La Esquinita inventory.",
+    "altText": "No. 4 Tuba Ash Tray ceramic object",
+    "price": 55,
+    "category": "ceramic-object",
+    "tags": [
+      "tuba",
+      "ashtray",
+      "ceramic"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/4_tubaAsh_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/4_tubaAsh_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/4_tubaAsh_1.jpg",
+      "/La_Esquinita_Inventory/4_tubaAsh_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 5,
+    "numberPadded": "005",
+    "label": "Tuba_Ash_Tray",
+    "labelSlug": "tuba-ash-tray",
+    "title": "Tuba Ash Tray",
+    "displayNumber": "No. 5",
+    "slug": "005-tuba-ash-tray",
+    "description": "Hand-built ceramic Tuba Ash Tray from the La Esquinita inventory.",
+    "altText": "No. 5 Tuba Ash Tray ceramic object",
+    "price": 55,
+    "category": "ceramic-object",
+    "tags": [
+      "tuba",
+      "ashtray",
+      "ceramic"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/5_tubaAsh_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/5_tubaAsh_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/5_tubaAsh_1.jpg",
+      "/La_Esquinita_Inventory/5_tubaAsh_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 6,
+    "numberPadded": "006",
+    "label": "Wounded_Mug",
+    "labelSlug": "wounded-mug",
+    "title": "Wounded Mug",
+    "displayNumber": "No. 6",
+    "slug": "006-wounded-mug",
+    "description": "Hand-built ceramic Wounded Mug from the La Esquinita inventory.",
+    "altText": "No. 6 Wounded Mug ceramic object",
+    "price": 70,
+    "category": "ceramic-object",
+    "tags": [
+      "mug",
+      "ceramic",
+      "limited"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/6_woundedMug_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/6_woundedMug_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/6_woundedMug_1.jpg",
+      "/La_Esquinita_Inventory/6_woundedMug_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 7,
+    "numberPadded": "007",
+    "label": "cat_Head",
+    "labelSlug": "cat-head",
+    "title": "Cat Head",
+    "displayNumber": "No. 7",
+    "slug": "007-cat-head",
+    "description": "Hand-built ceramic Cat Head from the La Esquinita inventory.",
+    "altText": "No. 7 Cat Head ceramic object",
+    "price": 160,
+    "category": "ceramic-object",
+    "tags": [
+      "ceramic",
+      "limited"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/7_catHead_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/7_catHead_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/7_catHead_1.jpg",
+      "/La_Esquinita_Inventory/7_catHead_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 8,
+    "numberPadded": "008",
+    "label": "fragile_Goddess",
+    "labelSlug": "fragile-goddess",
+    "title": "Fragile Goddess",
+    "displayNumber": "No. 8",
+    "slug": "008-fragile-goddess",
+    "description": "Hand-built ceramic Fragile Goddess from the La Esquinita inventory.",
+    "altText": "No. 8 Fragile Goddess ceramic object",
+    "price": 160,
+    "category": "ceramic-object",
+    "tags": [
+      "ceramic",
+      "limited"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/8_fragileGoddess_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/8_fragileGoddess_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/8_fragileGoddess_1.jpg",
+      "/La_Esquinita_Inventory/8_fragileGoddess_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 9,
+    "numberPadded": "009",
+    "label": "lobster_Dish",
+    "labelSlug": "lobster-dish",
+    "title": "Lobster Dish",
+    "displayNumber": "No. 9",
+    "slug": "009-lobster-dish",
+    "description": "Hand-built ceramic Lobster Dish from the La Esquinita inventory.",
+    "altText": "No. 9 Lobster Dish ceramic object",
+    "price": 160,
+    "category": "ceramic-object",
+    "tags": [
+      "ceramic",
+      "limited"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/9_lobsterDish_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/9_lobsterDish_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/9_lobsterDish_1.jpg",
+      "/La_Esquinita_Inventory/9_lobsterDish_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 10,
+    "numberPadded": "010",
+    "label": "lobster_Dish",
+    "labelSlug": "lobster-dish",
+    "title": "Lobster Dish",
+    "displayNumber": "No. 10",
+    "slug": "010-lobster-dish",
+    "description": "Hand-built ceramic Lobster Dish from the La Esquinita inventory.",
+    "altText": "No. 10 Lobster Dish ceramic object",
+    "price": 160,
+    "category": "ceramic-object",
+    "tags": [
+      "ceramic",
+      "limited"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/10_lobsterDish_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/10_lobsterDish_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/10_lobsterDish_1.jpg",
+      "/La_Esquinita_Inventory/10_lobsterDish_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 11,
+    "numberPadded": "011",
+    "label": "dish",
+    "labelSlug": "dish",
+    "title": "Dish",
+    "displayNumber": "No. 11",
+    "slug": "011-dish",
+    "description": "Hand-built ceramic Dish from the La Esquinita inventory.",
+    "altText": "No. 11 Dish ceramic object",
+    "price": 160,
+    "category": "ceramic-object",
+    "tags": [
+      "ceramic",
+      "limited"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/11_dish_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/11_dish_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/11_dish_1.jpg",
+      "/La_Esquinita_Inventory/11_dish_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  },
+  {
+    "inventoryNumber": 12,
+    "numberPadded": "012",
+    "label": "flamingo",
+    "labelSlug": "flamingo",
+    "title": "Flamingo",
+    "displayNumber": "No. 12",
+    "slug": "012-flamingo",
+    "description": "Hand-built ceramic Flamingo from the La Esquinita inventory.",
+    "altText": "No. 12 Flamingo ceramic object",
+    "price": 160,
+    "category": "ceramic-object",
+    "tags": [
+      "ceramic",
+      "limited"
+    ],
+    "primaryImage": "/La_Esquinita_Inventory/12_flamingo_1.jpg",
+    "undersideImage": "/La_Esquinita_Inventory/12_flamingo_2.jpg",
+    "gallery": [
+      "/La_Esquinita_Inventory/12_flamingo_1.jpg",
+      "/La_Esquinita_Inventory/12_flamingo_2.jpg"
+    ],
+    "availability": "available",
+    "dimensions": null,
+    "squareSku": null,
+    "isUnique": true,
+    "soldAt": null,
+    "squareCatalogObjectId": null
+  }
+]

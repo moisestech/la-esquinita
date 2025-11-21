@@ -9,297 +9,7 @@ import HiddenDoor from "./hidden-door"
 import FloatingSprinkles from "./floating-sprinkles"
 import { Toaster } from "@/components/ui/toaster"
 import { useCart } from "@/contexts/cart-context"
-import { Product } from "@/lib/supabase"
-
-// Placeholder product data for preview
-const placeholderProducts: Product[] = [
-  {
-    id: "15",
-    slug: "tuba-ashtray",
-    name: "Tuba Ashtray",
-    price: 55.00,
-    description: "Musical receptacle sculpture. Hand poured, fired, and glazed ceramic approximately 6 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/tuba_ashtray.png"],
-    status: "active",
-    category: "art",
-    tags: ["tuba", "ashtray", "music", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "2",
-    slug: "baby-doll-head-ceramic",
-    name: "Baby Doll Head Ceramic",
-    price: 25.00,
-    description: "Innocent porcelain portrait. Hand poured, fired, and glazed ceramic approximately 3 inches tall. Slip cast ceramic object.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057676/la-esquinita/laesquinita-product-baby_tlplfi.png"],
-    status: "active",
-    category: "art",
-    tags: ["baby", "doll", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "3",
-    slug: "fragile-goddess-statue",
-    name: "Fragile Goddess Statue",
-    price: 30.00,
-    description: "Ethereal feminine form. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Delicate slip cast ceramic object.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-woman_rdz1b2.png"],
-    status: "active",
-    category: "art",
-    tags: ["goddess", "statue", "ceramic", "slip-cast", "glazed", "delicate"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "4",
-    slug: "small-swan-dish",
-    name: "Small Swan Dish",
-    price: 22.00,
-    description: "Graceful aquatic vessel. Hand poured, fired, and glazed ceramic approximately 2.5 inches tall. Slip cast ceramic object.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-swan_ufmolk.png"],
-    status: "active",
-    category: "art",
-    tags: ["swan", "dish", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "5",
-    slug: "anxious-egg-head",
-    name: "Anxious Egg Head",
-    price: 20.00,
-    description: "Contemplative ovoid portrait. Hand poured, fired, and glazed ceramic approximately 3 inches tall. Slip cast ceramic object.",
-    image_urls: ["https://res.cloudinary.com/dck5rzi4h/image/upload/v1754057675/la-esquinita/laesquinita-product-egg_jcys6k.png"],
-    status: "active",
-    category: "art",
-    tags: ["anxious", "egg", "head", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "6",
-    slug: "happy-egg-head",
-    name: "Happy Egg Head",
-    price: 35.00,
-    description: "Joyful ovoid expression. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/babyhead2.png"],
-    status: "active",
-    category: "art",
-    tags: ["happy", "egg", "head", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "7",
-    slug: "sad-egg-head",
-    name: "Sad Egg Head",
-    price: 28.00,
-    description: "Melancholic ovoid visage. Hand poured, fired, and glazed ceramic approximately 3.5 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/eggheadsad.png"],
-    status: "active",
-    category: "art",
-    tags: ["sad", "egg", "head", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "8",
-    slug: "jolly-egg-head",
-    name: "Jolly Egg Head",
-    price: 24.00,
-    description: "Whimsical ovoid character. Hand poured, fired, and glazed ceramic approximately 3.5 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/jollyegghead.png"],
-    status: "active",
-    category: "art",
-    tags: ["jolly", "egg", "head", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "9",
-    slug: "boy-fish-wall-ornament",
-    name: "Boy Fish Wall Ornament",
-    price: 38.00,
-    description: "Aquatic wall sculpture. Hand poured, fired, and glazed ceramic approximately 5 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/boyfishwallornament.png"],
-    status: "active",
-    category: "art",
-    tags: ["boy", "fish", "wall", "ornament", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "10",
-    slug: "girl-fish-wall-ornament",
-    name: "Girl Fish Wall Ornament",
-    price: 38.00,
-    description: "Feminine aquatic sculpture. Hand poured, fired, and glazed ceramic approximately 5 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/girlfishwallornament.png"],
-    status: "active",
-    category: "art",
-    tags: ["girl", "fish", "wall", "ornament", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "11",
-    slug: "potato-ceramic",
-    name: "Potato Ceramic",
-    price: 26.00,
-    description: "Earthy organic form. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/potato1.png"],
-    status: "active",
-    category: "art",
-    tags: ["potato", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "12",
-    slug: "et-ceramic",
-    name: "ET Ceramic",
-    price: 45.00,
-    description: "Otherworldly visitor sculpture. Hand poured, fired, and glazed ceramic approximately 6 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/ET.png"],
-    status: "active",
-    category: "art",
-    tags: ["ET", "extraterrestrial", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "13",
-    slug: "yoda-ceramic",
-    name: "Yoda Ceramic",
-    price: 42.00,
-    description: "Wise mentor figure. Hand poured, fired, and glazed ceramic approximately 5 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/yoda.png"],
-    status: "active",
-    category: "art",
-    tags: ["yoda", "starwars", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "14",
-    slug: "bride-groom-ceramic",
-    name: "Bride and Groom Cake Topper",
-    price: 15.00,
-    description: "Ceremonial cake topper duo. Hand poured, fired, and glazed ceramic approximately 7 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/bride and groom.png"],
-    status: "active",
-    category: "art",
-    tags: ["bride", "groom", "wedding", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "1",
-    slug: "parrot-companion-ceramic",
-    name: "Parrot Companion Ceramic",
-    price: 40.00,
-    description: "Vibrant companion vessel. Hand poured, fired, and glazed ceramic approximately 12 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/parrot1.png"],
-    status: "active",
-    category: "art",
-    tags: ["parrot", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "16",
-    slug: "denim-jean-mug",
-    name: "Denim Jean Mug",
-    price: 38.00,
-    description: "Textile-inspired drinking vessel. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/denimjeanmug.png"],
-    status: "active",
-    category: "art",
-    tags: ["denim", "jean", "mug", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "17",
-    slug: "flamingo-neck-ceramic",
-    name: "Flamingo Neck Ceramic",
-    price: 48.00,
-    description: "Elongated avian silhouette. Hand poured, fired, and glazed ceramic approximately 8 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/flamingoneck.png"],
-    status: "active",
-    category: "art",
-    tags: ["flamingo", "neck", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "18",
-    slug: "turtle-lobster-leaf-dish",
-    name: "Turtle Lobster Leaf Dish",
-    price: 44.00,
-    description: "Multi-creature botanical dish. Hand poured, fired, and glazed ceramic approximately 5 inches wide. Slip cast ceramic object.",
-    image_urls: ["/shop/turtlelobsterleafdish.png"],
-    status: "active",
-    category: "art",
-    tags: ["turtle", "lobster", "leaf", "dish", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "19",
-    slug: "cat-head-ceramic",
-    name: "Cat Head Ceramic",
-    price: 36.00,
-    description: "Feline portrait vessel. Hand poured, fired, and glazed ceramic approximately 4 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/cathead.png"],
-    status: "active",
-    category: "art",
-    tags: ["cat", "head", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "20",
-    slug: "small-ornate-pitcher",
-    name: "Small Ornate Pitcher",
-    price: 42.00,
-    description: "Ornate pouring vessel. Hand poured, fired, and glazed ceramic approximately 5 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/smallornatepitcher.png"],
-    status: "active",
-    category: "art",
-    tags: ["small", "ornate", "pitcher", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "23",
-    slug: "shallow-dish-pedestal",
-    name: "Shallow Dish Pedestal",
-    price: 35.00,
-    description: "Curved serving platform. Hand poured, fired, and glazed ceramic approximately 3 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/shallowDishPedestal.png"],
-    status: "active",
-    category: "art",
-    tags: ["shallow", "dish", "pedestal", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "24",
-    slug: "shallow-dish",
-    name: "Shallow Dish",
-    price: 28.00,
-    description: "Minimal serving basin. Hand poured, fired, and glazed ceramic approximately 2 inches tall. Slip cast ceramic object.",
-    image_urls: ["/shop/shallowdish.png"],
-    status: "active",
-    category: "art",
-    tags: ["shallow", "dish", "ceramic", "slip-cast", "glazed"],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-]
+import { InventoryProduct, inventoryProducts } from "@/lib/inventory-data"
 
 const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min
 
@@ -341,7 +51,7 @@ function FloatingMosquitoLink() {
     <motion.a
       href="/mosquito-bar"
       aria-label="Visit the Mosquito Lounge"
-      className="fixed z-40 text-5xl pointer-events-auto"
+      className="fixed z-40 text-6xl pointer-events-auto"
       initial={initialPosition}
       animate={controls}
       whileHover={{ scale: 1.2, rotate: 0 }}
@@ -356,6 +66,36 @@ export default function StorefrontPage() {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [showHiddenDoor, setShowHiddenDoor] = useState(false)
   const { cartItems, addToCart, removeFromCart, updateQuantity } = useCart()
+  const [products, setProducts] = useState<InventoryProduct[]>(inventoryProducts)
+  const [inventorySource, setInventorySource] = useState<"static" | "supabase">("static")
+
+  useEffect(() => {
+    let isMounted = true
+
+    const loadInventory = async () => {
+      try {
+        const response = await fetch("/api/inventory")
+        if (!response.ok) throw new Error("Failed request")
+        const payload = await response.json()
+        if (!isMounted) return
+
+        if (Array.isArray(payload.items)) {
+          setProducts(payload.items)
+        }
+        if (payload.source === "supabase" || payload.source === "static") {
+          setInventorySource(payload.source)
+        }
+      } catch (error) {
+        console.error("Failed to load inventory", error)
+      }
+    }
+
+    loadInventory()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue">
@@ -373,8 +113,8 @@ export default function StorefrontPage() {
           transition={{ duration: 2, delay: 0.5 }}
         />
         <motion.img
-          src="/esquinita1.jpg"
-          alt="La Esquinita - Colorful storefront with birthday cake theme"
+          src="/front.jpg"
+          alt="La Esquinita storefront exterior at Locust Projects"
           className="w-full h-full object-cover"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -429,11 +169,14 @@ export default function StorefrontPage() {
               }}
             />
           </div>
+          <p className="text-sm text-gray-700">
+            {inventorySource === "supabase" ? "Live inventory feed" : "Demo inventory (sample data)"}
+          </p>
         </motion.div>
 
         {/* Product Grid */}
         <ProductGrid 
-          products={placeholderProducts} 
+          products={products} 
         />
 
         {/* Hidden Door */}

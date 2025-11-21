@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "inventory:generate": "tsc scripts/generate-inventory.ts --module commonjs --target es2020 --outDir scripts/dist --esModuleInterop && node scripts/dist/scripts/generate-inventory.js"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
@@ -35,6 +36,8 @@
     "@types/react-dom": "^18",
     "@types/three": "^0.161.2",
     "autoprefixer": "^10.4.17",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^15.0.3",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

@@ -40,6 +40,14 @@ la-esquinita/
 └── docs/                  # Project documentation
 ```
 
+### Inventory Naming Rules (Custom Storefront)
+- Source photos live in `public/La_Esquinita_Inventory/` and follow `{number}_{label}_{variant}.jpg`.
+- Display text is always `No. {number}` (unpadded), while slugs use zero-padded numbers plus kebab-case labels (`021-parrot`).
+- `_1` images are the hero beauty shot, `_2` shows the underside/number, `_3+` append to the gallery if ever present.
+- Titles/alt text auto-derive from the filename label (with optional overrides), and metadata such as pricing/categories comes from a simple lookup table.
+- Full details live in `docs/inventory-playbook.md` and power the 250-item storefront rollout.
+- Supabase schema updates for these objects live in `docs/supabase-inventory-migration.sql`.
+
 ## 🎭 Experience Design
 
 ### Three-Act Narrative Structure
