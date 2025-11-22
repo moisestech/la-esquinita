@@ -22,7 +22,13 @@
       "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_srESWy/**)",
       "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_CnPXN0/**)",
       "WebSearch",
-      "WebFetch(domain:developer.squareup.com)"
+      "WebFetch(domain:developer.squareup.com)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_I1FxSa/**)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_PZ1AuC/**)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_ex4pfi/**)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_Bp6qCs/**)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_LaYN73/**)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_JN5mJo/**)"
     ],
     "deny": []
   }
