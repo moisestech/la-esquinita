@@ -24,21 +24,31 @@ const currency = "USD"
 const cents = (value: number) => Math.round(value * 100)
 
 export async function POST(request: Request) {
+  console.log("[square] ========== CHECKOUT START ==========")
+  console.log("[square] isSquareConfigured=%s", isSquareConfigured)
+
   if (!isSquareConfigured) {
+    console.log("[square] ERROR: Square not configured")
     return NextResponse.json(
       { error: "Square credentials missing" },
       { status: 503 }
     )
   }
-  console.log(
-    "[square] checkout env=%s location=%s token=%s",
-    squareConfig.env,
-    squareConfig.locationId,
-    squareConfig.accessToken ? `${squareConfig.accessToken.slice(0, 6)}***` : "missing"
-  )
+
+  console.log("[square] Config details:")
+  console.log("  env=%s", squareConfig.env)
+  console.log("  applicationId=%s", squareConfig.applicationId ? `${squareConfig.applicationId.slice(0, 10)}***` : "missing")
+  console.log("  locationId=%s", squareConfig.locationId)
+  console.log("  accessToken=%s", squareConfig.accessToken ? `${squareConfig.accessToken.slice(0, 6)}***` : "missing")
+  console.log("  accessToken length=%s", squareConfig.accessToken?.length)
 
   try {
     const body = (await request.json()) as CheckoutRequest
+    console.log("[square] Request body received:")
+    console.log("  cartItems count=%s", body.cartItems?.length)
+    console.log("  sourceId=%s", body.sourceId ? `${body.sourceId.slice(0, 10)}***` : "missing")
+    console.log("  customerEmail=%s", body.customerEmail)
+    console.log("  totalAmount=%s", body.totalAmount)
 
     if (!body.sourceId) {
       return NextResponse.json(
@@ -72,9 +82,17 @@ export async function POST(request: Request) {
     const totalAmountCents = Math.min(subtotalCents, Math.max(0, requestedTotalCents))
     const discountCents = Math.max(0, subtotalCents - totalAmountCents)
 
-    const client = getSquareClient()
+    console.log("[square] Payment calculations:")
+    console.log("  subtotalCents=%s", subtotalCents)
+    console.log("  totalAmountCents=%s", totalAmountCents)
+    console.log("  discountCents=%s", discountCents)
 
-    const orderResponse = await client.orders.create({
+    console.log("[square] Getting Square client...")
+    const client = getSquareClient()
+    console.log("[square] Client created successfully")
+
+    console.log("[square] Creating order...")
+    const orderPayload = {
       order: {
         idempotencyKey: randomUUID(),
         locationId: squareConfig.locationId,
@@ -93,11 +111,18 @@ export async function POST(request: Request) {
               ]
             : undefined,
       },
-    })
+    }
+    console.log("[square] Order payload:", JSON.stringify(orderPayload, (key, value) =>
+      typeof value === 'bigint' ? value.toString() : value
+    ))
+
+    const orderResponse = await client.orders.create(orderPayload)
+    console.log("[square] Order created successfully, orderId=%s", orderResponse.data?.order?.id)
 
     const orderId = orderResponse.data?.order?.id
 
-    const paymentResponse = await client.payments.create({
+    console.log("[square] Creating payment...")
+    const paymentPayload = {
       idempotencyKey: randomUUID(),
       sourceId: body.sourceId,
       locationId: squareConfig.locationId,
@@ -108,7 +133,13 @@ export async function POST(request: Request) {
       orderId: orderId,
       autocomplete: true,
       buyerEmailAddress: body.customerEmail,
-    })
+    }
+    console.log("[square] Payment payload:", JSON.stringify(paymentPayload, (key, value) =>
+      typeof value === 'bigint' ? value.toString() : value
+    ))
+
+    const paymentResponse = await client.payments.create(paymentPayload)
+    console.log("[square] Payment created successfully, paymentId=%s", paymentResponse.data?.payment?.id)
 
     const soldAt = new Date().toISOString()
     const slugs = body.cartItems.map((item) => item.slug)
@@ -135,20 +166,24 @@ export async function POST(request: Request) {
       }
     }
 
+    console.log("[square] ========== CHECKOUT SUCCESS ==========")
     return NextResponse.json({
       payment: paymentResponse.data?.payment,
       orderId: orderIdentifier,
     })
   } catch (error) {
-    console.error("[square] checkout error", error)
+    console.error("[square] ========== CHECKOUT ERROR ==========")
+    console.error("[square] Error caught:", error)
 
     // Log detailed error info
     if (error && typeof error === 'object') {
-      console.error("[square] error details:", {
-        statusCode: (error as any).statusCode,
-        errors: (error as any).errors,
-        body: (error as any).body,
-      })
+      const err = error as any
+      console.error("[square] Error type:", err.constructor?.name)
+      console.error("[square] Error statusCode:", err.statusCode)
+      console.error("[square] Error errors:", JSON.stringify(err.errors, null, 2))
+      console.error("[square] Error body:", JSON.stringify(err.body, null, 2))
+      console.error("[square] Error message:", err.message)
+      console.error("[square] Full error object:", JSON.stringify(err, Object.getOwnPropertyNames(err), 2))
     }
 
     const message =
