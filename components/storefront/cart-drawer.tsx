@@ -274,7 +274,7 @@ function SquarePaymentSection({
   )
 
   useEffect(() => {
-    if (cartItems.length === 0) return
+    if (cartItems.length === 0 || card) return // Don't reinitialize if card already exists
     let isMounted = true
 
     const loadSquareScript = (env: "sandbox" | "production") => {
@@ -347,7 +347,7 @@ function SquarePaymentSection({
     return () => {
       isMounted = false
     }
-  }, [cartItems.length])
+  }, [cartItems.length, card])
 
   useEffect(() => {
     if (!payments || cartItems.length === 0) {
