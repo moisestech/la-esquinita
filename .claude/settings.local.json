@@ -31,7 +31,9 @@
       "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_JN5mJo/**)",
       "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_NgRQQY/**)",
       "Bash(cat:*)",
-      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_1emYki/**)"
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_1emYki/**)",
+      "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_7VViyL/**)",
+      "Bash(node:*)"
     ],
     "deny": []
   }

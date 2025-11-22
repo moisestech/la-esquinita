@@ -92,6 +92,44 @@ export async function POST(request: Request) {
     console.log("[square] Client created successfully")
 
     console.log("[square] Creating order...")
+
+    // DIAGNOSTIC: Try raw API call first
+    console.log("[square] DIAGNOSTIC: Testing raw API call to Square...")
+    const testPayload = {
+      idempotency_key: randomUUID(),
+      order: {
+        location_id: squareConfig.locationId,
+        line_items: lineItems.map(item => ({
+          name: item.name,
+          quantity: item.quantity,
+          base_price_money: {
+            amount: Number(item.basePriceMoney.amount),
+            currency: item.basePriceMoney.currency,
+          }
+        }))
+      }
+    }
+
+    console.log("[square] Raw API test payload:", JSON.stringify(testPayload))
+
+    const rawResponse = await fetch("https://connect.squareup.com/v2/orders", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${squareConfig.accessToken}`,
+        "Content-Type": "application/json",
+        "Square-Version": "2024-07-17",
+      },
+      body: JSON.stringify(testPayload)
+    })
+
+    const rawData = await rawResponse.json()
+    console.log("[square] Raw API response status:", rawResponse.status)
+    console.log("[square] Raw API response:", JSON.stringify(rawData))
+
+    if (!rawResponse.ok) {
+      throw new Error(`Raw API test failed: ${JSON.stringify(rawData)}`)
+    }
+
     const orderPayload = {
       order: {
         idempotencyKey: randomUUID(),
