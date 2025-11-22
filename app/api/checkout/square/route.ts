@@ -103,7 +103,7 @@ export async function POST(request: Request) {
             amount: Number(item.basePriceMoney.amount),
             currency: item.basePriceMoney.currency,
           },
-          catalog_object_id: item.catalogObjectId,
+          // Don't include catalog_object_id - we're not using Square catalog
         })),
         discounts: discountCents > 0 ? [{
           uid: randomUUID(),
