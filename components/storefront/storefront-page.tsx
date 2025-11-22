@@ -286,7 +286,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
           transition={{ duration: 1.2, delay: 1.2 }}
         >
           <p className="text-white text-lg md:text-xl font-display italic drop-shadow-lg px-4 text-center">
-            Scroll down and choose a sweet ceramic sculpture for your home!
+            Choose a ceramic sculpture in the gallery, purchase below, and walk out with it! ♡
           </p>
           <span className="mt-2 text-4xl md:text-5xl text-white animate-bounce">↓</span>
         </motion.div>
