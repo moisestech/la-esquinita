@@ -181,14 +181,17 @@ export async function POST(request: Request) {
     if (slugs.length) {
       try {
         const supabase = getSupabaseAdmin()
+      console.log("[square] Updating Supabase - marking items as sold:", slugs)
       const { error: updateError } = await supabase
         .from(INVENTORY_TABLE)
         .update({
-          status: "active",
+          status: "sold",
           sold_at: soldAt,
           square_order_id: orderIdentifier,
         })
-          .in("slug", slugs)
+        .in("slug", slugs)
+
+      console.log("[square] Supabase update complete, error:", updateError)
 
         if (updateError) {
           console.error("[square] Failed to update Supabase status", updateError)
