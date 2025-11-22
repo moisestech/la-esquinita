@@ -26,7 +26,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     product.display_number ||
     (product.inventory_number ? `No. ${product.inventory_number}` : null)
   const productStatus = (product.inventoryStatus || product.status || "active") as string
-  const isSold = productStatus === "sold"
+  const isSold = productStatus === "sold" || !!product.sold_at
   const isReserved = productStatus === "reserved"
   const isComingSoon =
     productStatus === "coming_soon" || productStatus === "coming-soon"

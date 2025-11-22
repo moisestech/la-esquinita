@@ -185,7 +185,7 @@ export async function POST(request: Request) {
       const { error: updateError } = await supabase
         .from(INVENTORY_TABLE)
         .update({
-          status: "sold",
+          status: "active",  // Keep status as active, sold_at indicates it's sold
           sold_at: soldAt,
           square_order_id: orderIdentifier,
         })
