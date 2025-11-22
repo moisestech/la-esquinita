@@ -6,7 +6,6 @@ import { X, ShoppingBag, Trash2, Plus, Minus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/contexts/cart-context"
 import { useToast } from "@/hooks/use-toast"
-import CouponInput from "./coupon-input"
 import { useRouter } from "next/navigation"
 
 declare global {
@@ -30,25 +29,18 @@ export default function CartDrawer({
   isOpen, 
   onClose
 }: CartDrawerProps) {
-  const { 
-    cartItems, 
-    appliedCoupon,
-    updateQuantity, 
-    removeFromCart, 
-    getCartTotal, 
-    getCartSubtotal, 
-    getCartDiscount, 
+  const {
+    cartItems,
+    updateQuantity,
+    removeFromCart,
+    getCartTotal,
     getCartItemCount,
-    applyCoupon,
-    removeCoupon,
     clearCart,
   } = useCart()
   const { toast } = useToast()
   const router = useRouter()
 
   const totalItems = getCartItemCount()
-  const subtotal = getCartSubtotal()
-  const discount = getCartDiscount()
   const total = getCartTotal()
 
   const handlePaymentSuccess = (details?: CheckoutResult) => {
@@ -201,32 +193,9 @@ export default function CartDrawer({
             {/* Footer */}
             {cartItems.length > 0 && (
               <div className="border-t border-gray-200 p-6">
-                {/* Coupon Input */}
-                <div className="mb-4">
-                  <CouponInput
-                    onCouponApplied={(discount, type) => {
-                      // The coupon code will be passed from the CouponInput component
-                      const code = appliedCoupon?.code || "COUPON"
-                      applyCoupon(discount, type, code)
-                    }}
-                    onCouponRemoved={removeCoupon}
-                    appliedCoupon={appliedCoupon}
-                  />
-                </div>
-
                 {/* Price Breakdown */}
                 <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>Subtotal:</span>
-                    <span>${subtotal.toFixed(2)}</span>
-                  </div>
-                  {discount > 0 && (
-                    <div className="flex justify-between text-sm text-green-600">
-                      <span>Discount:</span>
-                      <span>-${discount.toFixed(2)}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between items-center pt-2 border-t border-gray-200">
+                  <div className="flex justify-between items-center pt-2">
                     <span className="text-lg font-medium text-gray-800">Total:</span>
                     <span className="text-2xl font-bold text-miami-pink">${total.toFixed(2)}</span>
                   </div>

@@ -108,6 +108,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
   const [visibleCount, setVisibleCount] = useState(
     Math.min(INITIAL_BATCH, (initialProducts.length ? initialProducts : inventoryProducts).length)
   )
+  const isSearchPending = searchTerm !== deferredSearchTerm
 
   const availableTags = useMemo(() => {
     const excludedTags = ['ceramic', 'limited', 'one-of-one', 'tuba']
@@ -341,7 +342,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Find the number on the bottom of the ceramic, search for it below, and purchase!
+            Find the number on the bottom of the ceramic and search for it below!
           </motion.p>
         </motion.div>
 
@@ -388,7 +389,20 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
         </div>
 
         <div ref={gridRef}>
-          <ProductGrid products={displayedProducts} />
+          {isSearchPending ? (
+            <div className="flex flex-col items-center justify-center py-20">
+              <motion.div
+                className="text-6xl mb-4"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              >
+                🍰
+              </motion.div>
+              <p className="text-mint-rot/60 text-lg font-medium">Searching...</p>
+            </div>
+          ) : (
+            <ProductGrid products={displayedProducts} />
+          )}
         </div>
 
         {!isSearching && visibleCount < filteredProducts.length && (
