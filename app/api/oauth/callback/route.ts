@@ -23,6 +23,7 @@ export async function GET(request: Request) {
     client_secret: process.env.SQUARE_PROD_SECRET,
     code,
     grant_type: "authorization_code",
+    redirect_uri: "http://localhost:3000/api/oauth/callback",
   }
 
   console.log("OAuth payload:", JSON.stringify(payload))
