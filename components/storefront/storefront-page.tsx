@@ -76,13 +76,53 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
   )
   const [inventorySource, setInventorySource] = useState<"static" | "supabase">(initialSource)
 
+  // Poll Supabase for updates every 30 seconds
+  useEffect(() => {
+    const pollForUpdates = async () => {
+      try {
+        const response = await fetch('/api/products')
+        if (response.ok) {
+          const data = await response.json()
+          if (data.products && data.products.length > 0) {
+            setProducts(data.products)
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch product updates:', error)
+      }
+    }
+
+    // Initial fetch
+    pollForUpdates()
+
+    // Poll every 30 seconds
+    const interval = setInterval(pollForUpdates, 30000)
+    return () => clearInterval(interval)
+  }, [])
+
   const [searchTerm, setSearchTerm] = useState("")
+  const [selectedTag, setSelectedTag] = useState<string | null>(null)
   const deferredSearchTerm = useDeferredValue(searchTerm)
   const gridRef = useRef<HTMLDivElement | null>(null)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
   const [visibleCount, setVisibleCount] = useState(
     Math.min(INITIAL_BATCH, (initialProducts.length ? initialProducts : inventoryProducts).length)
   )
+
+  const availableTags = useMemo(() => {
+    const excludedTags = ['ceramic', 'limited', 'one-of-one', 'tuba']
+    const tagSet = new Set<string>()
+    products.forEach((p) => {
+      if (p.tags) {
+        p.tags.forEach((tag: string) => {
+          if (!excludedTags.includes(tag)) {
+            tagSet.add(tag)
+          }
+        })
+      }
+    })
+    return Array.from(tagSet).sort()
+  }, [products])
 
   const searchPool = useMemo(
     () =>
@@ -97,20 +137,38 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
   )
 
   const filteredProducts = useMemo(() => {
-    const normalized = deferredSearchTerm.trim().toLowerCase()
-    if (!normalized) return products
+    let filtered = products
 
-    return searchPool
-      .filter(({ number, display, slug, name }) => {
-        return (
-          (number && number.startsWith(normalized)) ||
-          (display && display.includes(normalized)) ||
-          slug.includes(normalized) ||
-          name.includes(normalized)
-        )
-      })
-      .map(({ product }) => product)
-  }, [products, deferredSearchTerm, searchPool])
+    // Filter by tag first
+    if (selectedTag) {
+      filtered = filtered.filter((p) => p.tags?.includes(selectedTag))
+    }
+
+    // Then filter by search term
+    const normalized = deferredSearchTerm.trim().toLowerCase()
+    if (normalized) {
+      const searchPool = filtered.map((product) => ({
+        product,
+        number: product.inventoryNumber?.toString().toLowerCase() ?? "",
+        display: product.displayNumber?.toLowerCase() ?? "",
+        slug: product.slug.toLowerCase(),
+        name: product.name.toLowerCase(),
+      }))
+
+      filtered = searchPool
+        .filter(({ number, display, slug, name }) => {
+          return (
+            (number && number.startsWith(normalized)) ||
+            (display && display.includes(normalized)) ||
+            slug.includes(normalized) ||
+            name.includes(normalized)
+          )
+        })
+        .map(({ product }) => product)
+    }
+
+    return filtered
+  }, [products, deferredSearchTerm, selectedTag])
 
   const isSearching = Boolean(deferredSearchTerm.trim())
   const displayedProducts = useMemo(() => {
@@ -278,7 +336,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
         </motion.div>
 
       {/* Product Grid */}
-        <div className="sticky top-0 z-30 pb-4 bg-gradient-to-b from-icing-white via-icing-white/95 to-transparent">
+        <div className="sticky top-0 z-30 pb-4 bg-gradient-to-b from-icing-white via-icing-white/95 to-transparent space-y-3">
           <label className="flex items-center gap-3 bg-white/90 border border-miami-pink/40 rounded-full px-4 py-3 shadow-lg">
             <span className="text-sm font-semibold text-miami-pink uppercase tracking-wide">
               Search No.
@@ -290,6 +348,33 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
               className="flex-1 bg-transparent focus:outline-none text-mint-rot placeholder:text-mint-rot/60"
             />
           </label>
+
+          {/* Tag Filter */}
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setSelectedTag(null)}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
+                !selectedTag
+                  ? "bg-miami-pink text-white shadow-md"
+                  : "bg-white/80 text-mint-rot border border-miami-pink/30 hover:bg-miami-pink/10"
+              }`}
+            >
+              All
+            </button>
+            {availableTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setSelectedTag(tag)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
+                  selectedTag === tag
+                    ? "bg-miami-pink text-white shadow-md"
+                    : "bg-white/80 text-mint-rot border border-miami-pink/30 hover:bg-miami-pink/10"
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div ref={gridRef}>
