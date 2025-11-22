@@ -61,7 +61,7 @@ export default function CakeHall() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <img
-              src="/esquinita3.jpg"
+              src="/cakeHall1.jpg"
               alt="Cake Hall Installation"
               className="w-full h-96 md:h-[500px] object-cover"
             />

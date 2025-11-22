@@ -333,6 +333,16 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
               }}
             />
           </div>
+
+          {/* Instructions */}
+          <motion.p
+            className="text-center text-mint-rot/80 text-sm md:text-base max-w-2xl mx-auto mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Find the number on the bottom of the ceramic, search for it below, and purchase!
+          </motion.p>
         </motion.div>
 
       {/* Product Grid */}

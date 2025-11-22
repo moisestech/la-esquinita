@@ -45,11 +45,15 @@ export default function CheckoutFailureScreen({ reason }: Props) {
             <li>Confirm your card details and billing ZIP.</li>
             <li>Try a different card or Apple Pay if you&apos;re on Safari.</li>
             <li>
-              Ping{" "}
-              <a href="mailto:hello@laesquinita.com" className="underline">
-                hello@laesquinita.com
+              Email{" "}
+              <a href="mailto:egodeathllc@gmail.com" className="underline font-semibold">
+                egodeathllc@gmail.com
               </a>{" "}
-              if the issue persists.
+              or text{" "}
+              <a href="sms:3178503624" className="underline font-semibold">
+                317-850-3624
+              </a>{" "}
+              with any issues.
             </li>
           </ul>
         </div>
