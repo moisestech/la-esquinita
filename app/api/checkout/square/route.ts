@@ -141,6 +141,16 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error("[square] checkout error", error)
+
+    // Log detailed error info
+    if (error && typeof error === 'object') {
+      console.error("[square] error details:", {
+        statusCode: (error as any).statusCode,
+        errors: (error as any).errors,
+        body: (error as any).body,
+      })
+    }
+
     const message =
       error instanceof Error ? error.message : "Unknown Square error"
     return NextResponse.json({ error: message }, { status: 500 })
