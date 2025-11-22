@@ -91,11 +91,8 @@ export async function POST(request: Request) {
     const client = getSquareClient()
     console.log("[square] Client created successfully")
 
-    console.log("[square] Creating order...")
-
-    // DIAGNOSTIC: Try raw API call first
-    console.log("[square] DIAGNOSTIC: Testing raw API call to Square...")
-    const testPayload = {
+    console.log("[square] Creating order with raw API...")
+    const orderPayload = {
       idempotency_key: randomUUID(),
       order: {
         location_id: squareConfig.locationId,
@@ -105,84 +102,81 @@ export async function POST(request: Request) {
           base_price_money: {
             amount: Number(item.basePriceMoney.amount),
             currency: item.basePriceMoney.currency,
-          }
-        }))
+          },
+          catalog_object_id: item.catalogObjectId,
+        })),
+        discounts: discountCents > 0 ? [{
+          uid: randomUUID(),
+          name: "Cart Discount",
+          amount_money: {
+            amount: discountCents,
+            currency,
+          },
+        }] : undefined,
       }
     }
 
-    console.log("[square] Raw API test payload:", JSON.stringify(testPayload))
+    console.log("[square] Order payload:", JSON.stringify(orderPayload))
 
-    const rawResponse = await fetch("https://connect.squareup.com/v2/orders", {
+    const orderResponse = await fetch("https://connect.squareup.com/v2/orders", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${squareConfig.accessToken}`,
         "Content-Type": "application/json",
         "Square-Version": "2024-07-17",
       },
-      body: JSON.stringify(testPayload)
+      body: JSON.stringify(orderPayload)
     })
 
-    const rawData = await rawResponse.json()
-    console.log("[square] Raw API response status:", rawResponse.status)
-    console.log("[square] Raw API response:", JSON.stringify(rawData))
+    const orderData = await orderResponse.json()
+    console.log("[square] Order response status:", orderResponse.status)
 
-    if (!rawResponse.ok) {
-      throw new Error(`Raw API test failed: ${JSON.stringify(rawData)}`)
+    if (!orderResponse.ok) {
+      throw new Error(`Order creation failed: ${JSON.stringify(orderData)}`)
     }
 
-    const orderPayload = {
-      order: {
-        idempotencyKey: randomUUID(),
-        locationId: squareConfig.locationId,
-        lineItems,
-        discounts:
-          discountCents > 0
-            ? [
-                {
-                  uid: randomUUID(),
-                  name: "Cart Discount",
-                  amountMoney: {
-                    amount: BigInt(discountCents),
-                    currency,
-                  },
-                },
-              ]
-            : undefined,
-      },
-    }
-    console.log("[square] Order payload:", JSON.stringify(orderPayload, (key, value) =>
-      typeof value === 'bigint' ? value.toString() : value
-    ))
+    console.log("[square] Order created successfully, orderId=%s", orderData.order?.id)
 
-    const orderResponse = await client.orders.create(orderPayload)
-    console.log("[square] Order created successfully, orderId=%s", orderResponse.data?.order?.id)
+    const orderId = orderData.order?.id
 
-    const orderId = orderResponse.data?.order?.id
-
-    console.log("[square] Creating payment...")
+    console.log("[square] Creating payment with raw API...")
     const paymentPayload = {
-      idempotencyKey: randomUUID(),
-      sourceId: body.sourceId,
-      locationId: squareConfig.locationId,
-      amountMoney: {
-        amount: BigInt(totalAmountCents),
+      idempotency_key: randomUUID(),
+      source_id: body.sourceId,
+      location_id: squareConfig.locationId,
+      amount_money: {
+        amount: totalAmountCents,
         currency,
       },
-      orderId: orderId,
+      order_id: orderId,
       autocomplete: true,
-      buyerEmailAddress: body.customerEmail,
+      buyer_email_address: body.customerEmail,
     }
-    console.log("[square] Payment payload:", JSON.stringify(paymentPayload, (key, value) =>
-      typeof value === 'bigint' ? value.toString() : value
-    ))
+    console.log("[square] Payment payload:", JSON.stringify(paymentPayload))
 
-    const paymentResponse = await client.payments.create(paymentPayload)
-    console.log("[square] Payment created successfully, paymentId=%s", paymentResponse.data?.payment?.id)
+    const paymentResponse = await fetch("https://connect.squareup.com/v2/payments", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${squareConfig.accessToken}`,
+        "Content-Type": "application/json",
+        "Square-Version": "2024-07-17",
+      },
+      body: JSON.stringify(paymentPayload)
+    })
+
+    const paymentData = await paymentResponse.json()
+    console.log("[square] Payment response status:", paymentResponse.status)
+
+    if (!paymentResponse.ok) {
+      throw new Error(`Payment creation failed: ${JSON.stringify(paymentData)}`)
+    }
+
+    console.log("[square] Payment created successfully, paymentId=%s", paymentData.payment?.id)
 
     const soldAt = new Date().toISOString()
     const slugs = body.cartItems.map((item) => item.slug)
-    const paymentId = paymentResponse.data?.payment?.id || null
-    const orderIdentifier = orderId || paymentResponse.data?.payment?.orderId || paymentId
+    const paymentId = paymentData.payment?.id || null
+    const orderIdentifier = orderId || paymentData.payment?.order_id || paymentId
 
     if (slugs.length) {
       try {
@@ -206,7 +200,7 @@ export async function POST(request: Request) {
 
     console.log("[square] ========== CHECKOUT SUCCESS ==========")
     return NextResponse.json({
-      payment: paymentResponse.data?.payment,
+      payment: paymentData.payment,
       orderId: orderIdentifier,
     })
   } catch (error) {
