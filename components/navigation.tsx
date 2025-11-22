@@ -56,13 +56,14 @@ export default function Navigation() {
           <div className="hidden md:flex items-center justify-end space-x-4 md:flex-1">
             <motion.button
               onClick={() => setIsCartOpen(true)}
-              className="p-2 text-mint-rot hover:text-miami-pink transition-colors relative"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              className="flex items-center gap-2 px-4 py-2 bg-white/90 border border-miami-pink/40 rounded-full text-mint-rot hover:text-miami-pink hover:bg-miami-pink/10 transition-all relative shadow-md"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <ShoppingBag className="w-5 h-5" />
+              <span className="font-semibold text-sm uppercase tracking-wide">Checkout</span>
               {cartItems.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-miami-pink text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="bg-miami-pink text-white text-xs px-2 py-0.5 rounded-full font-semibold">
                   {cartItems.length}
                 </span>
               )}
@@ -100,14 +101,18 @@ export default function Navigation() {
                     {item.label}
                   </Link>
                 ))}
-                <div className="flex items-center space-x-4 pt-4 border-t border-miami-pink/20">
+                <div className="flex items-center pt-4 border-t border-miami-pink/20">
                   <button
-                    onClick={() => setIsCartOpen(true)}
-                    className="p-2 text-mint-rot hover:text-miami-pink transition-colors relative"
+                    onClick={() => {
+                      setIsCartOpen(true)
+                      setIsMenuOpen(false)
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-white/90 border border-miami-pink/40 rounded-full text-mint-rot hover:text-miami-pink hover:bg-miami-pink/10 transition-all relative shadow-md w-full justify-center"
                   >
                     <ShoppingBag className="w-5 h-5" />
+                    <span className="font-semibold text-sm uppercase tracking-wide">Checkout</span>
                     {cartItems.length > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-miami-pink text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                      <span className="bg-miami-pink text-white text-xs px-2 py-0.5 rounded-full font-semibold">
                         {cartItems.length}
                       </span>
                     )}

@@ -285,8 +285,8 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 1.2 }}
         >
-          <p className="text-white text-xl md:text-2xl font-semibold tracking-[0.3em] uppercase drop-shadow-lg">
-            Scroll down to purchase
+          <p className="text-white text-lg md:text-xl font-display italic drop-shadow-lg px-4 text-center">
+            Scroll down and choose a sweet ceramic sculpture for your home!
           </p>
           <span className="mt-2 text-4xl md:text-5xl text-white animate-bounce">↓</span>
         </motion.div>
@@ -360,7 +360,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
           </label>
 
           {/* Tag Filter */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             <button
               onClick={() => setSelectedTag(null)}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
