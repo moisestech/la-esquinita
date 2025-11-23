@@ -351,6 +351,7 @@ function SquarePaymentSection({
 
   useEffect(() => {
     if (!payments || cartItems.length === 0) {
+      console.log("[Apple Pay] Not ready - payments:", !!payments, "cartItems:", cartItems.length)
       setApplePay(null)
       setApplePayReady(false)
       return
@@ -359,6 +360,9 @@ function SquarePaymentSection({
     let isActive = true
     const setupApplePay = async () => {
       try {
+        console.log("[Apple Pay] Setting up with total:", total)
+        console.log("[Apple Pay] Current domain:", window.location.hostname)
+        console.log("[Apple Pay] Full URL:", window.location.href)
         const paymentRequest = payments.paymentRequest({
           countryCode: "US",
           currencyCode: "USD",
@@ -372,19 +376,27 @@ function SquarePaymentSection({
           })),
         })
 
+        console.log("[Apple Pay] Payment request created, getting Apple Pay instance...")
         const applePayInstance = await payments.applePay(paymentRequest)
-        if (!applePayInstance) return
+        console.log("[Apple Pay] Instance:", !!applePayInstance)
+        if (!applePayInstance) {
+          console.log("[Apple Pay] No instance returned")
+          return
+        }
         const canUse = await applePayInstance.canUse()
+        console.log("[Apple Pay] Can use:", canUse)
         if (!isActive) return
         if (canUse) {
+          console.log("[Apple Pay] ✅ Ready to use!")
           setApplePay(applePayInstance)
           setApplePayReady(true)
         } else {
+          console.log("[Apple Pay] ❌ Cannot use")
           setApplePay(null)
           setApplePayReady(false)
         }
       } catch (err) {
-        console.warn("Apple Pay unavailable:", err)
+        console.error("[Apple Pay] Error:", err)
         if (!isActive) return
         setApplePay(null)
         setApplePayReady(false)
