@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 import { Share2, ShoppingCart, Heart } from "lucide-react"
 import { InventoryProduct } from "@/lib/inventory-data"
 import { useToast } from "@/hooks/use-toast"
@@ -160,22 +161,32 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Card Container */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-sugar-pink hover:border-miami-pink transition-colors duration-300">
         {/* Product Image */}
-        <div className="relative h-64 bg-gradient-to-br from-sugar-pink to-fondant-blue overflow-hidden p-4">
-          <img
-            src={primaryImage}
-            alt={product.name}
-            loading="lazy"
-            className={`w-full h-full object-contain transition-opacity duration-300 ${
-              secondaryImage ? "group-hover:opacity-0" : ""
-            }`}
-          />
-          {secondaryImage && (
-            <img
-              src={secondaryImage}
-              alt={`${product.name} underside`}
+        <div className="relative h-64 bg-gradient-to-br from-sugar-pink to-fondant-blue overflow-hidden">
+          <div className="relative w-full h-full p-4">
+            <Image
+              src={primaryImage}
+              alt={product.name}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              quality={80}
+              className={`object-contain transition-opacity duration-300 ${
+                secondaryImage ? "group-hover:opacity-0" : ""
+              }`}
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             />
+          </div>
+          {secondaryImage && (
+            <div className="absolute inset-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <Image
+                src={secondaryImage}
+                alt={`${product.name} underside`}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                quality={80}
+                className="object-contain"
+                loading="lazy"
+              />
+            </div>
           )}
           
           {/* Display Number */}

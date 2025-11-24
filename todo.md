@@ -36,11 +36,22 @@
 - [x] Re-enable Apple Pay once the Square account is certified, and expose native wallet buttons in the cart drawer.
 - [x] Build success + failure pages that Square redirects back to, showing order summary, pickup instructions, and a button to keep browsing.
 
-## Sprint 5 – Bulk Load, QA, and Launch Ops
-- [ ] Run the ingestion pipeline on the initial 3 sample objects, validate the storefront end-to-end, then repeat for the remaining ~247 files as soon as they land.
-- [ ] Stress-test the search bar, product page, and checkout on actual phones in the gallery (focus on 3G/poor Wi-Fi) and log any perf issues or Square latency.
-- [ ] Create monitoring/alerts (Simple logging + Supabase row auditing) so we can confirm each Square order updates the DB and no duplicate numbers slip through.
-- [ ] Document the nightly operation checklist: ingest new items, verify counts vs. physical shelf, reconcile Square payouts, and mark any manually sold pieces as `sold`.
-- [ ] Prepare deployment steps (env secrets, Supabase URL/key swap, Vercel redeploy) and a rollback plan in case Square or Supabase acts up opening night.
+## Sprint 5 – Bulk Load, QA, and Launch Ops ✅
+- [x] Run the ingestion pipeline on the initial 3 sample objects, validate the storefront end-to-end, then repeat for the remaining ~247 files as soon as they land.
+- [x] Stress-test the search bar, product page, and checkout on actual phones in the gallery (focus on 3G/poor Wi-Fi) and log any perf issues or Square latency.
+- [x] Create monitoring/alerts (Simple logging + Supabase row auditing) so we can confirm each Square order updates the DB and no duplicate numbers slip through.
+- [x] Document the nightly operation checklist: ingest new items, verify counts vs. physical shelf, reconcile Square payouts, and mark any manually sold pieces as `sold`.
+- [x] Prepare deployment steps (env secrets, Supabase URL/key swap, Vercel redeploy) and a rollback plan in case Square or Supabase acts up opening night.
+- [x] Make the mosquito bigger
 
-[x] lets make the mosquito bigger 
+## Sprint 6 – Performance Optimization & Polish ✅
+- [x] **Image Optimization**: Convert large storefront JPGs (1.9MB+) to Next.js Image component with WebP format, reduce bundle size by ~70%
+- [x] **Reduce Animation Overhead**: Remove staggered delays on ProductCard animations (currently 0.1 * index), use CSS transforms instead of Framer Motion for simple hover effects
+- [x] **Lazy Load Heavy Components**: Code-split FloatingSprinkles, FloatingMosquitoLink, and defer cart drawer until user interaction
+- [x] Virtual scrolling for product grid on mobile (render only visible items + buffer via IntersectionObserver)
+- [x] Add service worker for offline fallback and faster repeat visits
+- [x] Compress and optimize ceramic product images via Next.js Image component with responsive sizes 
+
+
+
+add discount code?

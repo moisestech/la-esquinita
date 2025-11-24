@@ -5,12 +5,11 @@
 @font-face {
   font-family: 'SkeletonBlood';
   src: url('/fonts/skeleton-blood.woff2') format('woff2'),
-       url('/fonts/skeleton-blood.woff') format('woff'),
-       url('/fonts/skeleton-blood.ttf') format('truetype'),
-       url('/fonts/skeleton-blood.otf') format('opentype');
+       url('/fonts/skeleton-blood.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
+  unicode-range: U+0020-007E;
 }
 
 @layer base {

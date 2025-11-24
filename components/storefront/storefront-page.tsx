@@ -2,71 +2,26 @@
 
 import React, { useDeferredValue, useEffect, useMemo, useRef, useState } from "react"
 import { motion, useAnimation } from "framer-motion"
+import Image from "next/image"
+import dynamic from "next/dynamic"
 import SugarIcingMarquee from "./sugar-icing-marquee"
 import ProductGrid from "./product-grid"
-import CartDrawer from "./cart-drawer"
 import HiddenDoor from "./hidden-door"
-import FloatingSprinkles from "./floating-sprinkles"
 import { Toaster } from "@/components/ui/toaster"
 import { InventoryProduct, inventoryProducts } from "@/lib/inventory-data"
+
+// Lazy load heavy components
+const CartDrawer = dynamic(() => import("./cart-drawer"), { ssr: false })
+const FloatingSprinkles = dynamic(() => import("./floating-sprinkles"), { ssr: false })
+const FloatingMosquitoLink = dynamic(() => import("./floating-mosquito-link"), { ssr: false })
 
 interface StorefrontPageProps {
   initialProducts: InventoryProduct[]
   initialSource: "supabase" | "static"
 }
 
-const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min
 const INITIAL_BATCH = 24
 const BATCH_SIZE = 12
-
-const generateMosquitoPosition = () => ({
-  top: `${randomBetween(5, 85)}vh`,
-  left: `${randomBetween(5, 90)}vw`,
-  rotate: randomBetween(-25, 25),
-})
-
-function FloatingMosquitoLink() {
-  const controls = useAnimation()
-  const initialPosition = { top: "50vh", left: "10vw", rotate: 0 }
-
-  useEffect(() => {
-    let isMounted = true
-
-    const glideAcrossScreen = async () => {
-      while (isMounted) {
-        const nextPosition = generateMosquitoPosition()
-        await controls.start({
-          ...nextPosition,
-          transition: {
-            duration: randomBetween(10, 16),
-            ease: "easeInOut",
-          },
-        })
-      }
-    }
-
-    glideAcrossScreen()
-
-    return () => {
-      isMounted = false
-      controls.stop()
-    }
-  }, [controls])
-
-  return (
-    <motion.a
-      href="/mosquito-bar"
-      aria-label="Visit the Mosquito Lounge"
-      className="fixed z-40 text-6xl pointer-events-auto"
-      initial={initialPosition}
-      animate={controls}
-      whileHover={{ scale: 1.2, rotate: 0 }}
-      whileTap={{ scale: 0.9 }}
-    >
-      🦟
-    </motion.a>
-  )
-}
 
 export default function StorefrontPage({ initialProducts, initialSource }: StorefrontPageProps) {
   const [isCartOpen, setIsCartOpen] = useState(false)
@@ -102,6 +57,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
 
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
+  const [statusFilter, setStatusFilter] = useState<'all' | 'available' | 'sold'>('all')
   const deferredSearchTerm = useDeferredValue(searchTerm)
   const gridRef = useRef<HTMLDivElement | null>(null)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
@@ -140,7 +96,14 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
   const filteredProducts = useMemo(() => {
     let filtered = products
 
-    // Filter by tag first
+    // Filter by status first
+    if (statusFilter === 'available') {
+      filtered = filtered.filter((p) => !p.sold_at && p.status !== 'sold')
+    } else if (statusFilter === 'sold') {
+      filtered = filtered.filter((p) => p.sold_at || p.status === 'sold')
+    }
+
+    // Filter by tag
     if (selectedTag) {
       filtered = filtered.filter((p) => p.tags?.includes(selectedTag))
     }
@@ -169,7 +132,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
     }
 
     return filtered
-  }, [products, deferredSearchTerm, selectedTag])
+  }, [products, deferredSearchTerm, selectedTag, statusFilter])
 
   const isSearching = Boolean(deferredSearchTerm.trim())
   const displayedProducts = useMemo(() => {
@@ -262,27 +225,28 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
         transition={{ duration: 1.5 }}
       >
         <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80"
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80 z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 0.5 }}
         />
-        <motion.img
+        <Image
           src="/front.jpg"
           alt="La Esquinita storefront exterior at Locust Projects"
-          className="w-full h-full object-cover"
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
+          fill
+          priority
+          quality={85}
+          sizes="100vw"
+          className="object-cover"
         />
         <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-pink-200/60 via-pink-100/30 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-pink-200/60 via-pink-100/30 to-transparent z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 1 }}
         />
         <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-end pb-10 pointer-events-none"
+          className="absolute inset-0 flex flex-col items-center justify-end pb-10 pointer-events-none z-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 1.2 }}
@@ -307,17 +271,15 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
           transition={{ duration: 0.8 }}
         >
           <div className="flex justify-center mb-4">
-            <motion.img
-              src="/logo/locustprojects1.png"
-              alt="La Esquinita at Locust Projects"
-              className="h-32 md:h-48 w-auto drop-shadow-neon-pink cursor-pointer"
-              whileHover={{ 
+            <motion.div
+              className="relative h-32 md:h-48 w-auto cursor-pointer"
+              whileHover={{
                 scale: 1.1,
                 filter: "drop-shadow(0 0 20px #ff69b4) drop-shadow(0 0 30px #4ecdc4)",
                 transition: { duration: 0.3 }
               }}
               whileTap={{ scale: 0.95 }}
-              animate={{ 
+              animate={{
                 y: [0, -5, 0],
                 filter: [
                   "drop-shadow(0 0 10px #ff69b4)",
@@ -325,15 +287,21 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
                   "drop-shadow(0 0 10px #ff69b4)"
                 ]
               }}
-              transition={{ 
+              transition={{
                 y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
                 filter: { duration: 3, repeat: Infinity, ease: "easeInOut" }
               }}
-              onClick={() => {
-                // Add a fun interaction - could trigger a sprinkle animation or sound
-                console.log("La Esquinita logo clicked!")
-              }}
-            />
+            >
+              <Image
+                src="/logo/locustprojects1.png"
+                alt="La Esquinita at Locust Projects"
+                width={384}
+                height={192}
+                priority
+                quality={90}
+                className="h-32 md:h-48 w-auto object-contain"
+              />
+            </motion.div>
           </div>
 
           {/* Instructions */}
@@ -360,6 +328,40 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
               className="flex-1 bg-transparent focus:outline-none text-mint-rot placeholder:text-mint-rot/60"
             />
           </label>
+
+          {/* Status Filter */}
+          <div className="flex flex-wrap gap-2 justify-center">
+            <button
+              onClick={() => setStatusFilter('all')}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
+                statusFilter === 'all'
+                  ? "bg-miami-blue text-white shadow-md"
+                  : "bg-white/80 text-mint-rot border border-miami-blue/30 hover:bg-miami-blue/10"
+              }`}
+            >
+              All Items
+            </button>
+            <button
+              onClick={() => setStatusFilter('available')}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
+                statusFilter === 'available'
+                  ? "bg-green-500 text-white shadow-md"
+                  : "bg-white/80 text-mint-rot border border-green-500/30 hover:bg-green-500/10"
+              }`}
+            >
+              Available
+            </button>
+            <button
+              onClick={() => setStatusFilter('sold')}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
+                statusFilter === 'sold'
+                  ? "bg-gray-500 text-white shadow-md"
+                  : "bg-white/80 text-mint-rot border border-gray-500/30 hover:bg-gray-500/10"
+              }`}
+            >
+              Sold
+            </button>
+          </div>
 
           {/* Tag Filter */}
           <div className="flex flex-wrap gap-2 justify-center">
@@ -407,7 +409,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
         </div>
 
         {!isSearching && visibleCount < filteredProducts.length && (
-          <div ref={loadMoreRef} className="mt-8 text-center text-mint-rot font-medium">
+          <div ref={loadMoreRef} className="mt-8 text-center text-mint-rot font-medium h-12 flex items-center justify-center">
             Loading more objects...
           </div>
         )}

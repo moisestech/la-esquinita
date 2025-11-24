@@ -2,6 +2,7 @@
 
 import React from "react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import ProductCard from "./product-card"
 import { InventoryProduct } from "@/lib/inventory-data"
 
@@ -71,9 +72,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.1 * index,
+              transition={{
+                duration: 0.3,
+                delay: Math.min(0.05 * index, 0.5),
                 ease: "easeOut"
               }}
             >
@@ -98,16 +99,18 @@ export default function ProductGrid({ products }: ProductGridProps) {
                   const imageIndex = Math.floor((index + 1) / SPONSOR_INTERVAL)
                   const asset = sponsorImages[imageIndex % sponsorImages.length]
                   return (
-                    <div className="relative overflow-hidden rounded-2xl shadow-2xl border-2 border-miami-pink/20">
-                      <motion.img
+                    <div className="relative overflow-hidden rounded-2xl shadow-2xl border-2 border-miami-pink/20 h-64 md:h-80">
+                      <Image
                         src={asset.src}
                         alt={asset.alt}
-                        className="w-full h-64 md:h-80 object-cover"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        quality={75}
+                        className="object-cover"
+                        loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+                      <div className="absolute bottom-4 left-4 right-4 z-20">
                         <p className="text-white/90 text-sm">{asset.caption}</p>
                       </div>
                     </div>

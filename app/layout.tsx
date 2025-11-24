@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
+import RegisterServiceWorker from './register-sw'
 import { CartProvider } from '@/contexts/cart-context'
 
 export const metadata: Metadata = {
@@ -44,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="h-full w-full m-0 p-0">
+        <RegisterServiceWorker />
         <CartProvider>
           <Navigation />
           <main className="pt-16">
