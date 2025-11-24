@@ -484,12 +484,13 @@ function SquarePaymentSection({
     const setupApplePay = async () => {
       try {
         console.log("[Apple Pay] Starting setup...")
-        console.log("[Apple Pay] Setting up with total:", total)
-        console.log("[Apple Pay] Current domain:", window.location.hostname)
-        console.log("[Apple Pay] Full URL:", window.location.href)
-        console.log("[Apple Pay] payments object:", payments)
-        console.log("[Apple Pay] payments.paymentRequest exists:", typeof payments.paymentRequest)
-        console.log("[Apple Pay] payments.applePay exists:", typeof payments.applePay)
+
+        // Check if Apple Pay is available in the browser first
+        console.log("[Apple Pay] window.ApplePaySession exists:", !!window.ApplePaySession)
+        if (window.ApplePaySession) {
+          console.log("[Apple Pay] ApplePaySession.canMakePayments:", window.ApplePaySession.canMakePayments())
+          console.log("[Apple Pay] ApplePaySession.supportsVersion(3):", window.ApplePaySession.supportsVersion(3))
+        }
 
         const paymentRequest = payments.paymentRequest({
           countryCode: "US",
@@ -503,42 +504,36 @@ function SquarePaymentSection({
             label: item.name,
           })),
         })
-        console.log("[Apple Pay] Payment request created:", paymentRequest)
+        console.log("[Apple Pay] Payment request created")
 
         console.log("[Apple Pay] Calling payments.applePay()...")
         const applePayInstance = await payments.applePay(paymentRequest)
         console.log("[Apple Pay] Got applePayInstance:", applePayInstance)
-        console.log("[Apple Pay] applePayInstance type:", typeof applePayInstance)
-        console.log("[Apple Pay] applePayInstance.canUse type:", typeof applePayInstance?.canUse)
 
-        if (!applePayInstance || typeof applePayInstance.canUse !== 'function') {
-          console.log("[Apple Pay] Invalid instance - bailing out")
+        if (!applePayInstance) {
+          console.log("[Apple Pay] No instance returned")
           return
         }
 
-        console.log("[Apple Pay] Calling canUse()...")
-        const canUse = await applePayInstance.canUse()
-        console.log("[Apple Pay] canUse result:", canUse)
+        // Apple Pay instance doesn't have canUse() - just check if browser supports it
+        if (!window.ApplePaySession || !window.ApplePaySession.canMakePayments()) {
+          console.log("[Apple Pay] ❌ Browser doesn't support Apple Pay")
+          setApplePay(null)
+          setApplePayReady(false)
+          return
+        }
 
         if (!isActive) {
           console.log("[Apple Pay] Component unmounted, aborting")
           return
         }
 
-        if (canUse) {
-          console.log("[Apple Pay] ✅ Ready! Setting state...")
-          setApplePay(applePayInstance)
-          setApplePayReady(true)
-        } else {
-          console.log("[Apple Pay] ❌ Cannot use - not available")
-          setApplePay(null)
-          setApplePayReady(false)
-        }
+        console.log("[Apple Pay] ✅ Ready! Setting state...")
+        setApplePay(applePayInstance)
+        setApplePayReady(true)
       } catch (err) {
         console.error("[Apple Pay] Error caught:", err)
-        console.error("[Apple Pay] Error type:", typeof err)
         console.error("[Apple Pay] Error message:", err instanceof Error ? err.message : String(err))
-        console.error("[Apple Pay] Full error:", err)
         if (!isActive) return
         setApplePay(null)
         setApplePayReady(false)
