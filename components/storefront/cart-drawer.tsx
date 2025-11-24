@@ -70,6 +70,9 @@ export default function CartDrawer({
     } else if (details?.paymentId) {
       params.set("paymentId", details.paymentId)
     }
+    if (needsShipping) {
+      params.set("shipping", "true")
+    }
     const query = params.toString()
     router.push(`/checkout/success${query ? `?${query}` : ""}`)
   }
@@ -136,7 +139,7 @@ export default function CartDrawer({
             </div>
 
             {/* Cart Items - Scrollable */}
-            <div className="flex-1 overflow-y-auto p-6" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+            <div className="flex-1 overflow-y-auto p-6">
               {cartItems.length === 0 ? (
                 <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
                   <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
@@ -205,7 +208,7 @@ export default function CartDrawer({
 
             {/* Footer - Fixed at bottom */}
             {cartItems.length > 0 && (
-              <div className="border-t border-gray-200 p-6 bg-white flex-shrink-0 overflow-y-auto" style={{ maxHeight: '60vh' }}>
+              <div className="border-t border-gray-200 p-6 bg-white flex-shrink-0 overflow-y-auto" style={{ maxHeight: '50vh' }}>
                 {/* Shipping Option */}
                 <div className="mb-4 p-4 bg-white rounded-lg border-2 border-fondant-blue shadow-sm">
                   <div className="flex items-center justify-between mb-2">

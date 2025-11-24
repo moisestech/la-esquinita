@@ -5,9 +5,10 @@ import { motion } from "framer-motion"
 
 type Props = {
   orderId?: string | null
+  needsShipping?: boolean
 }
 
-export default function CheckoutSuccessScreen({ orderId }: Props) {
+export default function CheckoutSuccessScreen({ orderId, needsShipping }: Props) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-icing-white via-sugar-pink to-fondant-blue flex items-center justify-center px-4">
       <motion.div
@@ -29,9 +30,6 @@ export default function CheckoutSuccessScreen({ orderId }: Props) {
           <p className="text-lg md:text-xl text-mint-rot/90 font-semibold">
             We appreciate your purchase!
           </p>
-          <p className="text-mint-rot/70">
-            You may take the ceramic out of the gallery.
-          </p>
           {orderId && (
             <p className="text-xs uppercase tracking-wide text-gray-500">
               Reference: <span className="font-semibold text-mint-rot">{orderId}</span>
@@ -42,20 +40,19 @@ export default function CheckoutSuccessScreen({ orderId }: Props) {
         <div className="bg-fondant-blue/10 border border-fondant-blue/30 rounded-2xl p-5 text-left space-y-3">
           <p className="font-semibold text-mint-rot text-lg">What happens next?</p>
           <ul className="text-sm text-mint-rot/80 space-y-2">
-            <li>• You may take the ceramic out of the gallery now!</li>
-            <li>• Keep browsing—there are 200+ one-of-ones still live.</li>
+            {needsShipping ? (
+              <>
+                <li>• We will ship your ceramic within the next week.</li>
+                <li>• Expect a tracking number sent to your email within a week.</li>
+                <li>• Keep browsing—there are 200+ one-of-ones still live.</li>
+              </>
+            ) : (
+              <>
+                <li>• If you're in the gallery, you may take your ceramic with you now!</li>
+                <li>• Keep browsing—there are 200+ one-of-ones still live.</li>
+              </>
+            )}
           </ul>
-        </div>
-
-        <div className="bg-miami-pink/5 border border-miami-pink/30 rounded-2xl p-5 text-left space-y-2">
-          <p className="font-semibold text-mint-rot">Need shipping?</p>
-          <p className="text-sm text-mint-rot/80">
-            If you need your ceramic shipped, email{" "}
-            <a href="mailto:egodeathllc@gmail.com" className="underline font-semibold">
-              egodeathllc@gmail.com
-            </a>{" "}
-            and we'll arrange prompt shipping as soon as the show is done in January.
-          </p>
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
