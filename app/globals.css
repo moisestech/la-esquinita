@@ -153,29 +153,9 @@
 }
 
 @layer components {
-  /* Custom cursor styles */
+  /* Custom cursor styles - DISABLED because it was creating a circle on checkboxes */
   .cursor-pointer {
     cursor: pointer !important;
-  }
-
-  .cursor-pointer::before {
-    content: '';
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.5);
-    border: 2px solid white;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.2s ease;
-    transform: translate(-50%, -50%);
-  }
-
-  .cursor-pointer:hover::before {
-    transform: translate(-50%, -50%) scale(1.5);
-    background: rgba(255, 255, 255, 0.8);
-    border-color: #ff69b4;
   }
 
   .about-button {

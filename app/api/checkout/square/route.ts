@@ -12,11 +12,23 @@ type CartItemPayload = {
   slug: string
 }
 
+type ShippingAddress = {
+  name: string
+  address: string
+  city: string
+  state: string
+  zip: string
+  email: string
+  phone: string
+}
+
 type CheckoutRequest = {
   cartItems: CartItemPayload[]
   sourceId: string
   customerEmail?: string
   totalAmount?: number
+  needsShipping?: boolean
+  shippingAddress?: ShippingAddress | null
 }
 
 const currency = "USD"
@@ -198,6 +210,50 @@ export async function POST(request: Request) {
         }
       } catch (err) {
         console.error("[square] Supabase admin unavailable", err)
+      }
+    }
+
+    // Send shipping email if needed
+    if (body.needsShipping && body.shippingAddress) {
+      try {
+        console.log("[square] Sending shipping notification email...")
+        const emailBody = `
+New Order Requires Shipping!
+
+Order ID: ${orderIdentifier}
+Payment ID: ${paymentId}
+Total Amount: $${(totalAmountCents / 100).toFixed(2)}
+
+SHIPPING ADDRESS:
+${body.shippingAddress.name}
+${body.shippingAddress.address}
+${body.shippingAddress.city}, ${body.shippingAddress.state} ${body.shippingAddress.zip}
+Email: ${body.shippingAddress.email}
+Phone: ${body.shippingAddress.phone}
+
+ITEMS TO SHIP:
+${body.cartItems.map((item) => `- ${item.name} (x${item.quantity}) - $${item.price.toFixed(2)} each`).join('\n')}
+
+Please pull these items from the gallery and arrange shipping.
+`
+
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            from: "La Esquinita <onboarding@resend.dev>",
+            to: ["brett.m.potter@gmail.com"],
+            subject: `🚚 Shipping Order #${orderIdentifier?.slice(-8)}`,
+            text: emailBody
+          })
+        })
+        console.log("[square] Shipping notification email sent")
+      } catch (emailError) {
+        console.error("[square] Failed to send shipping email:", emailError)
+        // Don't fail the checkout if email fails
       }
     }
 
