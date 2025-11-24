@@ -139,7 +139,7 @@ export default function CartDrawer({
             </div>
 
             {/* Cart Items - Scrollable */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-6" style={{ minHeight: '200px' }}>
               {cartItems.length === 0 ? (
                 <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
                   <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
@@ -208,7 +208,7 @@ export default function CartDrawer({
 
             {/* Footer - Fixed at bottom */}
             {cartItems.length > 0 && (
-              <div className="border-t border-gray-200 p-6 bg-white flex-shrink-0 overflow-y-auto" style={{ maxHeight: '50vh' }}>
+              <div className="border-t border-gray-200 p-6 bg-white flex-shrink-0 overflow-y-auto" style={{ maxHeight: '45vh' }}>
                 {/* Shipping Option */}
                 <div className="mb-4 p-4 bg-white rounded-lg border-2 border-fondant-blue shadow-sm">
                   <div className="flex items-center justify-between mb-2">
@@ -498,22 +498,16 @@ function SquarePaymentSection({
           })),
         })
 
-        console.log("[Apple Pay] Payment request created, getting Apple Pay instance...")
         const applePayInstance = await payments.applePay(paymentRequest)
-        console.log("[Apple Pay] Instance:", !!applePayInstance)
-        if (!applePayInstance) {
-          console.log("[Apple Pay] No instance returned")
+        if (!applePayInstance || typeof applePayInstance.canUse !== 'function') {
           return
         }
         const canUse = await applePayInstance.canUse()
-        console.log("[Apple Pay] Can use:", canUse)
         if (!isActive) return
         if (canUse) {
-          console.log("[Apple Pay] ✅ Ready to use!")
           setApplePay(applePayInstance)
           setApplePayReady(true)
         } else {
-          console.log("[Apple Pay] ❌ Cannot use")
           setApplePay(null)
           setApplePayReady(false)
         }
