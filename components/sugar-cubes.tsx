@@ -133,9 +133,9 @@ export default function SugarCubesV2({ count = 200 }) {
   return (
     <group ref={groupRef}>
       {/* Add lights with colors to help cubes stand out against white */}
-      <pointLight position={[10, 10, 10]} intensity={0.8} color="#ffddee" />
-      <pointLight position={[-10, -10, 10]} intensity={0.8} color="#ddffff" />
-      <pointLight position={[0, 0, 10]} intensity={0.5} color="#FF1493" />
+      <pointLight position={[10, 10, 10]} />
+      <pointLight position={[-10, -10, 10]} />
+      <pointLight position={[0, 0, 10]} />
     </group>
   )
 }

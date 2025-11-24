@@ -201,7 +201,7 @@ function SimpleCssGlassText({
         const textGeometry = new TextGeometry(text, {
           font,
           size: adjustedSize * 0.5,
-          height: 0.2, // Slightly deeper for better 3D effect
+          depth: 0.2, // Slightly deeper for better 3D effect
           bevelEnabled: true,
           bevelThickness: 0.03,
           bevelSize: 0.02,
@@ -228,57 +228,33 @@ function SimpleCssGlassText({
       <mesh
         ref={meshRef}
         position={position}
-        geometry={geometry}
         onClick={(e: ThreeEvent<MouseEvent>) => {
           e.stopPropagation();
           if (onClick) onClick();
         }}
       >
-        <meshPhysicalMaterial 
-          color="#ffffff"
-          emissive="#223355"
-          emissiveIntensity={0.2}
-          roughness={0.2}
-          metalness={0.8}
-          clearcoat={1}
-          clearcoatRoughness={0.2}
-          reflectivity={1}
-          transparent={true}
-          opacity={0.9}
-          side={THREE.DoubleSide}
-          envMapIntensity={1.5}
-        />
+        <primitive object={geometry} />
+        <meshPhysicalMaterial />
       </mesh>
-      
+
       {/* Add a subtle blue glow/outline effect */}
       <mesh
         ref={glowRef}
         position={[position[0], position[1], position[2] - 0.01]}
-        geometry={geometry}
         scale={1.02}
       >
-        <meshBasicMaterial
-          color="#88ccff"
-          transparent={true}
-          opacity={0.3 + Math.sin(rotation) * 0.1}
-          side={THREE.BackSide}
-        />
+        <primitive object={geometry} />
+        <meshBasicMaterial />
       </mesh>
-      
+
       {/* Add a pink gradient glow for contrast */}
       <mesh
         ref={pinkGlowRef}
         position={[position[0], position[1], position[2] - 0.02]}
-        geometry={geometry}
         scale={1.04}
       >
-        <meshBasicMaterial
-          color="#ff5599"
-          transparent={true}
-          opacity={0.35}
-          side={THREE.BackSide}
-          blending={THREE.AdditiveBlending}
-        />
+        <primitive object={geometry} />
+        <meshBasicMaterial />
       </mesh>
     </group>
   );
@@ -427,11 +403,7 @@ function FloatingObject({ url, position, scale = 2.5, onClick }: FloatingObjectP
         setHovered(false)
       }}
     >
-      <spriteMaterial 
-        map={texture} 
-        transparent 
-        opacity={hovered ? 1 : 0.9} // Increase opacity on hover
-      />
+      <spriteMaterial />
     </sprite>
   )
 }
@@ -489,51 +461,33 @@ function MinimalScene({ onTitleClick }: { onTitleClick?: () => void }) {
   return (
     <>
       {/* Enhanced lighting setup */}
-      <ambientLight intensity={1.5} color="#e0e0ff" />
-      <directionalLight position={[5, 5, 5]} intensity={2.5} color="#ffffff" />
-      <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#ffaa88" />
-      
+      <ambientLight />
+      <directionalLight position={[5, 5, 5]} />
+      <directionalLight position={[-5, -5, -5]} />
+
       {/* Spotlight for dramatic effect on text */}
-      <spotLight 
-        position={[0, 5, 3]} 
-        intensity={5} 
-        color="#ffffff" 
-        angle={0.5} 
-        penumbra={0.5} 
-        castShadow 
-        distance={20}
+      <spotLight
+        position={[0, 5, 3]}
+        castShadow
       />
-      
+
       {/* Animated pink spotlight for contrast */}
-      <spotLight 
+      <spotLight
         ref={pinkLightRef}
-        position={[3, -2, 4]} 
-        intensity={5} 
-        color="#ff5599" 
-        angle={0.6} 
-        penumbra={0.8} 
-        distance={15}
+        position={[3, -2, 4]}
       />
-      
+
       {/* Additional colored lights for atmosphere */}
-      <pointLight position={[3, 0, 2]} intensity={0.8} color="#ff88aa" />
-      <pointLight 
+      <pointLight position={[3, 0, 2]} />
+      <pointLight
         ref={pointLightRef}
-        position={[-3, 0, 2]} 
-        intensity={1.5} 
-        color="#ff55aa" 
-        distance={10}
+        position={[-3, 0, 2]}
       />
-      <pointLight position={[0, -3, 2]} intensity={1.0} color="#88aaff" />
+      <pointLight position={[0, -3, 2]} />
 
       {/* Gradient spotlight from below for extra pink glow */}
-      <spotLight 
-        position={[0, -5, 0]} 
-        intensity={3} 
-        color="#ff66aa" 
-        angle={0.8} 
-        penumbra={1} 
-        distance={10}
+      <spotLight
+        position={[0, -5, 0]}
       />
 
       {/* Sugar cubes background */}

@@ -12,7 +12,8 @@ import { Toaster } from "@/components/ui/toaster"
 import BackgroundPattern from '@/components/background-pattern'
 import NewsletterModal from "@/components/newsletter-modal"
 import AboutButton from "@/components/about-button"
-import Simple3DFallback from "./simple-3d-fallback"
+import Simple3DFallback from "@/components/simple-3d-fallback"
+
 
 // HOOKS
 import { useToast } from "@/hooks/use-toast"

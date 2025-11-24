@@ -98,9 +98,9 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
 
     // Filter by status first
     if (statusFilter === 'available') {
-      filtered = filtered.filter((p) => !p.sold_at && p.status !== 'sold')
+      filtered = filtered.filter((p) => !p.sold_at)
     } else if (statusFilter === 'sold') {
-      filtered = filtered.filter((p) => p.sold_at || p.status === 'sold')
+      filtered = filtered.filter((p) => !!p.sold_at)
     }
 
     // Filter by tag

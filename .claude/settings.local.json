@@ -36,7 +36,9 @@
       "Bash(node:*)",
       "Read(//var/folders/02/kbkx_shn6w1c64d3t2yfn8wm0000gn/T/TemporaryItems/NSIRD_screencaptureui_Z18S01/**)",
       "Bash(curl -X POST https://www.laesquinita.miami/api/run-fix -H \"Content-Type: application/json\" -d '{\"\"\"\"action\"\"\"\": \"\"\"\"fix-items\"\"\"\"}')",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)"
     ],
     "deny": []
   }

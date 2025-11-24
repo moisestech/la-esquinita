@@ -32,7 +32,7 @@ export default function MiamiText3D() {
       >
         <mesh>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="hotpink" />
+          <meshStandardMaterial />
         </mesh>
       </PresentationControls>
       <OrbitControls enableZoom={false} enablePan={false} />
