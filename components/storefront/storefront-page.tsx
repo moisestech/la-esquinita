@@ -16,8 +16,8 @@ interface StorefrontPageProps {
 }
 
 const randomBetween = (min: number, max: number) => Math.random() * (max - min) + min
-const INITIAL_BATCH = 48
-const BATCH_SIZE = 48
+const INITIAL_BATCH = 24
+const BATCH_SIZE = 12
 
 const generateMosquitoPosition = () => ({
   top: `${randomBetween(5, 85)}vh`,
@@ -178,7 +178,8 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
   }, [filteredProducts, isSearching, visibleCount])
 
   useEffect(() => {
-    if (!deferredSearchTerm.trim() || filteredProducts.length === 0) return
+    // Only scroll when user is actively searching, not when more items load
+    if (!deferredSearchTerm.trim() || filteredProducts.length === 0 || !isSearching) return
 
     const targetId = filteredProducts[0]?.id
     if (!targetId) return
@@ -187,7 +188,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
     if (!element) return
 
     element.scrollIntoView({ behavior: "smooth", block: "start" })
-  }, [filteredProducts, deferredSearchTerm])
+  }, [deferredSearchTerm]) // Only trigger on search term change, not filteredProducts change
 
   useEffect(() => {
     if (isSearching) return
@@ -203,7 +204,7 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
           )
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "400px" }
     )
 
     observer.observe(target)
