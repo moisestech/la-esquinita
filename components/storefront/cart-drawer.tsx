@@ -472,6 +472,7 @@ function SquarePaymentSection({
   }, [cartItems.length, card])
 
   useEffect(() => {
+    console.log("[Apple Pay] useEffect triggered - payments:", !!payments, "cartItems:", cartItems.length)
     if (!payments || cartItems.length === 0) {
       console.log("[Apple Pay] Not ready - payments:", !!payments, "cartItems:", cartItems.length)
       setApplePay(null)
@@ -482,9 +483,14 @@ function SquarePaymentSection({
     let isActive = true
     const setupApplePay = async () => {
       try {
+        console.log("[Apple Pay] Starting setup...")
         console.log("[Apple Pay] Setting up with total:", total)
         console.log("[Apple Pay] Current domain:", window.location.hostname)
         console.log("[Apple Pay] Full URL:", window.location.href)
+        console.log("[Apple Pay] payments object:", payments)
+        console.log("[Apple Pay] payments.paymentRequest exists:", typeof payments.paymentRequest)
+        console.log("[Apple Pay] payments.applePay exists:", typeof payments.applePay)
+
         const paymentRequest = payments.paymentRequest({
           countryCode: "US",
           currencyCode: "USD",
@@ -497,22 +503,42 @@ function SquarePaymentSection({
             label: item.name,
           })),
         })
+        console.log("[Apple Pay] Payment request created:", paymentRequest)
 
+        console.log("[Apple Pay] Calling payments.applePay()...")
         const applePayInstance = await payments.applePay(paymentRequest)
+        console.log("[Apple Pay] Got applePayInstance:", applePayInstance)
+        console.log("[Apple Pay] applePayInstance type:", typeof applePayInstance)
+        console.log("[Apple Pay] applePayInstance.canUse type:", typeof applePayInstance?.canUse)
+
         if (!applePayInstance || typeof applePayInstance.canUse !== 'function') {
+          console.log("[Apple Pay] Invalid instance - bailing out")
           return
         }
+
+        console.log("[Apple Pay] Calling canUse()...")
         const canUse = await applePayInstance.canUse()
-        if (!isActive) return
+        console.log("[Apple Pay] canUse result:", canUse)
+
+        if (!isActive) {
+          console.log("[Apple Pay] Component unmounted, aborting")
+          return
+        }
+
         if (canUse) {
+          console.log("[Apple Pay] ✅ Ready! Setting state...")
           setApplePay(applePayInstance)
           setApplePayReady(true)
         } else {
+          console.log("[Apple Pay] ❌ Cannot use - not available")
           setApplePay(null)
           setApplePayReady(false)
         }
       } catch (err) {
-        console.error("[Apple Pay] Error:", err)
+        console.error("[Apple Pay] Error caught:", err)
+        console.error("[Apple Pay] Error type:", typeof err)
+        console.error("[Apple Pay] Error message:", err instanceof Error ? err.message : String(err))
+        console.error("[Apple Pay] Full error:", err)
         if (!isActive) return
         setApplePay(null)
         setApplePayReady(false)
@@ -521,6 +547,7 @@ function SquarePaymentSection({
 
     setupApplePay()
     return () => {
+      console.log("[Apple Pay] Cleanup - component unmounting")
       isActive = false
     }
   }, [payments, cartItems, total])
