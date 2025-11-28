@@ -499,6 +499,8 @@ export const coupons = {
     // Hardcoded coupons for demo
     const hardcodedCoupons: Record<string, { discount: number; type: 'percentage' | 'fixed' }> = {
       'BUZZBITCH': { discount: 5, type: 'fixed' },
+      'BLE$$THI$ME$$': { discount: 100, type: 'percentage' }, // Master coupon - makes item free
+      'BLACKFRIDAY': { discount: 20, type: 'percentage' }, // Black Friday 20% off
     }
 
     const normalizedCode = code.toUpperCase().trim()
