@@ -2,11 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ShoppingBag, Trash2, Plus, Minus } from "lucide-react"
+import { X, ShoppingBag, Trash2, Plus, Minus, Tag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/contexts/cart-context"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
+import { coupons } from "@/lib/supabase"
 
 declare global {
   interface Window {
@@ -51,10 +52,62 @@ export default function CartDrawer({
     phone: ''
   })
 
+  // Coupon state
+  const [couponCode, setCouponCode] = useState('')
+  const [appliedCoupon, setAppliedCoupon] = useState<{
+    code: string
+    discount: number
+    type: 'percentage' | 'fixed'
+  } | null>(null)
+  const [couponError, setCouponError] = useState<string | null>(null)
+
   const totalItems = getCartItemCount()
   const subtotal = getCartTotal()
   const shippingCost = needsShipping ? 20 : 0
-  const total = subtotal + shippingCost
+
+  // Calculate discount
+  const discount = appliedCoupon
+    ? appliedCoupon.type === 'percentage'
+      ? (subtotal * appliedCoupon.discount) / 100
+      : appliedCoupon.discount
+    : 0
+
+  const total = Math.max(0, subtotal + shippingCost - discount)
+
+  const handleApplyCoupon = async () => {
+    if (!couponCode.trim()) {
+      setCouponError('Please enter a coupon code')
+      return
+    }
+
+    try {
+      const result = await coupons.validate(couponCode)
+      if (result.valid && result.discount && result.type) {
+        setAppliedCoupon({
+          code: couponCode.toUpperCase(),
+          discount: result.discount,
+          type: result.type
+        })
+        setCouponError(null)
+        toast({
+          title: "Coupon applied!",
+          description: result.message || "Your discount has been applied.",
+        })
+      } else {
+        setCouponError(result.message || 'Invalid coupon code')
+        setAppliedCoupon(null)
+      }
+    } catch (error) {
+      setCouponError('Failed to validate coupon')
+      setAppliedCoupon(null)
+    }
+  }
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null)
+    setCouponCode('')
+    setCouponError(null)
+  }
 
   const handlePaymentSuccess = (details?: CheckoutResult) => {
     toast({
@@ -109,7 +162,7 @@ export default function CartDrawer({
             onClick={onClose}
           />
 
-          {/* Cart Drawer */}
+          {/* Cart Drawer - Full height, single scroll area */}
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -118,10 +171,10 @@ export default function CartDrawer({
             className="relative w-full max-w-md h-full bg-white shadow-2xl flex flex-col"
           >
             {/* Header - Fixed */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200 flex-shrink-0">
+            <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200 flex-shrink-0">
               <div className="flex items-center space-x-3">
-                <ShoppingBag className="w-6 h-6 text-miami-pink" />
-                <h2 className="text-xl font-bold text-gray-800">Shopping Cart</h2>
+                <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 text-miami-pink" />
+                <h2 className="text-lg md:text-xl font-bold text-gray-800">Shopping Cart</h2>
                 {totalItems > 0 && (
                   <span className="bg-miami-pink text-white text-xs px-2 py-1 rounded-full">
                     {totalItems}
@@ -138,196 +191,260 @@ export default function CartDrawer({
               </motion.button>
             </div>
 
-            {/* Cart Items - Scrollable */}
-            <div className="flex-1 overflow-y-auto p-6" style={{ minHeight: '200px' }}>
-              {cartItems.length === 0 ? (
-                <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
-                  <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-700 mb-2">Your cart is empty</h3>
-                  <p className="text-gray-600">Add some treasures to your collection...</p>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {cartItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg"
-                    >
-                      {/* Product Image */}
-                      <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-contain"
+            {/* Scrollable Content Area - SINGLE scroll zone */}
+            <div className="flex-1 overflow-y-auto">
+              {/* Cart Items */}
+              <div className="p-4 md:p-6">
+                {cartItems.length === 0 ? (
+                  <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
+                    <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-700 mb-2">Your cart is empty</h3>
+                    <p className="text-gray-600">Add some treasures to your collection...</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {cartItems.map((item) => (
+                      <motion.div
+                        key={item.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg"
+                      >
+                        {/* Product Image */}
+                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 flex-shrink-0">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+
+                        {/* Product Details */}
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-medium text-gray-800 text-sm md:text-base truncate">{item.name}</h3>
+                          <p className="text-miami-pink font-semibold">${item.price.toFixed(2)}</p>
+                        </div>
+
+                        {/* Quantity Controls */}
+                        <div className="flex items-center space-x-2 flex-shrink-0">
+                          <motion.button
+                            onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                            className="p-1 rounded-full hover:bg-gray-200 transition-colors"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                          >
+                            <Minus className="w-4 h-4 text-gray-600" />
+                          </motion.button>
+                          <span className="w-8 text-center font-medium">{item.quantity}</span>
+                          <motion.button
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className="p-1 rounded-full hover:bg-gray-200 transition-colors"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                          >
+                            <Plus className="w-4 h-4 text-gray-600" />
+                          </motion.button>
+                        </div>
+
+                        {/* Remove Button */}
+                        <motion.button
+                          onClick={() => removeFromCart(item.id)}
+                          className="p-2 rounded-full hover:bg-red-100 transition-colors flex-shrink-0"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <Trash2 className="w-4 h-4 text-red-500" />
+                        </motion.button>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Checkout Section - Inside scroll area */}
+              {cartItems.length > 0 && (
+                <div className="p-4 md:p-6 pt-0 space-y-4">
+                  {/* Coupon Section */}
+                  <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Tag className="w-4 h-4 text-miami-pink" />
+                      <h3 className="font-semibold text-gray-800 text-sm">Have a coupon?</h3>
+                    </div>
+
+                    {!appliedCoupon ? (
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={couponCode}
+                          onChange={(e) => {
+                            setCouponCode(e.target.value)
+                            setCouponError(null)
+                          }}
+                          onKeyPress={(e) => e.key === 'Enter' && handleApplyCoupon()}
+                          placeholder="Enter code"
+                          className="flex-1 px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
+                        />
+                        <Button
+                          onClick={handleApplyCoupon}
+                          className="bg-miami-pink text-white hover:bg-miami-pink/90"
+                          size="sm"
+                        >
+                          Apply
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-3">
+                        <div className="flex-1">
+                          <p className="font-semibold text-green-800 text-sm">{appliedCoupon.code}</p>
+                          <p className="text-xs text-green-600">
+                            {appliedCoupon.type === 'percentage'
+                              ? `${appliedCoupon.discount}% off`
+                              : `$${appliedCoupon.discount} off`}
+                          </p>
+                        </div>
+                        <Button
+                          onClick={handleRemoveCoupon}
+                          variant="ghost"
+                          size="sm"
+                          className="text-green-700 hover:text-green-900 hover:bg-green-100"
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                    )}
+
+                    {couponError && (
+                      <p className="text-xs text-red-500 mt-2">{couponError}</p>
+                    )}
+                  </div>
+
+                  {/* Shipping Option */}
+                  <div className="p-4 bg-white rounded-lg border-2 border-fondant-blue shadow-sm">
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="flex items-center cursor-pointer gap-2">
+                        <input
+                          type="checkbox"
+                          checked={needsShipping}
+                          onChange={(e) => setNeedsShipping(e.target.checked)}
+                          className="w-4 h-4 cursor-pointer"
+                          style={{ accentColor: '#ff69b4' }}
+                        />
+                        <span className="font-semibold text-mint-rot text-sm">Need shipping? (+$20)</span>
+                      </label>
+                    </div>
+                    <p className="text-xs text-mint-rot/70">
+                      Free pickup available at the gallery during open hours
+                    </p>
+
+                    {needsShipping && (
+                      <div className="mt-4 space-y-3">
+                        <input
+                          type="text"
+                          placeholder="Full Name"
+                          value={shippingAddress.name}
+                          onChange={(e) => setShippingAddress({...shippingAddress, name: e.target.value})}
+                          className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
+                          required
+                        />
+                        <input
+                          type="text"
+                          placeholder="Street Address"
+                          value={shippingAddress.address}
+                          onChange={(e) => setShippingAddress({...shippingAddress, address: e.target.value})}
+                          className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
+                          required
+                        />
+                        <div className="grid grid-cols-2 gap-2">
+                          <input
+                            type="text"
+                            placeholder="City"
+                            value={shippingAddress.city}
+                            onChange={(e) => setShippingAddress({...shippingAddress, city: e.target.value})}
+                            className="px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
+                            required
+                          />
+                          <input
+                            type="text"
+                            placeholder="State"
+                            value={shippingAddress.state}
+                            onChange={(e) => setShippingAddress({...shippingAddress, state: e.target.value})}
+                            className="px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
+                            required
+                          />
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="ZIP Code"
+                          value={shippingAddress.zip}
+                          onChange={(e) => setShippingAddress({...shippingAddress, zip: e.target.value})}
+                          className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
+                          required
+                        />
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          value={shippingAddress.email}
+                          onChange={(e) => setShippingAddress({...shippingAddress, email: e.target.value})}
+                          className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
+                          required
+                        />
+                        <input
+                          type="tel"
+                          placeholder="Phone Number"
+                          value={shippingAddress.phone}
+                          onChange={(e) => setShippingAddress({...shippingAddress, phone: e.target.value})}
+                          className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
+                          required
                         />
                       </div>
+                    )}
+                  </div>
 
-                      {/* Product Details */}
-                      <div className="flex-1">
-                        <h3 className="font-medium text-gray-800">{item.name}</h3>
-                        <p className="text-miami-pink font-semibold">${item.price.toFixed(2)}</p>
+                  {/* Price Breakdown */}
+                  <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
+                    <div className="flex justify-between text-sm text-gray-600">
+                      <span>Subtotal:</span>
+                      <span>${subtotal.toFixed(2)}</span>
+                    </div>
+                    {appliedCoupon && discount > 0 && (
+                      <div className="flex justify-between text-sm text-green-600">
+                        <span>Discount ({appliedCoupon.code}):</span>
+                        <span>-${discount.toFixed(2)}</span>
                       </div>
-
-                      {/* Quantity Controls */}
-                      <div className="flex items-center space-x-2">
-                        <motion.button
-                          onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
-                          className="p-1 rounded-full hover:bg-gray-200 transition-colors"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <Minus className="w-4 h-4 text-gray-600" />
-                        </motion.button>
-                        <span className="w-8 text-center font-medium">{item.quantity}</span>
-                        <motion.button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="p-1 rounded-full hover:bg-gray-200 transition-colors"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <Plus className="w-4 h-4 text-gray-600" />
-                        </motion.button>
+                    )}
+                    {needsShipping && (
+                      <div className="flex justify-between text-sm text-gray-600">
+                        <span>Shipping & Processing:</span>
+                        <span>${shippingCost.toFixed(2)}</span>
                       </div>
+                    )}
+                    <div className="flex justify-between items-center pt-2 border-t border-gray-300">
+                      <span className="text-lg font-medium text-gray-800">Total:</span>
+                      <span className="text-2xl font-bold text-miami-pink">${total.toFixed(2)}</span>
+                    </div>
+                  </div>
 
-                      {/* Remove Button */}
-                      <motion.button
-                        onClick={() => removeFromCart(item.id)}
-                        className="p-2 rounded-full hover:bg-red-100 transition-colors"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <Trash2 className="w-4 h-4 text-red-500" />
-                      </motion.button>
-                    </motion.div>
-                  ))}
+                  {/* Payment Section */}
+                  <SquarePaymentSection
+                    cartItems={cartItems}
+                    total={total}
+                    needsShipping={needsShipping}
+                    shippingAddress={shippingAddress}
+                    onSuccess={handlePaymentSuccess}
+                    onFailure={handlePaymentFailure}
+                  />
+
+                  {/* Continue Shopping */}
+                  <Button
+                    onClick={onClose}
+                    variant="outline"
+                    className="w-full border-miami-pink/30 text-miami-pink hover:bg-miami-pink/10"
+                  >
+                    Continue Shopping
+                  </Button>
                 </div>
               )}
             </div>
-
-            {/* Footer - Fixed at bottom */}
-            {cartItems.length > 0 && (
-              <div className="border-t border-gray-200 p-6 bg-white flex-shrink-0 overflow-y-auto" style={{ maxHeight: '45vh' }}>
-                {/* Shipping Option */}
-                <div className="mb-4 p-4 bg-white rounded-lg border-2 border-fondant-blue shadow-sm">
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="flex items-center cursor-pointer gap-2">
-                      <input
-                        type="checkbox"
-                        checked={needsShipping}
-                        onChange={(e) => setNeedsShipping(e.target.checked)}
-                        className="w-4 h-4 cursor-pointer"
-                        style={{ accentColor: '#ff69b4' }}
-                      />
-                      <span className="font-semibold text-mint-rot">Need shipping? (+$20)</span>
-                    </label>
-                  </div>
-                  <p className="text-xs text-mint-rot/70">
-                    Free pickup available at the gallery during open hours
-                  </p>
-
-                  {needsShipping && (
-                    <div className="mt-4 space-y-3">
-                      <input
-                        type="text"
-                        placeholder="Full Name"
-                        value={shippingAddress.name}
-                        onChange={(e) => setShippingAddress({...shippingAddress, name: e.target.value})}
-                        className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
-                        required
-                      />
-                      <input
-                        type="text"
-                        placeholder="Street Address"
-                        value={shippingAddress.address}
-                        onChange={(e) => setShippingAddress({...shippingAddress, address: e.target.value})}
-                        className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
-                        required
-                      />
-                      <div className="grid grid-cols-2 gap-2">
-                        <input
-                          type="text"
-                          placeholder="City"
-                          value={shippingAddress.city}
-                          onChange={(e) => setShippingAddress({...shippingAddress, city: e.target.value})}
-                          className="px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
-                          required
-                        />
-                        <input
-                          type="text"
-                          placeholder="State"
-                          value={shippingAddress.state}
-                          onChange={(e) => setShippingAddress({...shippingAddress, state: e.target.value})}
-                          className="px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
-                          required
-                        />
-                      </div>
-                      <input
-                        type="text"
-                        placeholder="ZIP Code"
-                        value={shippingAddress.zip}
-                        onChange={(e) => setShippingAddress({...shippingAddress, zip: e.target.value})}
-                        className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
-                        required
-                      />
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        value={shippingAddress.email}
-                        onChange={(e) => setShippingAddress({...shippingAddress, email: e.target.value})}
-                        className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
-                        required
-                      />
-                      <input
-                        type="tel"
-                        placeholder="Phone Number"
-                        value={shippingAddress.phone}
-                        onChange={(e) => setShippingAddress({...shippingAddress, phone: e.target.value})}
-                        className="w-full px-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder:text-gray-500"
-                        required
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {/* Price Breakdown */}
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>Subtotal:</span>
-                    <span>${subtotal.toFixed(2)}</span>
-                  </div>
-                  {needsShipping && (
-                    <div className="flex justify-between text-sm text-gray-600">
-                      <span>Shipping & Processing:</span>
-                      <span>${shippingCost.toFixed(2)}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between items-center pt-2 border-t border-gray-200">
-                    <span className="text-lg font-medium text-gray-800">Total:</span>
-                    <span className="text-2xl font-bold text-miami-pink">${total.toFixed(2)}</span>
-                  </div>
-                </div>
-
-                <SquarePaymentSection
-                  cartItems={cartItems}
-                  total={total}
-                  needsShipping={needsShipping}
-                  shippingAddress={shippingAddress}
-                  onSuccess={handlePaymentSuccess}
-                  onFailure={handlePaymentFailure}
-                />
-
-                {/* Continue Shopping */}
-                <Button
-                  onClick={onClose}
-                  variant="outline"
-                  className="w-full mt-3 border-miami-pink/30 text-miami-pink hover:bg-miami-pink/10"
-                >
-                  Continue Shopping
-                </Button>
-              </div>
-            )}
           </motion.div>
         </motion.div>
       )}
@@ -396,7 +513,7 @@ function SquarePaymentSection({
   )
 
   useEffect(() => {
-    if (cartItems.length === 0 || card) return // Don't reinitialize if card already exists
+    if (cartItems.length === 0 || card) return
     let isMounted = true
 
     const loadSquareScript = (env: "sandbox" | "production") => {
@@ -485,7 +602,6 @@ function SquarePaymentSection({
       try {
         console.log("[Apple Pay] Starting setup...")
 
-        // Check if Apple Pay is available in the browser first
         console.log("[Apple Pay] window.ApplePaySession exists:", !!window.ApplePaySession)
         if (window.ApplePaySession) {
           console.log("[Apple Pay] ApplePaySession.canMakePayments:", window.ApplePaySession.canMakePayments())
@@ -515,7 +631,6 @@ function SquarePaymentSection({
           return
         }
 
-        // Apple Pay instance doesn't have canUse() - just check if browser supports it
         if (!window.ApplePaySession || !window.ApplePaySession.canMakePayments()) {
           console.log("[Apple Pay] ❌ Browser doesn't support Apple Pay")
           setApplePay(null)
@@ -618,7 +733,7 @@ function SquarePaymentSection({
   if (cartItems.length === 0) return null
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {statusMessage && (
         <p className="text-sm text-gray-500">{statusMessage}</p>
       )}
