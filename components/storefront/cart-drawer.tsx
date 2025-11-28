@@ -189,7 +189,7 @@ export default function CartDrawer({
             </div>
 
             {/* Cart Items - Takes available space */}
-            <div className="flex-1 overflow-y-auto p-4" style={{ minHeight: '150px' }}>
+            <div className="flex-1 overflow-y-auto p-4 pb-2" style={{ minHeight: '200px' }}>
               {cartItems.length === 0 ? (
                 <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
                   <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
@@ -203,7 +203,7 @@ export default function CartDrawer({
                       key={item.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg"
+                      className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg"
                     >
                       {/* Product Image */}
                       <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 flex-shrink-0">
@@ -217,11 +217,11 @@ export default function CartDrawer({
                       {/* Product Details */}
                       <div className="flex-1 min-w-0">
                         <h3 className="font-medium text-gray-800 text-sm truncate">{item.name}</h3>
-                        <p className="text-miami-pink font-semibold">${item.price.toFixed(2)}</p>
+                        <p className="text-miami-pink font-semibold text-sm">${item.price.toFixed(2)}</p>
                       </div>
 
                       {/* Quantity Controls */}
-                      <div className="flex items-center space-x-2 flex-shrink-0">
+                      <div className="flex items-center space-x-1 flex-shrink-0">
                         <motion.button
                           onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
                           className="p-1 rounded-full hover:bg-gray-200 transition-colors"
@@ -230,7 +230,7 @@ export default function CartDrawer({
                         >
                           <Minus className="w-4 h-4 text-gray-600" />
                         </motion.button>
-                        <span className="w-8 text-center font-medium">{item.quantity}</span>
+                        <span className="w-8 text-center font-medium text-sm">{item.quantity}</span>
                         <motion.button
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
                           className="p-1 rounded-full hover:bg-gray-200 transition-colors"
@@ -244,7 +244,7 @@ export default function CartDrawer({
                       {/* Remove Button */}
                       <motion.button
                         onClick={() => removeFromCart(item.id)}
-                        className="p-2 rounded-full hover:bg-red-100 transition-colors flex-shrink-0"
+                        className="p-1.5 rounded-full hover:bg-red-100 transition-colors flex-shrink-0"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
@@ -258,7 +258,7 @@ export default function CartDrawer({
 
             {/* Footer - Always stays on screen */}
             {cartItems.length > 0 && (
-              <div className="border-t border-gray-200 p-4 bg-white flex-shrink-0 overflow-y-auto" style={{ maxHeight: '55vh' }}>
+              <div className="border-t border-gray-200 p-4 pt-3 bg-white flex-shrink-0 overflow-y-auto" style={{ maxHeight: '50vh' }}>
                 {/* Coupon Section */}
                 <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
                   <div className="flex items-center gap-2 mb-2">
