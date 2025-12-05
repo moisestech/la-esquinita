@@ -20,11 +20,11 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
     entries: [
       {
         date: "Nov 21",
-        status: "Programming TBA",
+        status: "Delight in the Mire performance + Girlcop DJ + Holly Hunt",
       },
       {
         date: "Nov 22",
-        status: "Programming TBA",
+        status: "Black Brigade",
       },
     ],
   },
@@ -33,11 +33,11 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
     entries: [
       {
         date: "Dec 5",
-        status: "Programming TBA",
+        status: "Brain Rot (Whitney Mallett, David Lisbon, Brianna Griffin + Marylin Loddi + Bebas Neu + Rick Guerre + DJ Manni Cann + Lien Theresa, Reese + Shanti",
       },
       {
         date: "Dec 6",
-        status: "Programming TBA",
+        status: "Nick Leon + Poncili Creacion + Lydia Lunch + Camila Alvarez + El TAxI + Delight in the Mire final performance",
       },
       {
         date: "Dec 12",
