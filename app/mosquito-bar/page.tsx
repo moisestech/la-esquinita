@@ -16,7 +16,7 @@ type ScheduleEntry = {
 
 const schedule: { month: string; entries: ScheduleEntry[] }[] = [
   {
-    month: "NOVEMBER 2024",
+    month: "NOVEMBER 2025",
     entries: [
       {
         date: "Nov 21",
@@ -29,7 +29,7 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
     ],
   },
   {
-    month: "DECEMBER 2024",
+    month: "DECEMBER 2025",
     entries: [
       {
         date: "Dec 5",
