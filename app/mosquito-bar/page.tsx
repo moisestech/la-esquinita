@@ -39,31 +39,12 @@ const schedule: { month: string; entries: ScheduleEntry[] }[] = [
         date: "Dec 6",
         status: "Nick Leon + Poncili Creacion + Lydia Lunch + Camila Alvarez + El TAxI + Delight in the Mire final performance",
       },
-      {
-        date: "Dec 12",
-        status: "Programming TBA",
-      },
-      {
-        date: "Dec 13",
-        status: "Programming TBA",
-      },
-      {
-        date: "Dec 19",
-        status: "Programming TBA",
-      },
-      {
-        date: "Dec 20",
-        status: "Programming TBA",
-      },
     ],
   },
   {
     month: "JANUARY 2025",
     entries: [
-      { date: "Jan 9", status: "Programming TBA" },
-      { date: "Jan 10", status: "Programming TBA" },
-      { date: "Jan 16", status: "Programming TBA" },
-      { date: "Jan 17", status: "Programming TBA" },
+      { date: "Jan 17", status: "CLOSING NIGHT PARTY TBD TALENT" },
     ],
   },
 ]

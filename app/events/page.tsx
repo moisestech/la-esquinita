@@ -39,7 +39,9 @@ const events = [
     time: "10:00 AM - 12:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "preview",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+    isPast: true,
+    statusText: "EVENT PASSED"
   },
   {
     id: "4",
