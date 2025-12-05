@@ -168,10 +168,9 @@ export default function Events() {
                   </motion.a>
                 ) : (
                   <motion.button
-                    className="w-full bg-gray-500 text-white py-3 rounded-lg font-bold transition-all duration-300 relative overflow-hidden cursor-not-allowed opacity-75"
-                    disabled
+                    className="w-full bg-gradient-to-r from-miami-pink to-miami-purple text-white py-3 rounded-lg font-bold transition-all duration-300 relative overflow-hidden"
                   >
-                    <span className="relative z-10">RSVP Opening Soon</span>
+                    <span className="relative z-10">OPEN TO THE PUBLIC</span>
                   </motion.button>
                 )}
               </div>
