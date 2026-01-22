@@ -241,9 +241,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
 
           {isSold && (
-            <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
-              <span className="text-2xl font-extrabold uppercase text-white tracking-[0.4em]">
-                Sold Out
+            <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] flex items-center justify-center">
+              <span className="text-xl font-extrabold uppercase text-white tracking-[0.15em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                Out of Stock
               </span>
             </div>
           )}

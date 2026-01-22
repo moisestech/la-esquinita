@@ -19,6 +19,9 @@ export default function FloatingMosquitoLink() {
     let isMounted = true
 
     const glideAcrossScreen = async () => {
+      // Wait a bit for component to mount
+      await new Promise(resolve => setTimeout(resolve, 100))
+
       while (isMounted) {
         const nextPosition = generateMosquitoPosition()
         await controls.start({

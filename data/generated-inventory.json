@@ -115,12 +115,12 @@
       "/La_Esquinita_Inventory/4_tubaAsh_1.jpg",
       "/La_Esquinita_Inventory/4_tubaAsh_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-22T14:21:59.206Z",
     "squareCatalogObjectId": null
   },
   {
@@ -146,12 +146,12 @@
       "/La_Esquinita_Inventory/5_tubaAsh_1.jpg",
       "/La_Esquinita_Inventory/5_tubaAsh_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-22T14:21:59.206Z",
     "squareCatalogObjectId": null
   },
   {
@@ -207,12 +207,12 @@
       "/La_Esquinita_Inventory/7_catHead_1.jpg",
       "/La_Esquinita_Inventory/7_catHead_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-22T14:21:59.206Z",
     "squareCatalogObjectId": null
   },
   {
@@ -237,12 +237,12 @@
       "/La_Esquinita_Inventory/8_fragileGoddess_1.jpg",
       "/La_Esquinita_Inventory/8_fragileGoddess_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-22T14:21:59.206Z",
     "squareCatalogObjectId": null
   },
   {
@@ -938,12 +938,12 @@
       "/La_Esquinita_Inventory/31_eggSmile_1.jpg",
       "/La_Esquinita_Inventory/31_eggSmile_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-15T21:26:21.669Z",
     "squareCatalogObjectId": null
   },
   {
@@ -999,12 +999,12 @@
       "/La_Esquinita_Inventory/33_lobsterDish_1.jpg",
       "/La_Esquinita_Inventory/33_lobsterDish_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-16T13:21:50.183Z",
     "squareCatalogObjectId": null
   },
   {
@@ -1456,12 +1456,12 @@
       "/La_Esquinita_Inventory/48_wave_1.jpg",
       "/La_Esquinita_Inventory/48_wave_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-16T13:21:50.183Z",
     "squareCatalogObjectId": null
   },
   {
@@ -3078,12 +3078,12 @@
       "/La_Esquinita_Inventory/101_eggSmile_1.jpg",
       "/La_Esquinita_Inventory/101_eggSmile_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-15T21:14:29.595Z",
     "squareCatalogObjectId": null
   },
   {
@@ -4700,12 +4700,12 @@
       "/La_Esquinita_Inventory/154_cakeTopper_1.jpg",
       "/La_Esquinita_Inventory/154_cakeTopper_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-15T21:26:21.669Z",
     "squareCatalogObjectId": null
   },
   {
@@ -5375,12 +5375,12 @@
       "/La_Esquinita_Inventory/176_diamondDish_1.jpg",
       "/La_Esquinita_Inventory/176_diamondDish_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-16T13:21:50.183Z",
     "squareCatalogObjectId": null
   },
   {
@@ -8079,12 +8079,12 @@
       "/La_Esquinita_Inventory/265_pie_1.jpg",
       "/La_Esquinita_Inventory/265_pie_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-15T21:26:21.669Z",
     "squareCatalogObjectId": null
   },
   {
@@ -8141,12 +8141,12 @@
       "/La_Esquinita_Inventory/267_pie_1.jpg",
       "/La_Esquinita_Inventory/267_pie_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-15T21:14:29.595Z",
     "squareCatalogObjectId": null
   },
   {
@@ -8234,12 +8234,12 @@
       "/La_Esquinita_Inventory/270_pie_1.jpg",
       "/La_Esquinita_Inventory/270_pie_2.jpg"
     ],
-    "availability": "available",
-    "status": "active",
+    "availability": "sold",
+    "status": "sold",
     "dimensions": null,
     "squareSku": null,
     "isUnique": true,
-    "soldAt": null,
+    "soldAt": "2026-01-16T13:21:50.183Z",
     "squareCatalogObjectId": null
   },
   {

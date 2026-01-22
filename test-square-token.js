@@ -1,5 +1,6 @@
 // Test Square OAuth token directly
-const token = "EAAAlqmRVP_Br2ZWwJMWRTlK9WiNjLNYPaGN2TNeLPukbCK52meYCxRs1_6Z2Mqo"
+// Testing the NEW token from Square Developer Dashboard
+const token = "EAAAl1JeqAdYjRYr5QZsnIO2k4vPNiwz1fU2u31tp3GCtfqttRyyyJdMMdFu-0NP"
 const locationId = "LF4VBFSP4APJ8"
 
 async function testSquareToken() {
