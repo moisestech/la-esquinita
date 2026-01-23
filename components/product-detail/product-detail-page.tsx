@@ -176,7 +176,7 @@ export default function ProductDetailPage({
             <ImageGallery
               images={product.image_urls}
               productName={product.name}
-              statusLabel={statusLabel}
+              statusLabel={null}
             />
           </motion.div>
 

@@ -146,7 +146,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           </span>
           {isUnavailable && (
             <span className="px-3 py-1 bg-black text-white text-sm font-medium rounded-full">
-              {isSold ? "Sold" : isReserved ? "Reserved" : "Coming Soon"}
+              {isSold ? "Out of Stock" : isReserved ? "Reserved" : "Coming Soon"}
             </span>
           )}
         </div>
@@ -254,7 +254,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           ) : isUnavailable ? (
             <>
               <ShoppingCart className="w-5 h-5" />
-              <span>{isSold ? "Sold Out" : isReserved ? "Reserved" : "Coming Soon"}</span>
+              <span>{isSold ? "OUT OF STOCK" : isReserved ? "Reserved" : "Coming Soon"}</span>
             </>
           ) : (
             <>

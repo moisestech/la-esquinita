@@ -344,12 +344,9 @@ export default function ProductCard({ product }: ProductCardProps) {
     </motion.div>
   )
 
-  if (isSold) {
-    return cardContent
-  }
-
+  // Always make items clickable, even if sold (so people can view what they own!)
   return (
-    <Link href={`/product/${product.slug}`} className="block">
+    <Link href={`/product/${product.slug}`} className="block cursor-pointer">
       {cardContent}
     </Link>
   )

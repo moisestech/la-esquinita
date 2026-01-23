@@ -51,7 +51,9 @@ const events = [
     time: "7:00 PM - 10:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "reception",
-    image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&h=600&fit=crop"
+    image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&h=600&fit=crop",
+    isPast: true,
+    statusText: "EVENT PASSED"
   },
   {
     id: "5",
@@ -61,7 +63,9 @@ const events = [
     time: "12:00 PM - 5:00 PM",
     location: "Locust Projects, Miami",
     type: "market",
-    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=600&fit=crop"
+    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=600&fit=crop",
+    isPast: true,
+    statusText: "EVENT PASSED"
   },
   {
     id: "6",
@@ -71,7 +75,9 @@ const events = [
     time: "6:00 PM - 9:00 PM",
     location: "La Esquinita at Locust Projects",
     type: "reception",
-    image: "/esquinita3.jpg"
+    image: "/esquinita3.jpg",
+    isPast: true,
+    statusText: "EVENT PASSED"
   }
 ]
 
