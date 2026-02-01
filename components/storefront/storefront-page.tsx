@@ -304,18 +304,6 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
             </motion.div>
           </div>
 
-          {/* Sold Counter */}
-          <motion.div
-            className="text-center mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <p className="text-miami-pink font-display italic text-3xl md:text-4xl drop-shadow-lg">
-              {products.filter(p => p.sold_at).length} / {products.length} Sold!
-            </p>
-          </motion.div>
-
           {/* Instructions */}
           <motion.p
             className="text-center text-mint-rot/80 text-sm md:text-base max-w-2xl mx-auto mb-6"
@@ -325,6 +313,18 @@ export default function StorefrontPage({ initialProducts, initialSource }: Store
           >
             Find the number on the bottom of the ceramic and search for it below!
           </motion.p>
+        </motion.div>
+
+        {/* SOLD OUT Banner */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+        >
+          <h2 className="font-serif text-7xl md:text-9xl lg:text-[10rem] font-black text-black tracking-tight uppercase">
+            SOLD OUT!
+          </h2>
         </motion.div>
 
       {/* Product Grid */}
